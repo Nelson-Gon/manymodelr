@@ -1,18 +1,18 @@
 Package: manymodelr
 Title: Build and Tune Several Models
 Version: 0.1.0
-Authors@R: person(given = "Nelson",family = "Gonzabato",email = "gonzabato@hotmail.com",role=c("aut","cre"))
-Description: Frequently one needs a convenient way to build and tune several models in one go.The goal is to provide a number of convenience functions useful in machine learning applications. It provides the ability to build and tune several models in one function. In one function, one can easily know what model is working and fine tune for better performance.
+Authors@R:person(given = "Nelson",family = "Gonzabato",email = "gonzabato@hotmail.com",role=c("aut","cre"))
+Description:Frequently one needs a convenient way to build and tune several models in one go.The goal is to provide a number of convenience functions useful in machine learning applications. It provides the ability to build and tune several models in one function. In one function, one can easily know what model is working and fine tune for better performance.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Imports: 
-dplyr(>= 0.7.8),
-caret(>= 6.0-81),
-tidyr(>= 0.8.2),
-reshape2(>= 1.4.3),
-plyr(>= 1.8.4),
-magrittr(>= 1.5)
+Imports:
+    dplyr(>= 0.7.8),
+    caret(>= 6.0-81),
+    tidyr(>= 0.8.2),
+    reshape2(>= 1.4.3),
+    plyr(>= 1.8.4),
+    magrittr(>= 1.5)
 URL: https://github.com/Nelson-Gon/manymodelr
 BugReports: https://github.com/Nelson-Gon/manymodelr/issues
