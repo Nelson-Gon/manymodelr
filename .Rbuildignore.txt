@@ -1,3 +1,2 @@
 ^\.travis\.yml$
-^manymodelr\.Rproj$
-^\.Rproj\.user$
+
