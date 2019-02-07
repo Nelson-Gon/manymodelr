@@ -8,11 +8,11 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 Imports: 
-    dplyr(>= 0.7.8),
-    caret(>= 6.0-81),
-    tidyr(>= 0.8.2),
-    reshape2(>= 1.4.3),
-    plyr(>= 1.8.4),
-    magrittr(>= 1.5)
+    dplyr (>= 0.7.8),
+    caret (>= 6.0-81),
+    tidyr (>= 0.8.2),
+    reshape2 (>= 1.4.3),
+    plyr (>= 1.8.4),
+    magrittr (>= 1.5)
 URL: https://github.com/Nelson-Gon/manymodelr
 BugReports: https://github.com/Nelson-Gon/manymodelr/issues
