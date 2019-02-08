@@ -12,6 +12,7 @@ devtools::install_github("https://github.com/Nelson-Gon/manymodelr")
 ```
 
 **Loading the package**
+
 `library(manymodelr)`
 
 **What's in this version of the package?**
