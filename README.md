@@ -33,10 +33,10 @@ The aim of this package is to build on `caret`'s powerful machine learning algor
  Two objects are returned. A `data.frame` object containing stats:
  ![IMG](http://i67.tinypic.com/w9dyms.png)
 
-The first list contains the dataframe showing sample stats while the second(truncated) showss summary stats for the model.
+The first list contains the dataframe showing sample stats while the second(truncated) shows summary stats for the model.
 
 **2** `multi_model`
- This is the core function of this package and it aims to enable one perform any kinds of models in one function.
+ This is the core function of this package and it aims to enable one perform several kinds of models in one function.
  
  *sample usage*
  ```
