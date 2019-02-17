@@ -1,20 +1,8 @@
 Package: manymodelr
 Title: Build and Tune Several Models
 Version: 0.1.0
-Authors@R: 
-    person(given = "Nelson",
-           family = "Gonzabato",
-           email = "gonzabato@hotmail.com",
-           role=c("aut","cre"))
-Description: Frequently one needs a convenient way to build and tune several models in one go.
-             The goal is to provide a number of convenience functions useful in machine learning 
-             applications. It provides the ability to build,tune and obtain predictions of 
-             several models in one function. The models are built using the caret functions but
-             with an easier to read syntax and the added advantage of 
-             easy exploratory data analysis. The package harnesses caret's tuning power 
-             while leveraging tidy syntax for user readability
-             and like stated above easier exploratory data analysis. 
-             In one function, one can easily know what model is working and fine tune for better performance.
+Authors@R: person(given = "Nelson",family = "Gonzabato",email = "gonzabato@hotmail.com",role=c("aut","cre"))
+Description: Frequently one needs a convenient way to build and tune several models in one go.In one function, one can easily know what model is working and fine tune for better performance.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
