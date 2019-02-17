@@ -22,33 +22,104 @@ The aim of this package is to build on `caret`'s powerful machine learning algor
 **Key functions in this version**
 
 **1.** `modeleR`
-    This function is useful if one would like to fit linear models or perform analysis of variance(currently). 
+   
+   This function is useful if one would like to fit linear models or perform analysis of variance(currently). The function allows one to predict within the same function by providing new data for which predictions are needed.  
    
   *Sample usage*
-  
-  `modeleR(iris,Sepal.Length,Petal.Length,lm,na.rm=T)`
-  
-  The above code allows one to simply provide arguments and receieve summary stats about the model. Currently, the model doesn't allow predictions although this has been fixed and is set for release in a patch update.
  
- Two objects are returned. A `data.frame` object containing stats:
- ![IMG](http://i67.tinypic.com/w9dyms.png)
+ ```
+  iris1<-iris[1:60,]
+iris2<-iris[60:nrow(iris),]
+m1<-modeleR(iris1,Sepal.Length,Petal.Length,
+        lm,na.rm=TRUE,iris2))
+   
+  ```
 
-The first list contains the dataframe showing sample stats while the second(truncated) shows summary stats for the model.
+Three objects are returned. A `data.frame` object containing stats:
 
-**2** `multi_model`
- This is the core function of this package and it aims to enable one perform several kinds of models in one function.
+```
+m1$DataFrame
+  Residuals coefficients R.squared adj.r.squared fstatistic  Explanatory     Response
+1  0.134664     4.394245 0.5920943     0.5850615   84.18974 Petal.Length Sepal.Length
+
+```
+
+Summary stats:
+
+```
+m1$Summary_data
+
+```
+
+Predictions:
+
+```
+head(m1$Predictions)
+  predict.lm.fit.
+1        4.965336
+2        4.965336
+3        4.924544
+4        5.006128
+5        4.965336
+6        5.087713
+
+```
+
+**2** `multi_model_1`
+
+This is the core function of this package and it aims to enable one perform several kinds of models in one function.
  
  *sample usage*
- ```
- library(caret)
-ctrl<-trainControl(method="cv",number=5)
-multi_model(iris,"Species",".",c("rf","svmRadial","knn"),"Accuracy",ctrl)
+
 ```
-In the above function, we have trained our model on three model types. The results of this function(currently) are summary stats that aim to help one quickly judge which model does well on the given data.
+ library(caret)
+train_set<-createDataPartition(iris$Species,p=0.8,list=FALSE)
+valid_set<-iris[-train_set,]
+train_set<-iris[train_set,]
+ctrl<-trainControl(method="cv",number=5)
+set.seed(233)
+m<-multi_model_1(train_set,"Species",".",c("knn","rpart"),
+                 "Accuracy",ctrl,newdata =valid_set)
+```
 
-![IMG](http://i67.tinypic.com/10h0cif.png)
+In the above function, we have trained our model on two model types. The function returns a list continaing predictions and metrics as shown below.
 
-From the above, one can easily conclude that prototype models perform best on this data. In this version of the package, that is all the function can do. However, the function has been extended in a developer version that will be released in future updates(patch).
+
+```
+m$Predictions
+# A tibble: 30 x 2
+   knn    rpart 
+   <fct>  <fct> 
+ 1 setosa setosa
+ 2 setosa setosa
+ 3 setosa setosa
+ 4 setosa setosa
+ 5 setosa setosa
+ 6 setosa setosa
+ 7 setosa setosa
+ 8 setosa setosa
+ 9 setosa setosa
+10 setosa setosa
+# ... with 20 more rows
+
+```
+
+To get the metrics used:
+
+```
+m$Metrics
+# A tibble: 1 x 2
+    knn rpart
+  <dbl> <dbl>
+1 0.967 0.933
+
+```
+
+For more help, please click `?multi_model_1`.
+
+
+
+
 
 **Other Convenience Functions**
 These functions are mainly for convenience and may be removed in future versions of the package.
