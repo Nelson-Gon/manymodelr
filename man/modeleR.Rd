@@ -2,9 +2,9 @@
 % Please edit documentation in R/modeleR.R
 \name{modeleR}
 \alias{modeleR}
-\title{Perform several kinds of models in one click}
+\title{Perform several kinds of models in one function}
 \usage{
-modeleR(df, yname, xname, modeltype, na.rm = F, ...)
+modeleR(df, yname, xname, modeltype, na.rm = F, new_data, ...)
 }
 \arguments{
 \item{df}{The data for which analysis is required}
@@ -17,19 +17,32 @@ modeleR(df, yname, xname, modeltype, na.rm = F, ...)
 
 \item{na.rm}{Logical. Should missing values be removed from analysis?}
 
+\item{new_data}{A data.frame object for which new predictions are to be made}
+
 \item{...}{Additional arguments to the modeltype}
 }
 \value{
 A list containing summary stats and a data.frame object of some stats.
 }
 \description{
-Perform several kinds of models in one click
+Perform several kinds of models in one function
 }
 \details{
 This function provides a friendly way to perform any kind of model in one line.
+The model uses the inbuilt R functions aov and lm to make the predictions.
 }
 \examples{
+iris1<-iris[1:60,]
+iris2<-iris[60:nrow(iris),]
+modeleR(iris1,Sepal.Length,Petal.Length,
+         lm,na.rm=TRUE,iris2)
 \dontrun{
-modeleR(iris,Sepal.Length,Petal.Length,lm,na.rm=T)
+modeleR(iris,Sepal.Length,Petal.Length,lm,na.rm=TRUE)
 }
+}
+\references{
+Chambers, J. M. (1992) Linear models. Chapter 4 of Statistical Models in S eds J. M. Chambers and T. J. Hastie, Wadsworth & Brooks/Cole.
+
+Wilkinson, G. N. and Rogers, C. E. (1973). Symbolic descriptions of factorial models for analysis of variance. Applied
+Statistics, 22, 392-399. doi: 10.2307/2346786.
 }
