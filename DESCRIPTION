@@ -6,15 +6,15 @@ Authors@R:
            family = "Gonzabato",
            email = "gonzabato@hotmail.com",
            role=c("aut","cre"))
-Description: Frequently one needs a convenient way to build and tune several models in one go.
-             The goal is to provide a number of convenience functions useful in machine learning 
+Description: Frequently one needs a convenient way to build and tune,
+             several models in one go.The goal is to provide a number of convenience functions useful in machine learning 
              applications. It provides the ability to build,tune and obtain predictions of 
-             several models in one function. The models are built using the caret functions but
-             with an easier to read syntax and the added advantage of 
-             easy exploratory data analysis. The package harnesses caret's tuning power 
-             while leveraging tidy syntax for user readability
-             and like stated above easier exploratory data analysis. 
-             In one function, one can easily know what model is working and fine tune for better performance.
+             several models in one function. The models are built using 'caret' functions with
+             easier to read syntax.
+             Kuhn(2014)<arXiv:1405.6974v14>.
+             Kuhn(2008)<doi10.18637/jss.v028.i05>.
+             Chambers,J.M.(1992)<doi:10.1371/journal.pone.0053143>.
+             Wilkinson,G.N. and Rogers, C. E. (1973)<doi:10.2307/2346786>.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
@@ -31,3 +31,4 @@ Imports:
     e1071(>= 1.7-0.1)
 URL: https://github.com/Nelson-Gon/manymodelr
 BugReports: https://github.com/Nelson-Gon/manymodelr/issues
+
