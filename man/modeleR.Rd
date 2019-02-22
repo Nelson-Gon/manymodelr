@@ -36,9 +36,6 @@ iris1<-iris[1:60,]
 iris2<-iris[60:nrow(iris),]
 modeleR(iris1,Sepal.Length,Petal.Length,
          lm,na.rm=TRUE,iris2)
-\dontrun{
-modeleR(iris,Sepal.Length,Petal.Length,lm,na.rm=TRUE)
-}
 }
 \references{
 Chambers, J. M. (1992) Linear models. Chapter 4 of Statistical Models in S eds J. M. Chambers and T. J. Hastie, Wadsworth & Brooks/Cole.
