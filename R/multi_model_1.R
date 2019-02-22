@@ -35,17 +35,6 @@
 #'                 "Accuracy",ctrl,newdata =valid_set)
 #' m$Predictions
 #' m$Metrics
-#' \dontrun{
-#'library(caret)
-#'trainda<-createDataPartition(iris$Sepal.Length,p=0.8,list=F)
-#'valid_da<-iris[-trainda,]
-#'trainda<-iris[trainda,]
-#'ctrl<-trainControl(method="cv",number=5)
-#'set.seed(233)
-#'m<-multi_model_1(trainda,"Sepal.Length",".",c("knn","rf","xgbTree","gbm"),
-#'                 "RMSE",ctrl,newdata =valid_da,verbose=F)
-#'m$Metrics
-#' }
 #' @export
 multi_model_1<-function(df,yname,xname,method,metric,control,...,newdata){
   #yname<-deparse(substitute(yname))

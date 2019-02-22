@@ -21,9 +21,6 @@
 #' iris2<-iris[60:nrow(iris),]
 #' modeleR(iris1,Sepal.Length,Petal.Length,
 #'          lm,na.rm=TRUE,iris2)
-#' \dontrun{
-#' modeleR(iris,Sepal.Length,Petal.Length,lm,na.rm=TRUE)
-#' }
 #' @export
 modeleR<-function(df,yname,xname,modeltype,na.rm=F,new_data,...){
   #Takes data as df,yname as y variable,xname as
