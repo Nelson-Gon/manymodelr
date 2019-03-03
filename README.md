@@ -8,6 +8,7 @@
 **Installing the package**
 
 ```
+install.packages("manymodelr")
 remotes::install_github("https://github.com/Nelson-Gon/manymodelr")
 devtools::install_github("https://github.com/Nelson-Gon/manymodelr")
 ```
