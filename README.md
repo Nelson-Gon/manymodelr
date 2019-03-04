@@ -2,15 +2,23 @@
 
 **Tune and build several Machine learning models.**
 
-"[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)"
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Build Status](https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.org/Nelson-Gon/manymodelr)
 [![Rdoc](http://www.rdocumentation.org/badges/version/manymodelr)](http://www.rdocumentation.org/packages/manymodelr) 
 [![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 
 **Installing the package**
 
+**Installing from CRAN**
 ```
+
 install.packages("manymodelr")
+
+```
+
+**Installing from GitHub**
+
+```
 remotes::install_github("https://github.com/Nelson-Gon/manymodelr")
 devtools::install_github("https://github.com/Nelson-Gon/manymodelr")
 ```
