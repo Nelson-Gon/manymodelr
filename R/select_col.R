@@ -18,7 +18,7 @@
 select_col<-function(df,x,...){
   x<-deparse(substitute(x))
   z<-unlist(sapply(substitute(...()), deparse))
-df[c(x,z)]
+df[,c(x,z)]
 }
 
 
