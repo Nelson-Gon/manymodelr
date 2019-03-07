@@ -9,8 +9,7 @@
 #'}
 #'@export
 select_percentile<-function(df,n){
-  df<-df
-  nth<-(n/nrow(df))*100
-  return(df[nth,])
+  nth <- ((100-n)/nrow(df)) * 100
+  return(df[nth, ])
 }
 
