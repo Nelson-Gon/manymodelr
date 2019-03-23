@@ -23,6 +23,10 @@ remotes::install_github("https://github.com/Nelson-Gon/manymodelr")
 devtools::install_github("https://github.com/Nelson-Gon/manymodelr")
 ```
 
+If the above installs from `master`, please use:
+
+`remotes::install_github("https://github.com/Nelson-Gon/manymodelr",ref = "develop")`
+
 **Loading the package**
 
 `library(manymodelr)`
