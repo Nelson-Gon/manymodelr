@@ -11,8 +11,8 @@
 #'get_mode(test)
 #'\dontrun{
 #'mtcars %>%
-#'get_stats(get_mode)
-#'get_stats(mtcars,get_mode)}
+#'get_data_Stats(get_mode)
+#'get_data_Stats(mtcars,get_mode)}
 #' @export
 get_mode<-function(x){
  y<-x
