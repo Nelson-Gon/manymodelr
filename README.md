@@ -20,8 +20,8 @@ install.packages("manymodelr")
 **Installing from GitHub**
 
 ```
-remotes::install_github("https://github.com/Nelson-Gon/manymodelr")
-devtools::install_github("https://github.com/Nelson-Gon/manymodelr")
+remotes::install_github("Nelson-Gon/manymodelr")
+devtools::install_github("Nelson-Gon/manymodelr")
 ```
 
 
