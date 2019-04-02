@@ -45,7 +45,7 @@ The aim of this package is to build on `caret`'s powerful machine learning algor
   iris1<-iris[1:60,]
 iris2<-iris[60:nrow(iris),]
 m1<-modeleR(iris1,Sepal.Length,Petal.Length,
-        lm,na.rm=TRUE,iris2))
+        lm,na.rm=TRUE,iris2)
    
   ```
 
