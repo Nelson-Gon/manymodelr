@@ -4,7 +4,8 @@
 \alias{multi_model_1}
 \title{Simultaneously train and predict on new data.}
 \usage{
-multi_model_1(df, yname, xname, method, metric, control, ..., newdata)
+multi_model_1(df, yname, xname, method, metric, control, ..., newdata,
+  valid = FALSE)
 }
 \arguments{
 \item{df}{The data holding the training dataset}
@@ -22,10 +23,13 @@ multi_model_1(df, yname, xname, method, metric, control, ..., newdata)
 \item{...}{Other arguments to caret's train function}
 
 \item{newdata}{A data set to validate the model or for which predictions are required}
+
+\item{valid}{Logical. Are you performing validation or dealing with new data? Defaults to False. Predicitions added to new
+data}
 }
 \value{
-A list containing two objects. A tibble containing a summary of the metrics per model
-and a tibble containig predicted values
+A list containing two objects. A tibble containing a summary of the metrics per model,
+a tibble containig predicted values and information concerning the model
 }
 \description{
 This function provides a convenient way to train several model types.
@@ -45,9 +49,10 @@ train_set<-iris[train_set,]
 ctrl<-trainControl(method="cv",number=5)
 set.seed(233)
 m<-multi_model_1(train_set,"Species",".",c("knn","rpart"),
-                "Accuracy",ctrl,newdata =valid_set)
+"Accuracy",ctrl,newdata =valid_set,valid=TRUE)
 m$Predictions
 m$Metrics
+m$modelInfo
 }
 \references{
 Kuhn (2014), "Futility Analysis in the Cross-Validation of Machine Learning Models" http://arxiv.org/abs/1405.6974,

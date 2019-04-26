@@ -23,10 +23,3 @@ Returns a data.frame object showing columns with NAs and their replacement if na
 \description{
 Replacing all NAs with mean values of a given row
 }
-\examples{
-#This merges our replacement values with the original data containing NAs
-row_mean_na(airquality,mean,c("Ozone","Wind"),na.rm=TRUE,0)
-\dontrun{
-row_mean_na(iris,max,c("Sepal.Length","Petal.Length"),na.rm = F,5)
-}
-}

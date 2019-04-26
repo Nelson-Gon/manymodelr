@@ -29,7 +29,9 @@ Perform several kinds of models in one function
 }
 \details{
 This function provides a friendly way to perform any kind of model in one line.
-The model uses the inbuilt R functions aov and lm to make the predictions.
+The model uses the inbuilt R functions aov and lm to make the predictions. If the target
+is missing in the new data frame, the function will(currently) make an empty column and
+fill this with predictions.
 }
 \examples{
 iris1<-iris[1:60,]
