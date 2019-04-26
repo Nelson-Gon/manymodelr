@@ -31,6 +31,8 @@ devtools::install_github("Nelson-Gon/manymodelr")
 `library(manymodelr)`
 
 **What's in this version of the package?
+
+
 *Please see the News.md file*
 
 **Key functions in this version**
