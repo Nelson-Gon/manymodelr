@@ -1,4 +1,4 @@
-# manymodelr
+# manymodelr(0.2.1.9000)
 
 **Tune and build several Machine learning models.**
 
@@ -11,18 +11,10 @@
 
 **Installing the package**
 
-**Installing from CRAN**
 ```
-
-install.packages("manymodelr")
-
-```
-
-**Installing from GitHub**
-
-```
-remotes::install_github("Nelson-Gon/manymodelr")
-devtools::install_github("Nelson-Gon/manymodelr")
+remotes::install_github("Nelson-Gon/manymodelr@develop")
+devtools::install_github("Nelson-Gon/manymodelr@develop")
+devtools::install_github("Nelson-Gon/manymodelr@develop",build_vignettes=TRUE) #Builds vignettes
 ```
 
 
@@ -33,7 +25,9 @@ devtools::install_github("Nelson-Gon/manymodelr")
 **What's in this version of the package?
 
 
-*Please see the News.md file*
+*Please see the NEWS.md file for a list of changes*
+
+*Sample usage is also provided in the vignettes that can be opened using `browseVignettes("manymodelr")`
 
 **Key functions in this version**
 
