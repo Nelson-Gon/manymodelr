@@ -30,9 +30,8 @@ devtools::install_github("Nelson-Gon/manymodelr")
 
 `library(manymodelr)`
 
-**What's in this version of the package?**
-
-The aim of this package is to build on `caret`'s powerful machine learning algorithms while leveraging user convenience and `tidyverse` like syntax. To this end, the author has developed a number of convenience functions that make it easy to build and tune machine learning algorithms in one go. 
+**What's in this version of the package?
+*Please see the News.md file*
 
 **Key functions in this version**
 
