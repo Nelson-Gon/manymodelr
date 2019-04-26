@@ -22,12 +22,12 @@ devtools::install_github("Nelson-Gon/manymodelr@develop",build_vignettes=TRUE) #
 
 `library(manymodelr)`
 
-**What's in this version of the package?
+**What's in this version of the package?**
 
 
-*Please see the NEWS.md file for a list of changes*
+***Please see the NEWS.md file for a list of changes***
 
-*Sample usage is also provided in the vignettes that can be opened using `browseVignettes("manymodelr")`
+***Sample usage is also provided in the vignettes that can be opened using `browseVignettes("manymodelr")`***
 
 **Key functions in this version**
 
