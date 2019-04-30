@@ -4,12 +4,21 @@
 \alias{get_data_Stats}
 \title{A pipe friendly way to get summary stats for exploratory data analysis}
 \usage{
-get_data_Stats(x, func)
+get_data_Stats(x, func, exclude = NULL, na.rm = TRUE,
+  na_action = NULL)
 }
 \arguments{
 \item{x}{The data for which stats are required}
 
 \item{func}{The nature of function to apply}
+
+\item{exclude}{What kind of data should be excluded? Defaults to NULL. Currently only supports
+removing non-numeric data i.e exclude="non_numeric"}
+
+\item{na.rm}{Logical. Should NAs be removed. Defaults to TRUE.}
+
+\item{na_action}{If na.rm is set to TRUE, this uses na_replace to replace missing values.
+See ?na_replace for details.}
 }
 \value{
 A data.frame object showing the requested stats
@@ -21,14 +30,5 @@ A pipe friendly way to get summary stats for exploratory data analysis
 A convenient wrapper especially useful for get_mode
 }
 \examples{
-library(dplyr)
-mtcars \%>\%
-get_data_Stats(mean)
-mtcars \%>\%
-get_data_Stats(get_mode)
-\dontrun{
-get_data_Stats(airquality,min)
-airquality\%>\%
-get_data_Stats(get_mode)
-}
+get_data_Stats(airquality,mean,"non_numeric",na.rm = T,na_action = "mean")
 }
