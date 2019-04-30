@@ -4,8 +4,8 @@
 \alias{rowdiff}
 \title{Get row differences between values}
 \usage{
-rowdiff(df, direction = "forward", exclude = NULL, na_action = NULL,
-  na.rm = NULL)
+rowdiff(df, direction = "forward", exclude = NULL, na.rm = FALSE,
+  na_action = NULL)
 }
 \arguments{
 \item{df}{The data set for which differences are required}
@@ -17,6 +17,11 @@ between the current value and the next is returned}
 
 \item{exclude}{What data types should be removed?! Currently only supports the entry
 "non_numeric." See examples below}
+
+\item{na.rm}{Logical. Should misisng values be removed? Defaults to FALSE.}
+
+\item{na_action}{If na.rm is TRUE, how should missing values be replaced? Uses arguments
+to ?na_replace.}
 }
 \value{
 A data.frame object of row differences
