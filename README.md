@@ -1,6 +1,6 @@
 # manymodelr
 
-**Tune and build several Machine learning models.**
+**Tune and build several Machine Learning models.**
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Build Status](https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.org/Nelson-Gon/manymodelr)
@@ -9,16 +9,16 @@
 [![](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![TotalDownloads](http://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow)](https://cran.r-project.org/package=manymodelr)
 
-**Installing the package**
+## **Installing the package**
 
-**Installing from CRAN**
+* **Installing from CRAN**
 ```
 
 install.packages("manymodelr")
 
 ```
 
-**Installing from GitHub**
+* **Installing from GitHub**
 
 ```
 remotes::install_github("Nelson-Gon/manymodelr")
@@ -26,17 +26,17 @@ devtools::install_github("Nelson-Gon/manymodelr")
 ```
 
 
-**Loading the package**
+### **Loading the package**
 
 `library(manymodelr)`
 
-**What's in this version of the package?**
+#### **What's in this version of the package?**
 
 The aim of this package is to build on `caret`'s powerful machine learning algorithms while leveraging user convenience and `tidyverse` like syntax. To this end, the author has developed a number of convenience functions that make it easy to build and tune machine learning algorithms in one go. 
 
-**Key functions in this version**
+##### **Key functions in this version**
 
-**1.** `modeleR`
+* **1.** `modeleR`
    
    This function is useful if one would like to fit linear models or perform analysis of variance(currently). The function allows one to predict within the same function by providing new data for which predictions are needed.  
    
@@ -80,7 +80,7 @@ head(m1$Predictions)
 
 ```
 
-**2** `multi_model_1`
+* **2** `multi_model_1`
 
 This is the core function of this package and it aims to enable one perform several kinds of models in one function.
  
@@ -130,7 +130,7 @@ m$Metrics
 
 ```
 
-For more help, please click `?multi_model_1`.
+For more help, please see `?multi_model_1`.
 
 
 
@@ -139,7 +139,7 @@ For more help, please click `?multi_model_1`.
 **Other Convenience Functions**
 These functions are mainly for convenience and may be removed in future versions of the package.
 
-**3**  `get_data_Stats`
+* **3**  `get_data_Stats`
 
 As the name suggests, this function is useful for very fast data exploration, for instance if one wants to find the maximum,minimum,mode or any known summary stats. It is particularly useful once used together with `get_mode`
 
