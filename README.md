@@ -47,5 +47,5 @@ browseVignettes("manymodelr")
  
  ```
  
- Thank You and Happy Coding!
+ > Thank You and Happy Coding!
  
