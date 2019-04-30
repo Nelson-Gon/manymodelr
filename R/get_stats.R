@@ -1,30 +1,31 @@
 #' A pipe friendly way to get summary stats for exploratory data analysis
 #' @param x The data for which stats are required
 #' @param func The nature of function to apply
+#' @param exclude What kind of data should be excluded? Defaults to NULL. Currently only supports
+#' removing non-numeric data i.e exclude="non_numeric"
+#' @param na.rm Logical. Should NAs be removed. Defaults to TRUE.
+#' @param na_action If na.rm is set to TRUE, this uses na_replace to replace missing values.
+#' See ?na_replace for details.
 #' @return A data.frame object showing the requested stats
 #' @details A convenient wrapper especially useful for get_mode
 #' @examples
-#' library(dplyr)
-#' mtcars %>%
-#' get_data_Stats(mean)
-#' mtcars %>%
-#' get_data_Stats(get_mode)
-#' \dontrun{
-#' get_data_Stats(airquality,min)
-#' airquality%>%
-#' get_data_Stats(get_mode)
-#' }
+#' get_data_Stats(airquality,mean,"non_numeric",na.rm = T,na_action = "mean")
 #' @export
-get_data_Stats<-function(x,func){
+get_data_Stats<-function (x, func,exclude=NULL,na.rm=TRUE,na_action=NULL)
+{
+  if(na.rm==TRUE & anyNA(x)==TRUE){
+    x<-na_replace(x,how=na_action)
+  }
+  if(is.null(exclude)|| missing(exclude)){
+    x <- x
+  }
+  else if(exclude=="non_numeric"){
+    x<-Filter(is.numeric,x)
 
-  df<-x
-  for(i in 1:ncol(x))
-    if(is.numeric(i)){
-      df[i]<-func(x[,i])
-    }
-  df<-reshape2::melt(df[1,],id.vars=1)
-  df<-unique(df)
-  df[-1]
+
+  }
+  apply(x,2,function(x) do.call(func,list(x)))
+
 }
 
 
