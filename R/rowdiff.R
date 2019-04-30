@@ -7,12 +7,15 @@
 #' between the current value and the next is returned
 #' @param exclude What data types should be removed?! Currently only supports the entry
 #' "non_numeric." See examples below
+#' @param na.rm Logical. Should misisng values be removed? Defaults to FALSE.
+#' @param na_action If na.rm is TRUE, how should missing values be replaced? Uses arguments
+#' to ?na_replace.
 #' @return A data.frame object of row differences
 #' @examples
 #' rowdiff(iris,exclude = "non_numeric",direction = "reverse")
 #' rowdiff(mtcars)
 #' @export
-rowdiff<-function (df, direction = "forward",exclude=NULL,na_action=NULL,na.rm=NULL){
+rowdiff<-function (df, direction = "forward",exclude=NULL,na.rm=FALSE,na_action=NULL){
   res<-df
   if(na.rm==TRUE & anyNA(res)==TRUE){
     res<-na_replace(res,how=na_action)
