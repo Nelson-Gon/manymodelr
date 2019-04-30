@@ -12,8 +12,11 @@
 #' rowdiff(iris,exclude = "non_numeric",direction = "reverse")
 #' rowdiff(mtcars)
 #' @export
-rowdiff<-function (df, direction = "forward",exclude=NULL){
+rowdiff<-function (df, direction = "forward",exclude=NULL,na_action=NULL,na.rm=NULL){
   res<-df
+  if(na.rm==TRUE & anyNA(res)==TRUE){
+    res<-na_replace(res,how=na_action)
+  }
   factr_or_char<-Filter(function(x) !is.numeric(x),res)
   if(is.null(exclude) & direction=="forward"){
     res<-apply(res,2,function(x) x-dplyr::lead(x,1))
