@@ -1,6 +1,6 @@
 # manymodelr(Development Version 0.2.1.9000)
 
-**Tune and build several Machine learning models.**
+**Tune and build several Machine Learning models.**
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Build Status](https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.org/Nelson-Gon/manymodelr)
@@ -30,7 +30,7 @@ library(manymodelr)
 
 * Please see the NEWS.md file for a list of changes
 
-* A more thorough walkthrough of Sample usage is provided in the vignettes that can be opened as shown below:
+* A more thorough walkthrough is provided in the vignettes that can be opened as shown below:
 
 ```
 browseVignettes("manymodelr")
