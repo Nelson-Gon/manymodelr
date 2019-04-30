@@ -27,7 +27,13 @@ devtools::install_github("Nelson-Gon/manymodelr@develop",build_vignettes=TRUE) #
 
 ***Please see the NEWS.md file for a list of changes***
 
-***A more thorough walkthrough of Sample usage is also provided in the vignettes that can be opened using `browseVignettes("manymodelr")`***
+**A more thorough walkthrough of Sample usage is provided in the vignettes that can be opened as shown below:**
+
+```
+browseVignettes("manymodelr")
+
+```
+
 
 
  Other functions in the package are mainly experimental and may also be removed in future versions. For a complete list of available functions, please use:
