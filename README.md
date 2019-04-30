@@ -9,7 +9,7 @@
 [![](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![TotalDownloads](http://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow)](https://cran.r-project.org/package=manymodelr)
 
-**Installing the package**
+*  **Installing the package**
 
 ```
 remotes::install_github("Nelson-Gon/manymodelr@develop")
@@ -18,16 +18,19 @@ devtools::install_github("Nelson-Gon/manymodelr@develop",build_vignettes=TRUE) #
 ```
 
 
-**Loading the package**
+* **Loading the package**
 
-`library(manymodelr)`
+```
 
-**What's in this version of the package?**
+library(manymodelr)
 
+```
 
-***Please see the NEWS.md file for a list of changes***
+## **What's in this version of the package?**
 
-**A more thorough walkthrough of Sample usage is provided in the vignettes that can be opened as shown below:**
+* Please see the NEWS.md file for a list of changes
+
+* A more thorough walkthrough of Sample usage is provided in the vignettes that can be opened as shown below:
 
 ```
 browseVignettes("manymodelr")
@@ -38,7 +41,11 @@ browseVignettes("manymodelr")
 
  Other functions in the package are mainly experimental and may also be removed in future versions. For a complete list of available functions, please use:
  
- `help(package="manymodelr")`
+ ```
+ 
+ help(package="manymodelr")
+ 
+ ```
  
  Thank You and Happy Coding!
  
