@@ -14,6 +14,8 @@ author: "Nelson Gonzabato"
   `
 * `get_var_corr` provides a user-friendly way to find correlations between data.
 
+* `get_data_Stats` now supports removal of missing data as well as using only numeric data.
+
 * `modeleR` has been fixed to handle new data as expected. 
 
 * `multi_model_1` now supports either validation or working with new data.
