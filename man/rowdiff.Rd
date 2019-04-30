@@ -4,7 +4,8 @@
 \alias{rowdiff}
 \title{Get row differences between values}
 \usage{
-rowdiff(df, direction = "forward", exclude = NULL)
+rowdiff(df, direction = "forward", exclude = NULL, na_action = NULL,
+  na.rm = NULL)
 }
 \arguments{
 \item{df}{The data set for which differences are required}
