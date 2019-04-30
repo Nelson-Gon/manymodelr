@@ -28,7 +28,7 @@ library(manymodelr)
 
 ## **What's in this version of the package?**
 
-* Please see the NEWS.md file for a list of changes
+* Please see the `NEWS.md` file for a list of changes and/or additions.
 
 * A more thorough walkthrough is provided in the vignettes that can be opened as shown below:
 
