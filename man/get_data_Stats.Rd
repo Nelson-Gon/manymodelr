@@ -30,5 +30,5 @@ A pipe friendly way to get summary stats for exploratory data analysis
 A convenient wrapper especially useful for get_mode
 }
 \examples{
-get_data_Stats(airquality,mean,"non_numeric",na.rm = T,na_action = "mean")
+get_data_Stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "mean")
 }
