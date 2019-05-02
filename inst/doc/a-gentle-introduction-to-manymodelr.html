@@ -134,7 +134,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#&gt; 4 175  0  22</span>
 <span class="co">#&gt; 5 180  0  24</span>
 <span class="co">#&gt; 6 205  0   8</span></code></pre></div>
-<p>*<code>multi_model_1</code></p>
+<ul>
+<li><code>multi_model_1</code></li>
+</ul>
 <p>This is one of the core functions of the package. Since the function uses <code>caret</code> backend, we need to load the function before we can use it. To avoid, several messages showing up, we use the function <code>suppressMessages</code>. This assumes that one is familiar with machine learning basics. We specify our model types and we use the argument <code>valid=TRUE</code> to specify that we are dealing with validation. Had we wanted to predict on unseen test data, then this argument would be set to <code>FALSE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressMessages</span>(<span class="kw">library</span>(caret))
 train_set&lt;-<span class="kw">createDataPartition</span>(iris<span class="op">$</span>Species,<span class="dt">p=</span><span class="fl">0.8</span>,<span class="dt">list=</span><span class="ot">FALSE</span>)
@@ -150,7 +152,7 @@ ctrl&lt;-<span class="kw">trainControl</span>(<span class="dt">method=</span><sp
 <span class="co">#&gt; # A tibble: 1 x 2</span>
 <span class="co">#&gt;     knn rpart</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 0.967 0.933</span></code></pre></div>
+<span class="co">#&gt; 1     1   0.9</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(m<span class="op">$</span>Predictions)
 <span class="co">#&gt; # A tibble: 6 x 2</span>
 <span class="co">#&gt;   knn    rpart </span>
@@ -161,7 +163,9 @@ ctrl&lt;-<span class="kw">trainControl</span>(<span class="dt">method=</span><sp
 <span class="co">#&gt; 4 setosa setosa</span>
 <span class="co">#&gt; 5 setosa setosa</span>
 <span class="co">#&gt; 6 setosa setosa</span></code></pre></div>
-<p>*<code>modeleR</code></p>
+<ul>
+<li><code>modeleR</code></li>
+</ul>
 <p>Yet another core function, this allows us to (currently) conveniently perform linear regression and analysis of variance. Here we are simulatneously building and using our model to predict. This is particularly useful if you already know how well a given model models your data. We can extract the results just like we did above.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris1&lt;-iris[<span class="dv">1</span><span class="op">:</span><span class="dv">60</span>,]
 iris2&lt;-iris[<span class="dv">60</span><span class="op">:</span><span class="kw">nrow</span>(iris),]
@@ -175,7 +179,9 @@ m1&lt;-<span class="kw">modeleR</span>(iris1,Sepal.Length,Petal.Length,
 <span class="co">#&gt; 63  6.025933</span>
 <span class="co">#&gt; 64  6.311478</span>
 <span class="co">#&gt; 65  5.862764</span></code></pre></div>
-<p>*<code>get_var_cor</code></p>
+<ul>
+<li><code>get_var_cor</code></li>
+</ul>
 <p>As the name suggests, this function is useful when carrying out correlation tests as shown below. Setting <code>get_all</code> to <code>TRUE</code> implies that all the variables are correlated(from exploratory data analysis) and you just want to see what the correlation(s) is(are).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var_corr</span>(mtcars, <span class="st">&quot;mpg&quot;</span>,<span class="dt">get_all =</span> <span class="ot">TRUE</span>)
 <span class="co">#&gt;    Comparison_Var Other_Var      p_value Correlation</span>
@@ -189,7 +195,9 @@ m1&lt;-<span class="kw">modeleR</span>(iris1,Sepal.Length,Petal.Length,
 <span class="co">#&gt; 8             mpg        am 2.850207e-04   0.5998324</span>
 <span class="co">#&gt; 9             mpg      gear 5.400948e-03   0.4802848</span>
 <span class="co">#&gt; 10            mpg      carb 1.084446e-03  -0.5509251</span></code></pre></div>
-<p>*<code>rowdiff</code></p>
+<ul>
+<li><code>rowdiff</code></li>
+</ul>
 <p>This is useful when trying to find differemces between rows. The <code>direction</code> argument specifies how the subtractions are made while the <code>exclude</code> argument is currently used to remove non-numeric data. Using <code>direction=&quot;reverse&quot;</code> performs a subtraction akin to <code>x-(x-1)</code> where <code>x</code> is the row number.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">rowdiff</span>(iris,<span class="dt">exclude =</span> <span class="st">&quot;non_numeric&quot;</span>,<span class="dt">direction =</span> <span class="st">&quot;reverse&quot;</span>))
 <span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width</span>
