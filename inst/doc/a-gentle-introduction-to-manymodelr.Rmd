@@ -3,6 +3,7 @@ title: "A Gentle Introduction to manymodelr"
 author: "Nelson Gonzabato"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -27,7 +28,7 @@ In this vignette, we take a look at how we can simplify many machine learning ta
 #install.packages("manymodelr")
 ```
 
-Once our package has been successfully installed, we can then proceed by loading at exploring some of the key functionalities of the package.
+Once our package has been successfully installed, we can then proceed by loading the package and exploring some of the key functions.
 
 #Loading the package
 
@@ -39,7 +40,7 @@ library(manymodelr)
 
 * `agg_by_group`
 
-As you can guess from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form `x~y` where `y` is the grouping variable(in this case `Species`). One can supply a formula as shown next. 
+As one can guess from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form `x~y` where `y` is the grouping variable(in this case `Species`). One can supply a formula as shown next. 
 
 ```{r}
 agg_by_group(iris,.~Species,length)

@@ -12,7 +12,7 @@
 
 <meta name="author" content="Nelson Gonzabato" />
 
-<meta name="date" content="2019-04-15" />
+<meta name="date" content="2019-05-02" />
 
 <title>A Gentle Introduction to manymodelr</title>
 
@@ -95,7 +95,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">A Gentle Introduction to manymodelr</h1>
 <h4 class="author">Nelson Gonzabato</h4>
-<h4 class="date">2019-04-15</h4>
+<h4 class="date">2019-05-02</h4>
 
 
 
@@ -109,7 +109,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="installing-the-package" class="section level1">
 <h1>Installing the package</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&quot;manymodelr&quot;)</span></code></pre></div>
-<p>Once our package has been successfully installed, we can then proceed by loading at exploring some of the key functionalities of the package.</p>
+<p>Once our package has been successfully installed, we can then proceed by loading the package and exploring some of the key functions.</p>
 </div>
 <div id="loading-the-package" class="section level1">
 <h1>Loading the package</h1>
@@ -120,7 +120,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li><code>agg_by_group</code></li>
 </ul>
-<p>As you can guess from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form <code>x~y</code> where <code>y</code> is the grouping variable(in this case <code>Species</code>). One can supply a formula as shown next.</p>
+<p>As one can guess from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form <code>x~y</code> where <code>y</code> is the grouping variable(in this case <code>Species</code>). One can supply a formula as shown next.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">agg_by_group</span>(iris,.<span class="op">~</span>Species,length)
 <span class="co">#&gt; Grouped By[1]:    Species </span>
 <span class="co">#&gt; </span>
@@ -154,7 +154,7 @@ ctrl&lt;-<span class="kw">trainControl</span>(<span class="dt">method=</span><sp
 <span class="co">#&gt; # A tibble: 1 x 2</span>
 <span class="co">#&gt;     knn rpart</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 0.967 0.933</span></code></pre></div>
+<span class="co">#&gt; 1   0.9 0.867</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(m<span class="op">$</span>Predictions)
 <span class="co">#&gt; # A tibble: 6 x 2</span>
 <span class="co">#&gt;   knn    rpart </span>
@@ -172,13 +172,13 @@ iris2&lt;-iris[<span class="dv">60</span><span class="op">:</span><span class="k
 m1&lt;-<span class="kw">modeleR</span>(iris1,Sepal.Length,Petal.Length,
         lm,<span class="dt">na.rm=</span><span class="ot">TRUE</span>,iris2)
 <span class="kw">head</span>(m1<span class="op">$</span>Predictions)
-<span class="co">#&gt;    predict.lm.fit..new_data.</span>
-<span class="co">#&gt; 60                  5.985141</span>
-<span class="co">#&gt; 61                  5.821972</span>
-<span class="co">#&gt; 62                  6.107518</span>
-<span class="co">#&gt; 63                  6.025933</span>
-<span class="co">#&gt; 64                  6.311478</span>
-<span class="co">#&gt; 65                  5.862764</span></code></pre></div>
+<span class="co">#&gt;    Predicted</span>
+<span class="co">#&gt; 60  5.985141</span>
+<span class="co">#&gt; 61  5.821972</span>
+<span class="co">#&gt; 62  6.107518</span>
+<span class="co">#&gt; 63  6.025933</span>
+<span class="co">#&gt; 64  6.311478</span>
+<span class="co">#&gt; 65  5.862764</span></code></pre></div>
 <p>*<code>get_var_cor</code></p>
 <p>As the name suggests, this function is useful when carrying out correlation tests as shown below. Setting <code>get_all</code> to <code>TRUE</code> implies that all the variables are correlated(from exploratory data analysis) and you just want to see what the correlation(s) is(are).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_var_corr</span>(mtcars, <span class="st">&quot;mpg&quot;</span>,<span class="dt">get_all =</span> <span class="ot">TRUE</span>)
