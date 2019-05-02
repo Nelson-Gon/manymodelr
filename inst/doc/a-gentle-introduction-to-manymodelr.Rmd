@@ -16,13 +16,13 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-#manymodelr 
+# manymodelr 
 
-# manymodelr 0.2.1
+## manymodelr 0.2.1
 
 In this vignette, we take a look at how we can simplify many machine learning tasks using `manymodelr`. We will take a look at the core functions first.
 
-#Installing the package
+### Installing the package
 
 ```{r}
 #install.packages("manymodelr")
@@ -30,13 +30,13 @@ In this vignette, we take a look at how we can simplify many machine learning ta
 
 Once our package has been successfully installed, we can then proceed by loading the package and exploring some of the key functions.
 
-#Loading the package
+#### Loading the package
 
 ```{r}
 library(manymodelr)
 ```
 
-# A look at key functions.
+##### A look at some of the key functions.
 
 * `agg_by_group`
 
@@ -108,12 +108,14 @@ head(rowdiff(iris,exclude = "non_numeric",direction = "reverse"))
 
 
 
-# Exploring Further.
+###### Exploring Further.
 
 The vignette has been short and therefore is non exhaustive. The best way to explore this and any package or language is to practice. For more examples, please use `?function_name` and see a few implementations of the given function.
 
-#Reporting Issues
+####### Reporting Issues
 
 If you would like to contribute, report issues or improve any of these functions, please raise a pull request at ([manymodelr](github.com/Nelson-Gon/manymodelr))
+
+> "Programs must be written for people to read, and only incidentally for machines to execute." - Harold Abelson ([Reference](https://www.goodreads.com/quotes/tag/programming))
 
 **Thank You**
