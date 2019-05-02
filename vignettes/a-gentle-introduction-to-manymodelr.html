@@ -101,22 +101,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <div id="manymodelr" class="section level1">
 <h1>manymodelr</h1>
-</div>
-<div id="manymodelr-0.2.1" class="section level1">
-<h1>manymodelr 0.2.1</h1>
+<div id="manymodelr-0.2.1" class="section level2">
+<h2>manymodelr 0.2.1</h2>
 <p>In this vignette, we take a look at how we can simplify many machine learning tasks using <code>manymodelr</code>. We will take a look at the core functions first.</p>
-</div>
-<div id="installing-the-package" class="section level1">
-<h1>Installing the package</h1>
+<div id="installing-the-package" class="section level3">
+<h3>Installing the package</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&quot;manymodelr&quot;)</span></code></pre></div>
 <p>Once our package has been successfully installed, we can then proceed by loading the package and exploring some of the key functions.</p>
-</div>
-<div id="loading-the-package" class="section level1">
-<h1>Loading the package</h1>
+<div id="loading-the-package" class="section level4">
+<h4>Loading the package</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(manymodelr)</code></pre></div>
-</div>
-<div id="a-look-at-key-functions." class="section level1">
-<h1>A look at key functions.</h1>
+<div id="a-look-at-some-of-the-key-functions." class="section level5">
+<h5>A look at some of the key functions.</h5>
 <ul>
 <li><code>agg_by_group</code></li>
 </ul>
@@ -154,7 +150,7 @@ ctrl&lt;-<span class="kw">trainControl</span>(<span class="dt">method=</span><sp
 <span class="co">#&gt; # A tibble: 1 x 2</span>
 <span class="co">#&gt;     knn rpart</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1   0.9 0.867</span></code></pre></div>
+<span class="co">#&gt; 1 0.967 0.933</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(m<span class="op">$</span>Predictions)
 <span class="co">#&gt; # A tibble: 6 x 2</span>
 <span class="co">#&gt;   knn    rpart </span>
@@ -203,15 +199,22 @@ m1&lt;-<span class="kw">modeleR</span>(iris1,Sepal.Length,Petal.Length,
 <span class="co">#&gt; 4         -0.1        -0.1          0.2         0.0</span>
 <span class="co">#&gt; 5          0.4         0.5         -0.1         0.0</span>
 <span class="co">#&gt; 6          0.4         0.3          0.3         0.2</span></code></pre></div>
-</div>
-<div id="exploring-further." class="section level1">
-<h1>Exploring Further.</h1>
+<div id="exploring-further." class="section level6">
+<h6>Exploring Further.</h6>
 <p>The vignette has been short and therefore is non exhaustive. The best way to explore this and any package or language is to practice. For more examples, please use <code>?function_name</code> and see a few implementations of the given function.</p>
-</div>
-<div id="reporting-issues" class="section level1">
-<h1>Reporting Issues</h1>
+<div id="reporting-issues" class="section level7">
+<p>Reporting Issues</p>
 <p>If you would like to contribute, report issues or improve any of these functions, please raise a pull request at (<a href="github.com/Nelson-Gon/manymodelr">manymodelr</a>)</p>
+<blockquote>
+<p>“Programs must be written for people to read, and only incidentally for machines to execute.” - Harold Abelson (<a href="https://www.goodreads.com/quotes/tag/programming">Reference</a>)</p>
+</blockquote>
 <p><strong>Thank You</strong></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 
