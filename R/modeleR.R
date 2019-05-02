@@ -50,9 +50,15 @@ modeleR<-function (df, yname, xname, modeltype, na.rm = F, new_data, ...)
                                              10)])
     df <- cbind(df, Explanatory = xname, Response = yname)
     names(df) <- gsub("^r", "R", names(df))
-    list(DataFrame = df, Summary_data = m, Predictions = data.frame(Predictions = as.data.frame(predict(lm.fit,
-                                                                                                        new_data))),
+    res<-list(DataFrame = df, Summary_data = m,
+              Predictions = data.frame(Predictions =
+                                         as.data.frame(predict(lm.fit,
+                                  new_data))),
          Stats = stat_data)
+    names(res$Predictions)<-c("Predicted")
+    res$DataFrame$Explanatory<-gsub("\\+","",res$DataFrame$Explanatory)
+   res
+
   }
   else if (modeltype == "aov" & na.rm == T) {
     lm.fit <- do.call(modeltype, list(data = quote(df), formula1,
@@ -68,8 +74,13 @@ modeleR<-function (df, yname, xname, modeltype, na.rm = F, new_data, ...)
     df1$Value = round(df1$Value, 3)
     df1 <- df1[, c("Var", "Value")]
     df1 <- na.omit(df1)
-    list(DataFrame = df, Summary_data = m, Predictions = data.frame(Predictions = as.data.frame(predict(lm.fit,
-                                                                                                        new_data))))
+    res<-list(DataFrame = df, Summary_data = m,
+              Predictions = data.frame(Predictions =
+                                         as.data.frame(predict(lm.fit,
+                                                               new_data))),
+              Stats = stat_data)
+    names(res$Predictions)<-c("Predicted")
+    res
   }
   else if (modeltype == "aov" & na.rm == F) {
     lm.fit <- do.call(modeltype, list(data = quote(df), formula = formula1,
@@ -84,7 +95,12 @@ modeleR<-function (df, yname, xname, modeltype, na.rm = F, new_data, ...)
     df1$Var <- rownames(df1)
     df1$Value = round(df1$Value, 3)
     df1[, c("Value", "Var")]
-    list(DataFrame = df, Summary_data = m, Predictions = data.frame(Predictions = as.data.frame(predict(lm.fit,
-                                                                                                        new_data))))
+    res<-list(DataFrame = df, Summary_data = m,
+              Predictions = data.frame(Predictions =
+                                         as.data.frame(predict(lm.fit,
+                                                               new_data))),
+              Stats = stat_data)
+    names(res$Predictions)<-c("Predicted")
+ res
   }
 }
