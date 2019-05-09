@@ -21,7 +21,8 @@ get_var_corr<- function (df, comparison_var, other_vars = NULL, get_all = TRUE,.
       res1 <- cor.test(get(comparison_var, as.environment(df)),
                        get(x, as.environment(df)),...)
       data.frame(Comparison_Var = comparison_var, Other_Var = x,
-                 p_value = res1$p.value, Correlation = res1$estimate
+                 p_value = res1$p.value, Correlation = res1$estimate,
+                 lower_ci= res1$conf.int[1], upper_ci= res1$conf.int[2]
                  )
     }), data.frame)
     res
@@ -32,7 +33,8 @@ get_var_corr<- function (df, comparison_var, other_vars = NULL, get_all = TRUE,.
                        get(x, as.environment(df)),...)
 
       data.frame(Comparison_Var = comparison_var, Other_Var = x,
-                 p.value = res1$p.value, Correlation= res1$estimate)
+                 p.value = res1$p.value, Correlation= res1$estimate,
+                 lower_ci= res1$conf.int[1], upper_ci= res1$conf.int[2])
     }), data.frame)
     res
   }
