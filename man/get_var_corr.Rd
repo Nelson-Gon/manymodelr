@@ -5,7 +5,7 @@
 \title{Get correlations between variables}
 \usage{
 get_var_corr(df, comparison_var, other_vars = NULL, get_all = TRUE,
-  ...)
+  method = "pearson", ...)
 }
 \arguments{
 \item{df}{The data set for which correlations are required}
@@ -17,6 +17,9 @@ supplied, all variables will be used.}
 
 \item{get_all}{Logical. Should all variables be used for correlation? If true, all variables
 are used. Defaults to TRUE.}
+
+\item{method}{The method used to perform the correlation test as defined in 'cor.test'.
+Defaults to pearson.}
 
 \item{...}{Other arguments to 'cor.test' see ?cor.test for details}
 }
