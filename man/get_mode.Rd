@@ -4,7 +4,7 @@
 \alias{get_mode}
 \title{A convenience function that returns the mode}
 \usage{
-get_mode(x, na.rm = T)
+get_mode(x, na.rm = TRUE)
 }
 \arguments{
 \item{x}{The dataframe or vector for which the mode is required}
