@@ -18,8 +18,8 @@
 #'get_stats(get_mode)
 #'get_stats(mtcars,get_mode)}
 #' @export
-get_mode<-function (x,na.rm=T){
-  if(na.rm==T){
+get_mode<-function (x,na.rm=TRUE){
+  if(na.rm==TRUE){
     x<-x[!is.na(x)]
     y <- x
     for (i in 1:length(x)) {
