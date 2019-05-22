@@ -4,22 +4,24 @@
 \alias{select_percentile}
 \title{Get the row corresponding to a given percentile}
 \usage{
-select_percentile(df, n)
+select_percentile(df, percentile, get_all = T, ascend = FALSE)
 }
 \arguments{
 \item{df}{The dataframe for which a percentile is required}
 
-\item{n}{The percentile required eg 10th percentile}
+\item{percentile}{The percentile required eg 10 percentile}
+
+\item{get_all}{Logical. Should all variables be used? Currenty only supports
+using all variables.}
+
+\item{ascend}{Logical. Should the data be arranged in ascending order? Defaults
+to FALSE.}
 }
 \value{
-A dataframe showing the row corresponding to a given percentile
+A dataframe showing the row corresponding to the required percentile.
+ @examples
+select_percentile(iris,5,)
 }
 \description{
 Get the row corresponding to a given percentile
-}
-\examples{
-select_percentile(iris,5)
-\dontrun{
-select_percentile(mtcars,1)
-}
 }
