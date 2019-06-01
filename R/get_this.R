@@ -9,7 +9,7 @@
 #' my_list<-list(list(A=520),list(B=456))
 #' get_this(A,my_list)
 #' @export
-get_this<-function (what, where,deeper=NULL)
+get_this<-function (what, where)
 {
   what <- deparse(substitute(what))
   deeper<-deparse(substitute(deeper))
