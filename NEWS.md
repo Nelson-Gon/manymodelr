@@ -18,9 +18,11 @@ author: "Nelson Gonzabato"
 
 * `modeleR` has been fixed to handle new data as expected. 
 
-* `multi_model_1` now supports either validation or working with new data.
+* `multi_model_1` now supports either validation or working with new data. The function explicitly needs newdata to be provided for now.
 
 * `row_mean_na`  has been replaced with `na_replace` which is more robust. `row_mean_na` will be removed in future versions. 
+
+* `get_this` provides a convenient way to `extract` data from `data.frame` objects of `lists`. It is intended to be helpful to extract metrics, predictions as might be necessary.
 
 
 
