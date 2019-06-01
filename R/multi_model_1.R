@@ -42,6 +42,10 @@
 multi_model_1<-function (df, yname, xname, method, metric, control, ..., newdata,
                               valid=FALSE)
  {
+  if(is.null(newdata) || missing(newdata)){
+    stop("Please provide a data frame to perform validation or predict on
+         unseen data. ")
+  }
   if(valid==TRUE){
     df <- df
     methods1 <- method
