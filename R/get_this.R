@@ -26,7 +26,7 @@ get_this<-function (what, where)
   }
   else if (is.data.frame(where)) {
     what_matched <- match.arg(what, names(where))
-    where[,what_matched]
+    where[what_matched]
 
 
   }
