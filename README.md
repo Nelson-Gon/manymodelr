@@ -1,6 +1,6 @@
 # manymodelr
 
-**This branch read-only. For the developer version, please see: [develop](https://github.com/Nelson-Gon/manymodelr/tree/develop).**
+**This branch is read-only. For the developer version, please see: [develop](https://github.com/Nelson-Gon/manymodelr/tree/develop).**
 
 **Build and Tune Several Machine Learning models.**
 
