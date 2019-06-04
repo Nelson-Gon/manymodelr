@@ -13,7 +13,7 @@ modeleR(df, yname, xname, modeltype, na.rm = F, new_data, ...)
 
 \item{xname}{Theindependent variable. Supports formulae x1+x2+...}
 
-\item{modeltype}{Currently one of lm and aov. Other models may work with inaccuracies}
+\item{modeltype}{Currently one of lm, glm and aov. Other models may work with inaccuracies}
 
 \item{na.rm}{Logical. Should missing values be removed from analysis?}
 
