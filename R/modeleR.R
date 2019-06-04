@@ -46,6 +46,12 @@ modeleR<-function (df, yname, xname, modeltype, na.rm = F, new_data, ...)
     if(modeltype=="glm"){
       df<-as.data.frame(sapply(m,"[[",1)[c(3,4,5,12,14,15,16)])
       df <- cbind(df, Explanatory = xname, Response = yname)
+    new_names<-Map(function(x) gsub(" {1,},","",
+                                paste0(toupper(substring(x,1,1)),
+                                       substring(x,2,nchar(x)),collapse="")),
+               names(df))
+      names(df)<-NULL
+      names(df)<-unlist(new_names)
     }
     else{
       df <- as.data.frame(sapply(m, "[[", 1)[c(3, 4, 8, 9,
