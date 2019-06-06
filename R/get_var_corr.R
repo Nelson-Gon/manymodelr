@@ -32,7 +32,7 @@ get_var_corr<- function (df, comparison_var, other_vars = NULL, get_all = TRUE,
     res
     }
     else{
-      res <- plyr::ldply(lapply(other_vars, function(x) {
+      res <- plyr::ldply(lapply(columns, function(x) {
         res1 <- cor.test(get(comparison_var, as.environment(df)),
                          get(x, as.environment(df)),method=method,...)
 
