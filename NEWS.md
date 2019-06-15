@@ -14,6 +14,9 @@ author: "Nelson Gonzabato"
   `
 * `get_var_corr` provides a user-friendly way to find correlations between data.
 
+
+* `get_var_corr_` provides a user-friendly way to find combination-wise correlations. It is currently slow and also not modifiable.
+
 * `get_data_Stats` now supports removal of missing data as well as using only numeric data.
 
 * `modeleR` has been fixed to handle new data as expected. It also now supports `glm`. 
