@@ -1,0 +1,121 @@
+---
+title: "A Gentle Introduction to manymodelr"
+author: "Nelson Gonzabato"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# manymodelr 
+
+## manymodelr 0.2.1
+
+In this vignette, we take a look at how we can simplify many machine learning tasks using `manymodelr`. We will take a look at the core functions first.
+
+### Installing the package
+
+```{r}
+#install.packages("manymodelr")
+```
+
+Once our package has been successfully installed, we can then proceed by loading the package and exploring some of the key functions.
+
+#### Loading the package
+
+```{r}
+library(manymodelr)
+```
+
+##### A look at some of the key functions.
+
+* `agg_by_group`
+
+As one can guess from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form `x~y` where `y` is the grouping variable(in this case `Species`). One can supply a formula as shown next. 
+
+```{r}
+agg_by_group(iris,.~Species,length)
+```
+
+```{r}
+head(agg_by_group(mtcars,cyl~hp+vs,sum))
+```
+
+
+* `multi_model_1`
+
+This is one of the core functions of the package. Since the function uses `caret` backend, we need to load the function before we can use it. To avoid, several messages showing up, we use the function `suppressMessages`. This assumes that one is familiar with machine learning basics. We specify our model types and we use the argument `valid=TRUE` to specify that we are dealing with validation. Had we wanted to predict on unseen test data, then this argument would be set to `FALSE`.
+
+```{r}
+suppressMessages(library(caret))
+train_set<-createDataPartition(iris$Species,p=0.8,list=FALSE)
+valid_set<-iris[-train_set,]
+train_set<-iris[train_set,]
+ctrl<-trainControl(method="cv",number=5)
+set.seed(233)
+ m<-multi_model_1(train_set,"Species",".",c("knn","rpart"),
+"Accuracy",ctrl,newdata =valid_set,valid=TRUE)
+```
+
+The above message tells us that the model has returned our metrics for each of the model types we specified. These can be extracted as shown below. Other return values include predictions and a summary of the model.
+
+```{r}
+m$Metrics
+```
+```{r}
+head(m$Predictions)
+```
+
+
+* `modeleR`
+
+ Yet another core function, this allows us to (currently) conveniently perform linear regression and analysis of variance.  Here we are simulatneously building and using our model to predict. This is particularly useful if you already know how well a given model models your data. We can extract the results just like we did above.
+ 
+```{r}
+iris1<-iris[1:60,]
+iris2<-iris[60:nrow(iris),]
+m1<-modeleR(iris1,Sepal.Length,Petal.Length,
+        lm,na.rm=TRUE,iris2)
+head(m1$Predictions)
+```
+
+* `get_var_cor`
+ 
+ As the name suggests, this function is useful when carrying out correlation tests as shown below. Setting `get_all` to `TRUE` implies that all the variables are correlated(from exploratory data analysis) and you just want to see what the correlation(s) is(are).
+ 
+ 
+```{r}
+get_var_corr(mtcars, "mpg",get_all = TRUE)
+```
+
+* `rowdiff`
+
+ This is useful when trying to find differemces between rows. The `direction` argument specifies how the subtractions are made while the `exclude` argument is currently used to
+ remove non-numeric data.  Using `direction="reverse"` performs a subtraction akin to `x-(x-1)` where `x` is the row number. 
+
+```{r}
+head(rowdiff(iris,exclude = "non_numeric",direction = "reverse"))
+```
+
+
+
+###### Exploring Further.
+
+The vignette has been short and therefore is non exhaustive. The best way to explore this and any package or language is to practice. For more examples, please use `?function_name` and see a few implementations of the given function.
+
+####### Reporting Issues
+
+If you would like to contribute, report issues or improve any of these functions, please raise a pull request at ([manymodelr](github.com/Nelson-Gon/manymodelr))
+
+> "Programs must be written for people to read, and only incidentally for machines to execute." - Harold Abelson ([Reference](https://www.goodreads.com/quotes/tag/programming))
+
+**Thank You**
