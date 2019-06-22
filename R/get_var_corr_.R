@@ -16,7 +16,7 @@ plyr::ldply(lapply(no_dupe[lengths(no_dupe)>0],
                          comparison_var = x[1],
                             other_vars = x[2],
                          get_all = FALSE,...)),
-              data.frame)  
+              data.frame)[,-1] 
   
 }
 
