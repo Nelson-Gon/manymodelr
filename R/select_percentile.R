@@ -7,7 +7,7 @@
 #' to FALSE.
 #' @return A dataframe showing the row corresponding to the required percentile.
 #'  @examples
-#' select_percentile(iris,5,)
+#' select_percentile(iris,5)
 #'@export
 select_percentile<-function(df,percentile,get_all=T,descend=FALSE){
   # Returns the value corresponding to a percentile

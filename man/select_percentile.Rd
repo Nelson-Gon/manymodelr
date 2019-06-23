@@ -20,7 +20,7 @@ to FALSE.}
 \value{
 A dataframe showing the row corresponding to the required percentile.
  @examples
-select_percentile(iris,5,)
+select_percentile(iris,5)
 }
 \description{
 Get the row corresponding to a given percentile
