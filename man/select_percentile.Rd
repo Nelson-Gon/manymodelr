@@ -4,7 +4,7 @@
 \alias{select_percentile}
 \title{Get the row corresponding to a given percentile}
 \usage{
-select_percentile(df, percentile, get_all = T, descend = FALSE)
+select_percentile(df, percentile, get_all = TRUE, descend = FALSE)
 }
 \arguments{
 \item{df}{A `data.frame` object for which a percentile is required. Other data structures are not yet supported.}
