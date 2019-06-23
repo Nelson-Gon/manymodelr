@@ -7,7 +7,7 @@
 select_percentile(df, percentile, get_all = T, descend = FALSE)
 }
 \arguments{
-\item{df}{The dataframe for which a percentile is required}
+\item{df}{A `data.frame` object for which a percentile is required. Other data structures are not yet supported.}
 
 \item{percentile}{The percentile required eg 10 percentile}
 
@@ -19,9 +19,15 @@ to FALSE.}
 }
 \value{
 A dataframe showing the row corresponding to the required percentile.
- @examples
-select_percentile(iris,5)
 }
 \description{
 Get the row corresponding to a given percentile
+}
+\details{
+Returns the value corresponding to a percentile. 
+Returns mean values if the position of the percentile is  whole number.
+Values are sorted in ascending order. You can change this by setting descend to TRUE.
+}
+\examples{
+select_percentile(iris,5)
 }
