@@ -23,4 +23,9 @@ for combinations of variables. It is currently slow and may take up to a minute 
 }
 \examples{
 get_var_corr_(mtcars,exact=FALSE,method="spearman")
+\dontrun{
+# For finer control
+get_var_corr_(iris,c("Petal.Length","Sepal.Length"),
+ c("Petal.Width","Sepal.Width"))
+}
 }

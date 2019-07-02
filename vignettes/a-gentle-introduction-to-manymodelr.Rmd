@@ -29,6 +29,8 @@ In this vignette, we take a look at how we can simplify many machine learning ta
 
 Once the package has been successfully installed, we can then proceed by loading the package and exploring some of the key functions.
 
+
+
 ### Loading the package
 
 ```{r}
@@ -95,6 +97,13 @@ head(m1$Predictions)
 ```{r}
 get_var_corr(mtcars, "mpg",get_all = TRUE)
 ```
+
+Similarly, `get_var_corr_` (note the underscore at the end) provides  a convenient way to get combinations with even more control. For instance, one could get correlations for select variables as below.
+
+```{r}
+get_var_corr_(iris,comparison_var=c("Petal.Length","Sepal.Length"), other_var=c("Petal.Width","Sepal.Width"))
+```
+
 
 * `rowdiff`
 

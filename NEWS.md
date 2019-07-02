@@ -15,7 +15,7 @@ author: "Nelson Gonzabato"
 * `get_var_corr` provides a user-friendly way to find correlations between data.
 
 
-* `get_var_corr_` provides a user-friendly way to find combination-wise correlations. It is currently slow and also not modifiable.
+* `get_var_corr_` provides a user-friendly way to find combination-wise correlations. It is relatively fast depending on how big one's data is and/or machine specifications. 
 
 * `get_data_Stats` now supports removal of missing data as well as using only numeric data.
 
