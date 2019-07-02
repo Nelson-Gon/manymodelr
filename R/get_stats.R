@@ -24,7 +24,7 @@ get_data_Stats<-function (x, func,exclude=NULL,na.rm=TRUE,na_action=NULL)
 
 
   }
-  apply(x,2,function(x) do.call(func,list(x)))
+  sapply(x,function(x) do.call(func,list(x)))
 
 }
 
