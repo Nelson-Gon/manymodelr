@@ -17,6 +17,7 @@
 #' @importFrom dplyr "arrange" "desc"
 #' @import caret
 #' @import e1071
+#' @rawNamespace   import(Metrics,except=c("precision","recall"))
 #' @return A list containing two objects. A tibble containing a summary of the metrics per model,
 #' a tibble containig predicted values and information concerning the model
 #' @details Most of the details of the parameters can be found in the caret package documentation.
