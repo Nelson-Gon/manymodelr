@@ -12,7 +12,7 @@
 
 <meta name="author" content="Nelson Gonzabato" />
 
-<meta name="date" content="2019-06-22" />
+<meta name="date" content="2019-07-02" />
 
 <title>A Gentle Introduction to manymodelr</title>
 
@@ -303,7 +303,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">A Gentle Introduction to manymodelr</h1>
 <h4 class="author">Nelson Gonzabato</h4>
-<h4 class="date">2019-06-22</h4>
+<h4 class="date">2019-07-02</h4>
 
 
 
@@ -358,7 +358,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;     knn rpart</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 1     1   0.9</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 1   0.9   0.9</span></a></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">head</span>(m<span class="op">$</span>Predictions)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 2</span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;   knn    rpart </span></a>
@@ -412,18 +412,36 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt; 8   0.7844520</span></a>
 <a class="sourceLine" id="cb9-22" data-line-number="22"><span class="co">#&gt; 9   0.7100628</span></a>
 <a class="sourceLine" id="cb9-23" data-line-number="23"><span class="co">#&gt; 10 -0.2503183</span></a></code></pre></div>
+<p>Similarly, <code>get_var_corr_</code> (note the underscore at the end) provides a convenient way to get combinations with even more control. For instance, one could get correlations for select variables as below.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">get_var_corr_</span>(iris,<span class="dt">comparison_var=</span><span class="kw">c</span>(<span class="st">&quot;Petal.Length&quot;</span>,<span class="st">&quot;Sepal.Length&quot;</span>), <span class="dt">other_var=</span><span class="kw">c</span>(<span class="st">&quot;Petal.Width&quot;</span>,<span class="st">&quot;Sepal.Width&quot;</span>))</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; Warning in get_var_corr_(iris, comparison_var = c(&quot;Petal.Length&quot;, &quot;Sepal.Length&quot;), : Factor columns were found in the data set, these have </span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt;           been discarded.</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt;   Comparison_Var    Other_Var      p.value Correlation   lower_ci</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; 1   Sepal.Length  Sepal.Width 1.518983e-01  -0.1175698 -0.2726932</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; 2   Sepal.Length Petal.Length 1.038667e-47   0.8717538  0.8270363</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; 3   Sepal.Length  Petal.Width 2.325498e-37   0.8179411  0.7568971</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; 4    Sepal.Width Petal.Length 4.513314e-08  -0.4284401 -0.5508771</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; 5    Sepal.Width  Petal.Width 4.073229e-06  -0.3661259 -0.4972130</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; 6   Petal.Length  Petal.Width 4.675004e-86   0.9628654  0.9490525</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt;      upper_ci</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 1  0.04351158</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; 2  0.90550805</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; 3  0.86483606</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; 4 -0.28794993</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 5 -0.21869663</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; 6  0.97298532</span></a></code></pre></div>
 <ul>
 <li><code>rowdiff</code></li>
 </ul>
 <p>This is useful when trying to find differemces between rows. The <code>direction</code> argument specifies how the subtractions are made while the <code>exclude</code> argument is currently used to remove non-numeric data. Using <code>direction=&quot;reverse&quot;</code> performs a subtraction akin to <code>x-(x-1)</code> where <code>x</code> is the row number.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">rowdiff</span>(iris,<span class="dt">exclude =</span> <span class="st">&quot;non_numeric&quot;</span>,<span class="dt">direction =</span> <span class="st">&quot;reverse&quot;</span>))</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; 1           NA          NA           NA          NA</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; 2         -0.2        -0.5          0.0         0.0</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; 3         -0.2         0.2         -0.1         0.0</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; 4         -0.1        -0.1          0.2         0.0</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; 5          0.4         0.5         -0.1         0.0</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; 6          0.4         0.3          0.3         0.2</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">rowdiff</span>(iris,<span class="dt">exclude =</span> <span class="st">&quot;non_numeric&quot;</span>,<span class="dt">direction =</span> <span class="st">&quot;reverse&quot;</span>))</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; 1           NA          NA           NA          NA</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; 2         -0.2        -0.5          0.0         0.0</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; 3         -0.2         0.2         -0.1         0.0</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; 4         -0.1        -0.1          0.2         0.0</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; 5          0.4         0.5         -0.1         0.0</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; 6          0.4         0.3          0.3         0.2</span></a></code></pre></div>
 <div id="exploring-further." class="section level5">
 <h5>Exploring Further.</h5>
 <p>The vignette has been short and therefore is non exhaustive. The best way to explore this and any package or language is to practice. For more examples, please use <code>?function_name</code> and see a few implementations of the given function.</p>
