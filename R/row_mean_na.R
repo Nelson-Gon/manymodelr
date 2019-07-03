@@ -1,6 +1,6 @@
 #' @title Replacing all NAs with mean values of a given row
 #' @param data is the data you for which the mean is needed
-#' @param func describes the function to use. Currrently only supports the mean(others may work with some inaccuracies)
+#' @param func describes the function to use. Currently only supports the mean(others may work with some inaccuracies)
 #' @param observations takes on column names  for which manipulations are required
 #' @param na.rm Logical. Should NAs be removed from analysis?
 #' @param exc the column to exclude from analysis. Useful for removing factor columns

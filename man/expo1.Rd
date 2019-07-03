@@ -15,7 +15,7 @@ expo1(y, x)
 Convenience functions for use with get_exponent
 }
 \details{
-See ?get_exponent for detials
+See ?get_exponent for details
 }
 \examples{
 \dontrun{

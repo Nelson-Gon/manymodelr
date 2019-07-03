@@ -6,6 +6,10 @@ author: "Nelson Gonzabato"
 
 # manymodelr 0.2.1
 
+**Major Changes**
+
+1. **Additions**
+
 * `agg_by_group` is a new function that manipulates grouped data. It is fast and
    robust for many kinds of functions.
 
@@ -17,6 +21,11 @@ author: "Nelson Gonzabato"
 
 * `get_var_corr_` provides a user-friendly way to find combination-wise correlations. It is relatively fast depending on how big one's data is and/or machine specifications. 
 
+* `get_this` is an easy to use helper function to get metrics,predictions, etc. Currently supports `list`s and `data.frame` objects. 
+
+
+**Major Changes**
+
 * `get_data_Stats` now supports removal of missing data as well as using only numeric data.
 
 * `modeleR` has been fixed to handle new data as expected. It also now supports `glm`. 
@@ -25,7 +34,7 @@ author: "Nelson Gonzabato"
 
 * `row_mean_na`  has been replaced with `na_replace` which is more robust. `row_mean_na` will be removed in future versions. 
 
-* `get_this` is an easy to use helper function to get metrics,predictions, etc. Currently supports `list`s and `data.frame` objects. 
+
 
 
 

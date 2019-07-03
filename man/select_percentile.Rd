@@ -11,7 +11,7 @@ select_percentile(df, percentile, get_all = TRUE, descend = FALSE)
 
 \item{percentile}{The percentile required eg 10 percentile}
 
-\item{get_all}{Logical. Should all variables be used? Currenty only supports
+\item{get_all}{Logical. Should all variables be used? Currently only supports
 using all variables.}
 
 \item{descend}{Logical. Should the data be arranged in descending order? Defaults

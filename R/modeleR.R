@@ -3,7 +3,7 @@
 #' @importFrom stats "predict"
 #' @param df The data for which analysis is required
 #' @param yname The dependent variable
-#' @param xname Theindependent variable. Supports formulae x1+x2+...
+#' @param xname The independent variable. Supports formulae x1+x2+...
 #' @param modeltype Currently one of lm, glm and aov. Other models may work with inaccuracies
 #' @param na.rm Logical. Should missing values be removed from analysis?
 #' @param new_data A data.frame object for which new predictions are to be made

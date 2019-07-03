@@ -9,7 +9,7 @@ row_mean_na(data, func, observations, na.rm = F, exc)
 \arguments{
 \item{data}{is the data you for which the mean is needed}
 
-\item{func}{describes the function to use. Currrently only supports the mean(others may work with some inaccuracies)}
+\item{func}{describes the function to use. Currently only supports the mean(others may work with some inaccuracies)}
 
 \item{observations}{takes on column names  for which manipulations are required}
 

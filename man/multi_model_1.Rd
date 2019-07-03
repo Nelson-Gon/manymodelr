@@ -16,7 +16,7 @@ multi_model_1(df, yname, xname, method, metric, control, ..., newdata,
 
 \item{method}{A vector containing methods to be used as defined in the caret package}
 
-\item{metric}{One of several metrics. Accuraciy,RMSE,MAE,etc}
+\item{metric}{One of several metrics. Accuracy,RMSE,MAE,etc}
 
 \item{control}{See caret ?trainControl for details.}
 
@@ -24,12 +24,12 @@ multi_model_1(df, yname, xname, method, metric, control, ..., newdata,
 
 \item{newdata}{A data set to validate the model or for which predictions are required}
 
-\item{valid}{Logical. Are you performing validation or dealing with new data? Defaults to False. Predicitions added to new
+\item{valid}{Logical. Are you performing validation or dealing with new data? Defaults to False. Predictions added to new
 data}
 }
 \value{
 A list containing two objects. A tibble containing a summary of the metrics per model,
-a tibble containig predicted values and information concerning the model
+a tibble containing predicted values and information concerning the model
 }
 \description{
 This function provides a convenient way to train several model types.

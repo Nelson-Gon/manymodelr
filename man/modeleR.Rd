@@ -11,7 +11,7 @@ modeleR(df, yname, xname, modeltype, na.rm = F, new_data, ...)
 
 \item{yname}{The dependent variable}
 
-\item{xname}{Theindependent variable. Supports formulae x1+x2+...}
+\item{xname}{The independent variable. Supports formulae x1+x2+...}
 
 \item{modeltype}{Currently one of lm, glm and aov. Other models may work with inaccuracies}
 

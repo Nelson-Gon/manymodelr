@@ -1,11 +1,10 @@
 ---
-title: "A Gentle Introduction to manymodelr"
 author: "Nelson Gonzabato"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{ "A Gentle Introduction to manymodelr"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -79,7 +78,7 @@ head(m$Predictions)
 
 * `modeleR`
 
- Yet another core function, this allows us to (currently) conveniently perform linear regression and analysis of variance.  Here we are simulatneously building and using our model to predict. This is particularly useful if you already know how well a given model models your data. We can extract the results just like we did above.
+ Yet another core function, this allows us to (currently) conveniently perform linear regression and analysis of variance.  Here we are simultaneously building and using our model to predict. This is particularly useful if you already know how well a given model models your data. We can extract the results just like we did above.
  
 ```{r}
 iris1<-iris[1:60,]
@@ -107,7 +106,7 @@ get_var_corr_(iris,comparison_var=c("Petal.Length","Sepal.Length"), other_var=c(
 
 * `rowdiff`
 
- This is useful when trying to find differemces between rows. The `direction` argument specifies how the subtractions are made while the `exclude` argument is currently used to
+ This is useful when trying to find differences between rows. The `direction` argument specifies how the subtractions are made while the `exclude` argument is currently used to
  remove non-numeric data.  Using `direction="reverse"` performs a subtraction akin to `x-(x-1)` where `x` is the row number. 
 
 ```{r}

@@ -6,11 +6,11 @@
 #' @param yname The outcome variable
 #' @param xname The predictor variable(s)
 #' @param method A vector containing methods to be used as defined in the caret package
-#' @param metric One of several metrics. Accuraciy,RMSE,MAE,etc
+#' @param metric One of several metrics. Accuracy,RMSE,MAE,etc
 #' @param control See caret ?trainControl for details.
 #' @param newdata A data set to validate the model or for which predictions are required
 #' @param ... Other arguments to caret's train function
-#' @param valid Logical. Are you performing validation or dealing with new data? Defaults to False. Predicitions added to new
+#' @param valid Logical. Are you performing validation or dealing with new data? Defaults to False. Predictions added to new
 #' data
 #' @importFrom magrittr "%>%"
 #' @importFrom stats "as.formula"  "complete.cases" "setNames" "na.omit" "predict"
@@ -19,7 +19,7 @@
 #' @import e1071
 #' @rawNamespace   import(Metrics,except=c("precision","recall"))
 #' @return A list containing two objects. A tibble containing a summary of the metrics per model,
-#' a tibble containig predicted values and information concerning the model
+#' a tibble containing predicted values and information concerning the model
 #' @details Most of the details of the parameters can be found in the caret package documentation.
 #' This function is meant to help in exploratory analysis to
 #' make an informed choice of the best models

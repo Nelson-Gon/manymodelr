@@ -1,7 +1,7 @@
 #' Get the row corresponding to a given percentile
 #' @param df A `data.frame` object for which a percentile is required. Other data structures are not yet supported.
 #' @param percentile The percentile required eg 10 percentile
-#' @param get_all Logical. Should all variables be used? Currenty only supports
+#' @param get_all Logical. Should all variables be used? Currently only supports
 #' using all variables.
 #' @param descend Logical. Should the data be arranged in descending order? Defaults
 #' to FALSE.
