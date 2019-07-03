@@ -121,7 +121,7 @@ The vignette has been short and therefore is non exhaustive. The best way to exp
 
 ###### Reporting Issues
 
-If you would like to contribute, report issues or improve any of these functions, please raise a pull request at ([manymodelr](github.com/Nelson-Gon/manymodelr))
+If you would like to contribute, report issues or improve any of these functions, please raise a pull request at ([manymodelr](https://github.com/Nelson-Gon/manymodelr))
 
 > "Programs must be written for people to read, and only incidentally for machines to execute." - Harold Abelson ([Reference](https://www.goodreads.com/quotes/tag/programming))
 
