@@ -1,12 +1,6 @@
 # manymodelr(Development Version 0.2.1.9000)
 
-<<<<<<< HEAD
-**This branch is read-only. For the developer version, please see: [develop](https://github.com/Nelson-Gon/manymodelr/tree/develop).**
-
-**Build and Tune Several Machine Learning models.**
-=======
 **Tune and build several Machine Learning models.**
->>>>>>> develop
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Build Status](https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.org/Nelson-Gon/manymodelr)
@@ -16,27 +10,16 @@
 [![TotalDownloads](http://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow)](https://cran.r-project.org/package=manymodelr)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 
-<<<<<<< HEAD
-## **Installing the package**
-
-* **Installing from CRAN**
-```
-=======
 *  **Installing the package**
 
 * **From CRAN(0.2.1 Pending Review)**
->>>>>>> develop
 
 ```
 install.packages("manymodelr")
 
 ```
 
-<<<<<<< HEAD
-* **Installing from GitHub**
-=======
 * **From GitHub**
->>>>>>> develop
 
 ```
 remotes::install_github("Nelson-Gon/manymodelr")
@@ -45,43 +28,17 @@ devtools::install_github("Nelson-Gon/manymodelr",build_vignettes=TRUE) #Builds v
 ```
 
 
-<<<<<<< HEAD
-### **Loading the package**
-=======
 * **Loading the package**
->>>>>>> develop
 
 ```
 
-<<<<<<< HEAD
-#### **What's in this version of the package?**
-=======
 library(manymodelr)
->>>>>>> develop
 
 ```
 
-<<<<<<< HEAD
-##### **Key functions in this version**
-
-* **1.** `modeleR`
-   
-   This function is useful if one would like to fit linear models or perform analysis of variance(currently). The function allows one to predict within the same function by providing new data for which predictions are needed.  
-   
-  *Sample usage*
- 
- ```
-  iris1<-iris[1:60,]
-iris2<-iris[60:nrow(iris),]
-m1<-modeleR(iris1,Sepal.Length,Petal.Length,
-        lm,na.rm=TRUE,iris2)
-   
-  ```
-=======
 **Example usage of major functions**
 
 1.  `multi_model_1`
->>>>>>> develop
 
 ```
 suppressMessages(library(caret))
@@ -160,11 +117,7 @@ head(m1$Predictions)
 
 ```
 
-<<<<<<< HEAD
-* **2** `multi_model_1`
-=======
 3. `get_var_corr`
->>>>>>> develop
 
 As can probably(hopefully) be guessed from the name, this provides a convenient way to get variable correlations. It enables one to get correlation between one variable and all other variables in the data set if `get_all` is set to `TRUE` or with specific variables if `get_all` is set to `FALSE`
 
@@ -228,11 +181,7 @@ The above gives us(**strictly kendall is used for demonstration purposes**):
 
 ```
 
-<<<<<<< HEAD
-For more help, please see `?multi_model_1`.
-=======
 5. `rowdiff`
->>>>>>> develop
 
 If one needs to obtain differences between rows, `rowdiff` is designed to do exactly that.
 
@@ -252,11 +201,7 @@ Sepal.Length Sepal.Width Petal.Length Petal.Width
 5          0.4         0.5         -0.1         0.0
 6          0.4         0.3          0.3         0.2
 
-<<<<<<< HEAD
-* **3**  `get_data_Stats`
-=======
 ```
->>>>>>> develop
 
 The `NA`s can simply be dealt with as necessary. An `NA` simply serves to show the direction in which the differences were performed. See the documentation for more details. 
 
