@@ -11,9 +11,9 @@ modeleR(df, yname, xname, modeltype, na.rm = F, new_data, ...)
 
 \item{yname}{The dependent variable}
 
-\item{xname}{Theindependent variable. Supports formulae x1+x2+...}
+\item{xname}{The independent variable. Supports formulae x1+x2+...}
 
-\item{modeltype}{Currently one of lm and aov. Other models may work with inaccuracies}
+\item{modeltype}{Currently one of lm, glm and aov. Other models may work with inaccuracies}
 
 \item{na.rm}{Logical. Should missing values be removed from analysis?}
 
@@ -29,7 +29,9 @@ Perform several kinds of models in one function
 }
 \details{
 This function provides a friendly way to perform any kind of model in one line.
-The model uses the inbuilt R functions aov and lm to make the predictions.
+The model uses the inbuilt R functions aov and lm to make the predictions. If the target
+is missing in the new data frame, the function will(currently) make an empty column and
+fill this with predictions.
 }
 \examples{
 iris1<-iris[1:60,]

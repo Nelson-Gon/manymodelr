@@ -9,7 +9,7 @@ row_mean_na(data, func, observations, na.rm = F, exc)
 \arguments{
 \item{data}{is the data you for which the mean is needed}
 
-\item{func}{describes the function to use. Currrently only supports the mean(others may work with some inaccuracies)}
+\item{func}{describes the function to use. Currently only supports the mean(others may work with some inaccuracies)}
 
 \item{observations}{takes on column names  for which manipulations are required}
 
@@ -22,11 +22,4 @@ Returns a data.frame object showing columns with NAs and their replacement if na
 }
 \description{
 Replacing all NAs with mean values of a given row
-}
-\examples{
-#This merges our replacement values with the original data containing NAs
-row_mean_na(airquality,mean,c("Ozone","Wind"),na.rm=TRUE,0)
-\dontrun{
-row_mean_na(iris,max,c("Sepal.Length","Petal.Length"),na.rm = F,5)
-}
 }

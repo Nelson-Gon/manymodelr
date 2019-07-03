@@ -1,18 +1,13 @@
 #' @title Replacing all NAs with mean values of a given row
 #' @param data is the data you for which the mean is needed
-#' @param func describes the function to use. Currrently only supports the mean(others may work with some inaccuracies)
+#' @param func describes the function to use. Currently only supports the mean(others may work with some inaccuracies)
 #' @param observations takes on column names  for which manipulations are required
 #' @param na.rm Logical. Should NAs be removed from analysis?
 #' @param exc the column to exclude from analysis. Useful for removing factor columns
 #' @return Returns a data.frame object showing columns with NAs and their replacement if na.rm=T
 #' @export
-#' @examples
-#' #This merges our replacement values with the original data containing NAs
-#' row_mean_na(airquality,mean,c("Ozone","Wind"),na.rm=TRUE,0)
-#' \dontrun{
-#' row_mean_na(iris,max,c("Sepal.Length","Petal.Length"),na.rm = F,5)
-#' }
 row_mean_na<-function(data,func,observations,na.rm=F,exc){
+  .Deprecated("na_replace")
   m<-as.data.frame(mget(observations,envir = as.environment(data)))
   if(na.rm==T){
   #m[is.na(m)]<-as.numeric(0)
@@ -35,4 +30,40 @@ row_mean_na<-function(data,func,observations,na.rm=F,exc){
  data.frame(data,res3)
 }
 }
+#' @title Replace missing values
+#' @param df The data set for which replacements are required
+#' @param how How should missing values be replaced?  One of ffill, samples or any other known
+#' method e.g mean, median, max ,min. The default is NULL meaning no  imputation is done.
+#' @return A data.frame object with missing values replaced.
+#' @examples
+#' set.seed(520)
+#' na_replace(airquality,how="samples")
+#' @export
+na_replace<-function(df,how=NULL){
+if(is.null(how)){
+  return(df)
+}
+else if(!how%in%c("ffill","samples")){
+  as.data.frame(apply(df,2,function(x){
+    x[is.na(x)]<-do.call(how,list(x[!is.na(x)]))
+    x
+  }))
+}
+else if(how=="ffill"){
+  as.data.frame(apply(df,2,function(x){
+    to_replace<-x[!is.na(x)]
+    x[is.na(x)]<-to_replace[1:length(x[is.na(x)])]
+    x
+  }))
+}
+else if(how=="samples"){
+  as.data.frame(apply(df,2,function(x){
+    to_replace<-x[!is.na(x)]
+    x[is.na(x)]<-sample(to_replace,length(x[is.na(x)]),replace = TRUE)
+    x
+  }))
+}
+
+}
+
 

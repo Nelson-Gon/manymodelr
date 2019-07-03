@@ -17,7 +17,7 @@ expo<-function(n){
 #'Convenience functions for use with get_exponent
 #'@param y The value for which an exponential is required
 #'@param x The power to which y should be raised
-#'@details See ?get_exponent for detials
+#'@details See ?get_exponent for details
 #'@examples
 #'\dontrun{
 #' square<-expo(2)
