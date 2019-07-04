@@ -355,7 +355,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
 <a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt;     knn rpart</span></a>
 <a class="sourceLine" id="cb6-4" title="4"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; 1     1 0.933</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; 1 0.967 0.933</span></a></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">head</span>(m<span class="op">$</span>Predictions)</a>
 <a class="sourceLine" id="cb7-2" title="2"><span class="co">#&gt; # A tibble: 6 x 2</span></a>
 <a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt;   knn    rpart </span></a>
@@ -409,42 +409,39 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb9-21" title="21"><span class="co">#&gt; 8   0.7844520</span></a>
 <a class="sourceLine" id="cb9-22" title="22"><span class="co">#&gt; 9   0.7100628</span></a>
 <a class="sourceLine" id="cb9-23" title="23"><span class="co">#&gt; 10 -0.2503183</span></a></code></pre></div>
-<p>Similarly, <code>get_var_corr_</code> (note the underscore at the end) provides a convenient way to get combinations with even more control. For instance, one could get correlations for select variables as below.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">get_var_corr_</span>(iris,<span class="dt">comparison_var=</span><span class="kw">c</span>(<span class="st">&quot;Petal.Length&quot;</span>,<span class="st">&quot;Sepal.Length&quot;</span>), <span class="dt">other_var=</span><span class="kw">c</span>(<span class="st">&quot;Petal.Width&quot;</span>,<span class="st">&quot;Sepal.Width&quot;</span>))</a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="co">#&gt; Warning in get_var_corr_(iris, comparison_var = c(&quot;Petal.Length&quot;, &quot;Sepal.Length&quot;), : Factor columns were found in the data set, these have </span></a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt;           been discarded.</span></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt;   Comparison_Var    Other_Var      p.value Correlation   lower_ci</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1   Sepal.Length  Sepal.Width 1.518983e-01  -0.1175698 -0.2726932</span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; 2   Sepal.Length Petal.Length 1.038667e-47   0.8717538  0.8270363</span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; 3   Sepal.Length  Petal.Width 2.325498e-37   0.8179411  0.7568971</span></a>
-<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; 4    Sepal.Width Petal.Length 4.513314e-08  -0.4284401 -0.5508771</span></a>
-<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; 5    Sepal.Width  Petal.Width 4.073229e-06  -0.3661259 -0.4972130</span></a>
-<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; 6   Petal.Length  Petal.Width 4.675004e-86   0.9628654  0.9490525</span></a>
-<a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt;      upper_ci</span></a>
-<a class="sourceLine" id="cb10-12" title="12"><span class="co">#&gt; 1  0.04351158</span></a>
-<a class="sourceLine" id="cb10-13" title="13"><span class="co">#&gt; 2  0.90550805</span></a>
-<a class="sourceLine" id="cb10-14" title="14"><span class="co">#&gt; 3  0.86483606</span></a>
-<a class="sourceLine" id="cb10-15" title="15"><span class="co">#&gt; 4 -0.28794993</span></a>
-<a class="sourceLine" id="cb10-16" title="16"><span class="co">#&gt; 5 -0.21869663</span></a>
-<a class="sourceLine" id="cb10-17" title="17"><span class="co">#&gt; 6  0.97298532</span></a></code></pre></div>
+<p>To get correlations for only select variables, one could work as follows:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">get_var_corr</span>(mtcars,<span class="dt">comparison_var =</span> <span class="st">&quot;cyl&quot;</span>,</a>
+<a class="sourceLine" id="cb10-2" title="2">             <span class="dt">other_vars =</span> <span class="kw">c</span>(<span class="st">&quot;disp&quot;</span>,<span class="st">&quot;mpg&quot;</span>),<span class="dt">get_all =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt;   Comparison_Var Other_Var      p.value Correlation   lower_ci   upper_ci</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt; 1            cyl      disp 1.802838e-12   0.9020329  0.8072442  0.9514607</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 2            cyl       mpg 6.112687e-10  -0.8521620 -0.9257694 -0.7163171</span></a></code></pre></div>
+<p>Similarly, <code>get_var_corr_</code> (note the underscore at the end) provides a convenient way to get combination-wise correlations.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">head</span>(<span class="kw">get_var_corr_</span>(mtcars),<span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="co">#&gt;   Comparison_Var Other_Var      p.value Correlation    lower_ci   upper_ci</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="co">#&gt; 1            mpg       cyl 6.112687e-10  -0.8521620 -0.92576936 -0.7163171</span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="co">#&gt; 2            mpg      disp 9.380327e-10  -0.8475514 -0.92335937 -0.7081376</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; 3            mpg        hp 1.787835e-07  -0.7761684 -0.88526861 -0.5860994</span></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="co">#&gt; 4            mpg      drat 1.776240e-05   0.6811719  0.43604838  0.8322010</span></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="co">#&gt; 5            mpg        wt 1.293959e-10  -0.8676594 -0.93382641 -0.7440872</span></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="co">#&gt; 6            mpg      qsec 1.708199e-02   0.4186840  0.08195487  0.6696186</span></a></code></pre></div>
 <ul>
 <li><code>rowdiff</code></li>
 </ul>
 <p>This is useful when trying to find differences between rows. The <code>direction</code> argument specifies how the subtractions are made while the <code>exclude</code> argument is currently used to remove non-numeric data. Using <code>direction=&quot;reverse&quot;</code> performs a subtraction akin to <code>x-(x-1)</code> where <code>x</code> is the row number.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">head</span>(<span class="kw">rowdiff</span>(iris,<span class="dt">exclude =</span> <span class="st">&quot;non_numeric&quot;</span>,<span class="dt">direction =</span> <span class="st">&quot;reverse&quot;</span>))</a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width</span></a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="co">#&gt; 1           NA          NA           NA          NA</span></a>
-<a class="sourceLine" id="cb11-4" title="4"><span class="co">#&gt; 2         -0.2        -0.5          0.0         0.0</span></a>
-<a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; 3         -0.2         0.2         -0.1         0.0</span></a>
-<a class="sourceLine" id="cb11-6" title="6"><span class="co">#&gt; 4         -0.1        -0.1          0.2         0.0</span></a>
-<a class="sourceLine" id="cb11-7" title="7"><span class="co">#&gt; 5          0.4         0.5         -0.1         0.0</span></a>
-<a class="sourceLine" id="cb11-8" title="8"><span class="co">#&gt; 6          0.4         0.3          0.3         0.2</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">head</span>(<span class="kw">rowdiff</span>(iris,<span class="dt">exclude =</span> <span class="st">&quot;non_numeric&quot;</span>,<span class="dt">direction =</span> <span class="st">&quot;reverse&quot;</span>))</a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="co">#&gt; 1           NA          NA           NA          NA</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="co">#&gt; 2         -0.2        -0.5          0.0         0.0</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="co">#&gt; 3         -0.2         0.2         -0.1         0.0</span></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="co">#&gt; 4         -0.1        -0.1          0.2         0.0</span></a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="co">#&gt; 5          0.4         0.5         -0.1         0.0</span></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="co">#&gt; 6          0.4         0.3          0.3         0.2</span></a></code></pre></div>
 <div id="exploring-further." class="section level5">
 <h5>Exploring Further.</h5>
 <p>The vignette has been short and therefore is non exhaustive. The best way to explore this and any package or language is to practice. For more examples, please use <code>?function_name</code> and see a few implementations of the given function.</p>
 <div id="reporting-issues" class="section level6">
 <h6>Reporting Issues</h6>
-<p>If you would like to contribute, report issues or improve any of these functions, please raise a pull request at (<a href="https://github.com/Nelson-Gon/manymodelr">manymodelr</a>)</p>
+<p>If you would like to contribute, report issues or improve any of these functions, please raise a pull request at (<a href="https://www.github.com/Nelson-Gon/manymodelr">manymodelr</a>)</p>
 <blockquote>
 <p>“Programs must be written for people to read, and only incidentally for machines to execute.” - Harold Abelson (<a href="https://www.goodreads.com/quotes/tag/programming">Reference</a>)</p>
 </blockquote>

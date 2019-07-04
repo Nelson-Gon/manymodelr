@@ -96,12 +96,21 @@ head(m1$Predictions)
 ```{r}
 get_var_corr(mtcars, "mpg",get_all = TRUE)
 ```
-
-Similarly, `get_var_corr_` (note the underscore at the end) provides  a convenient way to get combinations with even more control. For instance, one could get correlations for select variables as below.
+To get correlations for only select variables, one could work as follows:
 
 ```{r}
-get_var_corr_(iris,comparison_var=c("Petal.Length","Sepal.Length"), other_var=c("Petal.Width","Sepal.Width"))
+get_var_corr(mtcars,comparison_var = "cyl",
+             other_vars = c("disp","mpg"),get_all = FALSE)
 ```
+
+
+
+Similarly, `get_var_corr_` (note the underscore at the end) provides  a convenient way to get combination-wise correlations.
+
+```{r}
+head(get_var_corr_(mtcars),6)
+```
+
 
 
 * `rowdiff`
@@ -121,7 +130,7 @@ The vignette has been short and therefore is non exhaustive. The best way to exp
 
 ###### Reporting Issues
 
-If you would like to contribute, report issues or improve any of these functions, please raise a pull request at ([manymodelr](https://github.com/Nelson-Gon/manymodelr))
+If you would like to contribute, report issues or improve any of these functions, please raise a pull request at ([manymodelr](https://www.github.com/Nelson-Gon/manymodelr))
 
 > "Programs must be written for people to read, and only incidentally for machines to execute." - Harold Abelson ([Reference](https://www.goodreads.com/quotes/tag/programming))
 

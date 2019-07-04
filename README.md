@@ -153,18 +153,17 @@ Comparison_Var Other_Var      p_value Correlation    lower_ci
 
 ```
 
-4. A closely related function is `get_var_corr_`(note the underscore) that enables finer control over which correlations to obtain with the ability to perform combination wise correlations. To get correlations for `mpg` and `vs` "against" `cyl` and `displ`, one could do:
+4. A closely related function is `get_var_corr_`(note the underscore) that enables enables one to obtain combination-wise correlations. Working with `mtcars`, we can do the following:
 
 ```
-head(get_var_corr_(mtcars, comparison_var=c("mpg","vs"), other_var=c("cyl",displ),method="kendall"))
+head(get_var_corr_(mtcars, method="kendall"))
 
 ```
 
 The above gives us(**strictly kendall is used for demonstration purposes**):
 
 ```
-
- Comparison_Var Other_Var      p.value Correlation    lower_ci
+Comparison_Var Other_Var      p.value Correlation    lower_ci
 1            mpg       cyl 6.112687e-10  -0.8521620 -0.92576936
 2            mpg      disp 9.380327e-10  -0.8475514 -0.92335937
 3            mpg        hp 1.787835e-07  -0.7761684 -0.88526861
@@ -178,6 +177,7 @@ The above gives us(**strictly kendall is used for demonstration purposes**):
 4  0.8322010
 5 -0.7440872
 6  0.6696186
+
 
 ```
 
