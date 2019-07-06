@@ -37,7 +37,7 @@ The developer version can be downloaded as follows
 
 devtools::install_github("Nelson-Gon/manymodelr@develop")
 
-devtools::install_github("Nelson-Gon/manymodelr@develop, build_vignettes=TRUE) #builds vignettes
+devtools::install_github("Nelson-Gon/manymodelr@develop", build_vignettes=TRUE) #builds vignettes
 
 ```
 
