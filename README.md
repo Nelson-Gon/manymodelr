@@ -27,7 +27,7 @@ devtools::install_github("Nelson-Gon/manymodelr")
 devtools::install_github("Nelson-Gon/manymodelr",build_vignettes=TRUE) #Builds vignettes
 ```
 
-For the developer version please see [develop](https://github.com/Nelson-Gon/tree/develop). 
+For the developer version please see [develop](https://github.com/Nelson-Gon/manymodelr/tree/develop). 
 
 
 
