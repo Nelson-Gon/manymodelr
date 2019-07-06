@@ -12,22 +12,6 @@
 
 *  **Installing the package**
 
-* **From CRAN**
-
-```
-install.packages("manymodelr")
-
-```
-
-* **From GitHub**
-
-```
-remotes::install_github("Nelson-Gon/manymodelr")
-devtools::install_github("Nelson-Gon/manymodelr")
-devtools::install_github("Nelson-Gon/manymodelr",build_vignettes=TRUE) #Builds vignettes
-```
-The developer version can be downloaded as follows
-
 ```
 
 devtools::install_github("Nelson-Gon/manymodelr@develop")
