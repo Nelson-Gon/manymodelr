@@ -22,22 +22,22 @@ rowdiff<-function (df, direction = "forward",exclude=NULL,na.rm=FALSE,na_action=
   }
   factr_or_char<-Filter(function(x) !is.numeric(x),res)
   if(is.null(exclude) & direction=="forward"){
-    res<-apply(res,2,function(x) x-dplyr::lead(x,1))
+    res<-sapply(res,function(x) x-dplyr::lead(x,1))
 
   }
   else if(is.null(exclude) & direction=="reverse"){
-    res<-apply(res,2,function(x) x-dplyr::lag(x,1))
+    res<-sapply(res,function(x) x-dplyr::lag(x,1))
   }
 
   else if(exclude=="non_numeric" & direction=="forward"){
     include<-setdiff(names(res),names(factr_or_char))
     res<-res[,include]
-    res<-apply(res,2,function(x) x-dplyr::lead(x,1))
+    res<-sapply(res,function(x) x-dplyr::lead(x,1))
   }
   else{
     include<-setdiff(names(res),names(factr_or_char))
     res<-res[,include]
-    res<-apply(res,2,function(x) x-dplyr::lag(x,1))
+    res<-sapply(res,function(x) x-dplyr::lag(x,1))
 
   }
 
