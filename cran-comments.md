@@ -1,15 +1,11 @@
-Resubmission.
-
-
-This is a resubmission. I have fixed the URL issue as advised.
 
 Release Summary
 
 
-Major release 
+This is a patch release. Fixes issues with warnings in the vignette. Fixes description field as advised.
 
 ## Test environments
-* local windows 10-x86_64 build 1903, R 3.6.0 
+* local Ubuntu 18.04.1 x86_64, R 3.6.0 
 
 * ubuntu 16.04.6 (on travis), R 3.6.0
 

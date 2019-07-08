@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# manymodelr 0.2.1
+# manymodelr 0.2.2
 
 In this vignette, we take a look at how we can simplify many machine learning tasks using `manymodelr`. We will take a look at the core functions first.
 
