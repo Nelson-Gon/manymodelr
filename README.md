@@ -1,4 +1,4 @@
-# manymodelr(Development Version 0.2.1.9000)
+# manymodelr(Development Version 0.2.2.9000)
 
 **Tune and build several Machine Learning models.**
 
