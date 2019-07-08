@@ -12,7 +12,7 @@
 
 *  **Installing the package**
 
-* **From CRAN(0.2.1 Pending Review)**
+* **From CRAN(0.2.1)**
 
 ```
 install.packages("manymodelr")
@@ -26,6 +26,8 @@ remotes::install_github("Nelson-Gon/manymodelr")
 devtools::install_github("Nelson-Gon/manymodelr")
 devtools::install_github("Nelson-Gon/manymodelr",build_vignettes=TRUE) #Builds vignettes
 ```
+
+For the current(unstable) developer version, please see [develop](https://www.github.com/Nelson-Gon/manymodelr/tree/develop).
 
 
 * **Loading the package**
