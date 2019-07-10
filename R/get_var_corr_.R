@@ -38,7 +38,8 @@ if("factor" %in% sapply(df,class)){
     manymodelr::get_var_corr(df,
                              comparison_var = x,
                              other_vars = y,
-                             get_all = FALSE)),data.frame)
+                             get_all = FALSE,
+                             ...)),data.frame)
 } else{
   # Transpose, support pairwise combinations
   to_use <- as.data.frame(t(combn(names(df),2)),
@@ -49,7 +50,8 @@ if("factor" %in% sapply(df,class)){
      get_var_corr(df,
                              comparison_var = x,
                            other_vars = y,
-                            get_all = FALSE)),data.frame)
+                            get_all = FALSE,
+                  ...)),data.frame)
 }
 }
 
