@@ -5,7 +5,7 @@
 \title{Get correlations between variables}
 \usage{
 get_var_corr(df, comparison_var, other_vars = NULL, get_all = TRUE,
-  method = "pearson", ...)
+  method = "pearson", drop_columns = TRUE, ...)
 }
 \arguments{
 \item{df}{The data set for which correlations are required}
@@ -20,6 +20,9 @@ are used. Defaults to TRUE.}
 
 \item{method}{The method used to perform the correlation test as defined in 'cor.test'.
 Defaults to pearson.}
+
+\item{drop_columns}{Logical. Should non-numeric columns be dropped? Defaults to TRUE. Useful 
+when `get_all` is set to TRUE.}
 
 \item{...}{Other arguments to 'cor.test' see ?cor.test for details}
 }

@@ -9,6 +9,8 @@
 #' are used. Defaults to TRUE.
 #' @param method The method used to perform the correlation test as defined in 'cor.test'.
 #' Defaults to pearson.
+#' @param drop_columns Logical. Should non-numeric columns be dropped? Defaults to TRUE. Useful 
+#' when `get_all` is set to TRUE.
 #' @param ... Other arguments to 'cor.test' see ?cor.test for details
 #' @return A data.frame object containing correlations between comparison_var and each of other_vars
 #' @examples
@@ -16,10 +18,26 @@
 #' get_var_corr(iris,"Sepal.Length","Petal.Length",get_all = FALSE,method="kendall")
 #' @export
 get_var_corr<- function (df, comparison_var, other_vars = NULL, get_all = TRUE,
-                         method= "pearson",...)
+                         method= "pearson",drop_columns=TRUE,
+                         ...)
 {
+  if(any(sapply(df,function(x) all(is.na(x))))){
+    stop("Cannot perform correlation tests on columns with only NAs. Please
+         remove these or impute missing values with known methods. Alternatively, set use='complete.obs'
+         to use complete observations. See details in help(get_var_corr)")
+  }
   columns <- setdiff(names(df), comparison_var)
+  
   if (get_all == TRUE){
+    if(any(! sapply(df,class) 
+           %in% c("numeric","integer","double")) &
+           drop_columns == TRUE){
+      warning("Non-numeric columns have been discarded. You
+              can manually do this yourself by setting drop_columns
+              to FALSE.")
+      df <- Filter(is.numeric,df)
+      columns <- setdiff(names(df), comparison_var)
+    } 
     if(method=="pearson") {
     res <- plyr::ldply(lapply(columns, function(x) {
       res1 <- cor.test(get(comparison_var, as.environment(df)),
