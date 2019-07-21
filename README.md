@@ -12,9 +12,10 @@
 
 *  **Installing the package**
 ```
-remotes::install_github("Nelson-Gon/manymodelr")
-devtools::install_github("Nelson-Gon/manymodelr")
-devtools::install_github("Nelson-Gon/manymodelr",build_vignettes=TRUE) #Builds vignettes
+remotes::install_github("Nelson-Gon/manymodelr@develop")
+devtools::install_github("Nelson-Gon/manymodelr@develop")
+devtools::install_github("Nelson-Gon/manymodelr@develop",
+build_vignettes=TRUE) #Builds vignettes
 ```
 
 For previous users, please see the `NEWS.md` file for a list of changes and/or additions.  For a complete list of available functions, please use:
