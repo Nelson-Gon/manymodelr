@@ -4,10 +4,12 @@
 \alias{get_mode}
 \title{A convenience function that returns the mode}
 \usage{
-get_mode(x)
+get_mode(x, na.rm = TRUE)
 }
 \arguments{
-\item{x}{The dataframe or vector for which the mode is required}
+\item{x}{The dataframe or vector for which the mode is required.}
+
+\item{na.rm}{Logical. Should NAs be removed from analysis? Deafults to TRUE.}
 }
 \value{
 a data.frame or vector showing the mode of the variable(s)
@@ -30,6 +32,6 @@ get_mode(test)
 get_mode(test2)
 \dontrun{
 mtcars \%>\%
-get_stats(get_mode)
-get_stats(mtcars,get_mode)}
+get_data_Stats(get_mode)
+get_data_Stats(mtcars,get_mode)}
 }
