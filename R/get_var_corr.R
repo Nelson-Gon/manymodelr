@@ -18,6 +18,12 @@
 #' get_var_corr(iris,"Sepal.Length","Petal.Length",get_all = FALSE,method="kendall")
 #' @export
 get_var_corr<- function (df, comparison_var, other_vars = NULL, get_all = TRUE,
+method= "pearson",drop_columns=TRUE,
+...){
+  UseMethod("get_var_corr")
+}
+#' @export
+get_var_corr<- function (df, comparison_var, other_vars = NULL, get_all = TRUE,
                          method= "pearson",drop_columns=TRUE,
                          ...)
 {

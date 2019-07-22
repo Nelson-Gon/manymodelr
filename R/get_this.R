@@ -9,13 +9,18 @@
 #' my_list<-list(list(A=520),list(B=456))
 #' get_this(A,my_list)
 #' @export
-get_this<-function (what, where)
-{
+get_this<- function (what, where){
+  UseMethod("get_this")
+ 
+}
+#' @export
+get_this<- function(what,where){
   what <- deparse(substitute(what))
-  deeper<-deparse(substitute(deeper))
-  if (is.list(where) & !is.data.frame(where)) {
-    if (is.null(names(where))) {
-      Filter(Negate(is.null), Map(function(x) x[[what]],
+ 
+if(is.list(where) & !is.data.frame(where)){
+   
+ if (is.null(names(where))) {
+     Filter(Negate(is.null), Map(function(x) x[[what]],
                                   where))
     }
 
@@ -23,12 +28,18 @@ get_this<-function (what, where)
       what_matched <- match.arg(what, names(where))
       where[[what_matched]]
     }
+ }
+  else{
+  what_matched <- match.arg(what, names(where))
+      where[what_matched]
+      
+    }
+    
   }
-  else if (is.data.frame(where)) {
-    what_matched <- match.arg(what, names(where))
-    where[what_matched]
+  
 
 
-  }
-}
+
+
+
 

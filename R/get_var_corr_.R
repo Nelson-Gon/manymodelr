@@ -7,6 +7,9 @@
 #' for combinations of variables. It is currently slow and may take up to a minute depending on system specifications.
 #' @examples 
 #' get_var_corr_(mtcars,method="pearson")
+get_var_corr_<-function(df,...){
+  UseMethod("get_var_corr_")
+}
 #' @export
 get_var_corr_<-function(df,...){
 # Strictly  pair wise combinations. 

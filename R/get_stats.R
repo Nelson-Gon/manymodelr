@@ -10,8 +10,17 @@
 #' @details A convenient wrapper especially useful for get_mode
 #' @examples
 #' get_data_Stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "mean")
+#' @export 
+get_data_Stats<-function(x, func,exclude=NULL,na.rm=TRUE,na_action=NULL){
+  UseMethod("get_data_Stats")
+}
 #' @export
-get_data_Stats<-function (x, func,exclude=NULL,na.rm=TRUE,na_action=NULL)
+get_data_Stats.default <-function (x, func,exclude=NULL,na.rm=TRUE,na_action=NULL){
+  stop("get_data_Stats is only implemented(currently) for
+       data.frame objects. Please convert to a data.frame object.")
+}
+#' @export
+get_data_Stats.data.frame<-function (x, func,exclude=NULL,na.rm=TRUE,na_action=NULL)
 {
   if(na.rm==TRUE & anyNA(x)==TRUE){
     x<-na_replace(x,how=na_action)
@@ -27,6 +36,8 @@ get_data_Stats<-function (x, func,exclude=NULL,na.rm=TRUE,na_action=NULL)
   sapply(x,function(x) do.call(func,list(x)))
 
 }
+
+
 
 
 

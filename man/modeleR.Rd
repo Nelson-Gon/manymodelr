@@ -33,12 +33,6 @@ The model uses the inbuilt R functions aov and lm to make the predictions. If th
 is missing in the new data frame, the function will(currently) make an empty column and
 fill this with predictions.
 }
-\examples{
-iris1<-iris[1:60,]
-iris2<-iris[60:nrow(iris),]
-modeleR(iris1,Sepal.Length,Petal.Length,
-         lm,na.rm=TRUE,iris2)
-}
 \references{
 Chambers, J. M. (1992) Linear models. Chapter 4 of Statistical Models in S eds J. M. Chambers and T. J. Hastie, Wadsworth & Brooks/Cole.
 

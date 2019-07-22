@@ -62,11 +62,9 @@ x <-Filter(Negate(is.factor), x)
 if(na.rm==TRUE){
   x <- na.omit(x)
 }
-structure(sapply(seq_along(x),
-         function(column) x[,
-                    column][which.max(apply(x[column],1,
-                                  function(y) 
-                              sum(x[column] ==y)))]),
+structure(sapply(x, function(column)
+  column[which.max(sapply(column,
+                          function(y) sum(column==y)))]),
          names = names(x))
   
 
