@@ -16,6 +16,10 @@
 #' select_percentile(iris,5)
 #'@export
 select_percentile<-function(df,percentile,get_all=TRUE,descend=FALSE){
+  UseMethod("select_percentile")
+}
+#' @export
+select_percentile<-function(df,percentile,get_all=TRUE,descend=FALSE){
   # Returns the value corresponding to a percentile
   # Returns mean values if the position of the percentile is  whole number
   # Values are sorted in ascending order. You can change this

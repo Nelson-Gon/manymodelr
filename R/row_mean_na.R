@@ -40,6 +40,11 @@ row_mean_na<-function(data,func,observations,na.rm=F,exc){
 #' na_replace(airquality,how="samples")
 #' @export
 na_replace<-function(df,how=NULL){
+ UseMethod("na_replace")
+}
+#' @export
+
+na_replace<-function(df,how=NULL){
 if(is.null(how)){
   return(df)
 }
