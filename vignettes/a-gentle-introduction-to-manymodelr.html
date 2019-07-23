@@ -439,6 +439,20 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt; 4         -0.1        -0.1          0.2         0.0</span></span>
 <span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt; 5          0.4         0.5         -0.1         0.0</span></span>
 <span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt; 6          0.4         0.3          0.3         0.2</span></span></code></pre></div>
+<ul>
+<li><code>na_replace</code></li>
+</ul>
+<p>This allows the user to conveniently replace missing values. Current options are <code>ffill</code> which replaces with the next non-missing value, <code>samples</code> that samples the data and does replacement, <code>value</code> that allows one to fill <code>NA</code>s with a specific value. Other common mathematical methods like <code>min</code>, <code>max</code>,<code>get_mode</code>, <code>sd</code>, etc are also supported.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">head</span>(<span class="kw">na_replace</span>(airquality, <span class="dt">how=</span><span class="st">&quot;value&quot;</span>, <span class="dt">value=</span><span class="st">&quot;Missing&quot;</span>),<span class="dv">8</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt;     Ozone Solar.R Wind Temp Month Day</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt; 1      41     190  7.4   67     5   1</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt; 2      36     118  8.0   72     5   2</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt; 3      12     149 12.6   74     5   3</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt; 4      18     313 11.5   62     5   4</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt; 5 Missing Missing 14.3   56     5   5</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt; 6      28 Missing 14.9   66     5   6</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt; 7      23     299  8.6   65     5   7</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt; 8      19      99 13.8   59     5   8</span></span></code></pre></div>
 <div id="exploring-further." class="section level5">
 <h5>Exploring Further.</h5>
 <p>The vignette has been short and therefore is non exhaustive. The best way to explore this and any package or language is to practice. For more examples, please use <code>?function_name</code> and see a few implementations of the given function.</p>
