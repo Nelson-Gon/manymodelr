@@ -123,6 +123,13 @@ head(rowdiff(iris,exclude = "non_numeric",direction = "reverse"))
 ```
 
 
+* `na_replace`
+
+This allows the user to conveniently replace missing values. Current options are `ffill` which replaces with the next non-missing value, `samples` that samples the data and does replacement, `value` that allows one to fill `NA`s with a specific value. Other common mathematical methods like `min`, `max`,`get_mode`, `sd`, etc are also supported.
+```{r}
+na_replace(airquality, how="value", value="Missing")
+```
+
 
 ##### Exploring Further.
 
