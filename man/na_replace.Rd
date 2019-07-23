@@ -7,10 +7,11 @@
 na_replace(df, how = NULL, value = NULL)
 }
 \arguments{
-\item{df}{The data set for which replacements are required}
+\item{df}{The data set(data.frame or vector) for which replacements are required}
 
 \item{how}{How should missing values be replaced?  One of ffill, samples,value or any other known
-method e.g mean, median, max ,min. The default is NULL meaning no  imputation is done.}
+method e.g mean, median, max ,min. The default is NULL meaning no  imputation is done. For character vectors,
+the use of `get_mode` is also supported. No implementation for class factor(yet).}
 
 \item{value}{If how is set to value, this allows the user to provide a specific fill value for the NAs.}
 }
