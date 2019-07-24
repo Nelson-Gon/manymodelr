@@ -11,3 +11,5 @@ author: "Nelson Gonzabato"
 
 2. `na_replace` has been extended to allow for user defined values. Grouping is not yet implemented. It may work with grouping functions(no guarantees, sorry!)
 
+3. `rowdiff` now accepts replacement of the calculation induced `NA`s. It does so by using `na_replace`. 
+

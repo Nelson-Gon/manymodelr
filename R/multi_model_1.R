@@ -43,7 +43,7 @@
 multi_model_1<-function (df, yname, xname, method, metric, control, ..., newdata,
 valid=FALSE)
 {
-  UsUseMethod("multi_model_1")
+  UseMethod("multi_model_1")
 }
 #' @export
 multi_model_1<-function (df, yname, xname, method, metric, control, ..., newdata,
