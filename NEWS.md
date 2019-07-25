@@ -13,3 +13,5 @@ author: "Nelson Gonzabato"
 
 3. `rowdiff` now accepts replacement of the calculation induced `NA`s. It does so by using `na_replace`. 
 
+4. `get_var_corr_` now supports using only a subset of the data. 
+
