@@ -5,13 +5,12 @@
 \title{Plot a correlations matrix}
 \usage{
 plot_corr(data, x = "Comparison_Var", y = "Other_Var",
-  show_value = TRUE, round_values = TRUE, decimals = 2,
-  custom_cols = c("skyblue", "indianred2"),
-  title = "Correlations Plot", xlabel = "Comparison_Variable",
-  ylabel = "Other_Variable", title_just = 0.5,
-  plot_style = "squares", size = 12, colour_by = NULL,
-  shape = NULL, value_col = "blue", value_angle = 360,
-  value_size = 4.5, ...)
+  xlabel = "Other_Variable", ylabel = "Comaprison_Variable",
+  title = "Correlations Plot", plot_style = "circles",
+  title_just = 0.5, round_values = TRUE, colour_by = "Correlation",
+  decimals = 2, show_value = TRUE, size = 7, value_angle = 360,
+  shape = 16, value_size = 3.5, value_col = "black", width = 7.5,
+  custom_cols = c("white", "green2", "gray34"), ...)
 }
 \arguments{
 \item{data}{The data to be plotted. A `data.frame` object produced
@@ -21,39 +20,41 @@ by `get_var_corr_`}
 
 \item{y}{Values for the y axis. Defaults to "Other_Var."}
 
-\item{show_value}{Logical. Should correlation coefficients be shown on the plot?
-Defaults to TRUE.}
-
-\item{round_values}{Logical. Should values be rounded off? Defaults to TRUE.}
-
-\item{decimals}{Numeric. To how many decimal places should the rounding be done? 
-Defaults to 2.}
-
-\item{custom_cols}{A vector(length 2) of colors to use for the plot. The first colour specifies the lower end of the 
-correlations. The second specifies  the higher end.}
-
-\item{title}{plot title.}
-
 \item{xlabel}{label for the x axis}
 
 \item{ylabel}{label for the y axis}
 
-\item{title_just}{Justification of the title. Defaults to 0.5, title is centered.}
+\item{title}{plot title.}
 
 \item{plot_style}{One of squares and circles(currently).}
 
-\item{size}{Size of the circles for plot_style set to circles}
+\item{title_just}{Justification of the title. Defaults to 0.5, title is centered.}
+
+\item{round_values}{Logical. Should values be rounded off? Defaults to TRUE.}
 
 \item{colour_by}{The column to use for coloring. Defaults to  "Correlation". Colour strength thus
 indicates the strength of correlations.}
 
-\item{shape}{Values for the shape if plot_style is circles}
+\item{decimals}{Numeric. To how many decimal places should the rounding be done?
+Defaults to 2.}
 
-\item{value_col}{What colour should the text in the squares/circles be?}
+\item{show_value}{Logical. Should correlation coefficients be shown on the plot?
+Defaults to TRUE.}
+
+\item{size}{Size of the circles for plot_style set to circles}
 
 \item{value_angle}{What angle should the text be?}
 
+\item{shape}{Values for the shape if plot_style is circles}
+
 \item{value_size}{Size of the text.}
+
+\item{value_col}{What colour should the text in the squares/circles be?}
+
+\item{width}{width value for plot_style set to squares.}
+
+\item{custom_cols}{A vector(length 2) of colors to use for the plot. The first colour specifies the lower end of the
+correlations. The second specifies  the higher end.}
 
 \item{...}{Other arguments to specific methods.}
 }
@@ -61,7 +62,7 @@ indicates the strength of correlations.}
 A `ggplot2` object.
 }
 \description{
-This function plots the results produced by 
+This function plots the results produced by
 `get_var_corr_`.
 }
 \details{
@@ -70,8 +71,19 @@ This function uses `ggplot2` backend. `ggplot2` is thus required for the plots t
 \examples{
 # compute correlations
 res<-get_var_corr_(mtcars)
-plot_corr(res, decimals = 2, plot_style = "squares",
-show_value = TRUE, size = 13,
-value_angle =20, colour_by = "Correlation")
+# defaults
+plot_corr(res)
+plot_corr(res, decimals = 2, plot_style = "circles",
+show_value = TRUE, size = 7,
+value_angle =360, colour_by = "Correlation",
+shape = 16,
+value_size = 3.5,
+width = 7.5,
+custom_cols = c("white","green2",
+"gray34"),
+             value_col = "black",
+             x="Other_Var",y="Comparison_Var",
+             xlabel = "Other_Variable",
+             ylabel="Comaprison_Variable")
 
 }
