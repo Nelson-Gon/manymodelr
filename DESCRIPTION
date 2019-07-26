@@ -28,7 +28,8 @@ Imports:
     Metrics(>= 0.1.4),
     tibble(>= 2.0.1),
     e1071(>= 1.7-0.1),
-    purrr(>= 0.3.2)
+    purrr(>= 0.3.2),
+    ggplot2(>= 3.2.0)
 URL: https://github.com/Nelson-Gon/manymodelr
 BugReports: https://github.com/Nelson-Gon/manymodelr/issues
 Suggests: 
