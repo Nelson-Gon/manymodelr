@@ -4,13 +4,16 @@
 \alias{na_replace}
 \title{Replace missing values}
 \usage{
-na_replace(df, how = NULL)
+na_replace(df, how = NULL, value = NULL)
 }
 \arguments{
-\item{df}{The data set for which replacements are required}
+\item{df}{The data set(data.frame or vector) for which replacements are required}
 
-\item{how}{How should missing values be replaced?  One of ffill, samples or any other known
-method e.g mean, median, max ,min. The default is NULL meaning no  imputation is done.}
+\item{how}{How should missing values be replaced?  One of ffill, samples,value or any other known
+method e.g mean, median, max ,min. The default is NULL meaning no  imputation is done. For character vectors,
+the use of `get_mode` is also supported. No implementation for class factor(yet).}
+
+\item{value}{If how is set to value, this allows the user to provide a specific fill value for the NAs.}
 }
 \value{
 A data.frame object with missing values replaced.
@@ -18,7 +21,10 @@ A data.frame object with missing values replaced.
 \description{
 Replace missing values
 }
+\details{
+This function currently does not support grouping although this may be achieved with some
+inaccuracies using grouping functions from other packages.
+}
 \examples{
-set.seed(520)
-na_replace(airquality,how="samples")
+na_replace(airquality,how="value", value="Missing")
 }

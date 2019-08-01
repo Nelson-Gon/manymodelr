@@ -10,20 +10,29 @@
 #' @examples
 #' agg_by_group(airquality,.~Month,sum)
 #' @export
-agg_by_group<-function(df,my_formula,func,...){
+agg_by_group <- function(df,my_formula,func, ...){
+  UseMethod("agg_by_group")
+}
+#' @export
+agg_by_group.default <- function(df, ...){
+  stop(paste0("Don't know how to deal with an 
+               object of class ", class(df)))
+  
+}
+#' @export
+agg_by_group.data.frame <-function(df,my_formula,func,...){
   my_formula<-deparse(substitute(my_formula))
   
   res<-aggregate(as.formula(my_formula),df,func,...)
   attr(res,"Groups")<-gsub("[~+]","",
-                           gsub(".*(?=~)","",my_formula,perl=TRUE))
+                           gsub(".*(?=~)","",
+                                my_formula,perl=TRUE))
   res_list<-strsplit(attributes(res)["Groups"][[1]]," ")[[1]]
   res_list<-res_list[res_list!=""]
   cat(noquote(paste0("Grouped By","[",length(res_list),"]",
                      ":","\t")))
-  cat(gsub(",","",paste0(c(unlist(attributes(res)["Groups"])),sep=",")),"\n ")
+  cat(gsub(",","",paste0(c(unlist(attributes(res)["Groups"])),
+                         sep=",")),"\n ")
   res
 }
-
-
-
 

@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# manymodelr 0.2.2
+# manymodelr 0.2.3
 
 In this vignette, we take a look at how we can simplify many machine learning tasks using `manymodelr`. We will take a look at the core functions first.
 
@@ -76,14 +76,14 @@ head(m$Predictions)
 ```
 
 
-* `modeleR`
+* `fit_model`
 
- Yet another core function, this allows us to (currently) conveniently perform linear regression and analysis of variance.  Here we are simultaneously building and using our model to predict. This is particularly useful if you already know how well a given model models your data. We can extract the results just like we did above.
+ Yet another core function, this allows us to (currently) conveniently perform linear regression and analysis of variance.  Here we are simultaneously building and using our model to predict. This is particularly useful if you already know how well a given model models your data. We can extract the results just like we did above. It was previously known as `modeleR`.
  
 ```{r}
 iris1<-iris[1:60,]
 iris2<-iris[60:nrow(iris),]
-m1<-modeleR(iris1,Sepal.Length,Petal.Length,
+m1<-fit_model(iris1,Sepal.Length,Petal.Length,
         lm,na.rm=TRUE,iris2)
 head(m1$Predictions)
 ```
@@ -122,6 +122,13 @@ head(get_var_corr_(mtcars),6)
 head(rowdiff(iris,exclude = "non_numeric",direction = "reverse"))
 ```
 
+
+* `na_replace`
+
+This allows the user to conveniently replace missing values. Current options are `ffill` which replaces with the next non-missing value, `samples` that samples the data and does replacement, `value` that allows one to fill `NA`s with a specific value. Other common mathematical methods like `min`, `max`,`get_mode`, `sd`, etc are also supported.
+```{r}
+head(na_replace(airquality, how="value", value="Missing"),8)
+```
 
 
 ##### Exploring Further.

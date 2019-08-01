@@ -23,4 +23,5 @@ Depends on the expo and expo1 functions in expo
 \examples{
 df<-data.frame(A=c(1123,25657,3987))
 get_exponent(df,3)
+get_exponent(1:5, 6)
 }

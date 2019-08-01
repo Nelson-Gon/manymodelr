@@ -7,10 +7,9 @@
 get_mode(x, na.rm = TRUE)
 }
 \arguments{
-\item{x}{The dataframe or vector for which the mode is required}
+\item{x}{The dataframe or vector for which the mode is required.}
 
-\item{na.rm}{Logical. Should missing values be removed? Defaults to True.Removes
-'NA' values if set to TRUE}
+\item{na.rm}{Logical. Should NAs be removed from analysis? Deafults to TRUE.}
 }
 \value{
 a data.frame or vector showing the mode of the variable(s)
@@ -22,7 +21,9 @@ A convenience function that returns the mode
 Useful when used together with get_stats in a pipe fashion.
 These functions are for exploratory data analysis
 The smallest number is returned if there is a tie in values
-The function is currently slow for greater than 300,000 rows. It may take up to a minute
+The function is currently slow for greater than 300,000 rows. It may take up to a minute.
+Getting the mode for charcater/ factor columns is also currently unsupported. It 
+may work with inaccuracies. By default, NAs are discarded.
 }
 \examples{
 test<-c(1,2,3,3,3,3,4,5)
@@ -31,6 +32,6 @@ get_mode(test)
 get_mode(test2)
 \dontrun{
 mtcars \%>\%
-get_stats(get_mode)
-get_stats(mtcars,get_mode)}
+get_data_Stats(get_mode)
+get_data_Stats(mtcars,get_mode)}
 }

@@ -16,6 +16,10 @@
 #' select_col(Species)
 #' }
 select_col<-function(df,x,...){
+  UseMethod("select_col")
+}
+#' @export
+select_col<-function(df,x,...){
   x<-deparse(substitute(x))
   z<-unlist(sapply(substitute(...()), deparse))
 df[c(x,z)]

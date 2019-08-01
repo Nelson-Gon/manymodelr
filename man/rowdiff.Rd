@@ -5,7 +5,7 @@
 \title{Get row differences between values}
 \usage{
 rowdiff(df, direction = "forward", exclude = NULL, na.rm = FALSE,
-  na_action = NULL)
+  na_action = NULL, ...)
 }
 \arguments{
 \item{df}{The data set for which differences are required}
@@ -18,10 +18,13 @@ between the current value and the next is returned}
 \item{exclude}{What data types should be removed?! Currently only supports the entry
 "non_numeric." See examples below}
 
-\item{na.rm}{Logical. Should misisng values be removed? Defaults to FALSE.}
+\item{na.rm}{Logical. Should missing values be removed? The missing values referred to are those introduced during the calculation ie when subtracting a row with itself.
+Defaults to FALSE.}
 
-\item{na_action}{If na.rm is TRUE, how should missing values be replaced? Uses arguments
-to ?na_replace.}
+\item{na_action}{If na.rm is TRUE, how should missing values be replaced? Depending on the 
+value as set out in `na_replace`, the value can be replaced as per the user's requirement.}
+
+\item{...}{Other arguments to `na_replace`.}
 }
 \value{
 A data.frame object of row differences
@@ -31,5 +34,9 @@ This function returns the differences between rows depending on the user's choic
 }
 \examples{
 rowdiff(iris,exclude = "non_numeric",direction = "reverse")
-rowdiff(mtcars)
+rowdiff(iris[1:5,], na.rm = TRUE, na_action = "get_mode",
+exclude="non_numeric",direction = "reverse")
+}
+\seealso{
+\code{\link{na_replace}}
 }

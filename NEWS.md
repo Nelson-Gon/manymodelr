@@ -2,39 +2,21 @@
 title: "manymodelr-News"
 author: "Nelson Gonzabato"
 ---
-# manymodelr(development version)
 
-# manymodelr 0.2.1
+# manymodelr 0.2.3
 
-**Major Changes**
+**New functions**
 
-1. **Additions**
-
-* `agg_by_group` is a new function that manipulates grouped data. It is fast and
-   robust for many kinds of functions.
-
-* `rowdiff` is another new function that enable one to find differences between rows
-   in a `data.frame` object. 
-  `
-* `get_var_corr` provides a user-friendly way to find correlations between data.
-
-
-* `get_var_corr_` provides a user-friendly way to find combination-wise correlations. It is relatively fast depending on how big one's data is and/or machine specifications. 
-
-* `get_this` is an easy to use helper function to get metrics,predictions, etc. Currently supports `list`s and `data.frame` objects. 
-
+1. `plot_corr` has been added to allow plotting of correlation matrices produced by `get_var_corr_`.
 
 **Major Changes**
 
-* `get_data_Stats` now supports removal of missing data as well as using only numeric data.
+1. `modeleR` has been replaced with `fit_model` which is an easier to remember name. Usage remains the same.
 
-* `modeleR` has been fixed to handle new data as expected. It also now supports `glm`. 
+2. `na_replace` has been extended to allow for user defined values. Grouping is not yet implemented. It may work with grouping functions(no guarantees, sorry!)
 
-* `multi_model_1` now supports either validation or working with new data.
+3. `rowdiff` now accepts replacement of the calculation induced `NA`s. It does so by using `na_replace`. 
 
-* `row_mean_na`  has been replaced with `na_replace` which is more robust. `row_mean_na` will be removed in future versions. 
-
-
-
+4. `get_var_corr_` now supports using only a subset of the data. 
 
 
