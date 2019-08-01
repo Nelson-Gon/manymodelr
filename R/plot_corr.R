@@ -26,6 +26,9 @@
 #' @param value_angle What angle should the text be?
 #' @param value_size Size of the text.
 #' @param width width value for plot_style set to squares.
+#' @param legend_labels Text to use for the legend labels. Defaults to the default
+#' labels produced by the plot method.
+#' @param legend_title Title to use for the legend.
 #' @param ... Other arguments to specific methods.
 #' @details
 #' This function uses `ggplot2` backend. `ggplot2` is thus required for the plots to work.
@@ -42,13 +45,16 @@
 #' value_angle =360, colour_by = "Correlation",
 #' shape = 16,
 #' value_size = 3.5,
-#' width = 7.5,
+#' width = 1.1,
 #' custom_cols = c("white","green2",
 #' "gray34"),
 #'              value_col = "black",
 #'              x="Other_Var",y="Comparison_Var",
 #'              xlabel = "Other_Variable",
-#'              ylabel="Comaprison_Variable")
+#'              ylabel="Comaprison_Variable",
+#'              legend_label="Correlations",
+#'               legend_labels = c("Very_Low",
+#'               "Low","Mid","High","VeryHigh"))
 
 #'
 #' @export
@@ -57,8 +63,8 @@
 plot_corr <- function(data,
                       x = "Comparison_Var",
                       y = "Other_Var",
-                      xlabel = "Other_Variable",
-                      ylabel = "Comaprison_Variable",
+                      xlabel = "Comparison_Variable",
+                      ylabel = "Other_Variable",
                       title = "Correlations Plot",
                       plot_style = "circles",
                       title_just = 0.5,
@@ -66,7 +72,7 @@ plot_corr <- function(data,
                       colour_by = "Correlation",
                       decimals = 2,
                       show_value = TRUE,
-                      size = 7,
+                      size = 12.6,
                       value_angle = 360,
                       shape = 16,
                       value_size = 3.5,
@@ -74,6 +80,9 @@ plot_corr <- function(data,
                       width = 1.1,
                       custom_cols = c("white", "green2",
                                       "gray34"),
+                      legend_labels = waiver(),
+                      legend_title = "Correlation",
+                      
                       
                       
                       
@@ -85,8 +94,8 @@ plot_corr <- function(data,
 plot_corr <- function(data,
                       x = "Comparison_Var",
                       y = "Other_Var",
-                      xlabel = "Other_Variable",
-                      ylabel = "Comaprison_Variable",
+                      xlabel = "Comparison_Variable",
+                      ylabel = "Other_Variable",
                       title = "Correlations Plot",
                       plot_style = "circles",
                       
@@ -95,7 +104,7 @@ plot_corr <- function(data,
                       colour_by = "Correlation",
                       decimals = 2,
                       show_value = TRUE,
-                      size = 7,
+                      size = 12.6,
                       value_angle = 360,
                       
                       shape = 16,
@@ -104,6 +113,8 @@ plot_corr <- function(data,
                       width =1.1,
                       custom_cols = c("white", "green2",
                                       "gray34"),
+                      legend_labels=waiver(),
+                      legend_title = "Correlation",
                       
                       
                       
@@ -128,12 +139,13 @@ plot_corr <- function(data,
     base_plot <- base_plot +
       geom_tile(size = size,
                 aes_string(fill = colour_by),
-                width = width,
-                
-                ...) +
+                width = width) +
       scale_fill_gradient2(low = custom_cols[1],
                            mid = custom_cols[2],
-                           high = custom_cols[3])
+                           high = custom_cols[3],
+                           labels=legend_labels)+
+      labs(x = xlabel, y = ylabel, title = title,
+           fill=legend_title) 
   }
   
   else if (plot_style == "circles") {
@@ -143,7 +155,10 @@ plot_corr <- function(data,
                  shape = shape) +
       scale_color_gradient2(low = custom_cols[1],
                             high = custom_cols[2],
-                            mid = custom_cols[3])
+                            mid = custom_cols[3],
+                            labels=legend_labels)+
+      labs(x = xlabel, y = ylabel, title = title,
+           color=legend_title) 
   }
   if (show_value) {
     base_plot <- base_plot +
@@ -159,15 +174,17 @@ plot_corr <- function(data,
   # set basic colours
   actual_plot <- base_plot
   # Themes
+  # can override with theme
+  # No need to set default(imho)
+  # if useing p values,format 
   actual_plot +
-    theme_classic() +
-    labs(x = xlabel, y = ylabel, title = title) +
-    theme(
-      plot.title = element_text(hjust = title_just,
-                                ...),
-      panel.grid = element_blank(),
+    theme_dark()+
+   theme(
+      plot.title = element_text(hjust = title_just),
       panel.background = element_blank()
     )
+  
+
   
   
   

@@ -5,12 +5,13 @@
 \title{Plot a correlations matrix}
 \usage{
 plot_corr(data, x = "Comparison_Var", y = "Other_Var",
-  xlabel = "Other_Variable", ylabel = "Comaprison_Variable",
+  xlabel = "Comparison_Variable", ylabel = "Other_Variable",
   title = "Correlations Plot", plot_style = "circles",
   title_just = 0.5, round_values = TRUE, colour_by = "Correlation",
-  decimals = 2, show_value = TRUE, size = 7, value_angle = 360,
+  decimals = 2, show_value = TRUE, size = 12.6, value_angle = 360,
   shape = 16, value_size = 3.5, value_col = "black", width = 1.1,
-  custom_cols = c("white", "green2", "gray34"), ...)
+  custom_cols = c("white", "green2", "gray34"),
+  legend_labels = waiver(), legend_title = "Correlation", ...)
 }
 \arguments{
 \item{data}{The data to be plotted. A `data.frame` object produced
@@ -56,6 +57,11 @@ Defaults to TRUE.}
 \item{custom_cols}{A vector(length 2) of colors to use for the plot. The first colour specifies the lower end of the
 correlations. The second specifies  the higher end.}
 
+\item{legend_labels}{Text to use for the legend labels. Defaults to the default
+labels produced by the plot method.}
+
+\item{legend_title}{Title to use for the legend.}
+
 \item{...}{Other arguments to specific methods.}
 }
 \value{
@@ -80,12 +86,15 @@ show_value = TRUE, size = 7,
 value_angle =360, colour_by = "Correlation",
 shape = 16,
 value_size = 3.5,
-width = 7.5,
+width = 1.1,
 custom_cols = c("white","green2",
 "gray34"),
              value_col = "black",
              x="Other_Var",y="Comparison_Var",
              xlabel = "Other_Variable",
-             ylabel="Comaprison_Variable")
+             ylabel="Comaprison_Variable",
+             legend_label="Correlations",
+              legend_labels = c("Very_Low",
+              "Low","Mid","High","VeryHigh"))
 
 }
