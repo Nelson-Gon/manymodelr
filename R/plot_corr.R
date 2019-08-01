@@ -29,7 +29,9 @@
 #' @param ... Other arguments to specific methods.
 #' @details
 #' This function uses `ggplot2` backend. `ggplot2` is thus required for the plots to work.
-#' @return A `ggplot2` object.
+#' Since the correlations are obtained by `get_var_corr_`, the default is to omit correlation between a variable and itself. Therefore
+#' blanks in the plot would indicate a correlation of 1. 
+#' @return A `ggplot2` object showing the correlations plot.
 #' @examples
 #' # compute correlations
 #' res<-get_var_corr_(mtcars)

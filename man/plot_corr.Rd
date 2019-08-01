@@ -9,7 +9,7 @@ plot_corr(data, x = "Comparison_Var", y = "Other_Var",
   title = "Correlations Plot", plot_style = "circles",
   title_just = 0.5, round_values = TRUE, colour_by = "Correlation",
   decimals = 2, show_value = TRUE, size = 7, value_angle = 360,
-  shape = 16, value_size = 3.5, value_col = "black", width = 7.5,
+  shape = 16, value_size = 3.5, value_col = "black", width = 1.1,
   custom_cols = c("white", "green2", "gray34"), ...)
 }
 \arguments{
@@ -59,7 +59,7 @@ correlations. The second specifies  the higher end.}
 \item{...}{Other arguments to specific methods.}
 }
 \value{
-A `ggplot2` object.
+A `ggplot2` object showing the correlations plot.
 }
 \description{
 This function plots the results produced by
@@ -67,6 +67,8 @@ This function plots the results produced by
 }
 \details{
 This function uses `ggplot2` backend. `ggplot2` is thus required for the plots to work.
+Since the correlations are obtained by `get_var_corr_`, the default is to omit correlation between a variable and itself. Therefore
+blanks in the plot would indicate a correlation of 1.
 }
 \examples{
 # compute correlations
