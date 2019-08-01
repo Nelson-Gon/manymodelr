@@ -69,7 +69,7 @@ plot_corr <- function(data,
                       shape = 16,
                       value_size = 3.5,
                       value_col = "black",
-                      width = 7.5,
+                      width = 1.1,
                       custom_cols = c("white", "green2",
                                       "gray34"),
                       
