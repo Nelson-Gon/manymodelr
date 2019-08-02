@@ -61,7 +61,15 @@
 #'               legend_labels = c("Very_Low",
 #'               "Low","Mid","High","VeryHigh"))
 
-#'
+#'\dontrun{
+#'manymodelr::plot_corr(manymodelr::get_var_corr_(mtcars),
+#'show_value = FALSE,
+#'show_signif = TRUE,
+#'x="Other_Var", y="Comparison_Var",plot_style = "circles",
+#'width = 1.1,
+#'custom_cols = c("green","blue","red"),colour_by = "p.value",
+#'legend_title =  "p.value")
+#'}
 #' @export
 #'
 #'
