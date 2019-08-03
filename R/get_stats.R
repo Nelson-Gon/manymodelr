@@ -29,12 +29,14 @@ get_data_Stats.data.frame<-function (x, func,exclude=NULL,na.rm=TRUE,na_action=N
     x <- x
   }
   else if(exclude=="non_numeric"){
+    warning("Non numeric columns have been discarded.")
     x<-Filter(is.numeric,x)
 
 
   }
-  sapply(x,function(x) do.call(func,list(x)))
-
+ sapply(x,function(x) do.call(func,list(x)))
+  
+  
 }
 
 
