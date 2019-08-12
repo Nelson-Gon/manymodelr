@@ -26,7 +26,7 @@ get_mode <- function(x,na.rm=TRUE){
 #' @export
 get_mode.numeric<-function(x,na.rm=TRUE){
   # vector
-  if(na.rm==TRUE){
+  if(na.rm){
     x <- na.omit(x)
   }
   x[which.max(sapply(seq_along(x), 
