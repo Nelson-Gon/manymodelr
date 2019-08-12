@@ -210,6 +210,8 @@ plot_corr(corrs)
 
 ```
 
+![Correlations Plot](https://ibb.co/Kjp7YdR)
+
 6. `rowdiff`
 
 If one needs to obtain differences between rows, `rowdiff` is designed to do exactly that.
