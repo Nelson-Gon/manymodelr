@@ -53,12 +53,12 @@ multi_model_1<-function (df, yname, xname, method, metric, control, ..., newdata
     stop("Please provide a data frame to perform validation or predict on
          unseen data. ")
   }
-  if(valid==TRUE){
+  if(valid){
     df <- df
     methods1 <- method
     f1 <- as.formula(paste0(yname, "~", xname))
     fit <- lapply(methods1, function(met) {
-      set.seed(233)
+      set.seed(520)
       fit <- do.call("train", list(data = quote(df), f1, metric = metric,
                                    trControl = control, method = met, ...))
     })
@@ -82,8 +82,9 @@ multi_model_1<-function (df, yname, xname, method, metric, control, ..., newdata
     methods1 <- method
     f1 <- as.formula(paste0(yname, "~", xname))
     fit <- lapply(methods1, function(met) {
-      set.seed(233)
-      fit <- do.call("train", list(data = quote(df), f1, metric = metric,
+      
+     set.seed(520)
+ fit <- do.call("train", list(data = quote(df), f1, metric = metric,
                                    trControl = control, method = met, ...))
     })
     preds <- lapply(fit, function(x) predict(x, newdata))

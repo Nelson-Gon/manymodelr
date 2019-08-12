@@ -36,7 +36,7 @@ get_mode.numeric<-function(x,na.rm=TRUE){
 #' @export
 get_mode.character <- function(x, na.rm=TRUE){
   # vector
-  if(na.rm==TRUE){
+  if(na.rm){
     x <- na.omit(x)
   }
   x[which.max(sapply(seq_along(x), 
@@ -54,12 +54,12 @@ stop(paste0("No implementation available for objects of class
 get_mode.data.frame <- function(x,na.rm=TRUE){
   
   
-if(any(sapply(x, class)=="factor")){
+if(any(sapply(x, is.factor))){
  warning("factor columns have been removed.")
 x <-Filter(Negate(is.factor), x) 
 }
 
-if(na.rm==TRUE){
+if(na.rm){
   x <- na.omit(x)
 }
 structure(sapply(x, function(column)

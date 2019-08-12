@@ -4,7 +4,7 @@
 \alias{modeleR}
 \title{Perform several kinds of models in one function}
 \usage{
-modeleR(df, yname, xname, modeltype, na.rm = F, new_data, ...)
+modeleR(df, yname, xname, modeltype, na.rm = FALSE, new_data, ...)
 }
 \arguments{
 \item{df}{The data for which analysis is required}

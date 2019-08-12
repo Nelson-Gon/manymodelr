@@ -195,6 +195,19 @@ This allows the user to conveniently replace missing values. Current options are
 head(na_replace(airquality, how="value", value="Missing"),8)
 ```
 
+- `na_replace_grouped`
+
+This provides a convenient way to replace values by group.
+```{r}
+test_df <- data.frame(A=c(NA,1,2,3), B=c(1,5,6,NA),
+                      groups=c("A","A","B","B"))
+# Replace NAs by group
+#agg_by_group(test_df,.~groups,mean)
+# from the above we see means are [1,5] [2,6]
+na_replace_grouped(df=test_df,group_by_cols = "groups",
+                   how="mean")
+```
+
 
 ##### Exploring Further.
 

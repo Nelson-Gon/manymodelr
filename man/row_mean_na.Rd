@@ -4,7 +4,7 @@
 \alias{row_mean_na}
 \title{Replacing all NAs with mean values of a given row}
 \usage{
-row_mean_na(data, func, observations, na.rm = F, exc)
+row_mean_na(data, func, observations, na.rm = FALSE, exc)
 }
 \arguments{
 \item{data}{is the data you for which the mean is needed}
