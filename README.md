@@ -210,7 +210,7 @@ plot_corr(corrs)
 
 ```
 
-![Correlations Plot](https://imgur.com/yCvrzH2)
+![Correlations Plot](https://i.imgur.com/yCvrzH2.png)
 
 6. `rowdiff`
 
