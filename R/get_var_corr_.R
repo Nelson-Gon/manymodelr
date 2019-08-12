@@ -58,7 +58,8 @@ if("factor" %in% sapply(df,class)){
                              other_vars = y,
                              get_all = FALSE,
                              ...)),data.frame)
-  if(subset_df==TRUE){
+  if(subset_df){
+   
     res[res$Comparison_Var %in%subset_cols[[1]] &
           res$Other_Var %in% subset_cols[[2]],]
    
@@ -79,7 +80,9 @@ if("factor" %in% sapply(df,class)){
                  other_vars = y,
                  get_all = FALSE,
                  ...)),data.frame)
-  if(subset_df==TRUE){
+  if(subset_df){
+   
+    
     res[res$Comparison_Var %in%subset_cols[[1]] &
           res$Other_Var %in% subset_cols[[2]],]
    

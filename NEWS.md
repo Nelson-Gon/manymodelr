@@ -9,6 +9,8 @@ author: "Nelson Gonzabato"
 
 1. `plot_corr` has been added to allow plotting of correlation matrices produced by `get_var_corr_`.
 
+2. `na_replace_grouped` extends `na_replace` by allowing replacement of missing values(`NA`s) by group.
+
 **Major Changes**
 
 1. `modeleR` has been replaced with `fit_model` which is an easier to remember name. Usage remains the same.

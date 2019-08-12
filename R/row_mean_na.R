@@ -6,10 +6,12 @@
 #' @param exc the column to exclude from analysis. Useful for removing factor columns
 #' @return Returns a data.frame object showing columns with NAs and their replacement if na.rm=T
 #' @export
-row_mean_na<-function(data,func,observations,na.rm=F,exc){
+row_mean_na<-function(data,func,observations,
+                      na.rm=FALSE,exc){
+  ###This is no longer used. Was a design flaw####
   .Deprecated("na_replace")
   m<-as.data.frame(mget(observations,envir = as.environment(data)))
-  if(na.rm==T){
+  if(na.rm){
   #m[is.na(m)]<-as.numeric(0)
   res1<-apply(m[complete.cases(m),],1,func)
   m<-m[!complete.cases(m),]

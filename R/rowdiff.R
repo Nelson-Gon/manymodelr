@@ -33,7 +33,7 @@ rowdiff.data.frame<-function(df, direction = "forward",exclude=NULL,
     res<-as.data.frame(sapply(df,
                           function(x) x-dplyr::lead(x,1)))
     
-    if(na.rm==TRUE){
+    if(na.rm){
       res<-na_replace(res,how=na_action, ...)
       res
     }
@@ -46,7 +46,7 @@ rowdiff.data.frame<-function(df, direction = "forward",exclude=NULL,
   else if(is.null(exclude) & direction=="reverse"){
     res<-as.data.frame(sapply(df,
                           function(x) x-dplyr::lag(x,1)))
-    if(na.rm==TRUE){
+    if(na.rm){
       res<-na_replace(res,how=na_action,...)
       res
     }
@@ -60,7 +60,7 @@ rowdiff.data.frame<-function(df, direction = "forward",exclude=NULL,
     df<-df[,include]
     res<-as.data.frame(sapply(df,
                           function(x) x-dplyr::lead(x,1)))
-    if(na.rm==TRUE){
+    if(na.rm){
       res<-na_replace(res,how=na_action,...)
       res
     }
@@ -73,7 +73,7 @@ rowdiff.data.frame<-function(df, direction = "forward",exclude=NULL,
     df<-df[,include]
     res<-as.data.frame(sapply(df,
                           function(x) x-dplyr::lag(x,1)))
-    if(na.rm==TRUE){
+    if(na.rm){
       res<-na_replace(res,how=na_action, ...)
       res
     }

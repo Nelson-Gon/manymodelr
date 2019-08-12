@@ -22,19 +22,21 @@ get_data_Stats.default <-function (x, func,exclude=NULL,na.rm=TRUE,na_action=NUL
 #' @export
 get_data_Stats.data.frame<-function (x, func,exclude=NULL,na.rm=TRUE,na_action=NULL)
 {
-  if(na.rm==TRUE & anyNA(x)==TRUE){
+  if(na.rm & anyNA(x)){
     x<-na_replace(x,how=na_action)
   }
   if(is.null(exclude)|| missing(exclude)){
     x <- x
   }
   else if(exclude=="non_numeric"){
+    warning("Non numeric columns have been discarded.")
     x<-Filter(is.numeric,x)
 
 
   }
-  sapply(x,function(x) do.call(func,list(x)))
-
+ sapply(x,function(x) do.call(func,list(x)))
+  
+  
 }
 
 

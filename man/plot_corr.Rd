@@ -4,17 +4,19 @@
 \alias{plot_corr}
 \title{Plot a correlations matrix}
 \usage{
-plot_corr(data, x = "Comparison_Var", y = "Other_Var",
+plot_corr(df, x = "Comparison_Var", y = "Other_Var",
   xlabel = "Comparison_Variable", ylabel = "Other_Variable",
   title = "Correlations Plot", plot_style = "circles",
   title_just = 0.5, round_values = TRUE, colour_by = "Correlation",
   decimals = 2, show_value = TRUE, size = 12.6, value_angle = 360,
   shape = 16, value_size = 3.5, value_col = "black", width = 1.1,
   custom_cols = c("white", "green2", "gray34"),
-  legend_labels = waiver(), legend_title = "Correlation", ...)
+  legend_labels = waiver(), legend_title = "Correlation",
+  show_signif = FALSE, signif_cutoff = 0.05, signif_size = 7,
+  signif_col = "gray13", ...)
 }
 \arguments{
-\item{data}{The data to be plotted. A `data.frame` object produced
+\item{df}{The data to be plotted. A `data.frame` object produced
 by `get_var_corr_`}
 
 \item{x}{Value for the x axis. Defaults to "Comparison_Var"}
@@ -62,7 +64,16 @@ labels produced by the plot method.}
 
 \item{legend_title}{Title to use for the legend.}
 
-\item{...}{Other arguments to specific methods.}
+\item{show_signif}{Logical. Should significance stars be shown on the plot? Defaults to FALSE.}
+
+\item{signif_cutoff}{Numeric. If show_signif is TRUE, this defines the cutoff point for significance. Defaults to 
+0.05.}
+
+\item{signif_size}{Numeric. Defines size of the significance stars.}
+
+\item{signif_col}{Charcater. Defines the col for the significance stars.}
+
+\item{...}{Other arguments to specific methods(`geom_text`) Useful once `show_signif` is set to  TRUE.}
 }
 \value{
 A `ggplot2` object showing the correlations plot.
@@ -96,5 +107,13 @@ custom_cols = c("white","green2",
              legend_label="Correlations",
               legend_labels = c("Very_Low",
               "Low","Mid","High","VeryHigh"))
-
+\dontrun{
+manymodelr::plot_corr(manymodelr::get_var_corr_(mtcars),
+show_value = FALSE,
+show_signif = TRUE,
+x="Other_Var", y="Comparison_Var",plot_style = "circles",
+width = 1.1,
+custom_cols = c("green","blue","red"),colour_by = "p.value",
+legend_title =  "p.value")
+}
 }

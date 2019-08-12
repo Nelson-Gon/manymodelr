@@ -19,12 +19,13 @@
 #'Wilkinson, G. N. and Rogers, C. E. (1973). Symbolic descriptions of factorial models for analysis of variance. Applied
 #'Statistics, 22, 392-399. doi: 10.2307/2346786.
 #' @export 
-modeleR<-function (df, yname, xname, modeltype, na.rm = F,
+modeleR<-function (df, yname, xname, modeltype, na.rm = FALSE,
                    new_data, ...)
 {
   UseMethod("modeleR")
 }
-modeleR<-function (df, yname, xname, modeltype, na.rm = F, new_data, ...)
+modeleR<-function (df, yname, xname, modeltype, na.rm = FALSE,
+                   new_data, ...)
 {
   .Deprecated("fit_model")
   yname <- deparse(substitute(yname))
@@ -66,7 +67,7 @@ modeleR<-function (df, yname, xname, modeltype, na.rm = F, new_data, ...)
     res$DataFrame$Explanatory <- gsub("\\+", "", res$DataFrame$Explanatory)
     res
   }
-  else if (modeltype == "aov" & na.rm == T) {
+  else if (modeltype == "aov" & na.rm) {
     lm.fit <- do.call(modeltype, list(data = quote(df), formula1,
                                       ...))
     m <- summary(lm.fit)
@@ -85,7 +86,7 @@ modeleR<-function (df, yname, xname, modeltype, na.rm = F, new_data, ...)
     names(res$Predictions) <- c("Predicted")
     res
   }
-  else if (modeltype == "aov" & na.rm == F) {
+  else if (modeltype == "aov" & !na.rm) {
     lm.fit <- do.call(modeltype, list(data = quote(df), formula = formula1,
                                       ...))
     m <- summary(lm.fit)
@@ -114,13 +115,13 @@ modeleR<-function (df, yname, xname, modeltype, na.rm = F, new_data, ...)
 #' fit_model(iris1,Sepal.Length,Petal.Length,
 #'          lm,na.rm=TRUE,iris2) 
 #' @export
-fit_model <- function (df, yname, xname, modeltype, na.rm = F,
+fit_model <- function (df, yname, xname, modeltype, na.rm = FALSE,
           new_data, ...)
 {
   UseMethod("fit_model")
 }
 #' @export
-fit_model <- function (df, yname, xname, modeltype, na.rm = F, new_data, ...)
+fit_model <- function (df, yname, xname, modeltype, na.rm = FALSE, new_data, ...)
 {
   yname <- deparse(substitute(yname))
   xname <- deparse(substitute(xname))
@@ -161,7 +162,7 @@ fit_model <- function (df, yname, xname, modeltype, na.rm = F, new_data, ...)
     res$DataFrame$Explanatory <- gsub("\\+", "", res$DataFrame$Explanatory)
     res
   }
-  else if (modeltype == "aov" & na.rm == T) {
+  else if (modeltype == "aov" & na.rm) {
     lm.fit <- do.call(modeltype, list(data = quote(df), formula1,
                                       ...))
     m <- summary(lm.fit)
@@ -180,7 +181,7 @@ fit_model <- function (df, yname, xname, modeltype, na.rm = F, new_data, ...)
     names(res$Predictions) <- c("Predicted")
     res
   }
-  else if (modeltype == "aov" & na.rm == F) {
+  else if (modeltype == "aov" & !na.rm) {
     lm.fit <- do.call(modeltype, list(data = quote(df), formula = formula1,
                                       ...))
     m <- summary(lm.fit)

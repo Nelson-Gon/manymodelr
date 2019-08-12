@@ -7,13 +7,12 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="author" content="Nelson Gonzabato" />
 
-<meta name="date" content="2019-07-23" />
+<meta name="date" content="2019-08-03" />
 
 <title>a-gentle-introduction-to-manymodelr.utf8.md</title>
 
@@ -21,9 +20,9 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -33,16 +32,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -51,9 +48,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -99,7 +96,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -312,147 +309,192 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>In this vignette, we take a look at how we can simplify many machine learning tasks using <code>manymodelr</code>. We will take a look at the core functions first.</p>
 <div id="installing-the-package" class="section level2">
 <h2>Installing the package</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#install.packages(&quot;manymodelr&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#install.packages(&quot;manymodelr&quot;)</span></a></code></pre></div>
 <p>Once the package has been successfully installed, we can then proceed by loading the package and exploring some of the key functions.</p>
 <div id="loading-the-package" class="section level3">
 <h3>Loading the package</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(manymodelr)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(manymodelr)</a></code></pre></div>
 <div id="a-look-at-some-of-the-key-functions." class="section level4">
 <h4>A look at some of the key functions.</h4>
 <ul>
-<li><code>agg_by_group</code></li>
+<li><strong><code>agg_by_group</code></strong></li>
 </ul>
 <p>As one can guess from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form <code>x~y</code> where <code>y</code> is the grouping variable(in this case <code>Species</code>). One can supply a formula as shown next.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">agg_by_group</span>(iris,.<span class="op">~</span>Species,length)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; Grouped By[1]:    Species </span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; </span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt;      Species Sepal.Length Sepal.Width Petal.Length Petal.Width</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; 1     setosa           50          50           50          50</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; 2 versicolor           50          50           50          50</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 3  virginica           50          50           50          50</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">head</span>(<span class="kw">agg_by_group</span>(mtcars,cyl<span class="op">~</span>hp<span class="op">+</span>vs,sum))</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Grouped By[2]:    hp  vs </span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; </span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt;    hp vs cyl</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; 1  91  0   4</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; 2 110  0  12</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; 3 150  0  16</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; 4 175  0  22</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; 5 180  0  24</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; 6 205  0   8</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">agg_by_group</span>(iris,.<span class="op">~</span>Species,length)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; Grouped By[1]:    Species </span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;      Species Sepal.Length Sepal.Width Petal.Length Petal.Width</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; 1     setosa           50          50           50          50</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; 2 versicolor           50          50           50          50</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; 3  virginica           50          50           50          50</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">agg_by_group</span>(mtcars,cyl<span class="op">~</span>hp<span class="op">+</span>vs,sum))</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; Grouped By[2]:    hp  vs </span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;    hp vs cyl</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; 1  91  0   4</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 2 110  0  12</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 3 150  0  16</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 4 175  0  22</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; 5 180  0  24</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; 6 205  0   8</span></a></code></pre></div>
 <ul>
-<li><code>multi_model_1</code></li>
+<li><strong><code>multi_model_1</code></strong></li>
 </ul>
 <p>This is one of the core functions of the package. Since the function uses <code>caret</code> backend, we need to load the function before we can use it. To avoid, several messages showing up, we use the function <code>suppressMessages</code>. This assumes that one is familiar with machine learning basics. We specify our model types and we use the argument <code>valid=TRUE</code> to specify that we are dealing with validation. Had we wanted to predict on unseen test data, then this argument would be set to <code>FALSE</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">suppressMessages</span>(<span class="kw">library</span>(caret))</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">set.seed</span>(<span class="dv">520</span>)</span>
-<span id="cb5-3"><a href="#cb5-3"></a>train_set&lt;-<span class="kw">createDataPartition</span>(iris<span class="op">$</span>Species,<span class="dt">p=</span><span class="fl">0.8</span>,<span class="dt">list=</span><span class="ot">FALSE</span>)</span>
-<span id="cb5-4"><a href="#cb5-4"></a>valid_set&lt;-iris[<span class="op">-</span>train_set,]</span>
-<span id="cb5-5"><a href="#cb5-5"></a>train_set&lt;-iris[train_set,]</span>
-<span id="cb5-6"><a href="#cb5-6"></a>ctrl&lt;-<span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;cv&quot;</span>,<span class="dt">number=</span><span class="dv">5</span>)</span>
-<span id="cb5-7"><a href="#cb5-7"></a>m&lt;-<span class="kw">multi_model_1</span>(train_set,<span class="st">&quot;Species&quot;</span>,<span class="st">&quot;.&quot;</span>,<span class="kw">c</span>(<span class="st">&quot;knn&quot;</span>,<span class="st">&quot;rpart&quot;</span>),</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="st">&quot;Accuracy&quot;</span>,ctrl,<span class="dt">newdata =</span>valid_set,<span class="dt">valid=</span><span class="ot">TRUE</span>)</span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; [1] &quot;Returning Metrics&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">suppressMessages</span>(<span class="kw">library</span>(caret))</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">520</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">train_set&lt;-<span class="kw">createDataPartition</span>(iris<span class="op">$</span>Species,<span class="dt">p=</span><span class="fl">0.8</span>,<span class="dt">list=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">valid_set&lt;-iris[<span class="op">-</span>train_set,]</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">train_set&lt;-iris[train_set,]</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">ctrl&lt;-<span class="kw">trainControl</span>(<span class="dt">method=</span><span class="st">&quot;cv&quot;</span>,<span class="dt">number=</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">m&lt;-<span class="kw">multi_model_1</span>(train_set,<span class="st">&quot;Species&quot;</span>,<span class="st">&quot;.&quot;</span>,<span class="kw">c</span>(<span class="st">&quot;knn&quot;</span>,<span class="st">&quot;rpart&quot;</span>),</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="st">&quot;Accuracy&quot;</span>,ctrl,<span class="dt">newdata =</span>valid_set,<span class="dt">valid=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; [1] &quot;Returning Metrics&quot;</span></a></code></pre></div>
 <p>The above message tells us that the model has returned our metrics for each of the model types we specified. These can be extracted as shown below. Other return values include predictions and a summary of the model.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>m<span class="op">$</span>Metrics</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; # A tibble: 1 x 2</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;     knn rpart</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 1     1 0.933</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">head</span>(m<span class="op">$</span>Predictions)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; # A tibble: 6 x 2</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt;   knn    rpart </span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt;   &lt;fct&gt;  &lt;fct&gt; </span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; 1 setosa setosa</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; 2 setosa setosa</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; 3 setosa setosa</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; 4 setosa setosa</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; 5 setosa setosa</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; 6 setosa setosa</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">m<span class="op">$</span>Metrics</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;     knn rpart</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 1     1 0.933</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">head</span>(m<span class="op">$</span>Predictions)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 2</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;   knn    rpart </span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;   &lt;fct&gt;  &lt;fct&gt; </span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; 1 setosa setosa</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 2 setosa setosa</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 3 setosa setosa</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 4 setosa setosa</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 5 setosa setosa</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 6 setosa setosa</span></a></code></pre></div>
 <ul>
-<li><code>fit_model</code></li>
+<li><strong><code>fit_model</code></strong></li>
 </ul>
 <p>Yet another core function, this allows us to (currently) conveniently perform linear regression and analysis of variance. Here we are simultaneously building and using our model to predict. This is particularly useful if you already know how well a given model models your data. We can extract the results just like we did above. It was previously known as <code>modeleR</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>iris1&lt;-iris[<span class="dv">1</span><span class="op">:</span><span class="dv">60</span>,]</span>
-<span id="cb8-2"><a href="#cb8-2"></a>iris2&lt;-iris[<span class="dv">60</span><span class="op">:</span><span class="kw">nrow</span>(iris),]</span>
-<span id="cb8-3"><a href="#cb8-3"></a>m1&lt;-<span class="kw">fit_model</span>(iris1,Sepal.Length,Petal.Length,</span>
-<span id="cb8-4"><a href="#cb8-4"></a>        lm,<span class="dt">na.rm=</span><span class="ot">TRUE</span>,iris2)</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">head</span>(m1<span class="op">$</span>Predictions)</span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;    Predicted</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; 60  5.985141</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; 61  5.821972</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; 62  6.107518</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; 63  6.025933</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; 64  6.311478</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; 65  5.862764</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">iris1&lt;-iris[<span class="dv">1</span><span class="op">:</span><span class="dv">60</span>,]</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">iris2&lt;-iris[<span class="dv">60</span><span class="op">:</span><span class="kw">nrow</span>(iris),]</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">m1&lt;-<span class="kw">fit_model</span>(iris1,Sepal.Length,Petal.Length,</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">        lm,<span class="dt">na.rm=</span><span class="ot">TRUE</span>,iris2)</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw">head</span>(m1<span class="op">$</span>Predictions)</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;    Predicted</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 60  5.985141</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; 61  5.821972</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 62  6.107518</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; 63  6.025933</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; 64  6.311478</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; 65  5.862764</span></a></code></pre></div>
 <ul>
-<li><code>get_var_cor</code></li>
+<li><strong><code>get_var_corr</code></strong></li>
 </ul>
 <p>As the name suggests, this function is useful when carrying out correlation tests as shown below. Setting <code>get_all</code> to <code>TRUE</code> implies that all the variables are correlated(from exploratory data analysis) and you just want to see what the correlation(s) is(are). The variant function <code>get_var_corr_</code> (note the underscore at the end provides a convenient way to get correlations for combinations of variables(pairs).)</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">get_var_corr</span>(mtcars, <span class="st">&quot;mpg&quot;</span>,<span class="dt">get_all =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt;    Comparison_Var Other_Var      p_value Correlation    lower_ci</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; 1             mpg       cyl 6.112687e-10  -0.8521620 -0.92576936</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; 2             mpg      disp 9.380327e-10  -0.8475514 -0.92335937</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; 3             mpg        hp 1.787835e-07  -0.7761684 -0.88526861</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; 4             mpg      drat 1.776240e-05   0.6811719  0.43604838</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; 5             mpg        wt 1.293959e-10  -0.8676594 -0.93382641</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; 6             mpg      qsec 1.708199e-02   0.4186840  0.08195487</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; 7             mpg        vs 3.415937e-05   0.6640389  0.41036301</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; 8             mpg        am 2.850207e-04   0.5998324  0.31755830</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt; 9             mpg      gear 5.400948e-03   0.4802848  0.15806177</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; 10            mpg      carb 1.084446e-03  -0.5509251 -0.75464796</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;      upper_ci</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; 1  -0.7163171</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt; 2  -0.7081376</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt; 3  -0.5860994</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#&gt; 4   0.8322010</span></span>
-<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#&gt; 5  -0.7440872</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a><span class="co">#&gt; 6   0.6696186</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt; 7   0.8223262</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt; 8   0.7844520</span></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt; 9   0.7100628</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a><span class="co">#&gt; 10 -0.2503183</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">get_var_corr</span>(mtcars, <span class="st">&quot;mpg&quot;</span>,<span class="dt">get_all =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt;    Comparison_Var Other_Var      p_value Correlation    lower_ci</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; 1             mpg       cyl 6.112687e-10  -0.8521620 -0.92576936</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; 2             mpg      disp 9.380327e-10  -0.8475514 -0.92335937</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 3             mpg        hp 1.787835e-07  -0.7761684 -0.88526861</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; 4             mpg      drat 1.776240e-05   0.6811719  0.43604838</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; 5             mpg        wt 1.293959e-10  -0.8676594 -0.93382641</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; 6             mpg      qsec 1.708199e-02   0.4186840  0.08195487</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; 7             mpg        vs 3.415937e-05   0.6640389  0.41036301</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; 8             mpg        am 2.850207e-04   0.5998324  0.31755830</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; 9             mpg      gear 5.400948e-03   0.4802848  0.15806177</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; 10            mpg      carb 1.084446e-03  -0.5509251 -0.75464796</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt;      upper_ci</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; 1  -0.7163171</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; 2  -0.7081376</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; 3  -0.5860994</span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; 4   0.8322010</span></a>
+<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; 5  -0.7440872</span></a>
+<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="co">#&gt; 6   0.6696186</span></a>
+<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt; 7   0.8223262</span></a>
+<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt; 8   0.7844520</span></a>
+<a class="sourceLine" id="cb9-22" data-line-number="22"><span class="co">#&gt; 9   0.7100628</span></a>
+<a class="sourceLine" id="cb9-23" data-line-number="23"><span class="co">#&gt; 10 -0.2503183</span></a></code></pre></div>
+<p>To drop non-numeric columns, one can use the argument <code>drop_columns</code> which defaults to <code>TRUE</code> for version 0.2.3 onwards.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># prevent warning that informs you of removal of non numeric columns</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">suppressWarnings</span>(<span class="kw">get_var_corr</span>(iris,<span class="dt">comparison_var =</span> <span class="st">&quot;Sepal.Length&quot;</span>,<span class="dt">get_all =</span> <span class="ot">TRUE</span>, <span class="dt">drop_columns =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt;   Comparison_Var    Other_Var      p_value Correlation   lower_ci</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; 1   Sepal.Length  Sepal.Width 1.518983e-01  -0.1175698 -0.2726932</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; 2   Sepal.Length Petal.Length 1.038667e-47   0.8717538  0.8270363</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; 3   Sepal.Length  Petal.Width 2.325498e-37   0.8179411  0.7568971</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt;     upper_ci</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; 1 0.04351158</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; 2 0.90550805</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; 3 0.86483606</span></a></code></pre></div>
 <p>To get correlations for only select variables, one could work as follows:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">get_var_corr</span>(mtcars,<span class="dt">comparison_var =</span> <span class="st">&quot;cyl&quot;</span>,</span>
-<span id="cb10-2"><a href="#cb10-2"></a>             <span class="dt">other_vars =</span> <span class="kw">c</span>(<span class="st">&quot;disp&quot;</span>,<span class="st">&quot;mpg&quot;</span>),<span class="dt">get_all =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt;   Comparison_Var Other_Var      p.value Correlation   lower_ci   upper_ci</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; 1            cyl      disp 1.802838e-12   0.9020329  0.8072442  0.9514607</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; 2            cyl       mpg 6.112687e-10  -0.8521620 -0.9257694 -0.7163171</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">get_var_corr</span>(mtcars,<span class="dt">comparison_var =</span> <span class="st">&quot;cyl&quot;</span>,</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">             <span class="dt">other_vars =</span> <span class="kw">c</span>(<span class="st">&quot;disp&quot;</span>,<span class="st">&quot;mpg&quot;</span>),<span class="dt">get_all =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt;   Comparison_Var Other_Var      p.value Correlation   lower_ci   upper_ci</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; 1            cyl      disp 1.802838e-12   0.9020329  0.8072442  0.9514607</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; 2            cyl       mpg 6.112687e-10  -0.8521620 -0.9257694 -0.7163171</span></a></code></pre></div>
 <p>Similarly, <code>get_var_corr_</code> (note the underscore at the end) provides a convenient way to get combination-wise correlations.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">head</span>(<span class="kw">get_var_corr_</span>(mtcars),<span class="dv">6</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt;   Comparison_Var Other_Var      p.value Correlation    lower_ci   upper_ci</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; 1            mpg       cyl 6.112687e-10  -0.8521620 -0.92576936 -0.7163171</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; 2            mpg      disp 9.380327e-10  -0.8475514 -0.92335937 -0.7081376</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; 3            mpg        hp 1.787835e-07  -0.7761684 -0.88526861 -0.5860994</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt; 4            mpg      drat 1.776240e-05   0.6811719  0.43604838  0.8322010</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; 5            mpg        wt 1.293959e-10  -0.8676594 -0.93382641 -0.7440872</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; 6            mpg      qsec 1.708199e-02   0.4186840  0.08195487  0.6696186</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">get_var_corr_</span>(mtcars),<span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt;   Comparison_Var Other_Var      p.value Correlation    lower_ci   upper_ci</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; 1            mpg       cyl 6.112687e-10  -0.8521620 -0.92576936 -0.7163171</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; 2            mpg      disp 9.380327e-10  -0.8475514 -0.92335937 -0.7081376</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; 3            mpg        hp 1.787835e-07  -0.7761684 -0.88526861 -0.5860994</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; 4            mpg      drat 1.776240e-05   0.6811719  0.43604838  0.8322010</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; 5            mpg        wt 1.293959e-10  -0.8676594 -0.93382641 -0.7440872</span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; 6            mpg      qsec 1.708199e-02   0.4186840  0.08195487  0.6696186</span></a></code></pre></div>
+<p>To use only a subset of the data, we can use the argument <code>subset_df</code>. This is logical. Once set to <code>TRUE</code>, we can then provide a <code>list</code> of <code>subset_cols</code>. By default, the first value(vector) in the list is mapped to <code>Comparison_Var</code> and the other to <code>Other_Var</code>. The list is therefore of length 2.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">get_var_corr_</span>(mtcars,</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">             <span class="dt">subset_df =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">             <span class="dt">subset_cols =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;mpg&quot;</span>,<span class="st">&quot;vs&quot;</span>),</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">                                <span class="kw">c</span>(<span class="st">&quot;disp&quot;</span>,<span class="st">&quot;wt&quot;</span>)),</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">             <span class="dt">method=</span><span class="st">&quot;spearman&quot;</span>,<span class="dt">exact=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;   Comparison_Var Other_Var      p.value Correlation</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; 2            mpg      disp 6.370336e-13  -0.9088824</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; 5            mpg        wt 1.487595e-11  -0.8864220</span></a></code></pre></div>
+<ul>
+<li><code>plot_corr</code></li>
+</ul>
+<p>Obtaining correlations would mostly likely benefit from some form of visualization. <code>plot_corr</code> aims to achieve just that. There are currently two plot styles that is <code>squares</code> and <code>circles</code>. <code>circles</code> has the <code>shape</code> argument that can allow for more flexibility with respect to shape. It should be noted that the correlation matrix supplied to this function is an object produced by <code>get_var_corr_</code>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># Use defaults.</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#res &lt;- get_var_corr_(mtcars)</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#plot_corr(res)</span></a></code></pre></div>
+<p>To modify the plot a bit, we can choose to switch the x and y values as shown below.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co">#plot_corr(res, x=&quot;Other_Var&quot;, y=&quot;Comparison_Var&quot;)</span></a></code></pre></div>
+<p>To show significance of the results instead of the correlations themselves, we can set <code>show_value</code> to <code>FALSE</code> and set <code>show_signif</code> to <code>TRUE</code> as shown below. By default, significance is set to 0.05. You can override this by supplying a different <code>signif_cutoff</code> to the function.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co"># color by p value</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co"># change custom colors by supplying custom_cols</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co"># significance is default </span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#plot_corr(res, x=&quot;Other_Var&quot;, y=&quot;Comparison_Var&quot;,</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"> <span class="co">#         plot_style = &quot;squares&quot;,</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">  <span class="co">#        show_value = FALSE, show_signif = TRUE,</span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">   <span class="co">#       colour_by = &quot;p.value&quot;,</span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8">    <span class="co">#      custom_cols = c(&quot;blue&quot;,&quot;yellow&quot;,&quot;red&quot;))</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">#plot_corr(res, x=&quot;Other_Var&quot;, y=&quot;Comparison_Var&quot;,</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"> <span class="co">#         plot_style = &quot;squares&quot;,</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">  <span class="co">#        show_value = FALSE, show_signif = TRUE,</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">   <span class="co">#       colour_by = &quot;p.value&quot;,</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">    <span class="co">#      custom_cols = c(&quot;blue&quot;,&quot;yellow&quot;,&quot;red&quot;),</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">     <span class="co">#     signif_cutoff = 0.01)</span></a></code></pre></div>
+<p>To explore more options, please take a look at the documentation.</p>
 <ul>
 <li><code>rowdiff</code></li>
 </ul>
 <p>This is useful when trying to find differences between rows. The <code>direction</code> argument specifies how the subtractions are made while the <code>exclude</code> argument is currently used to remove non-numeric data. Using <code>direction=&quot;reverse&quot;</code> performs a subtraction akin to <code>x-(x-1)</code> where <code>x</code> is the row number.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">head</span>(<span class="kw">rowdiff</span>(iris,<span class="dt">exclude =</span> <span class="st">&quot;non_numeric&quot;</span>,<span class="dt">direction =</span> <span class="st">&quot;reverse&quot;</span>))</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; 1           NA          NA           NA          NA</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt; 2         -0.2        -0.5          0.0         0.0</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt; 3         -0.2         0.2         -0.1         0.0</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt; 4         -0.1        -0.1          0.2         0.0</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt; 5          0.4         0.5         -0.1         0.0</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt; 6          0.4         0.3          0.3         0.2</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">rowdiff</span>(iris,<span class="dt">exclude =</span> <span class="st">&quot;non_numeric&quot;</span>,<span class="dt">direction =</span> <span class="st">&quot;reverse&quot;</span>))</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#&gt; 1           NA          NA           NA          NA</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="co">#&gt; 2         -0.2        -0.5          0.0         0.0</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co">#&gt; 3         -0.2         0.2         -0.1         0.0</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="co">#&gt; 4         -0.1        -0.1          0.2         0.0</span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co">#&gt; 5          0.4         0.5         -0.1         0.0</span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="co">#&gt; 6          0.4         0.3          0.3         0.2</span></a></code></pre></div>
 <ul>
 <li><code>na_replace</code></li>
 </ul>
 <p>This allows the user to conveniently replace missing values. Current options are <code>ffill</code> which replaces with the next non-missing value, <code>samples</code> that samples the data and does replacement, <code>value</code> that allows one to fill <code>NA</code>s with a specific value. Other common mathematical methods like <code>min</code>, <code>max</code>,<code>get_mode</code>, <code>sd</code>, etc are also supported.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">head</span>(<span class="kw">na_replace</span>(airquality, <span class="dt">how=</span><span class="st">&quot;value&quot;</span>, <span class="dt">value=</span><span class="st">&quot;Missing&quot;</span>),<span class="dv">8</span>)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt;     Ozone Solar.R Wind Temp Month Day</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt; 1      41     190  7.4   67     5   1</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt; 2      36     118  8.0   72     5   2</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt; 3      12     149 12.6   74     5   3</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt; 4      18     313 11.5   62     5   4</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt; 5 Missing Missing 14.3   56     5   5</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt; 6      28 Missing 14.9   66     5   6</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt; 7      23     299  8.6   65     5   7</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt; 8      19      99 13.8   59     5   8</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">na_replace</span>(airquality, <span class="dt">how=</span><span class="st">&quot;value&quot;</span>, <span class="dt">value=</span><span class="st">&quot;Missing&quot;</span>),<span class="dv">8</span>)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co">#&gt;     Ozone Solar.R Wind Temp Month Day</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co">#&gt; 1      41     190  7.4   67     5   1</span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co">#&gt; 2      36     118  8.0   72     5   2</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="co">#&gt; 3      12     149 12.6   74     5   3</span></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="co">#&gt; 4      18     313 11.5   62     5   4</span></a>
+<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="co">#&gt; 5 Missing Missing 14.3   56     5   5</span></a>
+<a class="sourceLine" id="cb19-8" data-line-number="8"><span class="co">#&gt; 6      28 Missing 14.9   66     5   6</span></a>
+<a class="sourceLine" id="cb19-9" data-line-number="9"><span class="co">#&gt; 7      23     299  8.6   65     5   7</span></a>
+<a class="sourceLine" id="cb19-10" data-line-number="10"><span class="co">#&gt; 8      19      99 13.8   59     5   8</span></a></code></pre></div>
 <div id="exploring-further." class="section level5">
 <h5>Exploring Further.</h5>
 <p>The vignette has been short and therefore is non exhaustive. The best way to explore this and any package or language is to practice. For more examples, please use <code>?function_name</code> and see a few implementations of the given function.</p>
@@ -470,9 +512,6 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </div>
 </div>
 
-
-
-<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

@@ -34,10 +34,10 @@ get_var_corr.data.frame<- function (df, comparison_var, other_vars = NULL, get_a
   }
   columns <- setdiff(names(df), comparison_var)
   
-  if (get_all == TRUE){
+  if (get_all){
     if(any(! sapply(df,class) 
            %in% c("numeric","integer","double")) &
-           drop_columns == TRUE){
+           drop_columns){
       warning("Non-numeric columns have been discarded. You
               can manually do this yourself by setting drop_columns
               to FALSE.")

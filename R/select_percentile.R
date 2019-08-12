@@ -32,7 +32,7 @@ select_percentile.data.frame<-function(df,percentile,get_all=TRUE,descend=FALSE)
   }
   numerics <- Filter(is.numeric,df)
   sort_by<- which(names(df)==names(numerics)[1])
-  if(get_all==TRUE){
+  if(get_all){
     sort_by<-names(numerics)[1]
     ordered_df<-df[sort(df[,sort_by],decreasing = descend,
                         index.return=T)[[2]],]

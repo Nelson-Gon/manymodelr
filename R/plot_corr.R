@@ -2,7 +2,7 @@
 #' @import ggplot2
 #' @description This function plots the results produced by
 #' `get_var_corr_`.
-#' @param data The data to be plotted. A `data.frame` object produced
+#' @param df The data to be plotted. A `data.frame` object produced
 #' by `get_var_corr_`
 #' @param x Value for the x axis. Defaults to "Comparison_Var"
 #' @param y Values for the y axis. Defaults to "Other_Var."
@@ -29,7 +29,12 @@
 #' @param legend_labels Text to use for the legend labels. Defaults to the default
 #' labels produced by the plot method.
 #' @param legend_title Title to use for the legend.
-#' @param ... Other arguments to specific methods.
+#' @param show_signif  Logical. Should significance stars be shown on the plot? Defaults to FALSE.
+#' @param signif_cutoff Numeric. If show_signif is TRUE, this defines the cutoff point for significance. Defaults to 
+#' 0.05. 
+#' @param signif_size Numeric. Defines size of the significance stars.
+#' @param signif_col  Charcater. Defines the col for the significance stars. 
+#' @param ... Other arguments to specific methods(`geom_text`) Useful once `show_signif` is set to  TRUE.
 #' @details
 #' This function uses `ggplot2` backend. `ggplot2` is thus required for the plots to work.
 #' Since the correlations are obtained by `get_var_corr_`, the default is to omit correlation between a variable and itself. Therefore
@@ -56,11 +61,19 @@
 #'               legend_labels = c("Very_Low",
 #'               "Low","Mid","High","VeryHigh"))
 
-#'
+#'\dontrun{
+#'manymodelr::plot_corr(manymodelr::get_var_corr_(mtcars),
+#'show_value = FALSE,
+#'show_signif = TRUE,
+#'x="Other_Var", y="Comparison_Var",plot_style = "circles",
+#'width = 1.1,
+#'custom_cols = c("green","blue","red"),colour_by = "p.value",
+#'legend_title =  "p.value")
+#'}
 #' @export
 #'
 #'
-plot_corr <- function(data,
+plot_corr <- function(df,
                       x = "Comparison_Var",
                       y = "Other_Var",
                       xlabel = "Comparison_Variable",
@@ -83,6 +96,10 @@ plot_corr <- function(data,
                       legend_labels = waiver(),
                       legend_title = "Correlation",
                       
+                      show_signif =FALSE,
+                      signif_cutoff=0.05,
+                      signif_size = 7,
+                      signif_col = "gray13",
                       
                       
                       
@@ -91,7 +108,7 @@ plot_corr <- function(data,
   UseMethod("plot_corr")
 }
 #' @export
-plot_corr <- function(data,
+plot_corr <- function(df,
                       x = "Comparison_Var",
                       y = "Other_Var",
                       xlabel = "Comparison_Variable",
@@ -115,23 +132,35 @@ plot_corr <- function(data,
                                       "gray34"),
                       legend_labels=waiver(),
                       legend_title = "Correlation",
+                      show_signif =FALSE,
+                      signif_cutoff=0.05,
+                      signif_size = 7,
+                      signif_col ="gray13",
                       
                       
                       
                       
                       ...) {
+  # significance
+
+  if(all(show_value & show_signif)){
+    stop("Can only show single values(currently). Either show
+         significance or correlation values.")
+  }
+ 
+
   #visible binding
   if (is.null(colour_by)) {
-    colour_by <- data$Correlation
+    colour_by <- df$Correlation
   }
   
   # Basic plot
   if (round_values) {
-    data["Correlation"] <- round(data["Correlation"],
+    df["Correlation"] <- round(df["Correlation"],
                                  decimals)
     
   }
-  base_plot <- ggplot2::ggplot(data = data,
+  base_plot <- ggplot2::ggplot(data = df,
                                mapping =
                                  ggplot2::aes_string(x = x,
                                                      y = y))
@@ -177,12 +206,25 @@ plot_corr <- function(data,
   # can override with theme
   # No need to set default(imho)
   # if useing p values,format 
-  actual_plot +
+  # 2show || !2show : That is the question -----> p_value signif
+actual_plot <- base_plot
+
+
+ if(show_signif){
+   actual_plot <- actual_plot +
+     geom_text(aes_string(label='ifelse(df$p.value < signif_cutoff,
+                                "***","ns")'),
+               size=signif_size,
+               color=signif_col)
+     
+ }
+   actual_plot +
     theme_dark()+
    theme(
       plot.title = element_text(hjust = title_just),
       panel.background = element_blank()
-    )
+    ) 
+   
   
 
   
