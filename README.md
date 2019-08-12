@@ -212,6 +212,18 @@ plot_corr(corrs)
 
 ![Correlations Plot](https://i.imgur.com/yCvrzH2.png)
 
+To show significance instead(ie based on `p values`), one can set `show_value` to `FALSE` and `show_signif` to `TRUE`. We can then set a significance cutoff point(0.05 here).
+
+```
+plot_corr(corrs, show_value=FALSE, show_signif=TRUE,signif_cutoff=0.05, legend_title="Significance",
+signif_size = 9, size=19)
+
+```
+
+![Signif plot](https://i.imgur.com/Vx3GI31.png)
+
+You can explore more options via `help(plot_corr)` or `?plot_corr`. Since the function uses `ggplot2` backend, one can change themes by adding `theme` components to the plot.
+
 6. `rowdiff`
 
 If one needs to obtain differences between rows, `rowdiff` is designed to do exactly that.
