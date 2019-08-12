@@ -22,6 +22,7 @@ install.packages("manymodelr")
 * **From GitHub**
 
 ```
+# development version(more stable)
 remotes::install_github("Nelson-Gon/manymodelr")
 devtools::install_github("Nelson-Gon/manymodelr")
 devtools::install_github("Nelson-Gon/manymodelr",build_vignettes=TRUE) #Builds vignettes
@@ -93,7 +94,7 @@ m$modelInfo
 
 ``` 
 
-2. `modeleR`
+2. `fit_model`
 
 This provides a convenient way to build linear models, generalised linear models and carry out analysis of variance(currently). Example usage is as shown below:
 
@@ -101,7 +102,7 @@ This provides a convenient way to build linear models, generalised linear models
 
 iris1<-iris[1:60,]
 iris2<-iris[60:nrow(iris),]
-m1<-modeleR(iris1,Sepal.Length,Petal.Length,
+m1<-fit_model(iris1,Sepal.Length,Petal.Length,
         lm,na.rm=TRUE,iris2)
 
 ```
@@ -130,6 +131,7 @@ Sample usage:
 corrs <- get_var_corr(mtcars,comparison_var="mpg",
 get_all=TRUE)
 
+
 ```
 
 The result is as follows(default pearson):
@@ -156,35 +158,59 @@ Comparison_Var Other_Var      p_value Correlation    lower_ci
 
 ```
 
+In case of data sets with factor columns, we can set `drop_columns` to `TRUE` as shown below.
+
+```
+# purely demonstrative
+get_var_corr(iris,"Sepal.Length","Petal.Length",get_all = FALSE,drop_columns= TRUE, method="spearman", exact=FALSE)
+
+#  Comparison_Var    Other_Var      p.value Correlation
+# 1   Sepal.Length Petal.Length 3.443087e-50   0.8818981
+```
+
+
 4. A closely related function is `get_var_corr_`(note the underscore) that enables finer control over which correlations to obtain with the ability to perform combination wise correlations. To get correlations for `mpg` and `vs` "against" `cyl` and `displ`, one could do:
 
 ```
-head(get_var_corr_(mtcars, comparison_var=c("mpg","vs"), other_var=c("cyl",displ),method="kendall"))
+head(get_var_corr_(mtcars, method="spearman",
+exact=FALSE))
+
+  Comparison_Var Other_Var      p.value Correlation
+1            mpg       cyl 4.690287e-13  -0.9108013
+2            mpg      disp 6.370336e-13  -0.9088824
+3            mpg        hp 5.085969e-12  -0.8946646
+4            mpg      drat 5.381347e-05   0.6514555
+5            mpg        wt 1.487595e-11  -0.8864220
+6            mpg      qsec 7.055765e-03   0.4669358
 
 ```
 
-The above gives us(**strictly kendall is used for demonstration purposes**):
+To use only a few columns, we can set `subset_df` to `TRUE` and specify `subset_cols`:
+
+```
+head(get_var_corr_(mtcars, method="spearman",
+exact=FALSE, subset_df=TRUE, subset_cols=list(c("mpg","disp"),
+  c("wt","drat"))))
+  
+      Comparison_Var  Other_Var      p.value Correlation
+4             mpg      drat     5.381347e-05   0.6514555
+5             mpg        wt    1.487595e-11  -0.8864220
+21           disp      drat    1.613884e-05  -0.6835921
+22           disp        wt    3.346362e-12   0.8977064
 
 ```
 
- Comparison_Var Other_Var      p.value Correlation    lower_ci
-1            mpg       cyl 6.112687e-10  -0.8521620 -0.92576936
-2            mpg      disp 9.380327e-10  -0.8475514 -0.92335937
-3            mpg        hp 1.787835e-07  -0.7761684 -0.88526861
-4            mpg      drat 1.776240e-05   0.6811719  0.43604838
-5            mpg        wt 1.293959e-10  -0.8676594 -0.93382641
-6            mpg      qsec 1.708199e-02   0.4186840  0.08195487
-    upper_ci
-1 -0.7163171
-2 -0.7081376
-3 -0.5860994
-4  0.8322010
-5 -0.7440872
-6  0.6696186
+5. To plot the above, one can use `plot_corr` as shown below:
 
 ```
 
-5. `rowdiff`
+corrs <- get_var_corr_(iris)
+
+plot_corr(corrs)
+
+```
+
+6. `rowdiff`
 
 If one needs to obtain differences between rows, `rowdiff` is designed to do exactly that.
 
@@ -206,8 +232,56 @@ Sepal.Length Sepal.Width Petal.Length Petal.Width
 
 ```
 
-The `NA`s can simply be dealt with as necessary. An `NA` simply serves to show the direction in which the differences were performed. See the documentation for more details. 
+To replace the calculation induced `NA`s, we can set `na.rm` to `TRUE` and specify `na_action`(uses `na_replace`).
 
+```
+# since reverse, first value is replaced with 0.
+head(rowdiff(mtcars,direction="reverse", na.rm=TRUE,
+na_action="value", value=0))
+
+   mpg  cyl disp  hp  drat     wt  qsec vs am gear carb
+1  0.0   0    0   0  0.00  0.000  0.00  0  0    0    0
+2  0.0   0    0   0  0.00  0.255  0.56  0  0    0    0
+3  1.8  -2  -52 -17 -0.05 -0.555  1.59  1  0    0   -3
+4 -1.4   2  150  17 -0.77  0.895  0.83  0 -1   -1    0
+5 -2.7   2  102  65  0.07  0.225 -2.42 -1  0    0    1
+6 -0.6  -2 -135 -70 -0.39  0.020  3.20  1  0    0   -1
+
+
+```
+
+`na_replace` used above works as shown below.
+
+```
+test_data <- data.frame(A=c(1,2,NA,NA), B= c(1,3,4,NA))
+# replace NAs with the mean of the non NA values
+na_replace(test_data, how="mean")
+    A        B
+1 1.0 1.000000
+2 2.0 3.000000
+3 1.5 4.000000
+4 1.5 2.666667
+
+```
+
+The above is less useful since one might want to replace values by group. Using `na_replace_grouped`, one can achieve just that.
+
+```
+
+test_groups = data.frame(groups=c(1,1,1,2,2,2), values = c(2,NA,2,3,NA,3))
+
+na_replace_grouped(test_groups,group_by="groups",
+how="mean")
+
+    groups values
+1      1      2
+2      1      2
+3      1      2
+4      2      3
+5      2      3
+6      2      3
+
+```
 
 Space constraints mean that a detailed exploration of the package cannot be made.  A more thorough walkthrough is provided in the vignettes that can be opened as shown below:
 
@@ -217,7 +291,7 @@ browseVignettes("manymodelr")
 ```
 
 
-For previous users, please see the `NEWS.md` file for a list of changes and/or additions.  For a complete list of available functions, please use:
+For previous users, please see the `NEWS.md` [file](https://github.com/Nelson-Gon/manymodelr/blob/master/NEWS.md) for a list of changes and/or additions.  For a complete list of available functions, please use:
  
  ```
  
