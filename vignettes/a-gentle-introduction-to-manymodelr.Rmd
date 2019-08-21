@@ -78,12 +78,51 @@ head(m$Predictions)
 
 - **`fit_model`**
 
- Yet another core function, this allows us to (currently) conveniently perform linear regression and analysis of variance.  Here we are simultaneously building and using our model to predict. This is particularly useful if you already know how well a given model models your data. We can extract the results just like we did above. It was previously known as `modeleR`.
+ Yet another core function, this allows us to fit any kind of model. It replaces `modeleR` which had several issues and development was discontinued. It can still work with some inaccuracies.
  
 ```{r}
-fit_model(iris,"Sepal.Length","Petal.Length","lm")
+iris1 <- iris[1:50,]
+iris2 <- iris[51:100,]
+lm_model <- fit_model(iris1,"Sepal.Length","Petal.Length","lm")
+lm_model
 
 ```
+
+To add predictions to our data set, we can use `add_model_predictions` as follows:
+
+```{r}
+# select only column 6 that has our predicted values
+head(add_model_predictions(lm_model, old_data = iris1, 
+                           new_data =  iris2))[6]
+```
+
+To do the same with `dplyr`, one can work as follows:
+
+```{r}
+library(dplyr)
+iris1 %>% 
+  add_model_predictions(model=lm_model,new_data = iris2) %>% 
+  select(predicted, everything()) %>% 
+  head()
+```
+
+To add residuals to our data set, we can use `add_model_residuals`:
+
+```{r}
+head(add_model_residuals(lm_model, iris1)[6])
+```
+
+With `dplyr`:
+
+```{r}
+iris1 %>% 
+  add_model_residuals(model=lm_model) %>% 
+  add_model_predictions(new_data = iris2, model = lm_model) %>% 
+  select(predicted,residuals, everything()) %>% 
+  head()
+```
+
+
 
 - **`get_var_corr`**
  
