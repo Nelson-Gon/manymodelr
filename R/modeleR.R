@@ -110,95 +110,26 @@ modeleR<-function (df, yname, xname, modeltype, na.rm = FALSE,
 #' @name fit_model
 #' @title Fit and predict in a single function.
 #' @examples
-#' iris1<-iris[1:60,]
-#' iris2<-iris[60:nrow(iris),]
-#' fit_model(iris1,Sepal.Length,Petal.Length,
-#'          lm,na.rm=TRUE,iris2) 
+#' fit_model(iris,"Petal.Length","Sepal.Length","aov")
 #' @export
-fit_model <- function (df, yname, xname, modeltype, na.rm = FALSE,
-          new_data, ...)
+fit_model <- function (df, yname, xname, modeltype,...)
 {
   UseMethod("fit_model")
 }
 #' @export
-fit_model <- function (df, yname, xname, modeltype, na.rm = FALSE, new_data, ...)
-{
-  yname <- deparse(substitute(yname))
-  xname <- deparse(substitute(xname))
+fit_model <- function (df, yname, xname, modeltype,...){
+  # Fit  a model
+  # Remove unquoting, stick to quotes
+  #yname <- deparse(substitute(yname))
+  #xname <- deparse(substitute(xname))
   to_use <- which(names(df) == yname)
   use_type <- class(df[, to_use])
-  modeltype <- deparse(substitute(modeltype))
+  #modeltype <- deparse(substitute(modeltype))
   formula1 <- as.formula(paste(yname, "~", xname))
-  if (!yname %in% names(df)) {
-    new_data$yname <- vector(use_type, nrow(new_data))
-    names(new_data) <- gsub("yname", yname, names(new_data))
-  }
-  if (!modeltype %in% c("lm", "aov","glm"))
-    stop("Model Type Not Suitable.")
-  if (modeltype %in% c("lm","glm")) {
-    lm.fit <- do.call(modeltype, list(data = quote(df), formula1,
+ do.call(modeltype, list(data = quote(df), formula1,
                                       ...))
-    m <- summary(lm.fit)
-    stat_data <- m[[4]]
-    if(modeltype=="glm"){
-      df<-as.data.frame(sapply(m,"[[",1)[c(3,4,5,12,14,15,16)])
-      df <- cbind(df, Explanatory = xname, Response = yname)
-      new_names<-Map(function(x) gsub(" {1,},","",
-                                      paste0(toupper(substring(x,1,1)),
-                                             substring(x,2,nchar(x)),collapse="")),
-                     names(df))
-      names(df)<-NULL
-      names(df)<-unlist(new_names)
-    }
-    else{
-      df <- as.data.frame(sapply(m, "[[", 1)[c(3, 4, 8, 9,
-                                               10)])
-      df <- cbind(df, Explanatory = xname, Response = yname)
-      names(df) <- gsub("^r", "R", names(df))
-    }
-    res <- list(DataFrame = df, Summary_data = m, Predictions = data.frame(Predictions = as.data.frame(predict(lm.fit,
-                                                                                                               new_data))), Stats = stat_data)
-    names(res$Predictions) <- c("Predicted")
-    res$DataFrame$Explanatory <- gsub("\\+", "", res$DataFrame$Explanatory)
-    res
-  }
-  else if (modeltype == "aov" & na.rm) {
-    lm.fit <- do.call(modeltype, list(data = quote(df), formula1,
-                                      ...))
-    m <- summary(lm.fit)
-    stat_data <- m[[1]][1]
-    df <- as.data.frame(sapply(m, "["))
-    df1 <- as.data.frame(unlist(df))
-    names(df1) <- c("Value")
-    rownames(df1) <- gsub("V1.", "", row.names(df1))
-    df1 <- dplyr::as_tibble(df1)
-    df1$Var <- rownames(df1)
-    df1$Value = round(df1$Value, 3)
-    df1 <- df1[, c("Var", "Value")]
-    df1 <- na.omit(df1)
-    res <- list(DataFrame = df, Summary_data = m, Predictions = data.frame(Predictions = as.data.frame(predict(lm.fit,
-                                                                                                               new_data))), Stats = stat_data)
-    names(res$Predictions) <- c("Predicted")
-    res
-  }
-  else if (modeltype == "aov" & !na.rm) {
-    lm.fit <- do.call(modeltype, list(data = quote(df), formula = formula1,
-                                      ...))
-    m <- summary(lm.fit)
-    stat_data <- m[[1]][1]
-    df <- as.data.frame(sapply(m, "["))
-    df1 <- as.data.frame(unlist(df))
-    names(df1) <- c("Value")
-    rownames(df1) <- gsub("V1.", "", row.names(df1))
-    df1 <- dplyr::as_tibble(df1)
-    df1$Var <- rownames(df1)
-    df1$Value = round(df1$Value, 3)
-    df1[, c("Value", "Var")]
-    res <- list(DataFrame = df, Summary_data = m, Predictions = data.frame(Predictions = as.data.frame(predict(lm.fit,
-                                                                                                               new_data))), Stats = stat_data)
-    names(res$Predictions) <- c("Predicted")
-    res
-  }
 }
+
+
 
 

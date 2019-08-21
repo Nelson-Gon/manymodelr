@@ -4,7 +4,7 @@
 \alias{fit_model}
 \title{Fit and predict in a single function.}
 \usage{
-fit_model(df, yname, xname, modeltype, na.rm = FALSE, new_data, ...)
+fit_model(df, yname, xname, modeltype, ...)
 }
 \arguments{
 \item{df}{The data for which analysis is required}
@@ -15,18 +15,11 @@ fit_model(df, yname, xname, modeltype, na.rm = FALSE, new_data, ...)
 
 \item{modeltype}{Currently one of lm, glm and aov. Other models may work with inaccuracies}
 
-\item{na.rm}{Logical. Should missing values be removed from analysis?}
-
-\item{new_data}{A data.frame object for which new predictions are to be made}
-
 \item{...}{Additional arguments to the modeltype}
 }
 \description{
 Fit and predict in a single function.
 }
 \examples{
-iris1<-iris[1:60,]
-iris2<-iris[60:nrow(iris),]
-fit_model(iris1,Sepal.Length,Petal.Length,
-         lm,na.rm=TRUE,iris2) 
+fit_model(iris,"Petal.Length","Sepal.Length","aov")
 }
