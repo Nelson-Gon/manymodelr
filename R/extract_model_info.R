@@ -85,9 +85,14 @@ model_summary[[what]]
 extract_model_info.lmerMod <- function(model_object, what){
   # Get summary
   model_summary <- summary(model_object)
+possible_what <- match.arg(what,c("fixed_effects",
+                                  "residuals",
+                                  "log_lik",
+                                  "random_groups","random_effects",
+                                  "reml","formula"))
   switch(what,
          fixed_effects = model_summary[[10]],
-         residuals = residuals(model_summary),
+         residuals = model_summary [[16]],
          log_lik =  model_summary[[6]],
          random_groups = model_summary [[9]],
          random_effects = Filter(Negate(anyNA),
