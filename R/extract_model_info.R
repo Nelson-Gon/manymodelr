@@ -81,4 +81,19 @@ else{
 model_summary[[what]]
 }
 }
-
+#' @export
+extract_model_info.lmerMod <- function(model_object, what){
+  # Get summary
+  model_summary <- summary(model_object)
+  switch(what,
+         fixed_effects = model_summary[[10]],
+         residuals = residuals(model_summary),
+         log_lik =  model_summary[[6]],
+         random_groups = model_summary [[9]],
+         random_effects = Filter(Negate(anyNA),
+              as.data.frame(model_summary[[13]])),
+         reml = model_summary [[14]],
+         formula = model_summary[[15]]
+         
+         )
+}
