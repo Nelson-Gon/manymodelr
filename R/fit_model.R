@@ -1,3 +1,28 @@
+#' @inheritParams modeleR
+#' @name fit_model
+#' @title Fit and predict in a single function.
+#' @examples
+#' fit_model(iris,"Sepal.Length","Species","aov")
+#' fit_model(iris,"Sepal.Width","Sepal.Length + Petal.Length + I(Petal.Width)**2","lm")
+#' @export
+fit_model <- function (df, yname, xname, modeltype,...)
+{
+  UseMethod("fit_model")
+}
+#' @export
+fit_model <- function (df, yname, xname, modeltype,...){
+  
+  model_formula <- as.formula(paste(yname, "~", xname))
+  do.call(modeltype, list(data = quote(df), model_formula,
+                          ...))
+}
+
+
+
+
+
+
+
 #' Perform several kinds of models in one function
 #' @importFrom stats "as.formula"  "complete.cases" "setNames"
 #' @importFrom stats "predict"
@@ -28,6 +53,7 @@ modeleR<-function (df, yname, xname, modeltype, na.rm = FALSE,
                    new_data, ...)
 {
   .Deprecated("fit_model")
+  # use fit_model
   yname <- deparse(substitute(yname))
   xname <- deparse(substitute(xname))
   to_use <- which(names(df) == yname)
@@ -105,31 +131,4 @@ modeleR<-function (df, yname, xname, modeltype, na.rm = FALSE,
     res
   }
 }
-
-#' @inheritParams modeleR
-#' @name fit_model
-#' @title Fit and predict in a single function.
-#' @examples
-#' fit_model(iris,"Petal.Length","Sepal.Length","aov")
-#' @export
-fit_model <- function (df, yname, xname, modeltype,...)
-{
-  UseMethod("fit_model")
-}
-#' @export
-fit_model <- function (df, yname, xname, modeltype,...){
-  # Fit  a model
-  # Remove unquoting, stick to quotes
-  #yname <- deparse(substitute(yname))
-  #xname <- deparse(substitute(xname))
-  to_use <- which(names(df) == yname)
-  use_type <- class(df[, to_use])
-  #modeltype <- deparse(substitute(modeltype))
-  formula1 <- as.formula(paste(yname, "~", xname))
- do.call(modeltype, list(data = quote(df), formula1,
-                                      ...))
-}
-
-
-
 

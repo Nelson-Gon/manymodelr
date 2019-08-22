@@ -22,4 +22,5 @@ Fit and predict in a single function.
 }
 \examples{
 fit_model(iris,"Petal.Length","Sepal.Length","aov")
+fit_model(iris,"Sepal.Width","Sepal.Length + Petal.Length + I(Petal.Width)**2","lm")
 }

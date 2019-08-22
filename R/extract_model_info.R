@@ -16,7 +16,7 @@ extract_model_info <- function(model_object, what){
 }
 #' @export
 extract_model_info.default <- function(model_object, what){
-  stop(paste0("Expecting a model object not an object of class",
+  stop(paste0("Expecting a model object not an object of class ",
               class(model_object)))
 }
 
@@ -73,3 +73,4 @@ else{
 model_summary[[what]]
 }
 }
+formula(x ~ y + I(y)**2)
