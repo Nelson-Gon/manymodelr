@@ -5,11 +5,18 @@
 #' @param model_object A model object for example a linear model object, generalized linear model object,
 #' analysis of variance object.
 #' @param what character. The attribute you would like to obtain for instance p_value
-#' @return An object with the requested model info.
+#' @details This provides a convenient way to extract model information for any kind of model. For linear models,
+#' one can extract such attributes as coefficients, p value("p_value"), standard error("std_err"),
+#' estimate, t value("t_value"), residuals.
+#' For analysis of variance (aov), other attributes like sum sqaured(ssq),
+#' mean squared error(msq), degrees of freedom(df),p_value. 
 #' @examples 
-#' #fit a linear model
-#' lm_model <- lm(Sepal.Length ~ Petal.Length, iris)
-#' extract_model_info(lm_model, "p_value")
+#' # perform analysis of variance
+#' aov_mod <- fit_model(iris, "Sepal.Length","Petal.Length + Species","aov")
+#' extract_model_info(aov_mod, "ssq") 
+#' # linear regression
+#' lm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
+#' extract_model_info(lm_model, "p_value") 
 #' @export
 extract_model_info <- function(model_object, what){
   UseMethod("extract_model_info")
@@ -44,13 +51,14 @@ extract_model_info.lm <- function(model_object, what){
 extract_model_info.aov <- function(model_object, what){
   model_summary <- summary(model_object)
   # possible what
-possible_what <- c("df","ssq","f_value","p_value")
+possible_what <- c("df","ssq","msq","f_value","p_value")
 what <- match.arg(what, possible_what)
   switch (what,
           df = model_summary[[1]][1],
           ssq = model_summary[[1]][2],
-          f_value = model_summary[[1]][3],
-          p_value = model_summary[[1]][4]
+          msq = model_summary[[1]][3],
+          f_value = model_summary[[1]][4],
+          p_value = model_summary[[1]][5]
           
   )
 }
@@ -73,4 +81,4 @@ else{
 model_summary[[what]]
 }
 }
-formula(x ~ y + I(y)**2)
+

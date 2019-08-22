@@ -12,15 +12,22 @@ analysis of variance object.}
 
 \item{what}{character. The attribute you would like to obtain for instance p_value}
 }
-\value{
-An object with the requested model info.
-}
 \description{
 Provides a convenient way to extract any kind of model information from
 common model objects
 }
+\details{
+This provides a convenient way to extract model information for any kind of model. For linear models,
+one can extract such attributes as coefficients, p value("p_value"), standard error("std_err"),
+estimate, t value("t_value"), residuals.
+For analysis of variance (aov), other attributes like sum sqaured(ssq),
+mean squared error(msq), degrees of freedom(df),p_value.
+}
 \examples{
-#fit a linear model
-lm_model <- lm(Sepal.Length ~ Petal.Length, iris)
-extract_model_info(lm_model, "p_value")
+# perform analysis of variance
+aov_mod <- fit_model(iris, "Sepal.Length","Petal.Length + Species","aov")
+extract_model_info(aov_mod, "ssq") 
+# linear regression
+lm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
+extract_model_info(lm_model, "p_value") 
 }
