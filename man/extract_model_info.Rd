@@ -30,4 +30,8 @@ extract_model_info(aov_mod, "ssq")
 # linear regression
 lm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
 extract_model_info(lm_model, "p_value") 
+extract_model_info(lm_model,"r2")
+## glm
+glm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
+extract_model_info(glm_model,"p_value")
 }

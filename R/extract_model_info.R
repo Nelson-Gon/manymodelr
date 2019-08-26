@@ -17,6 +17,10 @@
 #' # linear regression
 #' lm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
 #' extract_model_info(lm_model, "p_value") 
+#' extract_model_info(lm_model,"r2")
+#' ## glm
+#' glm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
+#' extract_model_info(glm_model,"p_value")
 #' @export
 extract_model_info <- function(model_object, what){
   UseMethod("extract_model_info")
@@ -34,12 +38,15 @@ extract_model_info.lm <- function(model_object, what){
   if(grepl("coef",what)){
     coeffs
   }
-  else if(what %in%  c("p_value","std_err","t_value","estimate")){
+  else if(what %in%  c("p_value","std_err","t_value","estimate",
+                       "r2","adj_r2")){
     switch(what,
            p_value = coeffs[,4],
            std_err = coeffs[,2],
            estimate = coeffs[,1],
-           t_value = coeffs[,3])
+           t_value = coeffs[,3],
+           r2 = model_summary[["r.squared"]],
+           adj_r2 = model_summary[["adj.r.squared"]])
   }
   else{
     model_summary[[what]]
