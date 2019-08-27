@@ -7,13 +7,13 @@
 plot_corr(df, x = "Comparison_Var", y = "Other_Var",
   xlabel = "Comparison_Variable", ylabel = "Other_Variable",
   title = "Correlations Plot", plot_style = "circles",
-  title_just = 0.5, round_values = TRUE, colour_by = "Correlation",
-  decimals = 2, show_value = TRUE, size = 12.6, value_angle = 360,
+  title_just = 0.5, round_values = TRUE,
+  round_which = "Correlations", colour_by = "Correlation",
+  decimals = 2, show_corr = TRUE, size = 12.6, value_angle = 360,
   shape = 16, value_size = 3.5, value_col = "black", width = 1.1,
-  custom_cols = c("white", "green2", "gray34"),
-  legend_labels = waiver(), legend_title = "Correlation",
-  show_signif = FALSE, signif_cutoff = 0.05, signif_size = 7,
-  signif_col = "gray13", ...)
+  custom_cols = c("indianred2", "green2", "gray34"),
+  legend_labels = waiver(), legend_title = NULL, show_signif = FALSE,
+  signif_cutoff = 0.05, signif_size = 7, signif_col = "gray13", ...)
 }
 \arguments{
 \item{df}{The data to be plotted. A `data.frame` object produced
@@ -35,13 +35,15 @@ by `get_var_corr_`}
 
 \item{round_values}{Logical. Should values be rounded off? Defaults to TRUE.}
 
+\item{round_which}{Character. The column name to be rounded off.}
+
 \item{colour_by}{The column to use for coloring. Defaults to  "Correlation". Colour strength thus
 indicates the strength of correlations.}
 
 \item{decimals}{Numeric. To how many decimal places should the rounding be done?
 Defaults to 2.}
 
-\item{show_value}{Logical. Should correlation coefficients be shown on the plot?
+\item{show_corr}{Logical. Should correlation coefficients be shown on the plot?
 Defaults to TRUE.}
 
 \item{size}{Size of the circles for plot_style set to circles}
@@ -91,29 +93,9 @@ blanks in the plot would indicate a correlation of 1.
 # compute correlations
 res<-get_var_corr_(mtcars)
 # defaults
-plot_corr(res)
-plot_corr(res, decimals = 2, plot_style = "circles",
-show_value = TRUE, size = 7,
-value_angle =360, colour_by = "Correlation",
-shape = 16,
-value_size = 3.5,
-width = 1.1,
-custom_cols = c("white","green2",
-"gray34"),
-             value_col = "black",
-             x="Other_Var",y="Comparison_Var",
-             xlabel = "Other_Variable",
-             ylabel="Comaprison_Variable",
-             legend_label="Correlations",
-              legend_labels = c("Very_Low",
-              "Low","Mid","High","VeryHigh"))
-\dontrun{
-manymodelr::plot_corr(manymodelr::get_var_corr_(mtcars),
-show_value = FALSE,
-show_signif = TRUE,
-x="Other_Var", y="Comparison_Var",plot_style = "circles",
-width = 1.1,
-custom_cols = c("green","blue","red"),colour_by = "p.value",
-legend_title =  "p.value")
-}
+plot_corr(res,show_corr = TRUE,
+show_signif = FALSE,round_values = TRUE,
+round_which = "Correlation",decimals = 2,x="Other_Var", 
+y="Comparison_Var",plot_style = "circles",width = 1.1,
+custom_cols = c("green","blue","red"),colour_by = "Correlation")
 }
