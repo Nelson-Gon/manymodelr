@@ -96,28 +96,96 @@ m$modelInfo
 
 2. `fit_model`
 
-This provides a convenient way to build linear models, generalised linear models and carry out analysis of variance(currently). Example usage is as shown below:
+This provides a convenient way to build any model type for instance linear models, generalized linear models, models from `lme4`. Example usage is as shown below:
 
 ```
 
-iris1<-iris[1:60,]
-iris2<-iris[60:nrow(iris),]
-m1<-fit_model(iris1,Sepal.Length,Petal.Length,
-        lm,na.rm=TRUE,iris2)
+# Make some data
+iris1 <- iris[1:50,]
+iris2 <-iris[51:100,]
+lm_model <- fit_model(iris1,"Sepal.Width","Sepal.Length", "lm")
+aov_model <- fit_model(iris,"Sepal.Width","Species", "aov")
+
+# Multilinear
+
+mlm_model <- fit_model(iris1,"Sepal.Width","Sepal.Length + Petal.Length", "lm")
+
+# glm
+glm_model <- fit_model(iris1,"Sepal.Width","Sepal.Length", "glm")
+
 
 ```
 
-We can get the predicted values as shown below:
+To extract model attributes from the above models, we can use `extract_model_info` as shown below:
 
 ```
-head(m1$Predictions)
- Predicted
-60  5.985141
-61  5.821972
-62  6.107518
-63  6.025933
-64  6.311478
-65  5.862764
+
+extract_model_info(lm_model, "coefficients")
+
+               Estimate Std. Error    t value     Pr(>|t|)
+(Intercept)  -0.53037726  0.5560922 -0.9537578 3.450860e-01
+Sepal.Length  0.80493004  0.1089726  7.3865333 2.125173e-09
+Petal.Length -0.04863374  0.2211842 -0.2198789 8.269177e-01
+
+extract_model_info(lm_model, "p_value")
+
+ (Intercept) Sepal.Length Petal.Length 
+3.450860e-01 2.125173e-09 8.269177e-01 
+
+extract_model_info(glm_model, "aic")
+
+[1] 9.800332
+
+
+extract_model_info(aov_model, "msq")
+
+           Mean Sq
+Species      5.6725
+Residuals    0.1154
+
+```
+
+To see currently supported model types, please see `help(extract_model_info)`. To request support for a given model, please file an issue at: [issues](https://www.github.com/Nelson-Gon/manymodelr/issues)
+
+
+To add predictions or residuals to a data set, we can use `add_model_predictions` and `add_model_residuals` respectively.
+
+```
+
+head(add_model_predictions(lm_model, iris1, iris2))
+
+    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
+1          5.1         3.5          1.4         0.2  setosa  4.875554
+2          4.9         3.0          1.4         0.2  setosa  4.402323
+3          4.7         3.2          1.3         0.2  setosa  4.785335
+4          4.6         3.1          1.5         0.2  setosa  3.702203
+5          5.0         3.6          1.4         0.2  setosa  4.477953
+6          5.4         3.9          1.7         0.4  setosa  3.838872
+
+
+head(add_model_residuals(lm_model, iris1))
+
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species     residuals
+1          5.1         3.5          1.4         0.2  setosa -0.0066787155
+2          4.9         3.0          1.4         0.2  setosa -0.3456927073
+3          4.7         3.2          1.3         0.2  setosa  0.0104299273
+4          4.6         3.1          1.5         0.2  setosa  0.0006496786
+5          5.0         3.6          1.4         0.2  setosa  0.1738142886
+6          5.4         3.9          1.7         0.4  setosa  0.1664323930
+
+# dplyr compatible
+#library(dplyr)
+iris1 %>% 
+add_model_predictions(model=lm_model, new_data = iris2) %>% 
+head()
+
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
+1          5.1         3.5          1.4         0.2  setosa  4.875554
+2          4.9         3.0          1.4         0.2  setosa  4.402323
+3          4.7         3.2          1.3         0.2  setosa  4.785335
+4          4.6         3.1          1.5         0.2  setosa  3.702203
+5          5.0         3.6          1.4         0.2  setosa  4.477953
+6          5.4         3.9          1.7         0.4  setosa  3.838872
 
 ```
 
@@ -128,8 +196,7 @@ As can probably(hopefully) be guessed from the name, this provides a convenient 
 Sample usage:
 
 ```
-corrs <- get_var_corr(mtcars,comparison_var="mpg",
-get_all=TRUE)
+corrs <- get_var_corr(mtcars,comparison_var="mpg", get_all=TRUE)
 
 
 ```
@@ -165,8 +232,7 @@ get_var_corr(iris,"Sepal.Length","Petal.Length",get_all = FALSE,drop_columns= TR
 4. A closely related function is `get_var_corr_`(note the underscore) that enables finer control over which correlations to obtain with the ability to perform combination wise correlations. To get correlations for `mpg` and `vs` "against" `cyl` and `displ`, one could do:
 
 ```
-head(get_var_corr_(mtcars, method="spearman",
-exact=FALSE))
+head(get_var_corr_(mtcars, method="spearman", exact=FALSE))
 
   Comparison_Var Other_Var      p.value Correlation
 1            mpg       cyl 4.690287e-13  -0.9108013
@@ -199,21 +265,21 @@ exact=FALSE, subset_df=TRUE, subset_cols=list(c("mpg","disp"),
 
 corrs <- get_var_corr_(iris)
 
-plot_corr(corrs)
+plot_corr(corrs, round_values = TRUE, round_which = "Correlation")
 
 ```
 
-![Correlations Plot](https://i.imgur.com/yCvrzH2.png)
+![Correlations Plot](https://imgur.com/pksPPZR.png)
 
-To show significance instead(ie based on `p values`), one can set `show_value` to `FALSE` and `show_signif` to `TRUE`. We can then set a significance cutoff point(0.05 here).
-
-```
-plot_corr(corrs, show_value=FALSE, show_signif=TRUE,signif_cutoff=0.05, legend_title="Significance",
-signif_size = 9, size=19)
+To show significance instead(ie based on `p values`), one can set `show_corr` to `FALSE` and `show_signif` to `TRUE`. We can then set a significance cutoff point(0.05 here).
 
 ```
+plot_corr(corrs, x="Other_Var", y="Comparison_Var",show_corr=FALSE, show_signif=TRUE,signif_cutoff=0.05, legend_title="Significance",signif_size = 9, size=19,round_values=FALSE,
+plot_style="squares")
 
-![Signif plot](https://i.imgur.com/Vx3GI31.png)
+```
+
+![Signif plot](https://i.imgur.com/cMiXZCA.png)
 
 You can explore more options via `help(plot_corr)` or `?plot_corr`. Since the function uses `ggplot2` backend, one can change themes by adding `theme` components to the plot.
 
