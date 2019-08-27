@@ -6,9 +6,10 @@
 #' by `get_var_corr_`
 #' @param x Value for the x axis. Defaults to "Comparison_Var"
 #' @param y Values for the y axis. Defaults to "Other_Var."
-#' @param show_value Logical. Should correlation coefficients be shown on the plot?
+#' @param show_corr Logical. Should correlation coefficients be shown on the plot?
 #' Defaults to TRUE.
 #' @param round_values Logical. Should values be rounded off? Defaults to TRUE.
+#' @param round_which Character. The column name to be rounded off.
 #' @param decimals     Numeric. To how many decimal places should the rounding be done?
 #' Defaults to 2.
 #' @param custom_cols A vector(length 2) of colors to use for the plot. The first colour specifies the lower end of the
@@ -44,32 +45,13 @@
 #' # compute correlations
 #' res<-get_var_corr_(mtcars)
 #' # defaults
-#' plot_corr(res)
-#' plot_corr(res, decimals = 2, plot_style = "circles",
-#' show_value = TRUE, size = 7,
-#' value_angle =360, colour_by = "Correlation",
-#' shape = 16,
-#' value_size = 3.5,
-#' width = 1.1,
-#' custom_cols = c("white","green2",
-#' "gray34"),
-#'              value_col = "black",
-#'              x="Other_Var",y="Comparison_Var",
-#'              xlabel = "Other_Variable",
-#'              ylabel="Comaprison_Variable",
-#'              legend_label="Correlations",
-#'               legend_labels = c("Very_Low",
-#'               "Low","Mid","High","VeryHigh"))
+#' plot_corr(res,show_corr = TRUE,
+#' show_signif = FALSE,round_values = TRUE,
+#' round_which = "Correlation",decimals = 2,x="Other_Var", 
+#' y="Comparison_Var",plot_style = "circles",width = 1.1,
+#' custom_cols = c("green","blue","red"),colour_by = "Correlation")
 
-#'\dontrun{
-#'manymodelr::plot_corr(manymodelr::get_var_corr_(mtcars),
-#'show_value = FALSE,
-#'show_signif = TRUE,
-#'x="Other_Var", y="Comparison_Var",plot_style = "circles",
-#'width = 1.1,
-#'custom_cols = c("green","blue","red"),colour_by = "p.value",
-#'legend_title =  "p.value")
-#'}
+
 #' @export
 #'
 #'
@@ -82,19 +64,20 @@ plot_corr <- function(df,
                       plot_style = "circles",
                       title_just = 0.5,
                       round_values = TRUE,
-                      colour_by = "Correlation",
+                      round_which = "Correlation",
                       decimals = 2,
-                      show_value = TRUE,
+                      colour_by = "Correlation",
+                      show_corr = TRUE,
                       size = 12.6,
                       value_angle = 360,
                       shape = 16,
                       value_size = 3.5,
                       value_col = "black",
                       width = 1.1,
-                      custom_cols = c("white", "green2",
+                      custom_cols = c("indianred2", "green2",
                                       "gray34"),
                       legend_labels = waiver(),
-                      legend_title = "Correlation",
+                      legend_title = waiver(),
                       
                       show_signif =FALSE,
                       signif_cutoff=0.05,
@@ -115,12 +98,12 @@ plot_corr <- function(df,
                       ylabel = "Other_Variable",
                       title = "Correlations Plot",
                       plot_style = "circles",
-                      
                       title_just = 0.5,
                       round_values = TRUE,
+                      round_which = "Correlations",
                       colour_by = "Correlation",
                       decimals = 2,
-                      show_value = TRUE,
+                      show_corr = TRUE,
                       size = 12.6,
                       value_angle = 360,
                       
@@ -128,10 +111,10 @@ plot_corr <- function(df,
                       value_size = 3.5,
                       value_col = "black",
                       width =1.1,
-                      custom_cols = c("white", "green2",
+                      custom_cols = c("indianred2", "green2",
                                       "gray34"),
                       legend_labels=waiver(),
-                      legend_title = "Correlation",
+                      legend_title = NULL,
                       show_signif =FALSE,
                       signif_cutoff=0.05,
                       signif_size = 7,
@@ -143,27 +126,37 @@ plot_corr <- function(df,
                       ...) {
   # significance
 
-  if(all(show_value & show_signif)){
+  if(all(show_corr & show_signif)){
     stop("Can only show single values(currently). Either show
          significance or correlation values.")
   }
  
+if(is.null(colour_by)){
+  stop("You must provide a colour_by column.Perhaps you used color_by instead?")
+}
 
   #visible binding
   if (is.null(colour_by)) {
     colour_by <- df$Correlation
+    
+  }
+  if(is.null(legend_title)){
+    legend_title <- colour_by
   }
   
   # Basic plot
-  if (round_values) {
-    df["Correlation"] <- round(df["Correlation"],
-                                 decimals)
-    
-  }
-  base_plot <- ggplot2::ggplot(data = df,
+  if (round_values){
+    df[[round_which]] <- round(df[[round_which]],
+                               decimals)
+     
+      
+}
+   
+    base_plot <- ggplot2::ggplot(data = df,
                                mapping =
                                  ggplot2::aes_string(x = x,
                                                      y = y))
+   
   if (plot_style == "squares") {
     base_plot <- base_plot +
       geom_tile(size = size,
@@ -189,7 +182,7 @@ plot_corr <- function(df,
       labs(x = xlabel, y = ylabel, title = title,
            color=legend_title) 
   }
-  if (show_value) {
+  if (show_corr) {
     base_plot <- base_plot +
       geom_text(
         aes_string(label = colour_by),
@@ -211,15 +204,16 @@ actual_plot <- base_plot
 
 
  if(show_signif){
+   
    actual_plot <- actual_plot +
-     geom_text(aes_string(label='ifelse(df$p.value < signif_cutoff,
+     geom_text(aes_string(label='ifelse(df[[colour_by]] < signif_cutoff,
                                 "***","ns")'),
                size=signif_size,
                color=signif_col)
      
  }
    actual_plot +
-    theme_dark()+
+    theme_minimal()+
    theme(
       plot.title = element_text(hjust = title_just),
       panel.background = element_blank()
