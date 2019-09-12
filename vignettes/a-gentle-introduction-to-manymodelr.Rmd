@@ -90,12 +90,12 @@ lm_model
 
 To extract information about the model, we can use `extract_model_info` as follows. Say we wanted to extract the R squared, we could proceed as follows:
 ```{r}
-extract_model_info(lm_model, "r.squared")
+extract_model_info(lm_model, "r2")
 ```
 
 To extract the adjusted r squared,  we can do the following:
 ```{r}
-extract_model_info(lm_model, "adj.r.squared")
+extract_model_info(lm_model, "adj_r2")
 ```
 
 For the p value:
@@ -103,7 +103,7 @@ For the p value:
 extract_model_info(lm_model, "p_value")
 ```
 
-This is not restricted to linear models but will work for model types. See `help(extract_model_info)` to see currently supported model types.
+This is not restricted to linear models but will work for most model types. See `help(extract_model_info)` to see currently supported model types.
 
 To add predictions to our data set, we can use `add_model_predictions` as follows:
 

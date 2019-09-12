@@ -13,7 +13,7 @@
 
 <meta name="author" content="Nelson Gonzabato" />
 
-<meta name="date" content="2019-08-27" />
+<meta name="date" content="2019-09-12" />
 
 <title>a-gentle-introduction-to-manymodelr.utf8.md</title>
 
@@ -387,16 +387,16 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;  (Intercept)  Petal.Length  </span></a>
 <a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt;       4.2132        0.5423</span></a></code></pre></div>
 <p>To extract information about the model, we can use <code>extract_model_info</code> as follows. Say we wanted to extract the R squared, we could proceed as follows:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">extract_model_info</span>(lm_model, <span class="st">&quot;r.squared&quot;</span>)</a>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">extract_model_info</span>(lm_model, <span class="st">&quot;r2&quot;</span>)</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; [1] 0.07138289</span></a></code></pre></div>
 <p>To extract the adjusted r squared, we can do the following:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">extract_model_info</span>(lm_model, <span class="st">&quot;adj.r.squared&quot;</span>)</a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">extract_model_info</span>(lm_model, <span class="st">&quot;adj_r2&quot;</span>)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; [1] 0.0520367</span></a></code></pre></div>
 <p>For the p value:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">extract_model_info</span>(lm_model, <span class="st">&quot;p_value&quot;</span>)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt;  (Intercept) Petal.Length </span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; 1.614927e-13 6.069778e-02</span></a></code></pre></div>
-<p>This is not restricted to linear models but will work for model types. See <code>help(extract_model_info)</code> to see currently supported model types.</p>
+<p>This is not restricted to linear models but will work for most model types. See <code>help(extract_model_info)</code> to see currently supported model types.</p>
 <p>To add predictions to our data set, we can use <code>add_model_predictions</code> as follows:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># select only column 6 that has our predicted values</span></a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">head</span>(<span class="kw">add_model_predictions</span>(lm_model, <span class="dt">old_data =</span> iris1, </a>
