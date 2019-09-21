@@ -7,12 +7,11 @@
 plot_corr(df, x = "Comparison_Var", y = "Other_Var",
   xlabel = "Comparison_Variable", ylabel = "Other_Variable",
   title = "Correlations Plot", plot_style = "circles",
-  title_just = 0.5, round_values = TRUE,
-  round_which = "Correlations", colour_by = "Correlation",
-  decimals = 2, show_corr = TRUE, size = 12.6, value_angle = 360,
-  shape = 16, value_size = 3.5, value_col = "black", width = 1.1,
-  custom_cols = c("indianred2", "green2", "gray34"),
-  legend_labels = waiver(), legend_title = NULL, show_signif = FALSE,
+  title_just = 0.5, round_values = TRUE, round_which = "Correlation",
+  colour_by = "Correlation", decimals = 2, show_which = "corr",
+  size = 12.6, value_angle = 360, shape = 16, value_size = 3.5,
+  value_col = "black", width = 1.1, custom_cols = c("indianred2",
+  "green2", "gray34"), legend_labels = waiver(), legend_title = NULL,
   signif_cutoff = 0.05, signif_size = 7, signif_col = "gray13", ...)
 }
 \arguments{
@@ -43,8 +42,9 @@ indicates the strength of correlations.}
 \item{decimals}{Numeric. To how many decimal places should the rounding be done?
 Defaults to 2.}
 
-\item{show_corr}{Logical. Should correlation coefficients be shown on the plot?
-Defaults to TRUE.}
+\item{show_which}{Character. One of either corr or signif to control whether to show the
+correlation values or significance stars of the correlations. This is case sensitive and defaults to
+corr ie correlation values are shown.}
 
 \item{size}{Size of the circles for plot_style set to circles}
 
@@ -65,8 +65,6 @@ correlations. The second specifies  the higher end.}
 labels produced by the plot method.}
 
 \item{legend_title}{Title to use for the legend.}
-
-\item{show_signif}{Logical. Should significance stars be shown on the plot? Defaults to FALSE.}
 
 \item{signif_cutoff}{Numeric. If show_signif is TRUE, this defines the cutoff point for significance. Defaults to 
 0.05.}
@@ -93,8 +91,8 @@ blanks in the plot would indicate a correlation of 1.
 # compute correlations
 res<-get_var_corr_(mtcars)
 # defaults
-plot_corr(res,show_corr = TRUE,
-show_signif = FALSE,round_values = TRUE,
+plot_corr(res,show_which = "corr",
+round_values = TRUE,
 round_which = "Correlation",decimals = 2,x="Other_Var", 
 y="Comparison_Var",plot_style = "circles",width = 1.1,
 custom_cols = c("green","blue","red"),colour_by = "Correlation")
