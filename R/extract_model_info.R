@@ -1,13 +1,14 @@
 #' Extract important model attributes
 #' @description Provides a convenient way to extract any kind of model information from
 #' common model objects
-#' @importFrom stats coef residuals
+#' @importFrom stats coef residuals AIC
 #' @param model_object A model object for example a linear model object, generalized linear model object,
 #' analysis of variance object.
 #' @param what character. The attribute you would like to obtain for instance p_value
+#' @param ... For "aic", additional arguments to `stats`' AIC function. 
 #' @details This provides a convenient way to extract model information for any kind of model. For linear models,
 #' one can extract such attributes as coefficients, p value("p_value"), standard error("std_err"),
-#' estimate, t value("t_value"), residuals.
+#' estimate, t value("t_value"), residuals, aic and other known attributes.
 #' For analysis of variance (aov), other attributes like sum sqaured(ssq),
 #' mean squared error(msq), degrees of freedom(df),p_value. 
 #' @examples 
@@ -32,20 +33,30 @@ extract_model_info.default <- function(model_object, what){
 }
 
 #' @export
-extract_model_info.lm <- function(model_object, what){
+extract_model_info.lm <- function(model_object, what,...){
+  
+  if(any(is.null(what), is.null(model_object))){
+    stop("Both what and model_object must be provided.")
+  }
+  
   model_summary <- summary(model_object)
+  # should match args
   available_args <-  c("coeffs","p_value","resids",
                     "std_err","t_value","estimate",
-                    "r2","adj_r2","rse","df", "f_stat")
+                    "r2","adj_r2","rse","df", "f_stat",
+                    "aic")
+  what <- match.arg(what, available_args)
   #available_args <- c(custom_vals,names(model_summary))
   # everything is accounted for AFAIK, negate the need to use the above
 
-if(! what %in% available_args){
-  stop("what should be one of ", paste0(available_args,
-                                        collapse = ","))
+#if(! what %in% available_args){
+ # stop("what should be one of ", paste0(available_args,
+  #                                      collapse = ","))
   
-}
+#}
+  
   coeffs <- coef(model_summary)
+  aic_res <- AIC(model_object, ...)
  switch(what,
            coeffs = coeffs ,
            p_value = coeffs[,4],
@@ -57,7 +68,8 @@ if(! what %in% available_args){
            rse = model_summary$sigma,
            df = model_summary[[10]][2:3],
            f_stat = model_summary[[10]][[1]],
-        resids = model_summary[[3]])
+        resids = model_summary[[3]],
+        aic = aic_res)
  
   #else{
    # model_summary[[what]]
@@ -67,6 +79,8 @@ if(! what %in% available_args){
 #' @export
 
 extract_model_info.aov <- function(model_object, what){
+  
+  # Need to test that args are not null
   model_summary <- summary(model_object)
 # possible arguments 
 possible_what <- c("coeffs","df","ssq","msq","f_value","p_value",
