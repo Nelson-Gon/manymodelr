@@ -4,7 +4,7 @@
 \alias{extract_model_info}
 \title{Extract important model attributes}
 \usage{
-extract_model_info(model_object, what)
+extract_model_info(model_object, what, ...)
 }
 \arguments{
 \item{model_object}{A model object for example a linear model object, generalized linear model object,
@@ -12,7 +12,7 @@ analysis of variance object.}
 
 \item{what}{character. The attribute you would like to obtain for instance p_value}
 
-\item{...}{For "aic", additional arguments to `stats`' AIC function.}
+\item{...}{For `glm` and `lm` "aic", additional arguments to `AIC` from `stats`.}
 }
 \description{
 Provides a convenient way to extract any kind of model information from
@@ -33,6 +33,7 @@ extract_model_info(aov_mod, "ssq")
 lm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
 extract_model_info(lm_model, "p_value") 
 extract_model_info(lm_model,"r2")
+extract_model_info(lm_model,"aic",k=3)
 ## glm
 glm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
 extract_model_info(glm_model,"p_value")

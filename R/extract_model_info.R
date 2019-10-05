@@ -5,7 +5,7 @@
 #' @param model_object A model object for example a linear model object, generalized linear model object,
 #' analysis of variance object.
 #' @param what character. The attribute you would like to obtain for instance p_value
-#' @param ... For "aic", additional arguments to `stats`' AIC function. 
+#' @param ... For `glm` and `lm` "aic", additional arguments to `AIC` from `stats`. 
 #' @details This provides a convenient way to extract model information for any kind of model. For linear models,
 #' one can extract such attributes as coefficients, p value("p_value"), standard error("std_err"),
 #' estimate, t value("t_value"), residuals, aic and other known attributes.
@@ -19,15 +19,16 @@
 #' lm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
 #' extract_model_info(lm_model, "p_value") 
 #' extract_model_info(lm_model,"r2")
+#' extract_model_info(lm_model,"aic",k=3)
 #' ## glm
 #' glm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
 #' extract_model_info(glm_model,"p_value")
 #' @export
-extract_model_info <- function(model_object, what){
+extract_model_info <- function(model_object, what,...){
   UseMethod("extract_model_info")
 }
 #' @export
-extract_model_info.default <- function(model_object, what){
+extract_model_info.default <- function(model_object, what,...){
   stop(paste0("Expecting a model object not an object of class ",
               class(model_object)))
 }
@@ -35,10 +36,7 @@ extract_model_info.default <- function(model_object, what){
 #' @export
 extract_model_info.lm <- function(model_object, what,...){
   
-  if(any(is.null(what), is.null(model_object))){
-    stop("Both what and model_object must be provided.")
-  }
-  
+
   model_summary <- summary(model_object)
   # should match args
   available_args <-  c("coeffs","p_value","resids",
@@ -56,7 +54,7 @@ extract_model_info.lm <- function(model_object, what,...){
 #}
   
   coeffs <- coef(model_summary)
-  aic_res <- AIC(model_object, ...)
+  aic_res <- AIC(model_object, ... )
  switch(what,
            coeffs = coeffs ,
            p_value = coeffs[,4],
@@ -78,7 +76,7 @@ extract_model_info.lm <- function(model_object, what,...){
 }
 #' @export
 
-extract_model_info.aov <- function(model_object, what){
+extract_model_info.aov <- function(model_object, what,...){
   
   # Need to test that args are not null
   model_summary <- summary(model_object)
@@ -102,7 +100,7 @@ what <- match.arg(what, possible_what)
 extract_model_info.glm <- extract_model_info.lm
 
 #' @export
-extract_model_info.lmerMod <- function(model_object, what){
+extract_model_info.lmerMod <- function(model_object, what,...){
   # Get summary
   model_summary <- summary(model_object)
 possible_what <- match.arg(what,c("fixed_effects",
