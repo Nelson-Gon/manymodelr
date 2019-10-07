@@ -17,6 +17,8 @@ author: "Nelson Gonzabato"
 
 5. `extract_model_info` allows easy extraction of common model attributes such as p values, residuals, coefficients, etc as per the specific model type.
 
+6. `multi_model_2` allows fitting and predicting in one function. It is similar to `multi_model_1` except it does not require metrics. 
+
 **Major Changes**
 
 1. `modeleR` has been replaced with `fit_model` which is an easier to remember name. Usage remains the same.
