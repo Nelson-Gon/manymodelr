@@ -9,6 +9,7 @@
 #'     "Petal.Length + Sepal.Width","lm")
 #' # glm
 #' multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length","glm")
+#' @export
 multi_model_2 <- function(old_data, new_data, yname,xname,modeltype,...){
   # check that lengths are actually equal before making prediictions
   if(nrow(old_data) != nrow(new_data)){
