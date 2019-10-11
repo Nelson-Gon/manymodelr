@@ -75,6 +75,32 @@ m$Metrics
 head(m$Predictions)
 ```
 
+- **multi_model_2**
+
+This is similar to `multi_model_1` with only one difference: it does not use metrics such as RMSE, accuracy and the like. This function is useful if one would like to fit and predict "simpler models" like generalized linear models or linear models, etc. Let's take a look:
+
+```{r}
+# fit a linear model and get predictions
+lin_model <- multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length","lm")
+
+head(lin_model)
+```
+
+We can also fit a multinear model as shown below:
+```{r}
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length",
+    "Petal.Length + Sepal.Width","lm"))
+```
+
+To take this a step further, we can fit a model with the square of Sepal.Width. 
+
+```{r}
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length",
+    "Petal.Length + I(Sepal.Width)**2","lm"))
+```
+
+The above function does more and can fit and predict on any model type. Exploration is therefore left to the reader.
+
 
 - **`fit_model`**
 
