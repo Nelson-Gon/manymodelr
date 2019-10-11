@@ -42,7 +42,7 @@ extract_model_info.lm <- function(model_object, what,...){
   available_args <-  c("coeffs","p_value","resids",
                     "std_err","t_value","estimate",
                     "r2","adj_r2","rse","df", "f_stat",
-                    "aic")
+                    "aic","terms","predictors","response")
   what <- match.arg(what, available_args)
   #available_args <- c(custom_vals,names(model_summary))
   # everything is accounted for AFAIK, negate the need to use the above
@@ -55,6 +55,9 @@ extract_model_info.lm <- function(model_object, what,...){
   
   coeffs <- coef(model_summary)
   aic_res <- AIC(model_object, ... )
+  model_terms <- model_summary$terms
+  response_var <- model_terms[[2]]
+  predictor_var <- model_terms[[3]]
  switch(what,
            coeffs = coeffs ,
            p_value = coeffs[,4],
@@ -67,7 +70,10 @@ extract_model_info.lm <- function(model_object, what,...){
            df = model_summary[[10]][2:3],
            f_stat = model_summary[[10]][[1]],
         resids = model_summary[[3]],
-        aic = aic_res)
+        aic = aic_res,
+        terms = model_terms,
+        predictors = predictor_var,
+        response = response_var)
  
   #else{
    # model_summary[[what]]
