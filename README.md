@@ -327,7 +327,7 @@ plot_corr(corrs, round_values = TRUE, round_which = "Correlation")
 
 ```
 
-![Correlations Plot](https://imgur.com/RyK6SDG)
+![Correlations Plot](https://i.imgur.com/RyK6SDG.png)
 
 To show significance instead(ie based on `p values`), one can set `show_which` to .
 
@@ -336,7 +336,7 @@ plot_corr(corrs, x="Other_Var", y="Comparison_Var",show_which="signif")
 
 ```
 
-![Signif plot](https://imgur.com/IPkOt47)
+![Signif plot](https://i.imgur.com/IPkOt47.png)
 
 You can explore more options via `help(plot_corr)` or `?plot_corr`. Since the function uses `ggplot2` backend, one can change themes by adding `theme` components to the plot. 
 
