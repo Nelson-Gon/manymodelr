@@ -94,9 +94,43 @@ m$modelInfo
 
 ``` 
 
-2. `fit_model`
+2. A related function is `multi_model_2` that aims to allow fitting and prediction in the same function. This builds on top of other modeling functions meaning that it can work with any model from any package. For demonstration purposes, only linear models will be shown.
 
-This provides a convenient way to build any model type for instance linear models, generalized linear models, models from `lme4`. Example usage is as shown below:
+```
+# fit a linear model and get predictions
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length","lm"))
+ 
+ Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
+1          5.1         3.5          1.4         0.2  setosa  4.972378
+2          4.9         3.0          1.4         0.2  setosa  6.761943
+3          4.7         3.2          1.3         0.2  setosa  6.653485
+4          4.6         3.1          1.5         0.2  setosa  6.870402
+5          5.0         3.6          1.4         0.2  setosa  6.382339
+6          5.4         3.9          1.7         0.4  setosa  6.707714
+
+```
+
+We can also fit a multilinear model as shown below:
+
+```
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length",
+    "Petal.Length + Sepal.Width","lm"))
+    
+ Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
+1          5.1         3.5          1.4         0.2  setosa  4.902999
+2          4.9         3.0          1.4         0.2  setosa  5.771541
+3          4.7         3.2          1.3         0.2  setosa  5.714857
+4          4.6         3.1          1.5         0.2  setosa  5.761483
+5          5.0         3.6          1.4         0.2  setosa  4.972473
+6          5.4         3.9          1.7         0.4  setosa  5.476232
+
+```
+
+As stated, the function can work with any model type and any package. However it uses a few other functions that have only been tested on models built with `lm`, `glm`, `aov`, `lme4`. 
+
+3. `fit_model`
+
+What if I just want to fit a model and not predict? `fit_model` does just that. It provides user friendly syntax and is more readable. Again you can build any model type.  Example usage is as shown below:
 
 ```
 
@@ -119,18 +153,39 @@ glm_model <- fit_model(iris1,"Sepal.Width","Sepal.Length", "glm")
 To extract model attributes from the above models, we can use `extract_model_info` as shown below:
 
 ```
+# extract coefficients
+extract_model_info(lm_model, "coef")
 
-extract_model_info(lm_model, "coefficients")
-
-               Estimate Std. Error    t value     Pr(>|t|)
-(Intercept)  -0.53037726  0.5560922 -0.9537578 3.450860e-01
-Sepal.Length  0.80493004  0.1089726  7.3865333 2.125173e-09
-Petal.Length -0.04863374  0.2211842 -0.2198789 8.269177e-01
+          Estimate Std. Error   t value     Pr(>|t|)
+(Intercept)  -0.5694327  0.5217119 -1.091470 2.805148e-01
+Sepal.Length  0.7985283  0.1039651  7.680738 6.709843e-10
 
 extract_model_info(lm_model, "p_value")
 
- (Intercept) Sepal.Length Petal.Length 
-3.450860e-01 2.125173e-09 8.269177e-01 
+(Intercept) Sepal.Length 
+2.805148e-01 6.709843e-10 
+
+# get predictors
+extract_model_info(lm_model,"predictors")
+
+Sepal.Length
+
+# get response variable
+extract_model_info(lm_model,"response")
+Sepal.Width
+# get several values(for now)
+sapply(c("p_value","aic","response"), function(x) extract_model_info(lm_model, x))
+$p_value
+ (Intercept) Sepal.Length 
+2.805148e-01 6.709843e-10 
+
+$aic
+[1] 9.800332
+
+$response
+Sepal.Width
+
+# what about glm?
 
 extract_model_info(glm_model, "aic")
 
@@ -143,10 +198,15 @@ extract_model_info(aov_model, "msq")
 Species      5.6725
 Residuals    0.1154
 
+# predictors
+extract_model_info(glm_model, "predictors")
+
+Sepal.Length
 ```
 
-To see currently supported model types, please see `help(extract_model_info)`. To request support for a given model, please file an issue at: [issues](https://www.github.com/Nelson-Gon/manymodelr/issues)
+To see currently supported model types, please see `help(extract_model_info)`. To request support for a given model, please file an issue at: [issues](https://www.github.com/Nelson-Gon/manymodelr/issues). Exploration of other available values is left to the user. 
 
+4. `add_model_residuals` and `add_model_predictions` 
 
 To add predictions or residuals to a data set, we can use `add_model_predictions` and `add_model_residuals` respectively.
 
@@ -154,24 +214,24 @@ To add predictions or residuals to a data set, we can use `add_model_predictions
 
 head(add_model_predictions(lm_model, iris1, iris2))
 
-    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
-1          5.1         3.5          1.4         0.2  setosa  4.875554
-2          4.9         3.0          1.4         0.2  setosa  4.402323
-3          4.7         3.2          1.3         0.2  setosa  4.785335
-4          4.6         3.1          1.5         0.2  setosa  3.702203
-5          5.0         3.6          1.4         0.2  setosa  4.477953
-6          5.4         3.9          1.7         0.4  setosa  3.838872
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
+1          5.1         3.5          1.4         0.2  setosa  5.020265
+2          4.9         3.0          1.4         0.2  setosa  4.541148
+3          4.7         3.2          1.3         0.2  setosa  4.940413
+4          4.6         3.1          1.5         0.2  setosa  3.822473
+5          5.0         3.6          1.4         0.2  setosa  4.621001
+6          5.4         3.9          1.7         0.4  setosa  3.982179
 
 
 head(add_model_residuals(lm_model, iris1))
 
-   Sepal.Length Sepal.Width Petal.Length Petal.Width Species     residuals
-1          5.1         3.5          1.4         0.2  setosa -0.0066787155
-2          4.9         3.0          1.4         0.2  setosa -0.3456927073
-3          4.7         3.2          1.3         0.2  setosa  0.0104299273
-4          4.6         3.1          1.5         0.2  setosa  0.0006496786
-5          5.0         3.6          1.4         0.2  setosa  0.1738142886
-6          5.4         3.9          1.7         0.4  setosa  0.1664323930
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species   residuals
+1          5.1         3.5          1.4         0.2  setosa -0.00306166
+2          4.9         3.0          1.4         0.2  setosa -0.34335600
+3          4.7         3.2          1.3         0.2  setosa  0.01634966
+4          4.6         3.1          1.5         0.2  setosa -0.00379751
+5          5.0         3.6          1.4         0.2  setosa  0.17679117
+6          5.4         3.9          1.7         0.4  setosa  0.15737985
 
 # dplyr compatible
 #library(dplyr)
@@ -180,22 +240,22 @@ add_model_predictions(model=lm_model, new_data = iris2) %>%
 head()
 
    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
-1          5.1         3.5          1.4         0.2  setosa  4.875554
-2          4.9         3.0          1.4         0.2  setosa  4.402323
-3          4.7         3.2          1.3         0.2  setosa  4.785335
-4          4.6         3.1          1.5         0.2  setosa  3.702203
-5          5.0         3.6          1.4         0.2  setosa  4.477953
-6          5.4         3.9          1.7         0.4  setosa  3.838872
-
+1          5.1         3.5          1.4         0.2  setosa  5.020265
+2          4.9         3.0          1.4         0.2  setosa  4.541148
+3          4.7         3.2          1.3         0.2  setosa  4.940413
+4          4.6         3.1          1.5         0.2  setosa  3.822473
+5          5.0         3.6          1.4         0.2  setosa  4.621001
+6          5.4         3.9          1.7         0.4  setosa  3.982179
 ```
 
-3. `get_var_corr`
+5. `get_var_corr`
 
 As can probably(hopefully) be guessed from the name, this provides a convenient way to get variable correlations. It enables one to get correlation between one variable and all other variables in the data set if `get_all` is set to `TRUE` or with specific variables if `get_all` is set to `FALSE`
 
 Sample usage:
 
 ```
+
 corrs <- get_var_corr(mtcars,comparison_var="mpg", get_all=TRUE)
 
 
@@ -229,8 +289,7 @@ get_var_corr(iris,"Sepal.Length","Petal.Length",get_all = FALSE,drop_columns= TR
 ```
 
 
-4. A closely related function is `get_var_corr_`(note the underscore) that enables finer control over which correlations to obtain with the ability to perform combination wise correlations. To get correlations for `mpg` and `vs` "against" `cyl` and `displ`, one could do:
-
+6. A closely related function is `get_var_corr_`(note the underscore) that enables finer control over which correlations to obtain with the ability to perform combination wise correlations. 
 ```
 head(get_var_corr_(mtcars, method="spearman", exact=FALSE))
 
@@ -247,9 +306,7 @@ head(get_var_corr_(mtcars, method="spearman", exact=FALSE))
 To use only a few columns, we can set `subset_df` to `TRUE` and specify `subset_cols`:
 
 ```
-head(get_var_corr_(mtcars, method="spearman",
-exact=FALSE, subset_df=TRUE, subset_cols=list(c("mpg","disp"),
-  c("wt","drat"))))
+head(get_var_corr_(mtcars, method="spearman", exact=FALSE, subset_df=TRUE, subset_cols=list(c("mpg","disp"),  c("wt","drat"))))
   
       Comparison_Var  Other_Var      p.value Correlation
 4             mpg      drat     5.381347e-05   0.6514555
@@ -259,31 +316,31 @@ exact=FALSE, subset_df=TRUE, subset_cols=list(c("mpg","disp"),
 
 ```
 
-5. To plot the above, one can use `plot_corr` as shown below:
+7. To plot the above, one can use `plot_corr` as shown below:
 
 ```
 
 corrs <- get_var_corr_(iris)
 
+
 plot_corr(corrs, round_values = TRUE, round_which = "Correlation")
 
 ```
 
-![Correlations Plot](https://imgur.com/pksPPZR.png)
+![Correlations Plot](https://imgur.com/RyK6SDG)
 
-To show significance instead(ie based on `p values`), one can set `show_corr` to `FALSE` and `show_signif` to `TRUE`. We can then set a significance cutoff point(0.05 here).
-
-```
-plot_corr(corrs, x="Other_Var", y="Comparison_Var",show_corr=FALSE, show_signif=TRUE,signif_cutoff=0.05, legend_title="Significance",signif_size = 9, size=19,round_values=FALSE,
-plot_style="squares")
+To show significance instead(ie based on `p values`), one can set `show_which` to .
 
 ```
+plot_corr(corrs, x="Other_Var", y="Comparison_Var",show_which="signif")
 
-![Signif plot](https://i.imgur.com/cMiXZCA.png)
+```
 
-You can explore more options via `help(plot_corr)` or `?plot_corr`. Since the function uses `ggplot2` backend, one can change themes by adding `theme` components to the plot.
+![Signif plot](https://imgur.com/IPkOt47)
 
-6. `rowdiff`
+You can explore more options via `help(plot_corr)` or `?plot_corr`. Since the function uses `ggplot2` backend, one can change themes by adding `theme` components to the plot. 
+
+8. `rowdiff`
 
 If one needs to obtain differences between rows, `rowdiff` is designed to do exactly that.
 
