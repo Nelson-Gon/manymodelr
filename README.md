@@ -329,7 +329,7 @@ plot_corr(corrs, round_values = TRUE, round_which = "Correlation")
 
 ![Correlations Plot](https://i.imgur.com/RyK6SDG.png)
 
-To show significance instead(ie based on `p values`), one can set `show_which` to .
+To show significance instead(ie based on `p values`), one can set `show_which` to "signif". The default is `show_which="corr"` which will display the correlations. 
 
 ```
 plot_corr(corrs, x="Other_Var", y="Comparison_Var",show_which="signif")
