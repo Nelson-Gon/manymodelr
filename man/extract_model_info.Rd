@@ -4,13 +4,15 @@
 \alias{extract_model_info}
 \title{Extract important model attributes}
 \usage{
-extract_model_info(model_object, what)
+extract_model_info(model_object, what, ...)
 }
 \arguments{
 \item{model_object}{A model object for example a linear model object, generalized linear model object,
 analysis of variance object.}
 
 \item{what}{character. The attribute you would like to obtain for instance p_value}
+
+\item{...}{For `glm` and `lm` "aic", additional arguments to `AIC` from `stats`.}
 }
 \description{
 Provides a convenient way to extract any kind of model information from
@@ -19,7 +21,7 @@ common model objects
 \details{
 This provides a convenient way to extract model information for any kind of model. For linear models,
 one can extract such attributes as coefficients, p value("p_value"), standard error("std_err"),
-estimate, t value("t_value"), residuals.
+estimate, t value("t_value"), residuals, aic and other known attributes.
 For analysis of variance (aov), other attributes like sum sqaured(ssq),
 mean squared error(msq), degrees of freedom(df),p_value.
 }
@@ -31,6 +33,7 @@ extract_model_info(aov_mod, "ssq")
 lm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
 extract_model_info(lm_model, "p_value") 
 extract_model_info(lm_model,"r2")
+extract_model_info(lm_model,"aic",k=3)
 ## glm
 glm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
 extract_model_info(glm_model,"p_value")

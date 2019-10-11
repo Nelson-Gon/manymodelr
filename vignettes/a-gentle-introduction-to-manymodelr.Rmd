@@ -75,6 +75,32 @@ m$Metrics
 head(m$Predictions)
 ```
 
+- **multi_model_2**
+
+This is similar to `multi_model_1` with only one difference: it does not use metrics such as RMSE, accuracy and the like. This function is useful if one would like to fit and predict "simpler models" like generalized linear models or linear models, etc. Let's take a look:
+
+```{r}
+# fit a linear model and get predictions
+lin_model <- multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length","lm")
+
+head(lin_model)
+```
+
+We can also fit a multinear model as shown below:
+```{r}
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length",
+    "Petal.Length + Sepal.Width","lm"))
+```
+
+To take this a step further, we can fit a model with the square of Sepal.Width. 
+
+```{r}
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length",
+    "Petal.Length + I(Sepal.Width)**2","lm"))
+```
+
+The above function does more and can fit and predict on any model type. Exploration is therefore left to the reader.
+
 
 - **`fit_model`**
 
@@ -90,12 +116,12 @@ lm_model
 
 To extract information about the model, we can use `extract_model_info` as follows. Say we wanted to extract the R squared, we could proceed as follows:
 ```{r}
-extract_model_info(lm_model, "r.squared")
+extract_model_info(lm_model, "r2")
 ```
 
 To extract the adjusted r squared,  we can do the following:
 ```{r}
-extract_model_info(lm_model, "adj.r.squared")
+extract_model_info(lm_model, "adj_r2")
 ```
 
 For the p value:
@@ -103,7 +129,7 @@ For the p value:
 extract_model_info(lm_model, "p_value")
 ```
 
-This is not restricted to linear models but will work for model types. See `help(extract_model_info)` to see currently supported model types.
+This is not restricted to linear models but will work for most model types. See `help(extract_model_info)` to see currently supported model types.
 
 To add predictions to our data set, we can use `add_model_predictions` as follows:
 
