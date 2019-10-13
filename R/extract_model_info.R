@@ -99,9 +99,26 @@ extract_model_info.aov <- function(model_object, what,...){
   
   # Need to test that args are not null
   model_summary <- summary(model_object)
+  aic_res <- AIC(model_object, ... )
+  # Not in summary
+  model_terms <- model_object$terms
+  response_var <- model_terms[[2]]
+  predictor_var <- model_terms[[3]]
+
+
 # possible arguments 
 possible_what <- c("coeffs","df","ssq","msq","f_value","p_value",
-                   "resids")
+                   "resids","aic","predictors","response",
+                   "interactions")
+predictor_var_as_char <- as.character(predictor_var)
+# Find interacting terms
+
+interacting_terms <- predictor_var_as_char[grep(":",predictor_var_as_char)]
+# Remove leftover formulae symbols
+interacting_terms_cleaner <- gsub(".*\\+ ","",interacting_terms)
+# Turn them into plain English
+interacting_terms <- gsub(":"," with ", interacting_terms_cleaner)
+
 what <- match.arg(what, possible_what)
   switch (what,
           coeffs = coef(model_object),
@@ -110,7 +127,11 @@ what <- match.arg(what, possible_what)
           msq = model_summary[[1]][3],
           f_value = model_summary[[1]][4],
           p_value = model_summary[[1]][5],
-          resids = residuals(model_summary)
+          resids = residuals(model_summary),
+          aic = aic_res,
+          predictors = predictor_var,
+          response = response_var,
+          interactions = interacting_terms
           
   )
 }
