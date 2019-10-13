@@ -64,10 +64,12 @@ extract_model_info.lm <- function(model_object, what,...){
 # From language to character
 predictor_var_as_char <- as.character(predictor_var)
 # Find interacting terms
-interacting_terms <- predictor_var_as_char[grep(":",predictor_var_as_char)]
-# Turn them into plain English
 
-interacting_terms <- gsub(":"," with ", interacting_terms)
+interacting_terms <- predictor_var_as_char[grep(":",predictor_var_as_char)]
+# Remove leftover formulae symbols
+interacting_terms_cleaner <- gsub(".*\\+ ","",interacting_terms)
+# Turn them into plain English
+interacting_terms <- gsub(":"," with ", interacting_terms_cleaner)
  switch(what,
            coeffs = coeffs ,
            p_value = coeffs[,4],
