@@ -42,7 +42,9 @@ extract_model_info.lm <- function(model_object, what,...){
   available_args <-  c("coeffs","p_value","resids",
                     "std_err","t_value","estimate",
                     "r2","adj_r2","rse","df", "f_stat",
-                    "aic","terms","predictors","response")
+                    "aic","terms","predictors","response",
+                    "interactions")
+  
   what <- match.arg(what, available_args)
   #available_args <- c(custom_vals,names(model_summary))
   # everything is accounted for AFAIK, negate the need to use the above
@@ -58,6 +60,14 @@ extract_model_info.lm <- function(model_object, what,...){
   model_terms <- model_summary$terms
   response_var <- model_terms[[2]]
   predictor_var <- model_terms[[3]]
+# Use predictor variables to get any interaction terms
+# From language to character
+predictor_var_as_char <- as.character(predictor_var)
+# Find interacting terms
+interacting_terms <- predictor_var_as_char[grep(":",predictor_var_as_char)]
+# Turn them into plain English
+
+interacting_terms <- gsub(":"," with ", interacting_terms)
  switch(what,
            coeffs = coeffs ,
            p_value = coeffs[,4],
@@ -73,7 +83,8 @@ extract_model_info.lm <- function(model_object, what,...){
         aic = aic_res,
         terms = model_terms,
         predictors = predictor_var,
-        response = response_var)
+        response = response_var,
+        interactions = interacting_terms)
  
   #else{
    # model_summary[[what]]
