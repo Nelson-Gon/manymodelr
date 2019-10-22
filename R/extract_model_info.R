@@ -147,8 +147,15 @@ possible_what <- match.arg(what,c("fixed_effects",
                                   "resids",
                                   "log_lik",
                                   "random_groups","random_effects",
-                                  "reml","formula"))
-  switch(what,
+                                  "reml","formula",
+                                  "coefficients"))
+# coefficients, nothing fancy
+model_coefficients <-  coef(model_object)
+# Remove attributes from the result
+# Might be buggy for some coefs if they are null
+# Unlikely but posssible. 
+model_coefficients <- Filter(Negate(is.null),model_coefficients)
+  switch(possible_what,
          fixed_effects = model_summary[[10]],
          resids = model_summary [[16]],
          log_lik =  model_summary[[6]],
@@ -156,7 +163,8 @@ possible_what <- match.arg(what,c("fixed_effects",
          random_effects = Filter(Negate(anyNA),
               as.data.frame(model_summary[[13]])),
          reml = model_summary [[14]],
-         formula = model_summary[[15]]
+         formula = model_summary[[15]],
+         coefficients = model_coefficients 
          
          )
 }
