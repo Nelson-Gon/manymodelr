@@ -42,7 +42,9 @@ extract_model_info.lm <- function(model_object, what,...){
   available_args <-  c("coeffs","p_value","resids",
                     "std_err","t_value","estimate",
                     "r2","adj_r2","rse","df", "f_stat",
-                    "aic","terms","predictors","response")
+                    "aic","terms","predictors","response",
+                    "interactions")
+  
   what <- match.arg(what, available_args)
   #available_args <- c(custom_vals,names(model_summary))
   # everything is accounted for AFAIK, negate the need to use the above
@@ -58,6 +60,16 @@ extract_model_info.lm <- function(model_object, what,...){
   model_terms <- model_summary$terms
   response_var <- model_terms[[2]]
   predictor_var <- model_terms[[3]]
+# Use predictor variables to get any interaction terms
+# From language to character
+predictor_var_as_char <- as.character(predictor_var)
+# Find interacting terms
+
+interacting_terms <- predictor_var_as_char[grep(":",predictor_var_as_char)]
+# Remove leftover formulae symbols
+interacting_terms_cleaner <- gsub(".*\\+ ","",interacting_terms)
+# Turn them into plain English
+interacting_terms <- gsub(":"," with ", interacting_terms_cleaner)
  switch(what,
            coeffs = coeffs ,
            p_value = coeffs[,4],
@@ -73,7 +85,8 @@ extract_model_info.lm <- function(model_object, what,...){
         aic = aic_res,
         terms = model_terms,
         predictors = predictor_var,
-        response = response_var)
+        response = response_var,
+        interactions = interacting_terms)
  
   #else{
    # model_summary[[what]]
@@ -86,9 +99,26 @@ extract_model_info.aov <- function(model_object, what,...){
   
   # Need to test that args are not null
   model_summary <- summary(model_object)
+  aic_res <- AIC(model_object, ... )
+  # Not in summary
+  model_terms <- model_object$terms
+  response_var <- model_terms[[2]]
+  predictor_var <- model_terms[[3]]
+
+
 # possible arguments 
 possible_what <- c("coeffs","df","ssq","msq","f_value","p_value",
-                   "resids")
+                   "resids","aic","predictors","response",
+                   "interactions")
+predictor_var_as_char <- as.character(predictor_var)
+# Find interacting terms
+
+interacting_terms <- predictor_var_as_char[grep(":",predictor_var_as_char)]
+# Remove leftover formulae symbols
+interacting_terms_cleaner <- gsub(".*\\+ ","",interacting_terms)
+# Turn them into plain English
+interacting_terms <- gsub(":"," with ", interacting_terms_cleaner)
+
 what <- match.arg(what, possible_what)
   switch (what,
           coeffs = coef(model_object),
@@ -97,7 +127,11 @@ what <- match.arg(what, possible_what)
           msq = model_summary[[1]][3],
           f_value = model_summary[[1]][4],
           p_value = model_summary[[1]][5],
-          resids = residuals(model_summary)
+          resids = residuals(model_summary),
+          aic = aic_res,
+          predictors = predictor_var,
+          response = response_var,
+          interactions = interacting_terms
           
   )
 }
@@ -113,8 +147,15 @@ possible_what <- match.arg(what,c("fixed_effects",
                                   "resids",
                                   "log_lik",
                                   "random_groups","random_effects",
-                                  "reml","formula"))
-  switch(what,
+                                  "reml","formula",
+                                  "coefficients"))
+# coefficients, nothing fancy
+model_coefficients <-  coef(model_object)
+# Remove attributes from the result
+# Might be buggy for some coefs if they are null
+# Unlikely but posssible. 
+model_coefficients <- Filter(Negate(is.null),model_coefficients)
+  switch(possible_what,
          fixed_effects = model_summary[[10]],
          resids = model_summary [[16]],
          log_lik =  model_summary[[6]],
@@ -122,7 +163,8 @@ possible_what <- match.arg(what,c("fixed_effects",
          random_effects = Filter(Negate(anyNA),
               as.data.frame(model_summary[[13]])),
          reml = model_summary [[14]],
-         formula = model_summary[[15]]
+         formula = model_summary[[15]],
+         coefficients = model_coefficients 
          
          )
 }
