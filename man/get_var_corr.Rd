@@ -4,8 +4,15 @@
 \alias{get_var_corr}
 \title{Get correlations between variables}
 \usage{
-get_var_corr(df, comparison_var, other_vars = NULL, get_all = TRUE,
-  method = "pearson", drop_columns = TRUE, ...)
+get_var_corr(
+  df,
+  comparison_var,
+  other_vars = NULL,
+  get_all = TRUE,
+  method = "pearson",
+  drop_columns = TRUE,
+  ...
+)
 }
 \arguments{
 \item{df}{The data set for which correlations are required}

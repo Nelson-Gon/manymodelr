@@ -4,8 +4,17 @@
 \alias{multi_model_1}
 \title{Simultaneously train and predict on new data.}
 \usage{
-multi_model_1(df, yname, xname, method, metric, control, ..., newdata,
-  valid = FALSE)
+multi_model_1(
+  df,
+  yname,
+  xname,
+  method,
+  metric,
+  control,
+  ...,
+  newdata,
+  valid = FALSE
+)
 }
 \arguments{
 \item{df}{The data holding the training dataset}

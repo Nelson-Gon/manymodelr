@@ -31,7 +31,7 @@ test2<-c(455,7878,908981,NA,456,455,7878,7878,NA)
 get_mode(test)
 get_mode(test2)
 \dontrun{
-mtcars \%>\%
+mtcars %>%
 get_data_Stats(get_mode)
 get_data_Stats(mtcars,get_mode)}
 }
