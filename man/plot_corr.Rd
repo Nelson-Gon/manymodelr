@@ -4,15 +4,34 @@
 \alias{plot_corr}
 \title{Plot a correlations matrix}
 \usage{
-plot_corr(df, x = "Comparison_Var", y = "Other_Var",
-  xlabel = "Comparison_Variable", ylabel = "Other_Variable",
-  title = "Correlations Plot", plot_style = "circles",
-  title_just = 0.5, round_values = TRUE, round_which = "Correlation",
-  colour_by = "Correlation", decimals = 2, show_which = "corr",
-  size = 12.6, value_angle = 360, shape = 16, value_size = 3.5,
-  value_col = "black", width = 1.1, custom_cols = c("indianred2",
-  "green2", "gray34"), legend_labels = waiver(), legend_title = NULL,
-  signif_cutoff = 0.05, signif_size = 7, signif_col = "gray13", ...)
+plot_corr(
+  df,
+  x = "Comparison_Var",
+  y = "Other_Var",
+  xlabel = "Comparison_Variable",
+  ylabel = "Other_Variable",
+  title = "Correlations Plot",
+  plot_style = "circles",
+  title_just = 0.5,
+  round_values = TRUE,
+  round_which = "Correlation",
+  colour_by = "Correlation",
+  decimals = 2,
+  show_which = "corr",
+  size = 12.6,
+  value_angle = 360,
+  shape = 16,
+  value_size = 3.5,
+  value_col = "black",
+  width = 1.1,
+  custom_cols = c("indianred2", "green2", "gray34"),
+  legend_labels = waiver(),
+  legend_title = NULL,
+  signif_cutoff = 0.05,
+  signif_size = 7,
+  signif_col = "gray13",
+  ...
+)
 }
 \arguments{
 \item{df}{The data to be plotted. A `data.frame` object produced

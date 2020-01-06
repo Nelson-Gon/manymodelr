@@ -2,10 +2,12 @@
 % Please edit documentation in R/get_stats.R
 \name{get_data_Stats}
 \alias{get_data_Stats}
+\alias{get_stats}
 \title{A pipe friendly way to get summary stats for exploratory data analysis}
 \usage{
-get_data_Stats(x, func, exclude = NULL, na.rm = TRUE,
-  na_action = NULL)
+get_data_Stats(x, func, exclude = NULL, na.rm = TRUE, na_action = NULL)
+
+get_stats(x, func, exclude = NULL, na.rm = TRUE, na_action = NULL)
 }
 \arguments{
 \item{x}{The data for which stats are required}
@@ -31,4 +33,5 @@ A convenient wrapper especially useful for get_mode
 }
 \examples{
 get_data_Stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "mean")
+get_stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "mean")
 }

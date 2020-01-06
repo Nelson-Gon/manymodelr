@@ -30,7 +30,11 @@ author: "Nelson Gonzabato"
 
 4. `rowdiff` now accepts replacement of the calculation induced `NA`s. It does so by using `na_replace`. 
 
-5. `get_var_corr_` now supports using only a subset of the data. 
+5. `get_var_corr_` now supports using only a subset of the data.
+
+6. Helper functions are no longer exported. 
+
+7. `get_data_Stats` is now aliased with `get_stats` for ease.
 
 
 # manymodelr 0.2.2

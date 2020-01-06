@@ -39,6 +39,12 @@ get_data_Stats.data.frame<-function (x, func,exclude=NULL,na.rm=TRUE,na_action=N
   
 }
 
+# Alias get_data_Stats with something simpler
+
+#' @rdname get_data_Stats
+#' @examples get_stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "mean")
+#' @export
+get_stats <- get_data_Stats
 
 
 
