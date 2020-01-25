@@ -1,8 +1,8 @@
- language: r
- cache: packages
- sudo: required
- r:
-     -oldrel
-     -release
-     -develop
- warnings_are_errors: true
+language: r
+sudo: required
+r:
+    - oldrel
+    - release
+    - devel
+warnings_are_errors: true
+
