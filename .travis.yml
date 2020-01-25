@@ -1,3 +1,8 @@
- language: R
+ language: r
  cache: packages
- sudo: false
+ sudo: required
+ r:
+     -oldrel
+     -release
+     -develop
+ warnings_are_errors: true
