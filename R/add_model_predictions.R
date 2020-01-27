@@ -37,7 +37,7 @@ UseMethod("add_model_residuals")
 }
 #' @export
 add_model_residuals <- function(model, old_data){
-  old_data$residuals <-extract_model_info(model,"resids")
+  old_data$residuals <- residuals(model)
   old_data
 }
 

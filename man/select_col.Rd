@@ -28,7 +28,7 @@ select_col(iris,Petal.Length,Sepal.Length,Species,Petal.Width)
 # A pipe friendly example
 \dontrun{
 library(dplyr)
-as_tibble(iris) %>%
+as_tibble(iris) \%>\%
 select_col(Species)
 }
 }
