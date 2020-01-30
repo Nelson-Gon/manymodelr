@@ -10,5 +10,10 @@ testthat::test_that(desc= "extract_model_info works as expected",
               testthat::expect_error(extract_model_info(iris,
                                                         "p_value"),
                                      "Expecting a model object not an object of class data.frame",
-                                     fixed = TRUE)        
+                                     fixed = TRUE) 
+              testthat::expect_type(extract_model_info(lm_model,"resids"),
+                                    "double")
+          testthat::expect_type(extract_model_info(lm_model,"residuals"),
+                                    "double")
+              
                     })

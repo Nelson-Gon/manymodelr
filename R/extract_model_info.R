@@ -43,7 +43,7 @@ extract_model_info.lm <- function(model_object, what,...){
                     "std_err","t_value","estimate",
                     "r2","adj_r2","rse","df", "f_stat",
                     "aic","terms","predictors","response",
-                    "interactions")
+                    "interactions","residuals")
   
   what <- match.arg(what, available_args)
   #available_args <- c(custom_vals,names(model_summary))
@@ -82,6 +82,7 @@ interacting_terms <- gsub(":"," with ", interacting_terms_cleaner)
            df = model_summary[[10]][2:3],
            f_stat = model_summary[[10]][[1]],
         resids = model_summary[[3]],
+        residuals = model_summary[[3]],
         aic = aic_res,
         terms = model_terms,
         predictors = predictor_var,
@@ -109,7 +110,7 @@ extract_model_info.aov <- function(model_object, what,...){
 # possible arguments 
 possible_what <- c("coeffs","df","ssq","msq","f_value","p_value",
                    "resids","aic","predictors","response",
-                   "interactions")
+                   "interactions","residuals")
 predictor_var_as_char <- as.character(predictor_var)
 # Find interacting terms
 
@@ -128,6 +129,7 @@ what <- match.arg(what, possible_what)
           f_value = model_summary[[1]][4],
           p_value = model_summary[[1]][5],
           resids = residuals(model_summary),
+          residuals = residuals(model_summary),
           aic = aic_res,
           predictors = predictor_var,
           response = response_var,
@@ -148,7 +150,8 @@ possible_what <- match.arg(what,c("fixed_effects",
                                   "log_lik",
                                   "random_groups","random_effects",
                                   "reml","formula",
-                                  "coefficients"))
+                                  "coefficients",
+                                  "residuals"))
 # coefficients, nothing fancy
 model_coefficients <-  coef(model_object)
 # Remove attributes from the result
@@ -158,6 +161,7 @@ model_coefficients <- Filter(Negate(is.null),model_coefficients)
   switch(possible_what,
          fixed_effects = model_summary[[10]],
          resids = model_summary [[16]],
+         residuals= model_summary[[16]],
          log_lik =  model_summary[[6]],
          random_groups = model_summary [[9]],
          random_effects = Filter(Negate(anyNA),
