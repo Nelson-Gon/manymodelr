@@ -37,6 +37,8 @@ devtools::install_github("Nelson-Gon/manymodelr",build_vignettes=TRUE) #Builds v
 
 For the current(unstable) developer version, please see [develop](https://www.github.com/Nelson-Gon/manymodelr/tree/develop).
 
+For previous users, please see the `NEWS.md` [file](https://github.com/Nelson-Gon/manymodelr/blob/master/NEWS.md) for a list of changes and/or additions.  
+
 
 * **Loading the package**
 
@@ -431,7 +433,7 @@ browseVignettes("manymodelr")
 ```
 
 
-For previous users, please see the `NEWS.md` [file](https://github.com/Nelson-Gon/manymodelr/blob/master/NEWS.md) for a list of changes and/or additions.  For a complete list of available functions, please use:
+For a complete list of available functions, please use:
  
  ```
  
