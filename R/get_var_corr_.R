@@ -42,11 +42,12 @@ other <- to_use[[2]]
 
   if(is.null(subset_cols)){
     
-plyr::ldply(purrr::map2(compare_with,other,function(x,y)
+final_res<-plyr::ldply(purrr::map2(compare_with,other,function(x,y)
       manymodelr::get_var_corr(df,
                                comparison_var = x,
                                other_vars = y,
                                ...)),data.frame)
+structure(final_res,1:nrow(final_res))
   }
   
   else{
@@ -56,8 +57,9 @@ plyr::ldply(purrr::map2(compare_with,other,function(x,y)
                                other_vars = y,
                                ...)),data.frame)
     
-  res[res$Comparison_Var %in% subset_cols[[1]] &
+final_res<-res[res$Comparison_Var %in% subset_cols[[1]] &
           res$Other_Var %in% subset_cols[[2]],]
+structure(final_res, row.names=1:nrow(final_res))
     
   }
 }
