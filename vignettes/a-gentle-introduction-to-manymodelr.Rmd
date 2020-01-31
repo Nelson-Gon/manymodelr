@@ -268,11 +268,10 @@ To explore more options, please take a look at the documentation.
 
 - `rowdiff`
 
- This is useful when trying to find differences between rows. The `direction` argument specifies how the subtractions are made while the `exclude` argument is currently used to
- remove non-numeric data.  Using `direction="reverse"` performs a subtraction akin to `x-(x-1)` where `x` is the row number. 
+ This is useful when trying to find differences between rows. The `direction` argument specifies how the subtractions are made while the `exclude` argument is used to specify classes that should be removed before calculations are made.  Using `direction="reverse"` performs a subtraction akin to `x-(x-1)` where `x` is the row number. 
 
 ```{r}
-head(rowdiff(iris,exclude = "non_numeric",direction = "reverse"))
+head(rowdiff(iris,exclude = "factor",direction = "reverse"))
 ```
 
 

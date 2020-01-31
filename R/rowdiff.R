@@ -5,8 +5,7 @@
 #' are calculated
 #' in such a way that the difference
 #' between the current value and the next is returned
-#' @param exclude What data types should be removed?! Currently only supports the entry
-#' "non_numeric." See examples below
+#' @param exclude A character vector specifying what classes should be removed. See examples below
 #' @param na.rm Logical. Should missing values be removed? The missing values referred to are those introduced during the calculation ie when subtracting a row with itself.
 #' Defaults to FALSE.
 #' @param na_action If na.rm is TRUE, how should missing values be replaced? Depending on the 
@@ -14,9 +13,11 @@
 #' @param ... Other arguments to `na_replace`.
 #' @return A data.frame object of row differences
 #' @examples
-#' rowdiff(iris,exclude = "non_numeric",direction = "reverse")
-#' rowdiff(iris[1:5,], na.rm = TRUE, na_action = "get_mode",
-#' exclude="non_numeric",direction = "reverse")
+#' # Remove factor columns
+#' rowdiff(iris,exclude = "factor",direction = "reverse")
+#' rowdiff(iris[1:5,], exclude="factor",
+#'      na.rm = TRUE, na_action = "get_mode",
+#'      direction = "reverse")
 #' @seealso \code{\link{na_replace}}
 #' @export
 rowdiff<-function (df, direction = "forward",exclude=NULL,
@@ -25,63 +26,66 @@ na.rm=FALSE,na_action=NULL,...){
 }
 
 #' @export
-rowdiff.data.frame<-function(df, direction = "forward",exclude=NULL,
+rowdiff.data.frame<-function(df, direction = "forward",
+                             exclude=NULL,
                    na.rm=FALSE,na_action=NULL,...){
- factr_or_char<-Filter(Negate(is.numeric),df)
 
  if(is.null(exclude) & direction=="forward"){
     res<-as.data.frame(sapply(df,
                           function(x) x-dplyr::lead(x,1)))
     
     if(na.rm){
-      res<-na_replace(res,how=na_action, ...)
-      res
+      na_replace(res,how=na_action, ...)
+      
     }
     else{
       res
     }
     
 
-  }
+}
   else if(is.null(exclude) & direction=="reverse"){
     res<-as.data.frame(sapply(df,
                           function(x) x-dplyr::lag(x,1)))
     if(na.rm){
-      res<-na_replace(res,how=na_action,...)
-      res
+      na_replace(res,how=na_action,...)
+      
     }
     else{
       res
     }
   }
 
-  else if(exclude=="non_numeric" & direction=="forward"){
-    include<-setdiff(names(df),names(factr_or_char))
-    df<-df[,include]
-    res<-as.data.frame(sapply(df,
+  else{
+    
+    filtered_df<-Filter(function(x) ! class(x) %in% exclude, df)
+    
+    if(direction=="forward"){
+   res<-as.data.frame(sapply(filtered_df,
                           function(x) x-dplyr::lead(x,1)))
     if(na.rm){
-      res<-na_replace(res,how=na_action,...)
-      res
+      na_replace(res,how=na_action,...)
+    
     }
     else{
       res
     }
-  }
+}
   else{
-    include<-setdiff(names(df),names(factr_or_char))
-    df<-df[,include]
-    res<-as.data.frame(sapply(df,
+   
+    res<-as.data.frame(sapply(filtered_df,
                           function(x) x-dplyr::lag(x,1)))
     if(na.rm){
-      res<-na_replace(res,how=na_action, ...)
-      res
+      na_replace(res,how=na_action, ...)
+      
     }
     else{
       res
     }
 
   }
+  
+    }
 
 
 }

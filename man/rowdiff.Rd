@@ -21,8 +21,7 @@ are calculated
 in such a way that the difference
 between the current value and the next is returned}
 
-\item{exclude}{What data types should be removed?! Currently only supports the entry
-"non_numeric." See examples below}
+\item{exclude}{A character vector specifying what classes should be removed. See examples below}
 
 \item{na.rm}{Logical. Should missing values be removed? The missing values referred to are those introduced during the calculation ie when subtracting a row with itself.
 Defaults to FALSE.}
@@ -39,9 +38,11 @@ A data.frame object of row differences
 This function returns the differences between rows depending on the user's choice.
 }
 \examples{
-rowdiff(iris,exclude = "non_numeric",direction = "reverse")
-rowdiff(iris[1:5,], na.rm = TRUE, na_action = "get_mode",
-exclude="non_numeric",direction = "reverse")
+# Remove factor columns
+rowdiff(iris,exclude = "factor",direction = "reverse")
+rowdiff(iris[1:5,], exclude="factor",
+     na.rm = TRUE, na_action = "get_mode",
+     direction = "reverse")
 }
 \seealso{
 \code{\link{na_replace}}

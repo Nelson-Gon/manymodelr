@@ -355,7 +355,7 @@ You can explore more options via `help(plot_corr)` or `?plot_corr`. Since the fu
 If one needs to obtain differences between rows, `rowdiff` is designed to do exactly that.
 
 ```
-head(rowdiff(iris,direction="reverse", exclude="non_numeric"))
+head(rowdiff(iris,direction="reverse", exclude="factor"))
 
 ```
 
