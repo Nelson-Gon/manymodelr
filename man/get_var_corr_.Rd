@@ -4,16 +4,21 @@
 \alias{get_var_corr_}
 \title{Get correlations for combinations}
 \usage{
-get_var_corr_(df, subset_df = FALSE, subset_cols = NULL, ...)
+get_var_corr_(
+  df,
+  subset_cols = NULL,
+  drop_columns = c("character", "factor"),
+  ...
+)
 }
 \arguments{
 \item{df}{A `data.frame` object for which correlations are required in combinations.}
 
-\item{subset_df}{Should results return select columns. Defaults to FALSE returning all
-variables. Pass TRUE to allow subsetting.}
-
 \item{subset_cols}{A `list` of length 2. The values in the list correspond to the comparison
 and other_Var arguments in `get_var_corr`. See examples below.}
+
+\item{drop_columns}{A character vector specifying column classes to drop. Defaults to 
+c("factor","character")}
 
 \item{...}{Other arguments to `get_var_corr`}
 }
@@ -30,8 +35,7 @@ for combinations of variables. It is currently slow and may take up to a minute 
 \examples{
 get_var_corr_(mtcars,method="pearson")
 #use only a subset of the data.
-get_var_corr_(mtcars,
-             subset_df = TRUE,
+ get_var_corr_(mtcars,
              subset_cols = list(c("mpg","vs"),
                                 c("disp","wt")),
              method="spearman",exact=FALSE)
