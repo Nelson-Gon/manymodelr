@@ -9,6 +9,8 @@
 [![](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![TotalDownloads](http://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow)](https://cran.r-project.org/package=manymodelr)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) 
+[![GitHub last commit](https://img.shields.io/github/last-commit/Nelson-Gon/manymodelr.svg)](https://github.com/Nelson-Gon/manymodelr/commits/master)
 [![GitHub issues](https://img.shields.io/github/issues/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues/)
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues?q=is%3Aissue+is%3Aclosed)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Nelson-Gon/manymodelr.svg)](http://isitmaintained.com/project/Nelson-Gon/badges "Average time to resolve an issue")
@@ -311,10 +313,10 @@ head(get_var_corr_(mtcars, method="spearman", exact=FALSE))
 
 ```
 
-To use only a few columns, we can set `subset_df` to `TRUE` and specify `subset_cols`:
+To use only a few columns, we specify a list of columns in  `subset_cols`:
 
 ```
-head(get_var_corr_(mtcars, method="spearman", exact=FALSE, subset_df=TRUE, subset_cols=list(c("mpg","disp"),  c("wt","drat"))))
+head(get_var_corr_(mtcars, method="spearman", exact=FALSE, subset_cols=list(c("mpg","disp"),  c("wt","drat"))))
   
       Comparison_Var  Other_Var      p.value Correlation
 4             mpg      drat     5.381347e-05   0.6514555
