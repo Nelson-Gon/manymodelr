@@ -5,46 +5,51 @@
 #' @param comparison_var The variable to compare to
 #' @param other_vars Variables for which correlation with comparison_var is required. If not
 #' supplied, all variables will be used.
-#' @param get_all Logical. Should all variables be used for correlation? If true, all variables
-#' are used. Defaults to TRUE.
 #' @param method The method used to perform the correlation test as defined in 'cor.test'.
 #' Defaults to pearson.
-#' @param drop_columns Logical. Should non-numeric columns be dropped? Defaults to TRUE. Useful 
-#' when `get_all` is set to TRUE.
+#' @param drop_columns A character vector specifying column classes to drop. Defaults to 
+#' c("factor","character")
 #' @param ... Other arguments to 'cor.test' see ?cor.test for details
 #' @return A data.frame object containing correlations between comparison_var and each of other_vars
 #' @examples
-#' get_var_corr(mtcars, "mpg",get_all = TRUE)
-#' get_var_corr(iris,"Sepal.Length","Petal.Length",get_all = FALSE,method="kendall")
+#' # Get correlations between all variables
+#' get_var_corr(mtcars,"mpg")
+#' # Use only a few variables
+#' get_var_corr(mtcars,"mpg", other_vars = c("disp","drat"), method = "kendall",
+#'  exact=FALSE)
 #' @export
-get_var_corr<- function (df, comparison_var, other_vars = NULL, get_all = TRUE,
-method= "pearson",drop_columns=TRUE,
-...){
+get_var_corr<- function (df, comparison_var, other_vars = NULL, 
+            method= "pearson",
+            drop_columns=c("factor","character"),
+                 ...){
   UseMethod("get_var_corr")
 }
 #' @export
-get_var_corr.data.frame<- function (df, comparison_var, other_vars = NULL, get_all = TRUE,
-                         method= "pearson",drop_columns=TRUE,
-                         ...)
+get_var_corr.data.frame<-function (df, comparison_var, other_vars = NULL, 
+                                   method= "pearson",
+                                   drop_columns=c("factor","character"),
+                                   ...)
 {
   if(any(sapply(df,function(x) all(is.na(x))))){
     stop("Cannot perform correlation tests on columns with only NAs. Please
          remove these or impute missing values with known methods. Alternatively, set use='complete.obs'
          to use complete observations. See details in help(get_var_corr)")
   }
+
   columns <- setdiff(names(df), comparison_var)
   
-  if (get_all){
-    if(any(! sapply(df,class) 
-           %in% c("numeric","integer","double")) &
-           drop_columns){
-      warning("Non-numeric columns have been discarded. You
-              can manually do this yourself by setting drop_columns
-              to FALSE.")
-      df <- Filter(is.numeric,df)
+  if (is.null(other_vars)){
+    
+    if(any(sapply(df,class) %in% drop_columns)){
+      
+    warning("Columns with classes in drop_columns have been discarded. You
+              can disable this by setting yourself by setting drop_columns
+              to NULL.")
+      df <- Filter(function(x) ! class(x) %in% drop_columns,df)
       columns <- setdiff(names(df), comparison_var)
-    } 
-    if(method=="pearson") {
+    }
+    
+      if(method=="pearson") {
     res <- plyr::ldply(lapply(columns, function(x) {
       res1 <- cor.test(get(comparison_var, as.environment(df)),
                        get(x, as.environment(df)),method=method,...)

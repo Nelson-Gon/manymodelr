@@ -167,31 +167,40 @@ iris1 %>%
 
 
 
-- **`get_var_corr`**
- 
- As the name suggests, this function is useful when carrying out correlation tests as shown below. Setting `get_all` to `TRUE` implies that all the variables are correlated(from exploratory data analysis) and you just want to see what the correlation(s) is(are). The variant function `get_var_corr_` (note the underscore at the end provides a convenient way to get correlations for combinations of variables(pairs).)
- 
- 
+- `get_var_corr`
+
+As can probably(hopefully) be guessed from the name, this provides a convenient way to get variable correlations. It enables one to get correlation between one variable and all other variables in the data set.
+
+**Previously, one would set `get_all` to `TRUE` if they wanted to get correlations between all variables. This argument has been dropped in favor of simply supplying an optional `other_vars` vector if one does not want to get all correlations.** 
+
+Sample usage:
+
 ```{r}
-get_var_corr(mtcars, "mpg",get_all = TRUE)
+
+# getall correlations
+corrs <- get_var_corr(mtcars,comparison_var="mpg")
 
 
 ```
 
-To drop non-numeric columns, one can use the argument `drop_columns` which defaults to `TRUE` for version 0.2.3 onwards. 
-```{r}
-# prevent warning that informs you of removal of non numeric columns
-suppressWarnings(get_var_corr(iris,comparison_var = "Sepal.Length",get_all = TRUE, drop_columns = TRUE))
-```
-
-
-To get correlations for only select variables, one could work as follows:
+The result is as follows(default pearson):
 
 ```{r}
-get_var_corr(mtcars,comparison_var = "cyl",
-             other_vars = c("disp","mpg"),get_all = FALSE)
+
+
+head(corrs)
+
 ```
 
+**Previously, one would also set `drop_columns` to `TRUE` if they wanted to drop factor columns.** Now, a user simply provides a character vector specifying which column types(classes) should be dropped. It defaults to `c("character","factor")`.
+
+```{r}
+
+# purely demonstrative
+get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns= c("factor","character"), method="spearman", exact=FALSE)
+
+
+```
 
 
 Similarly, `get_var_corr_` (note the underscore at the end) provides  a convenient way to get combination-wise correlations.

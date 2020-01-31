@@ -36,6 +36,8 @@ author: "Nelson Gonzabato"
 
 7. `get_data_Stats` is now aliased with `get_stats` for ease.
 
+8. `get_var_corr` no longer has the `get_all` argument. Instead, users can provide an option `other_vars` vector of subset columns. `drop_columns` has also been changed from `boolean` to a character vector. 
+
 
 # manymodelr 0.2.2
 

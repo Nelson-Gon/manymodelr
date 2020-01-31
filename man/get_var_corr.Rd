@@ -8,9 +8,8 @@ get_var_corr(
   df,
   comparison_var,
   other_vars = NULL,
-  get_all = TRUE,
   method = "pearson",
-  drop_columns = TRUE,
+  drop_columns = c("factor", "character"),
   ...
 )
 }
@@ -22,14 +21,11 @@ get_var_corr(
 \item{other_vars}{Variables for which correlation with comparison_var is required. If not
 supplied, all variables will be used.}
 
-\item{get_all}{Logical. Should all variables be used for correlation? If true, all variables
-are used. Defaults to TRUE.}
-
 \item{method}{The method used to perform the correlation test as defined in 'cor.test'.
 Defaults to pearson.}
 
-\item{drop_columns}{Logical. Should non-numeric columns be dropped? Defaults to TRUE. Useful 
-when `get_all` is set to TRUE.}
+\item{drop_columns}{A character vector specifying column classes to drop. Defaults to 
+c("factor","character")}
 
 \item{...}{Other arguments to 'cor.test' see ?cor.test for details}
 }
@@ -40,6 +36,9 @@ A data.frame object containing correlations between comparison_var and each of o
 This function returns the correlations between different variables.
 }
 \examples{
-get_var_corr(mtcars, "mpg",get_all = TRUE)
-get_var_corr(iris,"Sepal.Length","Petal.Length",get_all = FALSE,method="kendall")
+# Get correlations between all variables
+get_var_corr(mtcars,"mpg")
+# Use only a few variables
+get_var_corr(mtcars,"mpg", other_vars = c("disp","drat"), method = "kendall",
+ exact=FALSE)
 }

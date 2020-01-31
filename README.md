@@ -255,13 +255,15 @@ head()
 
 5. `get_var_corr`
 
-As can probably(hopefully) be guessed from the name, this provides a convenient way to get variable correlations. It enables one to get correlation between one variable and all other variables in the data set if `get_all` is set to `TRUE` or with specific variables if `get_all` is set to `FALSE`
+As can probably(hopefully) be guessed from the name, this provides a convenient way to get variable correlations. It enables one to get correlation between one variable and all other variables in the data set.
+
+**Previously, one would set `get_all` to `TRUE` if they wanted to get correlations between all variables. This argument has been dropped in favor of simply supplying an optional `other_vars` vector if one does not want to get all correlations.** 
 
 Sample usage:
 
 ```
-
-corrs <- get_var_corr(mtcars,comparison_var="mpg", get_all=TRUE)
+# get all correlations
+corrs <- get_var_corr(mtcars,comparison_var="mpg")
 
 
 ```
@@ -283,14 +285,15 @@ head(corrs)
 
 ```
 
-In case of data sets with factor columns, we can set `drop_columns` to `TRUE` as shown below.
+**Previously, one would also set `drop_columns` to `TRUE` if they wanted to drop factor columns.** Now, a user simply provides a character vector specifying which column types(classes) should be dropped. It defaults to `c("character","factor")`.
 
 ```
 # purely demonstrative
-get_var_corr(iris,"Sepal.Length","Petal.Length",get_all = FALSE,drop_columns= TRUE, method="spearman", exact=FALSE)
+get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns= c("factor","character"), method="spearman", exact=FALSE)
 
 #  Comparison_Var    Other_Var      p.value Correlation
 # 1   Sepal.Length Petal.Length 3.443087e-50   0.8818981
+
 ```
 
 
