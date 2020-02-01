@@ -14,7 +14,10 @@
 #' @examples 
 #' # perform analysis of variance
 #' aov_mod <- fit_model(iris, "Sepal.Length","Petal.Length + Species","aov")
-#' extract_model_info(aov_mod, "ssq") 
+#' extract_model_info(aov_mod, "ssq")
+#' extract_model_info(aov_mod, c("ssq","p_value","aic"),k=5) 
+#' #select multiple
+#' extract_model_info(aov_mod, c("ssq","p_value")) 
 #' # linear regression
 #' lm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
 #' extract_model_info(lm_model, "p_value") 
@@ -45,15 +48,7 @@ extract_model_info.lm <- function(model_object, what,...){
                     "aic","terms","predictors","response",
                     "interactions","residuals")
   
-  what <- match.arg(what, available_args)
-  #available_args <- c(custom_vals,names(model_summary))
-  # everything is accounted for AFAIK, negate the need to use the above
 
-#if(! what %in% available_args){
- # stop("what should be one of ", paste0(available_args,
-  #                                      collapse = ","))
-  
-#}
   
   coeffs <- coef(model_summary)
   aic_res <- AIC(model_object, ... )
@@ -70,8 +65,10 @@ interacting_terms <- predictor_var_as_char[grep(":",predictor_var_as_char)]
 interacting_terms_cleaner <- gsub(".*\\+ ","",interacting_terms)
 # Turn them into plain English
 interacting_terms <- gsub(":"," with ", interacting_terms_cleaner)
- switch(what,
-           coeffs = coeffs ,
+# Use a data list holding all the values needed
+# Return these values
+# Lists have greater control than switch statements
+model_attrs_list <- list(coeffs = coeffs ,
            p_value = coeffs[,4],
            std_err = coeffs[,2],
            estimate = coeffs[,1],
@@ -88,10 +85,20 @@ interacting_terms <- gsub(":"," with ", interacting_terms_cleaner)
         predictors = predictor_var,
         response = response_var,
         interactions = interacting_terms)
- 
-  #else{
-   # model_summary[[what]]
-  #}
+
+
+attrs_to_select<-match(what,names(model_attrs_list))
+
+if(length(what) == 1){
+  model_attrs_list[[attrs_to_select]]
+}
+else{
+  model_attrs_list[attrs_to_select]
+  
+}
+
+
+
   
 }
 #' @export
@@ -120,8 +127,7 @@ interacting_terms_cleaner <- gsub(".*\\+ ","",interacting_terms)
 # Turn them into plain English
 interacting_terms <- gsub(":"," with ", interacting_terms_cleaner)
 
-what <- match.arg(what, possible_what)
-  switch (what,
+model_attrs_list<-list(
           coeffs = coef(model_object),
           df = model_summary[[1]][1],
           ssq = model_summary[[1]][2],
@@ -136,6 +142,15 @@ what <- match.arg(what, possible_what)
           interactions = interacting_terms
           
   )
+attrs_to_select <- match(what,names(model_attrs_list))
+
+if(length(what)>1){
+  model_attrs_list[attrs_to_select]
+}
+else{
+  model_attrs_list[[attrs_to_select]]
+}
+
 }
 
 #' @export
@@ -158,7 +173,7 @@ model_coefficients <-  coef(model_object)
 # Might be buggy for some coefs if they are null
 # Unlikely but posssible. 
 model_coefficients <- Filter(Negate(is.null),model_coefficients)
-  switch(possible_what,
+model_attrs_list <-list(
          fixed_effects = model_summary[[10]],
          resids = model_summary [[16]],
          residuals= model_summary[[16]],
@@ -171,4 +186,12 @@ model_coefficients <- Filter(Negate(is.null),model_coefficients)
          coefficients = model_coefficients 
          
          )
+attrs_to_select <- match(what, names(model_attrs_list))
+
+if(length(what) ==1){
+  model_attrs_list[[what]]
+}
+else{
+  model_attrs_list[what]
+}
 }
