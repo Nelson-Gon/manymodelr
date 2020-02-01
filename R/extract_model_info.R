@@ -48,6 +48,12 @@ extract_model_info.lm <- function(model_object, what,...){
                     "aic","terms","predictors","response",
                     "interactions","residuals")
   
+  if(is.null(what) || ! what %in% available_args){
+    
+    stop(paste0(c("what should be one of",available_args),
+                collapse=" "))
+  }
+  
 
   
   coeffs <- coef(model_summary)
@@ -118,6 +124,11 @@ extract_model_info.aov <- function(model_object, what,...){
 possible_what <- c("coeffs","df","ssq","msq","f_value","p_value",
                    "resids","aic","predictors","response",
                    "interactions","residuals")
+if(is.null(what) || ! what %in% possible_what){
+  
+  stop(paste0(c("what should be one of",possible_what),
+              collapse=" "))
+}
 predictor_var_as_char <- as.character(predictor_var)
 # Find interacting terms
 
@@ -160,13 +171,18 @@ extract_model_info.glm <- extract_model_info.lm
 extract_model_info.lmerMod <- function(model_object, what,...){
   # Get summary
   model_summary <- summary(model_object)
-possible_what <- match.arg(what,c("fixed_effects",
+possible_what <- c("fixed_effects",
                                   "resids",
                                   "log_lik",
                                   "random_groups","random_effects",
                                   "reml","formula",
                                   "coefficients",
-                                  "residuals"))
+                                  "residuals")
+if(is.null(what) || ! what %in% possible_what){
+  
+  stop(paste0(c("what should be one of",possible_what),
+              collapse=" "))
+}
 # coefficients, nothing fancy
 model_coefficients <-  coef(model_object)
 # Remove attributes from the result
@@ -194,4 +210,5 @@ if(length(what) ==1){
 else{
   model_attrs_list[what]
 }
+
 }
