@@ -163,7 +163,7 @@ To extract model attributes from the above models, we can use `extract_model_inf
 
 ```
 # extract coefficients
-extract_model_info(lm_model, "coef")
+extract_model_info(lm_model, "coeffs")
 
           Estimate Std. Error   t value     Pr(>|t|)
 (Intercept)  -0.5694327  0.5217119 -1.091470 2.805148e-01
@@ -182,35 +182,31 @@ Sepal.Length
 # get response variable
 extract_model_info(lm_model,"response")
 Sepal.Width
-# get several values(for now)
-sapply(c("p_value","aic","response"), function(x) extract_model_info(lm_model, x))
-$p_value
- (Intercept) Sepal.Length 
-2.805148e-01 6.709843e-10 
 
-$aic
-[1] 9.800332
-
-$response
-Sepal.Width
-
-# what about glm?
-
+# glm
 extract_model_info(glm_model, "aic")
 
 [1] 9.800332
 
+```
 
-extract_model_info(aov_model, "msq")
+To get several values:
 
-           Mean Sq
-Species      5.6725
-Residuals    0.1154
+```
+extract_model_info(lm_model,c("p_value","coeffs","predictors"))
 
-# predictors
-extract_model_info(glm_model, "predictors")
+$p_value
+ (Intercept) Sepal.Length 
+2.805148e-01 6.709843e-10 
 
+$coeffs
+               Estimate Std. Error   t value     Pr(>|t|)
+(Intercept)  -0.5694327  0.5217119 -1.091470 2.805148e-01
+Sepal.Length  0.7985283  0.1039651  7.680738 6.709843e-10
+
+$predictors
 Sepal.Length
+
 ```
 
 To see currently supported model types, please see `help(extract_model_info)`. To request support for a given model, please file an issue at: [issues](https://www.github.com/Nelson-Gon/manymodelr/issues). Exploration of other available values is left to the user. 

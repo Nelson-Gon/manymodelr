@@ -17,7 +17,7 @@ testthat::test_that(desc= "extract_model_info works as expected",
                                     "double")
           testthat::expect_error(extract_model_info(lm_model,
                                                     "not_found"),
-       "what should be one of coeffs df ssq msq f_value p_value resids aic predictors response interactions residuals",
+       "what should be one of coeffs p_value resids std_err t_value estimate r2 adj_r2 rse df f_stat aic terms predictors response interactions residuals",
                                 fixed=TRUE)
               
                     })

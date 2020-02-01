@@ -15,7 +15,7 @@ author: "Nelson Gonzabato"
 
 4. `add_model_residuals` is an easy to use and `dplyr` compatible wrapper that allows addition of residuals to a data set.
 
-5. `extract_model_info` allows easy extraction of common model attributes such as p values, residuals, coefficients, etc as per the specific model type.
+5. `extract_model_info` allows easy extraction of common model attributes such as p values, residuals, coefficients, etc as per the specific model type. It supports extraction of multiple attributes. 
 
 6. `multi_model_2` allows fitting and predicting in one function. It is similar to `multi_model_1` except it does not require metrics. 
 

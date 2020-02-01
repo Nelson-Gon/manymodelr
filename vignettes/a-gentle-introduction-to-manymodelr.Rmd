@@ -129,6 +129,13 @@ For the p value:
 extract_model_info(lm_model, "p_value")
 ```
 
+To extract multiple attributes:
+
+```{r}
+extract_model_info(lm_model,c("p_value","response"))
+
+```
+
 This is not restricted to linear models but will work for most model types. See `help(extract_model_info)` to see currently supported model types.
 
 To add predictions to our data set, we can use `add_model_predictions` as follows:

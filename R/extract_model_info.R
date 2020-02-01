@@ -155,11 +155,12 @@ model_attrs_list<-list(
   )
 attrs_to_select <- match(what,names(model_attrs_list))
 
-if(length(what)>1){
-  model_attrs_list[attrs_to_select]
+if(length(what)==1){
+  model_attrs_list[[attrs_to_select]]
+
 }
 else{
-  model_attrs_list[[attrs_to_select]]
+  model_attrs_list[attrs_to_select]
 }
 
 }
