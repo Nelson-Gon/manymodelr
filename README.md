@@ -1,6 +1,6 @@
-# manymodelr(Development Version 0.2.3.9000)
+# Development Version 0.2.3.9000
 
-**Tune and build several Machine Learning models.**
+
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Build Status](https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.org/Nelson-Gon/manymodelr)
