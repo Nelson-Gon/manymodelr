@@ -48,7 +48,7 @@ extract_model_info.lm <- function(model_object, what,...){
                     "aic","terms","predictors","response",
                     "interactions","residuals")
   
-  if(! what %in% available_args){
+  if(any(! what %in% available_args)){
     
     stop(paste0(c("what should be one of",available_args),
                 collapse=" "))
@@ -124,7 +124,7 @@ extract_model_info.aov <- function(model_object, what,...){
 possible_what <- c("coeffs","df","ssq","msq","f_value","p_value",
                    "resids","aic","predictors","response",
                    "interactions","residuals")
-if(! what %in% possible_what){
+if(any(! what %in% possible_what)){
   
   stop(paste0(c("what should be one of",possible_what),
               collapse=" "))
@@ -179,7 +179,7 @@ possible_what <- c("fixed_effects",
                                   "reml","formula",
                                   "coefficients",
                                   "residuals")
-if(! what %in% possible_what){
+if(any(! what %in% possible_what)){
   
   stop(paste0(c("what should be one of",possible_what),
               collapse=" "))
