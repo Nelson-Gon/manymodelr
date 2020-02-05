@@ -2,12 +2,13 @@
 Release Summary
 
 
-This is a patch release. Fixes issues with warnings in the vignette. Fixes description field as advised.
+This is a new release. It fixes a number of issues with some functions and adds new functions.
+
 
 ## Test environments
-* local Ubuntu 18.04.1 x86_64, R 3.6.0 
+* local Windows 10 1903 x86_64, R 3.6.2 
 
-* ubuntu 16.04.6 (on travis), R 3.6.0
+* ubuntu 16.04.6 (on Travis), R 3.5.3
 
 * win-builder (devel, release)
 
@@ -19,4 +20,3 @@ revdepcheck results
 
 There are currently no reverse dependencies.
 
-* This is a new release.
