@@ -6,7 +6,7 @@ LICENSE.md
 LICENSE
 README.md
 .travis.yml
-
+README.Rmd
 ^cran-comments\.md$
 .*\.yml$
 _config.yml
