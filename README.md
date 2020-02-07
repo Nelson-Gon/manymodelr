@@ -278,6 +278,7 @@ As can probably(hopefully) be guessed from the name, this provides a convenient 
 Sample usage:
 
 ```
+
 # get all correlations
 corrs <- get_var_corr(mtcars,comparison_var="mpg")
 
@@ -314,6 +315,8 @@ get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns= c("fact
 
 
 6. A closely related function is `get_var_corr_`(note the underscore) that enables finer control over which correlations to obtain with the ability to perform combination wise correlations. 
+
+
 ```
 head(get_var_corr_(mtcars, method="spearman", exact=FALSE))
 
@@ -330,6 +333,7 @@ head(get_var_corr_(mtcars, method="spearman", exact=FALSE))
 To use only a few columns, we specify a list of columns in  `subset_cols`:
 
 ```
+
 head(get_var_corr_(mtcars, method="spearman", exact=FALSE, subset_cols=list(c("mpg","disp"),  c("wt","drat"))))
   
       Comparison_Var  Other_Var      p.value Correlation
@@ -337,6 +341,7 @@ head(get_var_corr_(mtcars, method="spearman", exact=FALSE, subset_cols=list(c("m
 5             mpg        wt    1.487595e-11  -0.8864220
 21           disp      drat    1.613884e-05  -0.6835921
 22           disp        wt    3.346362e-12   0.8977064
+
 
 ```
 
@@ -349,14 +354,18 @@ corrs <- get_var_corr_(iris)
 
 plot_corr(corrs, round_values = TRUE, round_which = "Correlation")
 
+
 ```
 
 ![Correlations Plot](https://i.imgur.com/RyK6SDG.png)
 
 To show significance instead(ie based on `p values`), one can set `show_which` to "signif". The default is `show_which="corr"` which will display the correlations. 
 
+
 ```
+
 plot_corr(corrs, x="Other_Var", y="Comparison_Var",show_which="signif")
+
 
 ```
 
@@ -368,14 +377,18 @@ You can explore more options via `help(plot_corr)` or `?plot_corr`. Since the fu
 
 If one needs to obtain differences between rows, `rowdiff` is designed to do exactly that.
 
+
 ```
+
 head(rowdiff(iris,direction="reverse", exclude="factor"))
+
 
 ```
 
 This gives us the following result:
 
 ```
+
 Sepal.Length Sepal.Width Petal.Length Petal.Width
 1           NA          NA           NA          NA
 2         -0.2        -0.5          0.0         0.0
@@ -384,11 +397,13 @@ Sepal.Length Sepal.Width Petal.Length Petal.Width
 5          0.4         0.5         -0.1         0.0
 6          0.4         0.3          0.3         0.2
 
+
 ```
 
 To replace the calculation induced `NA`s, we can set `na.rm` to `TRUE` and specify `na_action`(uses `na_replace`).
 
 ```
+
 # since reverse, first value is replaced with 0.
 head(rowdiff(mtcars,direction="reverse", na.rm=TRUE,
 na_action="value", value=0))
@@ -407,6 +422,7 @@ na_action="value", value=0))
 `na_replace` used above works as shown below.
 
 ```
+
 test_data <- data.frame(A=c(1,2,NA,NA), B= c(1,3,4,NA))
 # replace NAs with the mean of the non NA values
 na_replace(test_data, how="mean")
@@ -440,18 +456,21 @@ how="mean")
 Space constraints mean that a detailed exploration of the package cannot be made.  A more thorough walkthrough is provided in the vignettes that can be opened as shown below:
 
 ```
+
 browseVignettes("manymodelr")
+
 
 ```
 
 
 For a complete list of available functions, please use:
  
- ```
+```
  
- help(package="manymodelr")
+help(package="manymodelr")
+
  
- ```
+```
  
  > Thank You and Happy Coding!
  
