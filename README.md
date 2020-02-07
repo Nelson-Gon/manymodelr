@@ -1,4 +1,4 @@
-# Development Version 0.2.3.9000
+# Development Version 0.2.4.9000
 
 
 
@@ -25,7 +25,7 @@
 
 *  **Installing the package**
 
-* **From CRAN(0.2.2)**
+* **From CRAN(0.2.3)**
 
 ```
 install.packages("manymodelr")
@@ -39,9 +39,19 @@ install.packages("manymodelr")
 remotes::install_github("Nelson-Gon/manymodelr")
 devtools::install_github("Nelson-Gon/manymodelr")
 devtools::install_github("Nelson-Gon/manymodelr",build_vignettes=TRUE) #Builds vignettes
+
 ```
 
 For the current(unstable) developer version, please see [develop](https://www.github.com/Nelson-Gon/manymodelr/tree/develop).
+
+To install the less stable dev version:
+
+
+```
+devtools::install_github("Nelson-Gon/manymodelr@develop")
+
+```
+
 
 For previous users, please see the `NEWS.md` [file](https://github.com/Nelson-Gon/manymodelr/blob/master/NEWS.md) for a list of changes and/or additions.  
 
