@@ -3,6 +3,11 @@ title: "manymodelr-News"
 author: "Nelson Gonzabato"
 ---
 
+# manymodelr 0.2.5
+
+**Minor Fixes**
+- Fixed DOI to Max Kuhn's paper
+
 # manymodelr 0.2.4
 
 Fixes paper citation
