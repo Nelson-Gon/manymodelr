@@ -3,6 +3,10 @@ title: "manymodelr-News"
 author: "Nelson Gonzabato"
 ---
 
+# manymodelr 0.2.4
+
+Fixes paper citation
+
 # manymodelr 0.2.3
 
 **New functions**

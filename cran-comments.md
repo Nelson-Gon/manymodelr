@@ -2,7 +2,7 @@
 Release Summary
 
 
-This is a new release. It fixes a number of issues with some functions and adds new functions.
+This is a patch release. It fixes issues with citation in the description as requested.
 
 
 ## Test environments
