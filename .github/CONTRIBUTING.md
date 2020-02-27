@@ -17,7 +17,7 @@ If edited via an `.R` file, please also update the docs using `roxygen2` to gene
 
 **Pull Requests**
 
-* Please raise an issue for discussion and reproducibility checks at [issues](https://github.com/Nelson-Gon/mde/issues)
+* Please raise an issue for discussion and reproducibility checks at [issues](https://github.com/Nelson-Gon/manymodelr/issues)
 
 * Once the bug/enhancement is approved, please create a Git branch for the pull request.
 
