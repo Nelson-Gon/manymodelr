@@ -25,7 +25,7 @@
 
 *  **Installing the package**
 
-* **From CRAN(0.2.3)**
+* **From CRAN(0.2.4)**
 
 ```
 install.packages("manymodelr")
