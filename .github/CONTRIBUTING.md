@@ -1,6 +1,6 @@
-# Contributing to mde
+# Contributing to manymodelr
 
-This document provides guidelines for contributions to mde.
+This document provides guidelines for contributions to manymodelr.
 
 **Kinds of contribution**
 
@@ -26,6 +26,6 @@ If edited via an `.R` file, please also update the docs using `roxygen2` to gene
 * Update `NEWS.md` to reflect the changes made.
 
 
-Please note that the 'mde' project is released with a
+Please note that the 'manymodelr' project is released with a
 [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
