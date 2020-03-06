@@ -5,8 +5,15 @@ author: "Nelson Gonzabato"
 
 # manymodelr 0.2.5
 
+**Major additions**
+
+- **extract_model_info** now supports `glmerMod`
+
 **Minor Fixes**
+
 - Fixed DOI to Max Kuhn's paper
+
+- Refactored `get_mode` to be `tidy` compliant. 
 
 # manymodelr 0.2.4
 
