@@ -62,13 +62,19 @@ x <-Filter(Negate(is.factor), x)
 if(na.rm){
   x <- na.omit(x)
 }
-structure(sapply(x, function(column)
-  column[which.max(sapply(column,
-                          function(y) sum(column==y)))]),
-         names = names(x))
-  
+
+  else{
+    
+    structure(sapply(x, function(column)
+      column[which.max(sapply(column,
+                              function(y) sum(column==y)))]),
+      names = names(x))
+    
+  }
+}
+
 
  
-}
+
 
 

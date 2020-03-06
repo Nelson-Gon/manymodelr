@@ -213,3 +213,7 @@ else{
 }
 
 }
+
+#' @export
+
+extract_model_info.glmerMod <- extract_model_info.lmerMod
