@@ -475,7 +475,7 @@ help(package="manymodelr")
 ---
 
 Please note that the 'manymodelr' project is released with a
-[Contributor Code of Conduct](./CODE_OF_CONDUCT.md).
+[Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
 
 
