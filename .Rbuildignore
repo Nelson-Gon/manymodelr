@@ -11,3 +11,4 @@ README.Rmd
 .*\.yml$
 _config.yml
 ^\.$
+^codecov\.yml$
