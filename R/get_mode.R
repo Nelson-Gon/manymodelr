@@ -59,7 +59,7 @@ get_mode.data.frame <- function(x,na.rm=TRUE){
 if(any(sapply(x,is.factor))){
 warning("factor columns converted to character")
   x %>% 
-  dplyr::mutate_if(is.factor, as.character) %>% 
+  dplyr::mutate(dplyr::across(is.factor, as.character)) %>% 
     purrr::map_dfr(~get_mode.character(.x,na.rm=TRUE))
   
 } 
@@ -67,7 +67,7 @@ warning("factor columns converted to character")
   else{
    
 x %>% 
-     dplyr::mutate_if(is.factor, as.character) %>% 
+     dplyr::mutate(dplyr::across(is.factor, as.character)) %>% 
       purrr::map_dfr(~get_mode.character(.x,na.rm=TRUE))
     
   }
