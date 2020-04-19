@@ -26,8 +26,8 @@ get_mode <- function(x,na.rm=TRUE){
 
 #' @export
 get_mode.default<-function (x,na.rm=TRUE){
-  stop(paste0("No implementation available for objects of class
-             ", class(x)))  
+
+stop(paste0("No implementation available for objects of class ", class(x)))  
   
 }
 
@@ -38,11 +38,10 @@ get_mode.numeric<-function(x,na.rm=TRUE){
   
 if(na.rm){
   x <- na.omit(x)
-x[which.max(rowSums(sapply(seq_along(x),function(y) x == x[y])))]
+
 }
-  else{
-    x[which.max(rowSums(sapply(seq_along(x),function(y) x == x[y])))] 
-  }
+  
+x[which.max(rowSums(sapply(seq_along(x),function(y) x == x[y])))]
   
 }
 
@@ -59,18 +58,16 @@ get_mode.data.frame <- function(x,na.rm=TRUE){
 if(any(sapply(x,is.factor))){
 warning("factor columns converted to character")
   x %>% 
-  dplyr::mutate(dplyr::across(is.factor, as.character)) %>% 
-    purrr::map_dfr(~get_mode.character(.x,na.rm=TRUE))
+  dplyr::mutate(dplyr::across(is.factor, as.character)) -> x
   
 } 
   
-  else{
-   
-x %>% 
-     dplyr::mutate(dplyr::across(is.factor, as.character)) %>% 
-      purrr::map_dfr(~get_mode.character(.x,na.rm=TRUE))
+ 
+  x %>% 
+    purrr::map_dfr(~get_mode.character(.x,na.rm=na.rm))
+
     
-  }
+  
 
 }
 

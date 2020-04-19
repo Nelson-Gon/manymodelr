@@ -10,9 +10,7 @@
 #' @param control See caret ?trainControl for details.
 #' @param newdata A data set to validate the model or for which predictions are required
 #' @param ... Other arguments to caret's train function
-#' @param valid Logical. Are you performing validation or dealing with new data? Defaults to False. Predictions added to new
-#' data
-#' @importFrom magrittr "%>%"
+#' @importFrom dplyr "%>%"
 #' @importFrom stats "as.formula"  "complete.cases" "setNames" "na.omit" "predict"
 #' @importFrom dplyr "arrange" "desc"
 #' @import caret
@@ -35,73 +33,53 @@
 #' ctrl<-trainControl(method="cv",number=5)
 #' set.seed(233)
 #' m<-multi_model_1(train_set,"Species",".",c("knn","rpart"),
-#' "Accuracy",ctrl,newdata =valid_set,valid=TRUE)
+#' "Accuracy",ctrl,newdata =valid_set)
 #' m$Predictions
 #' m$Metrics
 #' m$modelInfo
 #' @export
-multi_model_1<-function (df, yname, xname, method, metric, control, ..., newdata,
-valid=FALSE)
+multi_model_1<-function (df, yname, xname, method=NULL, metric=NULL, control=NULL,newdata=NULL,  ...) 
 {
   UseMethod("multi_model_1")
 }
 #' @export
-multi_model_1<-function (df, yname, xname, method, metric, control, ..., newdata,
-                              valid=FALSE)
- {
+multi_model_1<-function (df, yname, xname, method=NULL, metric=NULL, control=NULL,newdata=NULL, 
+                         ...) {
   if(is.null(newdata) || missing(newdata)){
-    stop("Please provide a data frame to perform validation or predict on
-         unseen data. ")
+  stop("Please provide a data frame to perform validation or predict on unseen data. ")
   }
-  if(valid){
-    df <- df
-    methods1 <- method
-    f1 <- as.formula(paste0(yname, "~", xname))
-    fit <- lapply(methods1, function(met) {
-      set.seed(520)
-      fit <- do.call("train", list(data = quote(df), f1, metric = metric,
-                                   trControl = control, method = met, ...))
-    })
-    preds <- lapply(fit, function(x) predict(x, newdata))
-    res <- as.data.frame(sapply(preds, function(x) do.call(unlist,
-                                                           list(x))))
-    names(res) <- method
-    new_metric <- tolower(metric)
-    new_metric <- eval(parse(text = paste0("Metrics::", new_metric)))
-    print("Returning Metrics")
-    #res
-    metrics <- lapply(res, function(x) new_metric(newdata[,yname],
-                                                  x))
-    #res1<-list(Results=tibble::as_tibble(newdata),res=res)
-    Results <- list(Metrics = tibble::as_tibble(metrics), Predictions = tibble::as_tibble(res),
-                    modelInfo=fit)
+  if(any(is.null(metric), is.null(control))){
+    stop("Both metric and control must be supplied")
+  }
+  
+  if(!yname %in% names(df)){
+    stop("yname should be a valid column name in the data set.")
+  }
+  if(is.null(method)){
+    stop("A method or vector of methods must be supplied.")
+  }
+  model_formula <- as.formula(paste0(yname, "~", xname))
 
-  }
-  else{
-    df <- df
-    methods1 <- method
-    f1 <- as.formula(paste0(yname, "~", xname))
-    fit <- lapply(methods1, function(met) {
-      
-     set.seed(520)
- fit <- do.call("train", list(data = quote(df), f1, metric = metric,
-                                   trControl = control, method = met, ...))
-    })
-    preds <- lapply(fit, function(x) predict(x, newdata))
-    res <- as.data.frame(sapply(preds, function(x) do.call(unlist,
-                                                           list(x))))
-    names(res) <- method
-    new_metric <- tolower(metric)
-    new_metric <- eval(parse(text = paste0("Metrics::", new_metric)))
-    print("Returning Metrics")
-    #res
-    newdata[yname]<-res
-    metrics <- lapply(res, function(x) new_metric(newdata[,yname],
-                                                  x))
-    #res1<-list(Results=tibble::as_tibble(newdata),res=res)
-    Results <- list(Metrics = tibble::as_tibble(metrics), Predictions = tibble::as_tibble(res),
-                    modelInfo=fit)
-  }
+  fitted_model <- lapply(method, function(met) {
+    set.seed(520)
+    fit <- do.call("train", list(data = quote(df), model_formula, metric = metric,
+                                 trControl = control, method = met, ...))
+  })
+  predictions <- lapply(fitted_model, function(x) predict(x, newdata))
+  predicted_values <- as.data.frame(sapply(predictions, function(x) do.call(unlist,list(x))))
+  names(predicted_values) <- method
+  new_metric <- eval(parse(text = paste0("Metrics::", tolower(metric))))
+  
+  
+metrics <- lapply(predicted_values, function(x) new_metric(newdata[,yname],x))
+  
+final_results <- list(metric = dplyr::as_tibble(metrics), predictions = dplyr::as_tibble(predicted_values),
+                      model_info=fitted_model)
+ 
+
+final_results
+  
 
 
 }
+

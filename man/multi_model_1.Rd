@@ -8,12 +8,11 @@ multi_model_1(
   df,
   yname,
   xname,
-  method,
-  metric,
-  control,
-  ...,
-  newdata,
-  valid = FALSE
+  method = NULL,
+  metric = NULL,
+  control = NULL,
+  newdata = NULL,
+  ...
 )
 }
 \arguments{
@@ -29,12 +28,9 @@ multi_model_1(
 
 \item{control}{See caret ?trainControl for details.}
 
-\item{...}{Other arguments to caret's train function}
-
 \item{newdata}{A data set to validate the model or for which predictions are required}
 
-\item{valid}{Logical. Are you performing validation or dealing with new data? Defaults to False. Predictions added to new
-data}
+\item{...}{Other arguments to caret's train function}
 }
 \value{
 A list containing two objects. A tibble containing a summary of the metrics per model,
@@ -58,7 +54,7 @@ train_set<-iris[train_set,]
 ctrl<-trainControl(method="cv",number=5)
 set.seed(233)
 m<-multi_model_1(train_set,"Species",".",c("knn","rpart"),
-"Accuracy",ctrl,newdata =valid_set,valid=TRUE)
+"Accuracy",ctrl,newdata =valid_set)
 m$Predictions
 m$Metrics
 m$modelInfo

@@ -24,9 +24,7 @@ Imports:
     caret(>= 6.0-81),
     reshape2(>= 1.4.3),
     plyr(>= 1.8.4),
-    magrittr(>= 1.5),
     Metrics(>= 0.1.4),
-    tibble(>= 2.0.1),
     e1071(>= 1.7-0.1),
     purrr(>= 0.3.2),
     ggplot2(>= 3.2.0)

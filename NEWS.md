@@ -15,6 +15,8 @@ author: "Nelson Gonzabato"
 
 - Refactored `get_mode` to be `tidy` compliant. 
 
+- The argument `valid` was dropped in `multi_model_1`.
+
 # manymodelr 0.2.4
 
 Fixes paper citation

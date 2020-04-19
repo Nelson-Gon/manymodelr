@@ -16,14 +16,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-# manymodelr 0.2.3
+# manymodelr 0.2.5
 
 In this vignette, we take a look at how we can simplify many machine learning tasks using `manymodelr`. We will take a look at the core functions first.
 
 ## Installing the package
 
-```{r}
-#install.packages("manymodelr")
+```{r, eval=FALSE}
+install.packages("manymodelr")
 ```
 
 Once the package has been successfully installed, we can then proceed by loading the package and exploring some of the key functions.
@@ -44,6 +44,7 @@ As one can guess from the name, this function provides an easy way to manipulate
 
 ```{r}
 agg_by_group(iris,.~Species,length)
+
 ```
 
 ```{r}
@@ -62,8 +63,8 @@ train_set<-createDataPartition(iris$Species,p=0.8,list=FALSE)
 valid_set<-iris[-train_set,]
 train_set<-iris[train_set,]
 ctrl<-trainControl(method="cv",number=5)
-m<-multi_model_1(train_set,"Species",".",c("knn","rpart"),
-"Accuracy",ctrl,newdata =valid_set,valid=TRUE)
+m<-multi_model_1(train_set,"Species",".",c("knn","rpart"), "Accuracy",ctrl,newdata =valid_set)
+
 ```
 
 The above message tells us that the model has returned our metrics for each of the model types we specified. These can be extracted as shown below. Other return values include predictions and a summary of the model.
@@ -235,39 +236,40 @@ Obtaining correlations would mostly likely benefit from some form of visualizati
 
 ```{r}
 # Use defaults.
-#res <- get_var_corr_(mtcars)
-#plot_corr(res)
+res <- get_var_corr_(mtcars)
+head(res)
+
 ```
 
 
 To modify the plot a bit, we can choose to switch the x and y values as shown below.
 
-```{r}
-#plot_corr(res, x="Other_Var", y="Comparison_Var")
+```{r, eval=FALSE}
+
+plot_corr(res, x="Other_Var", y="Comparison_Var")
+
 ```
 
 
 To show significance of the results instead of the correlations themselves, we can set `show_corr` to `FALSE` and set `show_signif` to `TRUE` as shown below. By default,
 significance is set to 0.05. You can override this by supplying a different `signif_cutoff` to the function.
 
-```{r}
+```{r, eval=FALSE}
 # color by p value
 # change custom colors by supplying custom_cols
 # significance is default 
-#plot_corr(res, x="Other_Var", y="Comparison_Var",
- #         plot_style = "squares",
-  #        show_corr = FALSE, show_signif = TRUE,
-   #       colour_by = "p.value",
-    #      custom_cols = c("blue","yellow","red"))
+plot_corr(res, x="Other_Var", y="Comparison_Var",
+          plot_style = "squares",show_corr = FALSE, show_signif = TRUE,
+          colour_by = "p.value", custom_cols = c("blue","yellow","red"))
 ```
 
-```{r}
-#plot_corr(res, x="Other_Var", y="Comparison_Var",
- #         plot_style = "squares",
-  #        show_corr = FALSE, show_signif = TRUE,
-   #       colour_by = "p.value",
-    #      custom_cols = c("blue","yellow","red"),
-     #     signif_cutoff = 0.01)
+```{r, eval=FALSE}
+plot_corr(res, x="Other_Var", y="Comparison_Var",
+          plot_style = "squares",
+          show_corr = FALSE, show_signif = TRUE,
+          colour_by = "p.value",
+          custom_cols = c("blue","yellow","red"),
+          signif_cutoff = 0.01)
 ```
 
 To explore more options, please take a look at the documentation.

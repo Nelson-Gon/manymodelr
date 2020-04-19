@@ -1,5 +1,7 @@
 comment: false
-
+codecov:
+       token: b7ee17c4-2d8a-4a7e-9601-7795727a84b7
+       branch: master
 coverage:
   status:
     project:
