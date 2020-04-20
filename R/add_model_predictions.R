@@ -15,8 +15,19 @@ add_model_predictions<- function(model,old_data,new_data){
   UseMethod("add_model_predictions")
 }
 #' @export
-add_model_predictions<- function(model,old_data, new_data){
+add_model_predictions<- function(model=NULL,old_data=NULL, new_data=NULL){
+  
+  if(any(is.null(old_data), is.null(new_data))){
+    stop("Both old_data and new_data must be provided")
+  }
+  if(is.null(model)){
+    stop("A model object must be provided.")
+  }
+  if(nrow(old_data)!=nrow(new_data)){
+    stop("old_data and new_data must have equal lengths.")
+  }
   predictions <- predict(model,new_data)
+
   old_data$predicted <- predictions
   old_data
 }
@@ -31,12 +42,15 @@ add_model_predictions<- function(model,old_data, new_data){
 #' lm_model <- fit_model(iris1,"Sepal.Length","Sepal.Width","lm") 
 #' head(add_model_residuals(lm_model,iris1))
 #' @export
-add_model_residuals <- function(model, old_data){
+add_model_residuals <- function(model=NULL, old_data=NULL){
 UseMethod("add_model_residuals")
   
 }
 #' @export
-add_model_residuals <- function(model, old_data){
+add_model_residuals <- function(model=NULL, old_data=NULL){
+  if(any(is.null(model), is.null(old_data))){
+    stop("Both model an old_data are required.")
+  }
   old_data$residuals <- residuals(model)
   old_data
 }
