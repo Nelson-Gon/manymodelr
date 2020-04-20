@@ -23,6 +23,8 @@ author: "Nelson Gonzabato"
 
 - `row_mean_na` is now defunct.
 
+- `na_replace` no longer allows using functions such as `mean`,`min`, etc. These have been reimplemented in the package [mde](htttps://www.github.com/Nelson-Gon/mde)
+
 # manymodelr 0.2.4
 
 Fixes paper citation
