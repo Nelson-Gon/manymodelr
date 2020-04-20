@@ -5,16 +5,17 @@
 #' fit_model(iris,"Sepal.Length","Species","aov")
 #' fit_model(iris,"Sepal.Width","Sepal.Length + Petal.Length + I(Petal.Width)**2","lm")
 #' @export
-fit_model <- function (df, yname, xname, modeltype,...)
+fit_model <- function (df=NULL, yname=NULL, xname=NULL, modeltype=NULL,...)
 {
   UseMethod("fit_model")
 }
 #' @export
-fit_model <- function (df, yname, xname, modeltype,...){
-  
+fit_model <- function (df=NULL, yname=NULL, xname=NULL, modeltype=NULL,...){
+  if(any(is.null(df), is.null(yname),is.null(xname),is.null(modeltype))){
+    stop("All arguments must be supplied.")
+  }
   model_formula <- as.formula(paste(yname, "~", xname))
-  do.call(modeltype, list(data = quote(df), model_formula,
-                          ...))
+  do.call(modeltype, list(data = quote(df), model_formula,...))
 }
 
 

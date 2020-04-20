@@ -16,6 +16,8 @@ author: "Nelson Gonzabato"
 - Refactored `get_mode` to be `tidy` compliant. 
 
 - The argument `valid` was dropped in `multi_model_1`.
+- `get_all` was dropped in `select_percentile`. 
+- `select_col`, `select_percentile`, `row_mean_na` will be removed in the next release.
 
 # manymodelr 0.2.4
 

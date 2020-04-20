@@ -1,7 +1,6 @@
 #' A convenient selector gadget
 #' @param df The data set from which to select a column
-#' @param x The name of a column to select(no quotes)
-#' @param ... Other columns to select
+#' @param ... columns to select, no quotes
 #' @return Returns a dataframe with selected columns
 #' @details A friendly way to select a column or several columns. Mainly for non-pipe usage
 #' It is recommended to use known select functions to do pipe manipulations. Otherwise convert to tibble
@@ -15,14 +14,13 @@
 #' as_tibble(iris) %>%
 #' select_col(Species)
 #' }
-select_col<-function(df,x,...){
+select_col<-function(df,...){
   UseMethod("select_col")
 }
 #' @export
-select_col<-function(df,x,...){
-  x<-deparse(substitute(x))
-  z<-unlist(sapply(substitute(...()), deparse))
-df[c(x,z)]
+select_col<-function(df,...){
+select_columns<-unlist(sapply(substitute(...()), deparse))
+df[select_columns]
 }
 
 
