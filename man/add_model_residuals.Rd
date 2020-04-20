@@ -4,7 +4,7 @@
 \alias{add_model_residuals}
 \title{Add model residuals}
 \usage{
-add_model_residuals(model, old_data)
+add_model_residuals(model = NULL, old_data = NULL)
 }
 \arguments{
 \item{model}{A model object from `fit_model`}

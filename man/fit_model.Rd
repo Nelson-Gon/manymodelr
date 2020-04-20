@@ -4,7 +4,7 @@
 \alias{fit_model}
 \title{Fit and predict in a single function.}
 \usage{
-fit_model(df, yname, xname, modeltype, ...)
+fit_model(df = NULL, yname = NULL, xname = NULL, modeltype = NULL, ...)
 }
 \arguments{
 \item{df}{The data for which analysis is required}

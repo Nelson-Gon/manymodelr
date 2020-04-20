@@ -4,14 +4,12 @@
 \alias{select_col}
 \title{A convenient selector gadget}
 \usage{
-select_col(df, x, ...)
+select_col(df, ...)
 }
 \arguments{
 \item{df}{The data set from which to select a column}
 
-\item{x}{The name of a column to select(no quotes)}
-
-\item{...}{Other columns to select}
+\item{...}{columns to select, no quotes}
 }
 \value{
 Returns a dataframe with selected columns

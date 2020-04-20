@@ -5,7 +5,7 @@
 \title{Add predictions to the data set.
 A dplyr compatible way to add predictions to a data set.}
 \usage{
-add_model_predictions(model, old_data, new_data)
+add_model_predictions(model = NULL, old_data = NULL, new_data = NULL)
 }
 \arguments{
 \item{model}{A model object from `fit_model`}

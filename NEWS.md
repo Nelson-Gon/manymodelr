@@ -9,15 +9,19 @@ author: "Nelson Gonzabato"
 
 - **extract_model_info** now supports `glmerMod`
 
-**Minor Fixes**
+**Other changes**
 
 - Fixed DOI to Max Kuhn's paper
 
 - Refactored `get_mode` to be `tidy` compliant. 
 
 - The argument `valid` was dropped in `multi_model_1`.
+
 - `get_all` was dropped in `select_percentile`. 
+
 - `select_col`, `select_percentile`, `row_mean_na` will be removed in the next release.
+
+- `row_mean_na` is now defunct.
 
 # manymodelr 0.2.4
 

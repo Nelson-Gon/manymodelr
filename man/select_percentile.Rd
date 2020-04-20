@@ -4,15 +4,12 @@
 \alias{select_percentile}
 \title{Get the row corresponding to a given percentile}
 \usage{
-select_percentile(df, percentile, get_all = TRUE, descend = FALSE)
+select_percentile(df = NULL, percentile = NULL, descend = FALSE)
 }
 \arguments{
 \item{df}{A `data.frame` object for which a percentile is required. Other data structures are not yet supported.}
 
 \item{percentile}{The percentile required eg 10 percentile}
-
-\item{get_all}{Logical. Should all variables be used? Currently only supports
-using all variables.}
 
 \item{descend}{Logical. Should the data be arranged in descending order? Defaults
 to FALSE.}
