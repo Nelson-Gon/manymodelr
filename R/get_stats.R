@@ -9,7 +9,7 @@
 #' @return A data.frame object showing the requested stats
 #' @details A convenient wrapper especially useful for get_mode
 #' @examples
-#' get_data_Stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "mean")
+#' head(get_data_Stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "get_mode"))
 #' @export 
 get_data_Stats<-function(x, func,exclude=NULL,na.rm=TRUE,na_action=NULL){
   UseMethod("get_data_Stats")
