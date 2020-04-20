@@ -16,8 +16,7 @@ testthat::test_that("Test rowdiff",
   
  # Replace NAs frrom calculation
 testthat::expect_equal(rowdiff(dummy_data, na.rm=TRUE,
-          na_action = "value", value="Self diff")[4,1],
-          "Self diff", fixed=TRUE)
+          na_action = "value", value=0)[4,1],0)
           
   
                     })

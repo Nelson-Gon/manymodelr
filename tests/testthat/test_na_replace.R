@@ -5,15 +5,13 @@ testthat::test_that(desc="NA replacement works",
                       
                   test_data <- data.frame(ID=c("A","A",
                                                "B","B"),
-                                          Val=c(1,NA,2,NA),
-                                          stringsAsFactors = FALSE)
+                                          Val=c(1,NA,2,NA))
               testthat::expect_equal(na_replace(test_data,
-                             how="value","Replaced")[2,2],
-                             "Replaced",
-                             fixed= TRUE)
+                             how="value",0)[2,2],
+                             0)
               testthat::expect_equal(as.numeric(na_replace(test_data,
-                                                how="max")[2,2]),
-                                     2)
+                                                how="get_mode")[2,2]),
+                                     1)
               
               
                     
@@ -24,15 +22,15 @@ testthat::test_that(desc="Test grouped replacement",
                       
               test_data <- data.frame(ID=c("A","A","A",
                                                    "B","B","B"),
-                                              Val=c(1,NA,3,2,NA,5),
-                                              stringsAsFactors = FALSE)
+                                              Val=c(1,NA,3,2,NA,5))
               testthat::expect_equal(na_replace_grouped(test_data,
                                                         group_by_cols = "ID",
-                                                        how="mean")[2,2],
-                                     2)
-              testthat::expect_equal(na_replace_grouped(test_data,
+                                                        how="get_mode")[2,2],
+                                     1)
+              testthat::expect_error(na_replace_grouped(test_data,
                                                         group_by_cols = "ID",
-                                                        how="mean")[5,2],
-                                     3.5)
+                                                        how="mean"),
+                                     "how should be one of ffill, samples, value or get_mode.",
+                                     fixed = TRUE)
                     })
 
