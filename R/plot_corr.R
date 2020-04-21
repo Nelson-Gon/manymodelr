@@ -5,7 +5,7 @@
 #' @param df The data to be plotted. A `data.frame` object produced
 #' by `get_var_corr_`
 #' @param x Value for the x axis. Defaults to "comparison_var"
-#' @param y Values for the y axis. Defaults to "Other_Var."
+#' @param y Values for the y axis. Defaults to "other_var."
 #' @param show_which Character. One of either corr or signif to control whether to show the
 #' correlation values or significance stars of the correlations. This is case sensitive and defaults to
 #' corr ie correlation values are shown.
@@ -47,7 +47,7 @@
 #' # defaults
 #' plot_corr(res,show_which = "corr",
 #' round_values = TRUE,
-#' round_which = "correlation",decimals = 2,x="Other_Var", 
+#' round_which = "correlation",decimals = 2,x="other_var", 
 #' y="comparison_var",plot_style = "circles",width = 1.1,
 #' custom_cols = c("green","blue","red"),colour_by = "correlation")
 
@@ -57,7 +57,7 @@
 #'
 plot_corr <- function(df,
                       x = "comparison_var",
-                      y = "Other_Var",
+                      y = "other_var",
                       xlabel = "Comparison Variable",
                       ylabel = "Other Variable",
                       title = "Correlations Plot",
@@ -92,9 +92,9 @@ plot_corr <- function(df,
 #' @export
 plot_corr <- function(df,
                       x = "comparison_var",
-                      y = "Other_Var",
+                      y = "other_var",
                       xlabel = "comparison_variable",
-                      ylabel = "Other_Variable",
+                      ylabel = "other_variable",
                       title = "Correlations Plot",
                       plot_style = "circles",
                       title_just = 0.5,

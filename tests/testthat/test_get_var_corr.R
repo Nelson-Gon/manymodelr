@@ -7,6 +7,7 @@ testthat::test_that(desc="Correlation tests",
       
     testthat::expect_error(get_var_corr(test_data,comparison_var = "A"),
       "Found columns with only NAs. Please remove these first.",fixed=TRUE)
+    testthat::expect_error(get_var_corr(iris),"comparison_var is required.", fixed=TRUE)
     
     testthat::expect_warning( get_var_corr(iris,"Sepal.Length",
                                            drop_columns = c("factor")),

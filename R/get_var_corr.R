@@ -53,7 +53,7 @@ final_result<-do.call(rbind, lapply(columns, function(x) {
     correlations <- cor.test(get(comparison_var, as.environment(df)),
                      get(x, as.environment(df)),method=method,...)
     
-    data.frame(comparison_var = comparison_var, Other_var = x,
+    data.frame(comparison_var = comparison_var, other_var = x,
                p.value = correlations$p.value, correlation= correlations$estimate,
                lower_ci= correlations$conf.int[1], upper_ci= correlations$conf.int[2])
   }))
@@ -65,7 +65,7 @@ structure(final_result,row.names= 1:nrow(final_result))
       correlations <- cor.test(get(comparison_var, as.environment(df)),
                        get(x, as.environment(df)),method=method,...)
       
-      data.frame(comparison_var = comparison_var, Other_var = x,
+      data.frame(comparison_var = comparison_var, other_var = x,
                  p.value = correlations$p.value, correlation= correlations$estimate)
     }))
   structure(final_result,row.names= 1:nrow(final_result))

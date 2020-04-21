@@ -49,7 +49,7 @@ final_result<-structure(final_result,row.names=1:nrow(final_result))
 if(!is.null(subset_cols)){
   
 final_result<-final_result[final_result$comparison_var %in% subset_cols[[1]] &
-                           final_result$Other_Var %in% subset_cols[[2]],]
+                           final_result$other_var %in% subset_cols[[2]],]
   
 }
 

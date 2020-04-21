@@ -7,9 +7,9 @@
 plot_corr(
   df,
   x = "comparison_var",
-  y = "Other_Var",
+  y = "other_var",
   xlabel = "comparison_variable",
-  ylabel = "Other_Variable",
+  ylabel = "other_variable",
   title = "Correlations Plot",
   plot_style = "circles",
   title_just = 0.5,
@@ -39,7 +39,7 @@ by `get_var_corr_`}
 
 \item{x}{Value for the x axis. Defaults to "comparison_var"}
 
-\item{y}{Values for the y axis. Defaults to "Other_Var."}
+\item{y}{Values for the y axis. Defaults to "other_var."}
 
 \item{xlabel}{label for the x axis}
 
@@ -112,7 +112,7 @@ res<-get_var_corr_(mtcars)
 # defaults
 plot_corr(res,show_which = "corr",
 round_values = TRUE,
-round_which = "correlation",decimals = 2,x="Other_Var", 
+round_which = "correlation",decimals = 2,x="other_var", 
 y="comparison_var",plot_style = "circles",width = 1.1,
 custom_cols = c("green","blue","red"),colour_by = "correlation")
 }
