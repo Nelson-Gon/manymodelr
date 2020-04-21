@@ -198,7 +198,7 @@ plot_corr <- function(df,
            },
            signif={
              base_plot <- base_plot +
-               geom_text(aes_string(label='ifelse(df[[colour_by]] < signif_cutoff,
+               geom_text(aes_string(label='ifelse(.data[[colour_by]] < signif_cutoff,
                                 "***","ns")'),
                          size=signif_size,
                          color=signif_col)+

@@ -292,7 +292,7 @@ The result is as follows(default pearson):
 
 head(corrs)
 
-    Comparison_Var Other_Var      p_value Correlation    lower_ci   upper_ci
+    comparison_Var other_Var      p_value  correlation    lower_ci   upper_ci
 1            mpg       cyl   6.112687e-10  -0.8521620 -0.92576936 -0.7163171
 2            mpg      disp   9.380327e-10  -0.8475514 -0.92335937 -0.7081376
 3            mpg        hp   1.787835e-07  -0.7761684 -0.88526861 -0.5860994
@@ -309,7 +309,7 @@ head(corrs)
 # purely demonstrative
 get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns= c("factor","character"), method="spearman", exact=FALSE)
 
-#  Comparison_Var    Other_Var      p.value Correlation
+#  comparison_Var    other_var      p.value   correlation
 # 1   Sepal.Length Petal.Length 3.443087e-50   0.8818981
 
 ```
@@ -321,7 +321,7 @@ get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns= c("fact
 ```
 head(get_var_corr_(mtcars, method="spearman", exact=FALSE))
 
-  Comparison_Var Other_Var      p.value Correlation
+   comparison_var  other_var      p.value correlation
 1            mpg       cyl 4.690287e-13  -0.9108013
 2            mpg      disp 6.370336e-13  -0.9088824
 3            mpg        hp 5.085969e-12  -0.8946646
@@ -337,7 +337,7 @@ To use only a few columns, we specify a list of columns in  `subset_cols`:
 
 head(get_var_corr_(mtcars, method="spearman", exact=FALSE, subset_cols=list(c("mpg","disp"),  c("wt","drat"))))
   
-      Comparison_Var  Other_Var      p.value Correlation
+      comparison_Var  other_var      p.value  correlation
 4             mpg      drat     5.381347e-05   0.6514555
 5             mpg        wt    1.487595e-11  -0.8864220
 21           disp      drat    1.613884e-05  -0.6835921
@@ -353,24 +353,24 @@ head(get_var_corr_(mtcars, method="spearman", exact=FALSE, subset_cols=list(c("m
 corrs <- get_var_corr_(iris)
 
 
-plot_corr(corrs, round_values = TRUE, round_which = "Correlation")
+plot_corr(corrs, round_values = TRUE, round_which = "correlation")
 
 
 ```
 
-![Correlations Plot](https://i.imgur.com/RyK6SDG.png)
+![Correlations Plot](https://imgur.com/biB23AD)
 
 To show significance instead(ie based on `p values`), one can set `show_which` to "signif". The default is `show_which="corr"` which will display the correlations. 
 
 
 ```
 
-plot_corr(corrs, x="Other_Var", y="Comparison_Var",show_which="signif")
+plot_corr(corrs, x="other_var", y="comparison_var",show_which="signif")
 
 
 ```
 
-![Signif plot](https://i.imgur.com/IPkOt47.png)
+![Signif plot](https://ibb.co/9VG4dH4)
 
 You can explore more options via `help(plot_corr)` or `?plot_corr`. Since the function uses `ggplot2` backend, one can change themes by adding `theme` components to the plot. 
 
