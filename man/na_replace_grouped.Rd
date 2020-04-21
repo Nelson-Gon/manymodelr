@@ -22,10 +22,5 @@ A convenient way to replace NAs by group.
 \examples{
 test2 <- data.frame(A=c("A","A","A","B","B","B"),
 B=c(NA,5,2,2,NA,2))
-head(na_replace_grouped(test2,"A",
-how="value","Replaced"))
-test <- data.frame(groups=c("A","A","A","B","B","B"),
-                  values = c(1,NA,2,1,NA,NA))
-
- na_replace_grouped(test,"groups",how="get_mode")
+head(na_replace_grouped(test2,"A",how="value","Replaced"))
 }
