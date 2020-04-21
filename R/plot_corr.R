@@ -4,7 +4,7 @@
 #' `get_var_corr_`.
 #' @param df The data to be plotted. A `data.frame` object produced
 #' by `get_var_corr_`
-#' @param x Value for the x axis. Defaults to "Comparison_Var"
+#' @param x Value for the x axis. Defaults to "comparison_var"
 #' @param y Values for the y axis. Defaults to "Other_Var."
 #' @param show_which Character. One of either corr or signif to control whether to show the
 #' correlation values or significance stars of the correlations. This is case sensitive and defaults to
@@ -21,7 +21,7 @@
 #' @param title_just Justification of the title. Defaults to 0.5, title is centered.
 #' @param plot_style One of squares and circles(currently).
 #' @param size Size of the circles for plot_style set to circles
-#' @param colour_by The column to use for coloring. Defaults to  "Correlation". Colour strength thus
+#' @param colour_by The column to use for coloring. Defaults to  "correlation". Colour strength thus
 #' indicates the strength of correlations.
 #' @param shape Values for the shape if plot_style is circles
 #' @param value_col What colour should the text in the squares/circles be?
@@ -47,26 +47,26 @@
 #' # defaults
 #' plot_corr(res,show_which = "corr",
 #' round_values = TRUE,
-#' round_which = "Correlation",decimals = 2,x="Other_Var", 
-#' y="Comparison_Var",plot_style = "circles",width = 1.1,
-#' custom_cols = c("green","blue","red"),colour_by = "Correlation")
+#' round_which = "correlation",decimals = 2,x="Other_Var", 
+#' y="comparison_var",plot_style = "circles",width = 1.1,
+#' custom_cols = c("green","blue","red"),colour_by = "correlation")
 
 
 #' @export
 #'
 #'
 plot_corr <- function(df,
-                      x = "Comparison_Var",
+                      x = "comparison_var",
                       y = "Other_Var",
-                      xlabel = "Comparison_Variable",
-                      ylabel = "Other_Variable",
+                      xlabel = "Comparison Variable",
+                      ylabel = "Other Variable",
                       title = "Correlations Plot",
                       plot_style = "circles",
                       title_just = 0.5,
                       round_values = TRUE,
-                      round_which = "Correlation",
+                      round_which = "correlation",
                       decimals = 2,
-                      colour_by = "Correlation",
+                      colour_by = "correlation",
                       show_which = "corr",
                       size = 12.6,
                       value_angle = 360,
@@ -91,16 +91,16 @@ plot_corr <- function(df,
 }
 #' @export
 plot_corr <- function(df,
-                      x = "Comparison_Var",
+                      x = "comparison_var",
                       y = "Other_Var",
-                      xlabel = "Comparison_Variable",
+                      xlabel = "comparison_variable",
                       ylabel = "Other_Variable",
                       title = "Correlations Plot",
                       plot_style = "circles",
                       title_just = 0.5,
                       round_values = TRUE,
-                      round_which = "Correlation",
-                      colour_by = "Correlation",
+                      round_which = "correlation",
+                      colour_by = "correlation",
                       decimals = 2,
                       show_which = "corr",
                       size = 12.6,
@@ -124,7 +124,7 @@ plot_corr <- function(df,
                       ...) {
   #visible binding
   if (is.null(colour_by)) {
-    colour_by <- df$Correlation
+    colour_by <- df$correlation
     
   }
   if(! colour_by %in% names(df)){

@@ -22,7 +22,6 @@ RoxygenNote: 7.0.2
 Imports: 
     dplyr(>= 0.8.9.9000),
     caret(>= 6.0-81),
-    plyr(>= 1.8.4),
     Metrics(>= 0.1.4),
     e1071(>= 1.7-0.1),
     ggplot2(>= 3.2.0)

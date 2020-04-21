@@ -6,7 +6,7 @@
 \usage{
 get_var_corr(
   df,
-  comparison_var,
+  comparison_var = NULL,
   other_vars = NULL,
   method = "pearson",
   drop_columns = c("factor", "character"),
@@ -18,7 +18,7 @@ get_var_corr(
 
 \item{comparison_var}{The variable to compare to}
 
-\item{other_vars}{Variables for which correlation with comparison_var is required. If not
+\item{other_vars}{variables for which correlation with comparison_var is required. If not
 supplied, all variables will be used.}
 
 \item{method}{The method used to perform the correlation test as defined in 'cor.test'.
@@ -39,6 +39,5 @@ This function returns the correlations between different variables.
 # Get correlations between all variables
 get_var_corr(mtcars,"mpg")
 # Use only a few variables
-get_var_corr(mtcars,"mpg", other_vars = c("disp","drat"), method = "kendall",
- exact=FALSE)
+get_var_corr(mtcars,"mpg", other_vars = c("disp","drat"), method = "kendall",exact=FALSE)
 }
