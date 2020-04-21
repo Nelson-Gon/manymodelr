@@ -12,7 +12,7 @@
 #' test <- data.frame(groups=c("A","A","A","B","B","B"),
 #'                   values = c(1,NA,2,1,NA,NA))
 #' 
-#'  na_replace_grouped(test,"groups",how="mean")
+#'  na_replace_grouped(test,"groups",how="get_mode")
 #' @export
 na_replace_grouped <- function(df,group_by_cols=NULL,...){
   UseMethod("na_replace_grouped")
