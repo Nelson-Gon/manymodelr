@@ -17,15 +17,12 @@ row_mean_na<-function(data,func,observations,na.rm=FALSE,exc){
   res2<-rowSums(m)/ncol(m)
   with_NA<-data[,observations]
   with_NA<-with_NA[!complete.cases(with_NA),]
- res<-reshape2::melt(c(res1,res2))
+ 
  res_with_NA<-setNames(cbind(res2,with_NA),nm=c("Replacement"))
  replaced<-list(res1,res2,res_with_NA["Replacement"])[3]
  merge(data,replaced,by=0)[-1]
 
-  }else{
- res3<-reshape2::melt(apply(m,1,func))
- data.frame(data,res3)
-}
+  }
 }
 #' @title Replace missing values
 #' @param df The data set(data.frame or vector) for which replacements are required

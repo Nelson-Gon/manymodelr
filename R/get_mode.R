@@ -54,17 +54,18 @@ get_mode.character <- get_mode.numeric
 #' @export
 get_mode.data.frame <- function(x,na.rm=TRUE){
   
-
-if(any(sapply(x,is.factor))){
+all_factors <- sapply(x,is.factor)
+if(any(all_factors)){
 warning("factor columns converted to character")
-  x %>% 
-  dplyr::mutate(dplyr::across(is.factor, as.character)) -> x
+ x %>% 
+   dplyr::mutate(dplyr::across(is.factor, as.character)) -> x
   
 } 
   
  
-  x %>% 
-    purrr::map_dfr(~get_mode.character(.x,na.rm=na.rm))
+x %>% 
+  dplyr::summarise(dplyr::across(dplyr::everything(),
+                                 ~get_mode.character(.,na.rm=na.rm)))
 
     
   

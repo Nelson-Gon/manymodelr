@@ -17,15 +17,13 @@
 #'              method="spearman",exact=FALSE)
 #' @export
 get_var_corr_<-function(df,subset_cols=NULL,
-                        drop_columns = c("character",
-                                         "factor"),
+                        drop_columns = c("character","factor"),
                         ...){
   UseMethod("get_var_corr_")
 }
 #' @export
 get_var_corr_.data.frame<-function(df,subset_cols=NULL,
-                                   drop_columns = c("character",
-                                                    "factor"),
+                                   drop_columns = c("character","factor"),
                                   ...){
 
 if(any(sapply(df,class) %in% drop_columns)){
@@ -33,35 +31,30 @@ if(any(sapply(df,class) %in% drop_columns)){
  warning("Columns with classes in drop_columns were dropped.")
 }
   
-to_use <- as.data.frame(t(combn(names(df),2)),
-                          stringsAsFactors= FALSE)
+to_use <- as.data.frame(t(combn(names(df),2)),stringsAsFactors= FALSE)
 compare_with<-to_use[[1]]
 other <- to_use[[2]]
 # Transpose, support pairwise combinations
  
+final_res <- Map(function(x,y)
+  manymodelr::get_var_corr(df,
+                           comparison_var = x,
+                           other_vars = y,
+                           ...),compare_with,other)
 
-  if(is.null(subset_cols)){
-    
-plyr::ldply(purrr::map2(compare_with,other,function(x,y)
-      manymodelr::get_var_corr(df,
-                               comparison_var = x,
-                               other_vars = y,
-                               ...)),data.frame)
 
-  }
+
+final_result<-do.call(rbind,final_res)
+final_result<-structure(final_result,row.names=1:nrow(final_result)) 
+if(!is.null(subset_cols)){
   
-  else{
-  res <- plyr::ldply(purrr::map2(compare_with,other,function(x,y)
-      manymodelr::get_var_corr(df,
-                               comparison_var = x,
-                               other_vars = y,
-                               ...)),data.frame)
-    
-final_res<-res[res$Comparison_Var %in% subset_cols[[1]] &
-          res$Other_Var %in% subset_cols[[2]],]
-structure(final_res, row.names=1:nrow(final_res))
-    
-  }
+final_result<-final_result[final_result$Comparison_Var %in% subset_cols[[1]] &
+                           final_result$Other_Var %in% subset_cols[[2]],]
+  
+}
+
+final_result
+  
 }
   
 
