@@ -33,5 +33,5 @@ A convenient wrapper especially useful for get_mode
 }
 \examples{
 head(get_data_Stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "get_mode"))
-get_stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "mean")
+get_stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "get_mode")
 }
