@@ -406,8 +406,7 @@ To replace the calculation induced `NA`s, we can set `na.rm` to `TRUE` and speci
 ```
 
 # since reverse, first value is replaced with 0.
-head(rowdiff(mtcars,direction="reverse", na.rm=TRUE,
-na_action="value", value=0))
+head(rowdiff(mtcars,direction="reverse", na.rm=TRUE, na_action="value", value=0))
 
    mpg  cyl disp  hp  drat     wt  qsec vs am gear carb
 1  0.0   0    0   0  0.00  0.000  0.00  0  0    0    0
@@ -426,14 +425,15 @@ na_action="value", value=0))
 
 test_data <- data.frame(A=c(1,2,NA,NA), B= c(1,3,4,NA))
 # replace NAs with the mean of the non NA values
-na_replace(test_data, how="mean")
-    A        B
-1 1.0 1.000000
-2 2.0 3.000000
-3 1.5 4.000000
-4 1.5 2.666667
+na_replace(test_data, how="get_mode")
+  A B
+1 1 1
+2 2 3
+3 1 4
+4 1 1
 
 ```
+
 
 The above is less useful since one might want to replace values by group. Using `na_replace_grouped`, one can achieve just that.
 
@@ -441,10 +441,9 @@ The above is less useful since one might want to replace values by group. Using 
 
 test_groups = data.frame(groups=c(1,1,1,2,2,2), values = c(2,NA,2,3,NA,3))
 
-na_replace_grouped(test_groups,group_by="groups",
-how="mean")
+na_replace_grouped(test_groups,group_by="groups",how="get_mode")
 
-    groups values
+ groups values
 1      1      2
 2      1      2
 3      1      2
@@ -453,6 +452,7 @@ how="mean")
 6      2      3
 
 ```
+The use of `mean`,`sd`,etc is no longer supported. Use [mde](https://www.github.com/Nelson-Gon/mde) instead which is focused on missingness. 
 
 Space constraints mean that a detailed exploration of the package cannot be made.  A more thorough walkthrough is provided in the vignettes that can be opened as shown below:
 

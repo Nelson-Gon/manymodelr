@@ -2,6 +2,7 @@
 author: "Nelson Gonzabato"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+title: Build and Tune Several Models
 
 vignette: >
   %\VignetteIndexEntry{ "A Gentle Introduction to manymodelr"}
@@ -305,6 +306,7 @@ na_replace_grouped(df=test_df,group_by_cols = "groups",how="ffill")
 
 ```
 
+The use of `mean`,`sd`,etc is no longer supported. Use [mde](https://www.github.com/Nelson-Gon/mde) instead which is focused on missingness. 
 
 ##### Exploring Further.
 
