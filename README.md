@@ -5,7 +5,7 @@
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3764309.svg)](https://doi.org/10.5281/zenodo.3764309)
 [![Build Status](https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.org/Nelson-Gon/manymodelr)
-[![R CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check/badge.svg)](https://github.com/Nelson-Gon/manymodelr)
+[![R CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg)](https://github.com/Nelson-Gon/manymodelr)
 [![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 [![Rdoc](http://www.rdocumentation.org/badges/version/manymodelr)](http://www.rdocumentation.org/packages/manymodelr) 
 [![Downloads](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
