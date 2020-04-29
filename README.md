@@ -14,7 +14,6 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Nelson-Gon/manymodelr/graphs/commit-activity) 
 [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) 
 [![Codecov test coverage](https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop)
-![Actions Coverage](https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg)
  [![GitHub last commit](https://img.shields.io/github/last-commit/Nelson-Gon/manymodelr.svg)](https://github.com/Nelson-Gon/manymodelr/commits/master)
 [![GitHub issues](https://img.shields.io/github/issues/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues/)
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues?q=is%3Aissue+is%3Aclosed)
@@ -80,8 +79,7 @@ valid_set<-iris[-train_set,]
 train_set<-iris[train_set,]
 ctrl<-trainControl(method="cv",number=5)
 
- m<-multi_model_1(train_set,"Species",".",c("knn","rpart"),
-"Accuracy",ctrl,newdata =valid_set,valid=TRUE)
+ m<-multi_model_1(train_set,"Species",".",c("knn","rpart"),"Accuracy",ctrl,newdata =valid_set)
 
 ```
 
@@ -142,8 +140,7 @@ head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length","lm"))
 We can also fit a multilinear model as shown below:
 
 ```
-head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length",
-    "Petal.Length + Sepal.Width","lm"))
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length + Sepal.Width","lm"))
     
  Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
 1          5.1         3.5          1.4         0.2  setosa  4.902999
