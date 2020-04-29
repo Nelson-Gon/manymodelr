@@ -42,7 +42,9 @@ na_replace<-function(df,how=NULL,value=NULL){
 #' @export
 
 na_replace.data.frame<-function(df,how=NULL,value=NULL){
-do.call(data.frame,list(sapply(df,na_replace.character,how=how,value=value)))
+ df %>% 
+    dplyr::mutate(dplyr::across(dplyr::everything(),
+                                ~na_replace.character(.,how=how,value = value)))
   
 }
 #' @export
