@@ -9,7 +9,6 @@
 #' @param show_which Character. One of either corr or signif to control whether to show the
 #' correlation values or significance stars of the correlations. This is case sensitive and defaults to
 #' corr ie correlation values are shown.
-#' @param round_values Logical. Should values be rounded off? Defaults to TRUE.
 #' @param round_which Character. The column name to be rounded off.
 #' @param decimals     Numeric. To how many decimal places should the rounding be done?
 #' Defaults to 2.
@@ -35,17 +34,14 @@
 #' 0.05. 
 #' @param signif_size Numeric. Defines size of the significance stars.
 #' @param signif_col  Charcater. Defines the col for the significance stars. 
-#' @param ... Other arguments to specific methods(`geom_text`) Useful once `show_signif` is set to  TRUE.
+#' @param ... Other arguments to get_var_corr_
 #' @details
 #' This function uses `ggplot2` backend. `ggplot2` is thus required for the plots to work.
 #' Since the correlations are obtained by `get_var_corr_`, the default is to omit correlation between a variable and itself. Therefore
 #' blanks in the plot would indicate a correlation of 1. 
 #' @return A `ggplot2` object showing the correlations plot.
 #' @examples
-#' # compute correlations
-#' res<-get_var_corr_(mtcars)
-#' # defaults
-#' plot_corr(res,show_which = "corr",
+#' plot_corr(mtcars,show_which = "corr",
 #' round_values = TRUE,
 #' round_which = "correlation",decimals = 2,x="other_var", 
 #' y="comparison_var",plot_style = "circles",width = 1.1,
@@ -98,9 +94,8 @@ plot_corr <- function(df,
                       title = "Correlations Plot",
                       plot_style = "circles",
                       title_just = 0.5,
-                      round_values = TRUE,
-                      round_which = "correlation",
-                      colour_by = "correlation",
+                      round_which = NULL,
+                      colour_by = NULL,
                       decimals = 2,
                       show_which = "corr",
                       size = 12.6,
@@ -122,8 +117,11 @@ plot_corr <- function(df,
                       
                       
                       ...) {
-  #visible binding
+  
+  df <- get_var_corr_(df,...)
+  
   if (is.null(colour_by)) {
+    warning("Using correlation in colour_by")
     colour_by <- df$correlation
     
   }
@@ -131,26 +129,38 @@ plot_corr <- function(df,
     stop(paste0(colour_by," is not a valid column name in the data"))
   }
   if(is.null(legend_title)){
+    warning("Using colour_by for the legend title.")
     legend_title <- colour_by
   }
   
   # Basic plot
-  if (round_values){
+  if (!is.null(round_which)){
     # check that the column actually exists
     if(! round_which %in% names(df)) stop("round_which must be a valid column name.")
-    df[[round_which]] <- round(df[[round_which]],
-                               decimals)
+    df[[round_which]] <- round(df[[round_which]],decimals)
      
       
 }
-   
+ #since R 4.0.0?
+stopifnot("plot_style must be one of circles or squares"= plot_style %in% c("circles","squares"))
+
     base_plot <- ggplot2::ggplot(data = df,
                                mapping =
                                  ggplot2::aes_string(x = x,
                                                      y = y))
+    base_plot_final <- base_plot +
+      geom_point(size = size,
+                 aes_string(col = colour_by),
+                 shape = shape) +
+      scale_color_gradient2(low = custom_cols[1],
+                            high = custom_cols[2],
+                            mid = custom_cols[3],
+                            labels=legend_labels)+
+      labs(x = xlabel, y = ylabel, title = title,
+           color=legend_title)
    
   if (plot_style == "squares") {
-    base_plot <- base_plot +
+    base_plot_final <- base_plot +
       geom_tile(size = size,
                 aes_string(fill = colour_by),
                 width = width) +
@@ -162,18 +172,7 @@ plot_corr <- function(df,
            fill=legend_title)
   }
   
-  else if (plot_style == "circles") {
-    base_plot <- base_plot +
-      geom_point(size = size,
-                 aes_string(col = colour_by),
-                 shape = shape) +
-      scale_color_gradient2(low = custom_cols[1],
-                            high = custom_cols[2],
-                            mid = custom_cols[3],
-                            labels=legend_labels)+
-      labs(x = xlabel, y = ylabel, title = title,
-           color=legend_title)
-  }
+ 
     
     
     
@@ -187,7 +186,7 @@ plot_corr <- function(df,
     
     switch(show_which,
            corr= {
-             base_plot <-base_plot +
+             base_plot_final <-base_plot_final +
                geom_text(
                  aes_string(label = colour_by),
                  color = value_col,
@@ -197,7 +196,7 @@ plot_corr <- function(df,
              
            },
            signif={
-             base_plot <- base_plot +
+             base_plot_final <- base_plot_final +
                geom_text(aes_string(label='ifelse(.data[[colour_by]] < signif_cutoff,
                                 "***","ns")'),
                          size=signif_size,
@@ -208,10 +207,9 @@ plot_corr <- function(df,
 
   
   
-actual_plot <- base_plot
+actual_plot <- base_plot_final
 
-# Change themes..keep is short and simple
-# Give user chance to show some creativity.     
+  
 
 actual_plot +
     theme_minimal()+

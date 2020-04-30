@@ -350,27 +350,29 @@ head(get_var_corr_(mtcars, method="spearman", exact=FALSE, subset_cols=list(c("m
 
 ```
 
-corrs <- get_var_corr_(iris)
+plot_corr(mtcars,show_which = "corr",
+          round_which = "correlation",decimals = 2,
+          x="other_var", 
+           y="comparison_var",plot_style = "squares"
+          ,width = 1.1,
+           custom_cols = c("green","blue","red"),colour_by = "correlation")
+
+```
+
+![Correlations Plot](https://imgur.com/XQWcvIe)
+
+To show significance instead(ie based on `p values`), one can set `show_which` to "signif". The default is `show_which="corr"` which will display correlations. 
 
 
-plot_corr(corrs, round_values = TRUE, round_which = "correlation")
+```
+plot_corr(mtcars, x="other_var", y="comparison_var",
+          plot_style = "squares",show_which = "signif",
+          colour_by = "p.value", custom_cols = c("indianred4","skyblue","red"))
 
 
 ```
 
-![Correlations Plot](https://imgur.com/biB23AD)
-
-To show significance instead(ie based on `p values`), one can set `show_which` to "signif". The default is `show_which="corr"` which will display the correlations. 
-
-
-```
-
-plot_corr(corrs, x="other_var", y="comparison_var",show_which="signif")
-
-
-```
-
-![Signif plot](https://ibb.co/9VG4dH4)
+![Signif plot](https://imgur.com/rwInrRj)
 
 You can explore more options via `help(plot_corr)` or `?plot_corr`. Since the function uses `ggplot2` backend, one can change themes by adding `theme` components to the plot. 
 

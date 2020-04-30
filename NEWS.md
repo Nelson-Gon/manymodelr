@@ -11,6 +11,8 @@ author: "Nelson Gonzabato"
 
 **Other changes**
 
+- `plot_corr` now directly accepts `data.frame` obejcts. Arguments like `round_values` have also been dropped.
+
 - Fixed DOI to Max Kuhn's paper
 
 - Refactored `get_mode` to be `tidy` compliant. 
@@ -21,9 +23,11 @@ author: "Nelson Gonzabato"
 
 - `select_col`, `select_percentile`, `row_mean_na` will be removed in the next release.
 
-- `row_mean_na` is now defunct.
+- `row_mean_na` is now defunct. Use `na_replace` instead.
 
 - `na_replace` no longer allows using functions such as `mean`,`min`, etc. These have been reimplemented in the package [mde](htttps://www.github.com/Nelson-Gon/mde)
+
+- `modeleR` is now defunct. Use `fit_model` instead.
 
 # manymodelr 0.2.4
 

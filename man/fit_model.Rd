@@ -21,6 +21,6 @@ fit_model(df = NULL, yname = NULL, xname = NULL, modeltype = NULL, ...)
 Fit and predict in a single function.
 }
 \examples{
-fit_model(iris,"Sepal.Length","Species","aov")
+fit_model(iris,"Sepal.Length","Species","lm")
 fit_model(iris,"Sepal.Width","Sepal.Length + Petal.Length + I(Petal.Width)**2","lm")
 }

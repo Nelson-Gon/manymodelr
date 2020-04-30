@@ -2,17 +2,17 @@
 #' @name fit_model
 #' @title Fit and predict in a single function.
 #' @examples
-#' fit_model(iris,"Sepal.Length","Species","aov")
+#' fit_model(iris,"Sepal.Length","Species","lm")
 #' fit_model(iris,"Sepal.Width","Sepal.Length + Petal.Length + I(Petal.Width)**2","lm")
-#' @export
-fit_model <- function (df=NULL, yname=NULL, xname=NULL, modeltype=NULL,...)
-{
-  UseMethod("fit_model")
-}
+
 #' @export
 fit_model <- function (df=NULL, yname=NULL, xname=NULL, modeltype=NULL,...){
   if(any(is.null(df), is.null(yname),is.null(xname),is.null(modeltype))){
     stop("All arguments must be supplied.")
+  }
+  
+  if(any(!yname %in% names(df), !xname %in% names(df))){
+    stop("yname and xname must be valid names in the data.")
   }
   model_formula <- as.formula(paste(yname, "~", xname))
   do.call(modeltype, list(data = quote(df), model_formula,...))
@@ -53,8 +53,8 @@ modeleR<-function (df, yname, xname, modeltype, na.rm = FALSE,
 modeleR<-function (df, yname, xname, modeltype, na.rm = FALSE,
                    new_data, ...)
 {
-  .Deprecated("fit_model")
-  # use fit_model
+  .Defunct("fit_model")
+  
   yname <- deparse(substitute(yname))
   xname <- deparse(substitute(xname))
   to_use <- which(names(df) == yname)

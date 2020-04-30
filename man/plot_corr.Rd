@@ -13,9 +13,8 @@ plot_corr(
   title = "Correlations Plot",
   plot_style = "circles",
   title_just = 0.5,
-  round_values = TRUE,
-  round_which = "correlation",
-  colour_by = "correlation",
+  round_which = NULL,
+  colour_by = NULL,
   decimals = 2,
   show_which = "corr",
   size = 12.6,
@@ -50,8 +49,6 @@ by `get_var_corr_`}
 \item{plot_style}{One of squares and circles(currently).}
 
 \item{title_just}{Justification of the title. Defaults to 0.5, title is centered.}
-
-\item{round_values}{Logical. Should values be rounded off? Defaults to TRUE.}
 
 \item{round_which}{Character. The column name to be rounded off.}
 
@@ -92,7 +89,7 @@ labels produced by the plot method.}
 
 \item{signif_col}{Charcater. Defines the col for the significance stars.}
 
-\item{...}{Other arguments to specific methods(`geom_text`) Useful once `show_signif` is set to  TRUE.}
+\item{...}{Other arguments to get_var_corr_}
 }
 \value{
 A `ggplot2` object showing the correlations plot.
@@ -107,10 +104,7 @@ Since the correlations are obtained by `get_var_corr_`, the default is to omit c
 blanks in the plot would indicate a correlation of 1.
 }
 \examples{
-# compute correlations
-res<-get_var_corr_(mtcars)
-# defaults
-plot_corr(res,show_which = "corr",
+plot_corr(mtcars,show_which = "corr",
 round_values = TRUE,
 round_which = "correlation",decimals = 2,x="other_var", 
 y="comparison_var",plot_style = "circles",width = 1.1,

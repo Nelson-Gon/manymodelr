@@ -3,13 +3,16 @@ library(manymodelr)
 testthat::test_that(desc="test fit_model",
                     code={
                       
-   testthat::expect_equal(
-    class(fit_model(iris,"Sepal.Length","Petal.Length","aov"))[1],"aov", fixed = TRUE)
-    testthat::expect_error(fit_model(iris,"Sepal.Length","Petal.Length"),
+testthat::expect_error(fit_model(iris,"Sepal.Length","Petal.Length"),
                            "All arguments must be supplied.", fixed=TRUE)
     testthat::expect_equal(
-      class(fit_model(iris,"Sepal.Length","Petal.Length","lm")),"lm", fixed = TRUE)
+      class(fit_model(iris,"Sepal.Length","Petal.Length","lm")),"lm")
+    testthat::expect_error(fit_model(iris,"error","Petal.Length","lm"),
+                           "yname and xname must be valid names in the data.",
+                           fixed=TRUE)
     
+    testthat::expect_equal(class(fit_model(iris,"Sepal.Width","Petal.Length","glm"))[[1]],
+                           "glm")
             
                     })
 
