@@ -359,7 +359,7 @@ plot_corr(mtcars,show_which = "corr",
 
 ```
 
-![Correlations Plot](https://imgur.com/XQWcvIe)
+![Correlations Plot](./images/corr_plot.png)
 
 To show significance instead(ie based on `p values`), one can set `show_which` to "signif". The default is `show_which="corr"` which will display correlations. 
 
@@ -372,7 +372,7 @@ plot_corr(mtcars, x="other_var", y="comparison_var",
 
 ```
 
-![Signif plot](https://imgur.com/rwInrRj)
+![Signif plot](./images/signif_plot.png)
 
 You can explore more options via `help(plot_corr)` or `?plot_corr`. Since the function uses `ggplot2` backend, one can change themes by adding `theme` components to the plot. 
 
