@@ -92,8 +92,7 @@ head(lin_model)
 
 We can also fit a multinear model as shown below:
 ```{r}
-head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length",
-    "Petal.Length + Sepal.Width","lm"))
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length + Sepal.Width","lm"))
 ```
 
 To take this a step further, we can fit a model with the square of Sepal.Width. 

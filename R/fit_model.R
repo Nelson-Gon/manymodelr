@@ -11,9 +11,7 @@ fit_model <- function (df=NULL, yname=NULL, xname=NULL, modeltype=NULL,...){
     stop("All arguments must be supplied.")
   }
   
-  if(any(!yname %in% names(df), !xname %in% names(df))){
-    stop("yname and xname must be valid names in the data.")
-  }
+ 
   model_formula <- as.formula(paste(yname, "~", xname))
   do.call(modeltype, list(data = quote(df), model_formula,...))
 }
