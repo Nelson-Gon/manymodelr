@@ -10,29 +10,31 @@
 #' @examples
 #' agg_by_group(airquality,.~Month,sum)
 #' @export
-agg_by_group <- function(df,my_formula,func, ...){
+agg_by_group <- function(df=NULL,my_formula=NULL,func=NULL,...){
   UseMethod("agg_by_group")
 }
 #' @export
-agg_by_group.default <- function(df, ...){
-  stop(paste0("Don't know how to deal with an 
-               object of class ", class(df)))
+agg_by_group.default <- function(df=NULL,my_formula=NULL,func=NULL,...){
+  stop(paste0("Don't know how to deal with an object of class ", class(df)))
   
 }
 #' @export
-agg_by_group.data.frame <-function(df,my_formula,func,...){
-  my_formula<-deparse(substitute(my_formula))
+agg_by_group.data.frame <-function(df=NULL,my_formula=NULL,func=NULL,...){
+
+  if(any(is.null(my_formula), is.null(func), is.null(df))){
+    stop("You should provide a data.frame, formula, and a function.")
+  }
+  
+ 
+    my_formula<-deparse(substitute(my_formula))
   
   res<-aggregate(as.formula(my_formula),df,func,...)
-  attr(res,"Groups")<-gsub("[~+]","",
-                           gsub(".*(?=~)","",
-                                my_formula,perl=TRUE))
+  attr(res,"Groups")<-trimws(gsub("[~+]","",gsub(".*(?=~)","",my_formula,perl=TRUE),"left"))
+  attr(res,"Groups")<-strsplit(attributes(res)$Groups,"\\s+")[[1]]
   res_list<-strsplit(attributes(res)["Groups"][[1]]," ")[[1]]
   res_list<-res_list[res_list!=""]
-  cat(noquote(paste0("Grouped By","[",length(res_list),"]",
-                     ":","\t")))
-  cat(gsub(",","",paste0(c(unlist(attributes(res)["Groups"])),
-                         sep=",")),"\n ")
+  cat(noquote(paste0("Grouped By","[",length(res_list),"]",":","\t")))
+  cat(gsub(",","",paste0(c(unlist(attributes(res)["Groups"])),sep=",")),"\n ")
   res
 }
 
