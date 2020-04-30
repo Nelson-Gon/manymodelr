@@ -120,14 +120,21 @@ plot_corr <- function(df,
   
   df <- get_var_corr_(df,...)
   
+#since R 4.0.0?
+
+stopifnot("plot_style must be one of circles or squares"= plot_style %in% c("circles","squares"))
+  
+  
   if (is.null(colour_by)) {
     warning("Using correlation in colour_by")
     colour_by <- df$correlation
     
   }
-  if(! colour_by %in% names(df)){
-    stop(paste0(colour_by," is not a valid column name in the data"))
+  
+  if(any(!round_which %in% names(df), !colour_by %in% names(df))){
+    stop("round_which and colour_by must be valid column names.")
   }
+ 
   if(is.null(legend_title)){
     warning("Using colour_by for the legend title.")
     legend_title <- colour_by
@@ -136,13 +143,11 @@ plot_corr <- function(df,
   # Basic plot
   if (!is.null(round_which)){
     # check that the column actually exists
-    if(! round_which %in% names(df)) stop("round_which must be a valid column name.")
+  
     df[[round_which]] <- round(df[[round_which]],decimals)
      
-      
+     
 }
- #since R 4.0.0?
-stopifnot("plot_style must be one of circles or squares"= plot_style %in% c("circles","squares"))
 
     base_plot <- ggplot2::ggplot(data = df,
                                mapping =
