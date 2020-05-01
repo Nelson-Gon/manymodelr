@@ -72,14 +72,13 @@ library(manymodelr)
 1.  `multi_model_1`
 
 ```
-suppressMessages(library(caret))
 set.seed(520)
 train_set<-createDataPartition(iris$Species,p=0.8,list=FALSE)
 valid_set<-iris[-train_set,]
 train_set<-iris[train_set,]
 ctrl<-trainControl(method="cv",number=5)
 
- m<-multi_model_1(train_set,"Species",".",c("knn","rpart"),"Accuracy",ctrl,newdata =valid_set)
+ m<-multi_model_1(train_set,"Species",".",c("knn","rpart"),"Accuracy",ctrl,new_data =valid_set)
 
 ```
 

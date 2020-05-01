@@ -5,18 +5,18 @@
 \title{Simultaneously train and predict on new data.}
 \usage{
 multi_model_1(
-  df,
+  old_data,
   yname,
   xname,
   method = NULL,
   metric = NULL,
   control = NULL,
-  newdata = NULL,
+  new_data = NULL,
   ...
 )
 }
 \arguments{
-\item{df}{The data holding the training dataset}
+\item{old_data}{The data holding the training dataset}
 
 \item{yname}{The outcome variable}
 
@@ -28,7 +28,7 @@ multi_model_1(
 
 \item{control}{See caret ?trainControl for details.}
 
-\item{newdata}{A data set to validate the model or for which predictions are required}
+\item{new_data}{A data set to validate the model or for which predictions are required}
 
 \item{...}{Other arguments to caret's train function}
 }
@@ -47,14 +47,13 @@ This function is meant to help in exploratory analysis to
 make an informed choice of the best models
 }
 \examples{
-library(caret)
 train_set<-createDataPartition(iris$Species,p=0.8,list=FALSE)
 valid_set<-iris[-train_set,]
 train_set<-iris[train_set,]
 ctrl<-trainControl(method="cv",number=5)
 set.seed(233)
 m<-multi_model_1(train_set,"Species",".",c("knn","rpart"),
-"Accuracy",ctrl,newdata =valid_set)
+"Accuracy",ctrl,new_data =valid_set)
 m$Predictions
 m$Metrics
 m$modelInfo
@@ -62,5 +61,5 @@ m$modelInfo
 \references{
 Kuhn (2014), "Futility Analysis in the Cross-Validation of Machine Learning Models" http://arxiv.org/abs/1405.6974,
 
-Kuhn (2008), "Building Predictive Models in R Using the caret" (http://www.jstatsoft.org/article/view/v028i05/v28i05.pdf)
+Kuhn (2008), "Building Predictive Models in R Using the caret" (http://www.jstatsoft.org/article/view/v028i05/v28i05.pold_data)
 }

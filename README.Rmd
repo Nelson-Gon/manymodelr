@@ -60,23 +60,27 @@ head(agg_by_group(mtcars,cyl~hp+vs,sum))
 This is one of the core functions of the package. Since the function uses `caret` backend, we need to load `caret` before we can use it. To avoid, several messages showing up, we use the function `suppressMessages`. This assumes that one is familiar with machine learning basics.
 
 ```{r}
-suppressMessages(library(caret))
 set.seed(520)
 train_set<-createDataPartition(iris$Species,p=0.8,list=FALSE)
 valid_set<-iris[-train_set,]
 train_set<-iris[train_set,]
 ctrl<-trainControl(method="cv",number=5)
-m<-multi_model_1(train_set,"Species",".",c("knn","rpart"), "Accuracy",ctrl,newdata =valid_set)
+m<-multi_model_1(train_set,"Species",".",c("knn","rpart"), "Accuracy",ctrl,new_data =valid_set)
 
 ```
 
 The above message tells us that the model has returned our metrics for each of the model types we specified. These can be extracted as shown below. Other return values include predictions and a summary of the model.
 
 ```{r}
+
 m$Metrics
+
 ```
+
 ```{r}
+
 head(m$Predictions)
+
 ```
 
 - **multi_model_2**
