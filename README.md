@@ -89,11 +89,14 @@ In the above we have trained and also got predictions(validated) on our data.
 To get the metrics for all our models, we can  proceed as follows:
 
 ```
-m$Metrics
+
+m$metric
+
 # A tibble: 1 x 2
-    knn rpart
-  <dbl> <dbl>
-1     1 0.933
+  knn_accuracy rpart_accuracy
+         <dbl>          <dbl>
+1            1          0.933
+
 
 ```
 

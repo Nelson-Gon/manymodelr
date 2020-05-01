@@ -5,35 +5,53 @@ author: "Nelson Gonzabato"
 
 # manymodelr 0.2.5
 
+
 **Major additions**
+
 
 - **extract_model_info** now supports `glmerMod`
 
+
 **Other changes**
+
+- Metrics from `multi_model_1` are now more informative with the metric and method wrapped in the naming of the result. 
+
 
 - `df` was renamed as `old_data` in `multi_model_1`, `newdata` to `new_data`.
 
+
 - `plot_corr` now directly accepts `data.frame` obejcts. Arguments like `round_values` have also been dropped.
+
 
 - Fixed DOI to Max Kuhn's paper
 
+
 - Refactored `get_mode` to be `tidy` compliant. 
+
 
 - The argument `valid` was dropped in `multi_model_1`.
 
+
 - `get_all` was dropped in `select_percentile`. 
+
 
 - `select_col`, `select_percentile`, `row_mean_na` will be removed in the next release.
 
+
 - `row_mean_na` is now defunct. Use `na_replace` instead.
+
 
 - `na_replace` no longer allows using functions such as `mean`,`min`, etc. These have been reimplemented in the package [mde](htttps://www.github.com/Nelson-Gon/mde)
 
+
 - `modeleR` is now defunct. Use `fit_model` instead.
+
 
 # manymodelr 0.2.4
 
 Fixes paper citation
+
+---
 
 # manymodelr 0.2.3
 
@@ -70,11 +88,14 @@ Fixes paper citation
 
 8. `get_var_corr` no longer has the `get_all` argument. Instead, users can provide an option `other_vars` vector of subset columns. `drop_columns` has also been changed from `boolean` to a character vector. 
 
+---
+
 
 # manymodelr 0.2.2
 
 Minor bug fixes with respect to the vignette.
 
+---
 
 # manymodelr 0.2.1
 
@@ -88,7 +109,7 @@ Minor bug fixes with respect to the vignette.
 
 3. `get_var_corr` provides a user-friendly way to find correlations between data.
 
-4. `get_var_corr_` provides a user-friendly way to find combination-wise correlations. It is relatively fast depending on how big one’s data is and/or machine specifications.
+4. `get_var_corr_` provides a user-friendly way to find combination-wise correlations. It is relatively fast depending on how big one's data is and/or machine specifications.
 
 5. `get_this` is an easy to use helper function to get metrics,predictions, etc. Currently supports lists and data.frame objects.
 

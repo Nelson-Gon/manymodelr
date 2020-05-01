@@ -73,7 +73,7 @@ The above message tells us that the model has returned our metrics for each of t
 
 ```{r}
 
-m$Metrics
+m$metric
 
 ```
 

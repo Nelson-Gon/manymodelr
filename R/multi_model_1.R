@@ -51,25 +51,26 @@ multi_model_1<-function (old_data, yname, xname, method=NULL, metric=NULL, contr
   
 
   
-  model_formula <- as.formula(paste0(yname, "~", xname))
-
-  fitted_model <- lapply(method, function(met) {
+model_formula <- as.formula(paste0(yname, "~", xname))
+fitted_model <- lapply(method, function(met) {
     set.seed(520)
     fit <- do.call("train", list(data = quote(old_data), model_formula, metric = metric,
                                  trControl = control, method = met, ...))
   })
   predictions <- lapply(fitted_model, function(x) predict(x, new_data))
   predicted_values <- as.data.frame(sapply(predictions, function(x) do.call(unlist,list(x))))
-  names(predicted_values) <- method
   new_metric <- tolower(metric)
+  names(predicted_values) <- method
+ 
   
   
 metrics <- lapply(predicted_values, function(x) do.call(new_metric, list(new_data[,yname],x)))
+
   
 final_results <- list(metric = dplyr::as_tibble(metrics), predictions = dplyr::as_tibble(predicted_values),
                       model_info=fitted_model)
  
-
+names(final_results$metric) <- paste(names(final_results$metric),new_metric,sep = "_")
 final_results
   
 
