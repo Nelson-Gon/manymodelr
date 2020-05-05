@@ -129,8 +129,16 @@ m$metric
 
 ``` r
 
-head(m$Predictions)
-#> NULL
+head(m$predictions)
+#> # A tibble: 6 x 2
+#>   knn    rpart 
+#>   <chr>  <chr> 
+#> 1 setosa setosa
+#> 2 setosa setosa
+#> 3 setosa setosa
+#> 4 setosa setosa
+#> 5 setosa setosa
+#> 6 setosa setosa
 ```
 
   - **multi\_model\_2**

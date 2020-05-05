@@ -97,7 +97,7 @@ m$metric
 
 ```{r}
 
-head(m$Predictions)
+head(m$predictions)
 
 ```
 
