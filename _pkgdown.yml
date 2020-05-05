@@ -1,0 +1,40 @@
+title: Build and Tune Several Models
+url: https://nelson-gon.github.io/manymodelr/
+template:
+   params:
+      bootswatch: flatly
+reference:
+  - title: Exported Functions
+    desc: Functions exported by manymodelr
+    contents:
+     - '`add_model_predictions`'
+     - '`agg_by_group`'
+     - '`extract_model_info`'
+     - '`fit_model`'
+     - '`get_exponent`'
+     - '`get_mode`'
+     - '`get_stats`'
+     - '`get_this`'
+     - '`get_var_corr`'
+     - '`get_var_corr_`'
+     - '`multi_model_1`'
+     - '`multi_model_2`'
+     - '`na_replace`'
+     - '`na_replace_grouped`'
+     - '`plot_corr`'
+     - '`rowdiff`'
+     - '`select_col`'
+     - '`select_percentile`'
+
+
+navbar:
+  type: inverse
+  left:
+    - icon: fa-home
+      href: articles/manymodelr_vignette.html
+    - text: "Tutorial"
+      menu:
+        - text: Usage
+          href: articles/manymodelr_vignette.html
+        - text: Changes
+          href: news/index.html

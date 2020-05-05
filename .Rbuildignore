@@ -16,3 +16,6 @@ _config.yml
 ^Meta$
 ^.github$
 ^images.*
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

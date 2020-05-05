@@ -1,9 +1,6 @@
 ---
-author: "Nelson Gonzabato"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-title: Build and Tune Several Models
-
+output: github_document
 vignette: >
   %\VignetteIndexEntry{ "A Gentle Introduction to manymodelr"}
   %\VignetteEngine{knitr::rmarkdown}
@@ -17,11 +14,30 @@ knitr::opts_chunk$set(
 )
 ```
 
-# manymodelr 0.2.5
+# `manymodelr`: Build and Tune Several Models
+
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3764309.svg)](https://doi.org/10.5281/zenodo.3764309)
+[![Build Status](https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.org/Nelson-Gon/manymodelr)
+[![R CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg)](https://github.com/Nelson-Gon/manymodelr)
+[![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+[![Rdoc](http://www.rdocumentation.org/badges/version/manymodelr)](http://www.rdocumentation.org/packages/manymodelr) 
+[![Downloads](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
+[![TotalDownloads](http://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow)](https://cran.r-project.org/package=manymodelr) 
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable) 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Nelson-Gon/manymodelr/graphs/commit-activity) 
+[![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) 
+[![Codecov test coverage](https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop)
+ [![GitHub last commit](https://img.shields.io/github/last-commit/Nelson-Gon/manymodelr.svg)](https://github.com/Nelson-Gon/manymodelr/commits/master)
+[![GitHub issues](https://img.shields.io/github/issues/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues/)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues?q=is%3Aissue+is%3Aclosed)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Nelson-Gon/manymodelr.svg)](http://isitmaintained.com/project/Nelson-Gon/manymodelr "Average time to resolve an issue")
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 In this vignette, we take a look at how we can simplify many machine learning tasks using `manymodelr`. We will take a look at the core functions first.
 
-## Installing the package
+
+**Installing the package**
 
 ```{r, eval=FALSE}
 
@@ -33,20 +49,22 @@ Once the package has been successfully installed, we can then proceed by loading
 
 
 
-### Loading the package
+**Loading the package**
 
 ```{r}
 library(manymodelr)
 ```
 
-#### A look at some of the key functions.
+
+**Sample Usage of Key Functions**
+
 
 - **`agg_by_group`**
 
 As one can guess from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form `x~y` where `y` is the grouping variable(in this case `Species`). One can supply a formula as shown next. 
 
 ```{r}
-agg_by_group(iris,.~Species,length)
+head(agg_by_group(iris,.~Species,length))
 
 ```
 
@@ -150,8 +168,7 @@ To add predictions to our data set, we can use `add_model_predictions` as follow
 
 ```{r}
 # select only column 6 that has our predicted values
-head(add_model_predictions(lm_model, old_data = iris1, 
-                           new_data =  iris2))[6]
+head(add_model_predictions(lm_model, old_data = iris1, new_data =  iris2))[6]
 ```
 
 To do the same with `dplyr`, one can work as follows:
@@ -212,7 +229,7 @@ head(corrs)
 ```{r}
 
 # purely demonstrative
-get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns= c("factor","character"), method="spearman", exact=FALSE)
+get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns=c("factor","character"), method="spearman", exact=FALSE)
 
 
 ```
@@ -313,11 +330,13 @@ na_replace_grouped(df=test_df,group_by_cols = "groups",how="ffill")
 
 The use of `mean`,`sd`,etc is no longer supported. Use [mde](https://www.github.com/Nelson-Gon/mde) instead which is focused on missingness. 
 
-##### Exploring Further.
+---
+
+**Exploring Further**
 
 The vignette has been short and therefore is non exhaustive. The best way to explore this and any package or language is to practice. For more examples, please use `?function_name` and see a few implementations of the given function.
 
-###### Reporting Issues
+**Reporting Issues**
 
 If you would like to contribute, report issues or improve any of these functions, please raise a pull request at ([manymodelr](https://www.github.com/Nelson-Gon/manymodelr))
 
