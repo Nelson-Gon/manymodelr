@@ -26,5 +26,5 @@ This function currently does not support grouping although this may be achieved 
 inaccuracies using grouping functions from other packages.
 }
 \examples{
-na_replace(airquality,how="value", value="Missing")
+head(na_replace(airquality,how="value", value="Missing"))
 }

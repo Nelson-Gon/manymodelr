@@ -113,6 +113,8 @@ Minor bug fixes with respect to the vignette.
 
 5. `get_this` is an easy to use helper function to get metrics,predictions, etc. Currently supports lists and data.frame objects.
 
+6. `modeleR` and `row_mean_na` were removed. 
+
 **Major Modifications**
 
 6. `get_data_Stats` now supports removal of missing data as well as using only numeric data.

@@ -5,11 +5,20 @@ testthat::test_that(desc="test fit_model",
                       
 testthat::expect_error(fit_model(iris,"Sepal.Length","Petal.Length"),
                            "All arguments must be supplied.", fixed=TRUE)
-    testthat::expect_equal(
-      class(fit_model(iris,"Sepal.Length","Petal.Length","lm")),"lm")
-  
-      testthat::expect_equal(class(fit_model(iris,"Sepal.Width","Petal.Length","glm"))[[1]],
-                           "glm")
+   
+      testthat::expect_error(fit_model(iris,"Sepal.Length","Petal.h","lm"),"All names must exist in the data",
+                             fixed=TRUE)
+      # check that model can be ran and results obtained
+      # fit an lm
+      lm_fit <-fit_model(iris,"Sepal.Length","Petal.Length","lm")
+      glm_fit <- fit_model(iris,"Sepal.Length","Petal.Length","glm")
+      total_attrs<-length(manymodelr::extract_model_info(lm_fit,
+                                            c("p_value","coeffs")))
+      
+      testthat::expect_equal(total_attrs,2)
+      testthat::expect_true(inherits(lm_fit,"lm"))
+      testthat::expect_true(inherits(glm_fit,"glm"))
+      
             
                     })
 

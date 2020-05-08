@@ -11,13 +11,11 @@ multi_model_2(old_data, new_data, yname, xname, modeltype, ...)
 
 \item{new_data}{The data set to use for predicting.}
 
-\item{yname}{The dependent variable}
+\item{yname}{The outcome variable}
 
-\item{xname}{The independent variable. Supports formulae x1+x2+...}
+\item{xname}{The predictor variable(s)}
 
-\item{modeltype}{Currently one of lm, glm and aov. Other models may work with inaccuracies}
-
-\item{...}{Additional arguments to the modeltype}
+\item{...}{Other arguments to specific model types.}
 }
 \description{
 Fit and predict in one function

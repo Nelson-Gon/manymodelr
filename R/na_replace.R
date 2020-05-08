@@ -1,29 +1,3 @@
-#' @title Replacing all NAs with mean values of a given row
-#' @param data is the data you for which the mean is needed
-#' @param func describes the function to use. Currently only supports the mean(others may work with some inaccuracies)
-#' @param observations takes on column names  for which manipulations are required
-#' @param na.rm Logical. Should NAs be removed from analysis?
-#' @param exc the column to exclude from analysis. Useful for removing factor columns
-#' @return Returns a data.frame object showing columns with NAs and their replacement if na.rm=T
-#' @export
-row_mean_na<-function(data,func,observations,na.rm=FALSE,exc){
-  ###This is no longer used. Was a design flaw####
-  .Defunct("na_replace")
-  m<-as.data.frame(mget(observations,envir = as.environment(data)))
-  if(na.rm){
-  res1<-apply(m[complete.cases(m),],1,func)
-  m<-m[!complete.cases(m),]
-  m[is.na(m)]<-0
-  res2<-rowSums(m)/ncol(m)
-  with_NA<-data[,observations]
-  with_NA<-with_NA[!complete.cases(with_NA),]
- 
- res_with_NA<-setNames(cbind(res2,with_NA),nm=c("Replacement"))
- replaced<-list(res1,res2,res_with_NA["Replacement"])[3]
- merge(data,replaced,by=0)[-1]
-
-  }
-}
 #' @title Replace missing values
 #' @param df The data set(data.frame or vector) for which replacements are required
 #' @param how How should missing values be replaced?  One of ffill, samples,value or any other known
@@ -34,7 +8,7 @@ row_mean_na<-function(data,func,observations,na.rm=FALSE,exc){
 #' inaccuracies using grouping functions from other packages.
 #' @return A data.frame object with missing values replaced.
 #' @examples
-#' na_replace(airquality,how="value", value="Missing")
+#' head(na_replace(airquality,how="value", value="Missing"))
 #' @export
 na_replace<-function(df,how=NULL,value=NULL){
   UseMethod("na_replace")

@@ -7,15 +7,15 @@
 fit_model(df = NULL, yname = NULL, xname = NULL, modeltype = NULL, ...)
 }
 \arguments{
-\item{df}{The data for which analysis is required}
+\item{df}{A data.frame object}
 
-\item{yname}{The dependent variable}
+\item{yname}{The outcome variable}
 
-\item{xname}{The independent variable. Supports formulae x1+x2+...}
+\item{xname}{The predictor variable(s)}
 
-\item{modeltype}{Currently one of lm, glm and aov. Other models may work with inaccuracies}
+\item{...}{Other arguments to specific model types.}
 
-\item{...}{Additional arguments to the modeltype}
+\item{model_type}{A character specifying the model type e.g lm for linear model}
 }
 \description{
 Fit and predict in a single function.
