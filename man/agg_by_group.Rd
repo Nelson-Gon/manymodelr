@@ -23,5 +23,5 @@ A grouped data.frame object with results of the chosen operation.
 This function performs operations by grouping the data.
 }
 \examples{
-agg_by_group(airquality,.~Month,sum)
+head(agg_by_group(airquality,.~Month,sum))
 }

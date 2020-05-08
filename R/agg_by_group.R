@@ -8,7 +8,7 @@
 #' @param ... Other arguments to 'aggregate' see ?aggregate for details
 #' @return A grouped data.frame object with results of the chosen operation.
 #' @examples
-#' agg_by_group(airquality,.~Month,sum)
+#' head(agg_by_group(airquality,.~Month,sum))
 #' @export
 agg_by_group <- function(df=NULL,my_formula=NULL,func=NULL,...){
   UseMethod("agg_by_group")
@@ -31,7 +31,7 @@ agg_by_group.data.frame <-function(df=NULL,my_formula=NULL,func=NULL,...){
   res<-aggregate(as.formula(my_formula),df,func,...)
   attr(res,"Groups")<-trimws(gsub("[~+]","",gsub(".*(?=~)","",my_formula,perl=TRUE),"left"))
   attr(res,"Groups")<-strsplit(attributes(res)$Groups,"\\s+")[[1]]
-  res_list<-strsplit(attributes(res)["Groups"][[1]]," ")[[1]]
+  res_list<-unlist(strsplit(attributes(res)["Groups"][[1]]," "))
   res_list<-res_list[res_list!=""]
   cat(noquote(paste0("Grouped By","[",length(res_list),"]",":","\t")))
   cat(gsub(",","",paste0(c(unlist(attributes(res)["Groups"])),sep=",")),"\n ")

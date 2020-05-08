@@ -4,10 +4,10 @@
 \alias{get_exponent}
 \title{Get the exponent of any number or numbers}
 \usage{
-get_exponent(y, x)
+get_exponent(y = NULL, x = NULL)
 }
 \arguments{
-\item{y}{The number for which an exponent is required}
+\item{y}{The number or numeric columns for which an exponent is required}
 
 \item{x}{The power to which y is raised}
 }
@@ -23,5 +23,5 @@ Depends on the expo and expo1 functions in expo
 \examples{
 df<-data.frame(A=c(1123,25657,3987))
 get_exponent(df,3)
-get_exponent(1:5, 6)
+get_exponent(1:5, 2)
 }
