@@ -13,9 +13,9 @@ fit_model(df = NULL, yname = NULL, xname = NULL, modeltype = NULL, ...)
 
 \item{xname}{The predictor variable(s)}
 
-\item{...}{Other arguments to specific model types.}
+\item{modeltype}{A character specifying the model type e.g lm for linear model}
 
-\item{model_type}{A character specifying the model type e.g lm for linear model}
+\item{...}{Other arguments to specific model types.}
 }
 \description{
 Fit and predict in a single function.

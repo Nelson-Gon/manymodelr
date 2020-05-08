@@ -1,6 +1,6 @@
 #' @param df A data.frame object
 #' @inheritParams multi_model_1
-#' @param model_type A character specifying the model type e.g lm for linear model
+#' @param modeltype A character specifying the model type e.g lm for linear model
 #' @param ... Other arguments to specific model types.
 #' @name fit_model
 #' @title Fit and predict in a single function.
