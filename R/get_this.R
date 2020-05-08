@@ -31,7 +31,7 @@ if(!any(sapply(where,is.list))){
 
   if(any(sapply(where,is.list))){
   
-  if(all(!is.null(names(where)),any(! what %in% unlist(sapply(my_list,names))))){
+  if(all(!is.null(names(where)),any(! what %in% unlist(sapply(where,names))))){
     stop("what should be a valid name in where. Perhaps you have an unnamed list?") 
   }
 
