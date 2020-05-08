@@ -6,37 +6,53 @@
 #' @details This is a helper function useful if you would like to extract data from
 #' the output of `multi_model_1`.
 #' @examples
-#' my_list<-list(list(A=520),list(B=456))
-#' get_this(A,my_list)
+#' my_list<-list(list(A=520),list(B=456,C=567))
+#' get_this(what="A",my_list)
+#' get_this(my_list,"C")
+#' # use values
+#' get_this(my_list, "B")
 #' @export
-get_this<- function (what, where){
+get_this<- function (where=NULL, what=NULL){
   UseMethod("get_this")
  
 }
 #' @export
-get_this<- function(what,where){
-  what <- deparse(substitute(what))
- 
-if(is.list(where) & !is.data.frame(where)){
-   
- if (is.null(names(where))) {
-     Filter(Negate(is.null), Map(function(x) x[[what]],
-                                  where))
-    }
-
-    else {
-      what_matched <- match.arg(what, names(where))
-      where[[what_matched]]
-    }
+get_this.list<- function(where=NULL,what=NULL){
+ if(any(is.null(what), is.null(where))){
+   stop("Both what and where are required")
  }
-  else{
-  what_matched <- match.arg(what, names(where))
-      where[what_matched]
-      
-    }
-    
+
+if(!any(sapply(where,is.list))){
+  if(all(!is.null(names(where)),any(!what %in% names(where)))){
+    stop("what should be a valid name in where. Perhaps you have an unnamed list?")
   }
+  final_result<-where[what]
+}
+
+  if(any(sapply(where,is.list))){
   
+  if(all(!is.null(names(where)),any(! what %in% unlist(sapply(my_list,names))))){
+    stop("what should be a valid name in where. Perhaps you have an unnamed list?") 
+  }
+
+final_result<-Filter(Negate(is.null), Map(function(x)x[[what]],where))
+}
+
+final_result
+}
+
+
+#' @export 
+
+get_this.data.frame <- get_this.list
+  
+  
+ 
+  
+ 
+
+  
+
 
 
 

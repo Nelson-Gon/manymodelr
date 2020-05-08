@@ -4,14 +4,14 @@
 \alias{get_this}
 \title{Helper function to easily access elements}
 \usage{
-get_this(what, where)
+get_this(where = NULL, what = NULL)
 }
 \arguments{
-\item{what}{What do you want to extract from the `data.frame` or `list`? No quotes. See
-examples below.}
-
 \item{where}{Where do you want to get it from? Currently only supports `list`s
 and `data.frame`objects.}
+
+\item{what}{What do you want to extract from the `data.frame` or `list`? No quotes. See
+examples below.}
 }
 \description{
 Helper function to easily access elements
@@ -21,6 +21,9 @@ This is a helper function useful if you would like to extract data from
 the output of `multi_model_1`.
 }
 \examples{
-my_list<-list(list(A=520),list(B=456))
-get_this(A,my_list)
+my_list<-list(list(A=520),list(B=456,C=567))
+get_this(what="A",my_list)
+get_this(my_list,"C")
+# use values
+get_this(my_list, "B")
 }

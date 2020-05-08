@@ -11,6 +11,8 @@ author: "Nelson Gonzabato"
 
 - **extract_model_info** now supports `glmerMod`
 
+- **get_this** now works with numeric input and also supports `data.frame` objects.
+
 
 **Other changes**
 
@@ -46,6 +48,7 @@ author: "Nelson Gonzabato"
 
 - `modeleR` is now defunct. Use `fit_model` instead.
 
+- `get_this` no longer accepts non quoted character strings. 
 
 # manymodelr 0.2.4
 
