@@ -1,4 +1,4 @@
-2020-05-05
+2020-05-13
 
 # `manymodelr`: Build and Tune Several Models
 
@@ -85,7 +85,7 @@ head(agg_by_group(iris,.~Species,length))
 
 ``` r
 head(agg_by_group(mtcars,cyl~hp+vs,sum))
-#> Grouped By[1]:   hp vs 
+#> Grouped By[2]:   hp vs 
 #> 
 #>    hp vs cyl
 #> 1  91  0   4
@@ -427,12 +427,13 @@ shown below.
 
 
 plot_corr(mtcars,show_which = "corr",
-          round_which = "correlation",decimals = 2,
-          x="other_var", 
-           y="comparison_var",plot_style = "squares"
-          ,width = 1.1,
-           custom_cols = c("green","blue","red"),colour_by = "correlation")
+          round_which = "correlation",decimals = 2,x="other_var",  y="comparison_var",plot_style = "squares"
+          ,width = 1.1,custom_cols = c("green","blue","red"),colour_by = "correlation")
+#> Warning in plot_corr(mtcars, show_which = "corr", round_which = "correlation", :
+#> Using colour_by for the legend title.
 ```
+
+![](README_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
 
 To show significance of the results instead of the correlations
 themselves, we can set `show_which` to “signif” as shown below. By
@@ -443,19 +444,14 @@ a different `signif_cutoff`.
 # color by p value
 # change custom colors by supplying custom_cols
 # significance is default 
-plot_corr(mtcars, x="other_var", y="comparison_var",
-          plot_style = "squares",show_which = "signif",
-          colour_by = "p.value", custom_cols = c("indianred4","skyblue","red"))
+set.seed(233)
+plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_which = "signif",
+          colour_by = "p.value", sample(colours(),3))
+#> Warning in plot_corr(mtcars, x = "other_var", y = "comparison_var", plot_style =
+#> "circles", : Using colour_by for the legend title.
 ```
 
-``` r
-plot_corr(res, x="other_var", y="comparison_var",
-          plot_style = "squares",
-          show_corr = FALSE, show_signif = TRUE,
-          colour_by = "p.value",
-          custom_cols = c("blue","yellow","red"),
-          signif_cutoff = 0.01)
-```
+![](README_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
 
 To explore more options, please take a look at the documentation.
 

@@ -261,15 +261,12 @@ Obtaining correlations would mostly likely benefit from some form of visualizati
 
 To modify the plot a bit, we can choose to switch the x and y values as shown below.
 
-```{r, eval=FALSE}
+```{r}
 
 
 plot_corr(mtcars,show_which = "corr",
-          round_which = "correlation",decimals = 2,
-          x="other_var", 
-           y="comparison_var",plot_style = "squares"
-          ,width = 1.1,
-           custom_cols = c("green","blue","red"),colour_by = "correlation")
+          round_which = "correlation",decimals = 2,x="other_var",  y="comparison_var",plot_style = "squares"
+          ,width = 1.1,custom_cols = c("green","blue","red"),colour_by = "correlation")
 
 ```
 
@@ -277,23 +274,16 @@ plot_corr(mtcars,show_which = "corr",
 To show significance of the results instead of the correlations themselves, we can set `show_which` to "signif"  as shown below. By default,
 significance is set to 0.05. You can override this by supplying a different `signif_cutoff`.
 
-```{r, eval=FALSE}
+```{r}
 # color by p value
 # change custom colors by supplying custom_cols
 # significance is default 
-plot_corr(mtcars, x="other_var", y="comparison_var",
-          plot_style = "squares",show_which = "signif",
-          colour_by = "p.value", custom_cols = c("indianred4","skyblue","red"))
+set.seed(233)
+plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_which = "signif",
+          colour_by = "p.value", sample(colours(),3))
 ```
 
-```{r, eval=FALSE}
-plot_corr(res, x="other_var", y="comparison_var",
-          plot_style = "squares",
-          show_corr = FALSE, show_signif = TRUE,
-          colour_by = "p.value",
-          custom_cols = c("blue","yellow","red"),
-          signif_cutoff = 0.01)
-```
+
 
 To explore more options, please take a look at the documentation.
 
