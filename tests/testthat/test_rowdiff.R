@@ -1,6 +1,5 @@
-# Row differences
-library(manymodelr)
-testthat::test_that("Test rowdiff",
+
+test_that("Test rowdiff",
                     code={
   
                       
@@ -8,14 +7,14 @@ testthat::test_that("Test rowdiff",
   
   the_test <- rowdiff(dummy_data,
                       direction="reverse")[3,2]
-  testthat::expect_equal(the_test, -2)
+ expect_equal(the_test, -2)
   
   another_test <- rowdiff(dummy_data,
                           direction="forward")[3,2]
-  testthat::expect_equal(another_test, -4)
+  expect_equal(another_test, -4)
   
  # Replace NAs frrom calculation
-testthat::expect_equal(rowdiff(dummy_data, na.rm=TRUE,
+expect_equal(rowdiff(dummy_data, na.rm=TRUE,
           na_action = "value", value=0)[4,1],0)
           
   

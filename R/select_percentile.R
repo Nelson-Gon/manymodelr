@@ -17,9 +17,7 @@ select_percentile<-function(df=NULL,percentile=NULL,descend=FALSE){
   UseMethod("select_percentile")
 }
 
-select_percentile.default <- function(df=NULL,percentile=NULL,descend=FALSE){
-  stop("Only `data.frame` objects are supported.")
-}
+
 #' @export
 select_percentile.data.frame<-function(df=NULL,percentile=NULL,descend=FALSE){
   # Returns the value corresponding to a percentile

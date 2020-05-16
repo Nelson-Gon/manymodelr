@@ -1,40 +1,41 @@
 #' A pipe friendly way to get summary stats for exploratory data analysis
 #' @param x The data for which stats are required
 #' @param func The nature of function to apply
-#' @param exclude What kind of data should be excluded? Defaults to NULL. Currently only supports
-#' removing non-numeric data i.e exclude="non_numeric"
-#' @param na.rm Logical. Should NAs be removed. Defaults to TRUE.
+#' @param exclude What kind of data should be excluded? Defaults to c("character","factor") to drop character and factor columns
+#' @param na.rm Logical. Should NAs be removed. Defaults to FALSE.
 #' @param na_action If na.rm is set to TRUE, this uses na_replace to replace missing values.
+#' @param ... Other arguments to na_replace
 #' See ?na_replace for details.
 #' @return A data.frame object showing the requested stats
 #' @details A convenient wrapper especially useful for get_mode
 #' @examples
-#' head(get_data_Stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "get_mode"))
+#' head(get_data_Stats(airquality,mean,na.rm = TRUE,na_action = "get_mode"))
 #' @export 
-get_data_Stats<-function(x, func,exclude=NULL,na.rm=TRUE,na_action=NULL){
+get_data_Stats<-function (x=NULL, func=NULL,exclude=c("factor","character"),na.rm=FALSE,na_action=NULL,...) {
   UseMethod("get_data_Stats")
 }
+
 #' @export
-get_data_Stats.default <-function (x, func,exclude=NULL,na.rm=TRUE,na_action=NULL){
-  stop("get_data_Stats is only implemented(currently) for
-       data.frame objects. Please convert to a data.frame object.")
+
+get_data_Stats.data.frame<-function (x=NULL, func=NULL,exclude=c("factor","character"),na.rm=FALSE,na_action=NULL,...) {
+
+if(any(is.null(x), is.null(func))) stop("Both df and func must be supplied")
+
+if(!is.null(exclude)){
+  warning("Columns with classes in exclude have been discarded")
+  
+  x <- Filter(function(x) ! class(x) %in% exclude, x)
+  
 }
-#' @export
-get_data_Stats.data.frame<-function (x, func,exclude=NULL,na.rm=TRUE,na_action=NULL)
-{
-  if(na.rm & anyNA(x)){
-    x<-na_replace(x,how=na_action)
-  }
-  if(is.null(exclude)|| missing(exclude)){
-    x <- x
-  }
-  else if(exclude=="non_numeric"){
-    warning("Non numeric columns have been discarded.")
-    x<-Filter(is.numeric,x)
 
+  if(na.rm){
+   if(!anyNA(x)) warning("NA removal requested on data with no missing values")
 
-  }
- sapply(x,function(x) do.call(func,list(x)))
+    x<-na_replace(x,how=na_action,...)
+
+}
+
+sapply(x,function(x) do.call(func,list(x)))
   
   
 }

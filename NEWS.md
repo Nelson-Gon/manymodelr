@@ -16,6 +16,8 @@ author: "Nelson Gonzabato"
 
 **Other changes**
 
+- `get_stats` now drops columns via a vector and not "non_numeric" as previously.
+
 - Metrics from `multi_model_1` are now more informative with the metric and method wrapped in the naming of the result. 
 
 
@@ -49,6 +51,7 @@ author: "Nelson Gonzabato"
 - `modeleR` is now defunct. Use `fit_model` instead.
 
 - `get_this` no longer accepts non quoted character strings. 
+
 
 # manymodelr 0.2.4
 

@@ -15,77 +15,41 @@
 #' @examples
 #' # Remove factor columns
 #' rowdiff(iris,exclude = "factor",direction = "reverse")
-#' rowdiff(iris[1:5,], exclude="factor",
-#'      na.rm = TRUE, na_action = "get_mode",
-#'      direction = "reverse")
+#' rowdiff(iris[1:5,], exclude="factor", na.rm = TRUE, na_action = "get_mode",direction = "reverse")
 #' @seealso \code{\link{na_replace}}
 #' @export
-rowdiff<-function (df, direction = "forward",exclude=NULL,
-na.rm=FALSE,na_action=NULL,...){
+rowdiff<-function (df, direction = "forward",exclude=NULL,na.rm=FALSE,na_action=NULL,...){
   UseMethod("rowdiff")
 }
 
 #' @export
-rowdiff.data.frame<-function(df, direction = "forward",
-                             exclude=NULL,
-                   na.rm=FALSE,na_action=NULL,...){
-
- if(is.null(exclude) & direction=="forward"){
-    res<-as.data.frame(sapply(df,
-                          function(x) x-dplyr::lead(x,1)))
-    
-    if(na.rm){
-      na_replace(res,how=na_action, ...)
-      
-    }
-    else{
-      res
-    }
-    
-
-}
-  else if(is.null(exclude) & direction=="reverse"){
-    res<-as.data.frame(sapply(df,
-                          function(x) x-dplyr::lag(x,1)))
-    if(na.rm){
-      na_replace(res,how=na_action,...)
-      
-    }
-    else{
-      res
-    }
-  }
-
-  else{
-    
-    filtered_df<-Filter(function(x) ! class(x) %in% exclude, df)
-    
-    if(direction=="forward"){
-   res<-as.data.frame(sapply(filtered_df,
-                          function(x) x-dplyr::lead(x,1)))
-    if(na.rm){
-      na_replace(res,how=na_action,...)
-    
-    }
-    else{
-      res
-    }
-}
-  else{
-   
-    res<-as.data.frame(sapply(filtered_df,
-                          function(x) x-dplyr::lag(x,1)))
-    if(na.rm){
-      na_replace(res,how=na_action, ...)
-      
-    }
-    else{
-      res
-    }
-
-  }
+rowdiff.data.frame<-function(df, direction = "forward", exclude=NULL, na.rm=FALSE,na_action=NULL,...){
   
-    }
+  if(!is.null(exclude)){
+   
+    df<-Filter(function(x) ! class(x) %in% exclude, df)    
+  }
+
+  stopifnot("Only forward and reverse are supported"= direction %in% c("forward","reverse"))
+  
+ if(direction=="forward"){
+    res<-as.data.frame(sapply(df,
+                          function(x) x-dplyr::lead(x,1)))
+    
+}
+
+  if(direction=="reverse"){
+    res<-as.data.frame(sapply(df,
+                          function(x) x-dplyr::lag(x,1)))
+  }
+
+  if(na.rm){
+      res<-na_replace(res,how=na_action,...)
+      
+}
+   
+res
+
 
 
 }

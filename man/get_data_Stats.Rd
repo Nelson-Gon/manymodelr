@@ -5,19 +5,30 @@
 \alias{get_stats}
 \title{A pipe friendly way to get summary stats for exploratory data analysis}
 \usage{
-get_data_Stats(x, func, exclude = NULL, na.rm = TRUE, na_action = NULL)
+get_data_Stats(
+  x = NULL,
+  func = NULL,
+  exclude = c("factor", "character"),
+  na.rm = FALSE,
+  na_action = NULL
+)
 
-get_stats(x, func, exclude = NULL, na.rm = TRUE, na_action = NULL)
+get_stats(
+  x = NULL,
+  func = NULL,
+  exclude = c("factor", "character"),
+  na.rm = FALSE,
+  na_action = NULL
+)
 }
 \arguments{
 \item{x}{The data for which stats are required}
 
 \item{func}{The nature of function to apply}
 
-\item{exclude}{What kind of data should be excluded? Defaults to NULL. Currently only supports
-removing non-numeric data i.e exclude="non_numeric"}
+\item{exclude}{What kind of data should be excluded? Defaults to c("character","factor") to drop character and factor columns}
 
-\item{na.rm}{Logical. Should NAs be removed. Defaults to TRUE.}
+\item{na.rm}{Logical. Should NAs be removed. Defaults to FALSE.}
 
 \item{na_action}{If na.rm is set to TRUE, this uses na_replace to replace missing values.
 See ?na_replace for details.}
@@ -32,6 +43,6 @@ A pipe friendly way to get summary stats for exploratory data analysis
 A convenient wrapper especially useful for get_mode
 }
 \examples{
-head(get_data_Stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "get_mode"))
+head(get_data_Stats(airquality,mean,na.rm = TRUE,na_action = "get_mode"))
 get_stats(airquality,mean,"non_numeric",na.rm = TRUE,na_action = "get_mode")
 }
