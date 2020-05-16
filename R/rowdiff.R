@@ -33,14 +33,13 @@ rowdiff.data.frame<-function(df, direction = "forward", exclude=NULL, na.rm=FALS
   stopifnot("Only forward and reverse are supported"= direction %in% c("forward","reverse"))
   
  if(direction=="forward"){
-    res<-as.data.frame(sapply(df,
-                          function(x) x-dplyr::lead(x,1)))
+    
+   res<-as.data.frame(sapply(df,function(x) x-dplyr::lead(x,1)))
     
 }
 
   if(direction=="reverse"){
-    res<-as.data.frame(sapply(df,
-                          function(x) x-dplyr::lag(x,1)))
+    res<-as.data.frame(sapply(df, function(x) x-dplyr::lag(x,1)))
   }
 
   if(na.rm){

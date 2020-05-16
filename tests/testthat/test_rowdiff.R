@@ -9,14 +9,10 @@ test_that("Test rowdiff",
                       direction="reverse")[3,2]
  expect_equal(the_test, -2)
   
-  another_test <- rowdiff(dummy_data,
-                          direction="forward")[3,2]
+  another_test <- rowdiff(dummy_data, direction="forward")[3,2]
   expect_equal(another_test, -4)
   
  # Replace NAs frrom calculation
-expect_equal(rowdiff(dummy_data, na.rm=TRUE,
-          na_action = "value", value=0)[4,1],0)
-          
-  
-                    })
+expect_equal(rowdiff(dummy_data, na.rm=TRUE,na_action = "value", value=0)[4,1],0)})
 
+expect_error(rowdiff(iris,direction = "gibberish"),"Only forward and reverse are supported", fixed=TRUE)
