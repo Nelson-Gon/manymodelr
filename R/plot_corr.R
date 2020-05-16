@@ -119,40 +119,41 @@ plot_corr <- function(df,
                       ...) {
   
   df <- get_var_corr_(df,...)
+ 
   
 #since R 4.0.0?
 
 stopifnot("plot_style must be one of circles or squares"= plot_style %in% c("circles","squares"))
   
   
-  if (is.null(colour_by)) {
+
+# Basic plot
+if (!is.null(round_which)){
+  # check that the column actually exists
+  if(!round_which %in% names(df)) stop("round_which must exist in get_var_corr_(df)")
+  
+  df[[round_which]] <- round(df[[round_which]],decimals)
+  
+  
+}
+# For use with `.data`
+colour_by_string <- colour_by
+if (is.null(colour_by)) {
     warning("Using correlation in colour_by")
     colour_by <- df$correlation
+    colour_by_string <- "correlation"
     
   }
-  
-  if(any(!round_which %in% names(df), !colour_by %in% names(df))){
-    stop("round_which and colour_by must be valid column names.")
-  }
+
  
   if(is.null(legend_title)){
     warning("Using colour_by for the legend title.")
-    legend_title <- colour_by
+    legend_title <- colour_by_string
   }
   
-  # Basic plot
-  if (!is.null(round_which)){
-    # check that the column actually exists
-  
-    df[[round_which]] <- round(df[[round_which]],decimals)
-     
-     
-}
 
-    base_plot <- ggplot2::ggplot(data = df,
-                               mapping =
-                                 ggplot2::aes_string(x = x,
-                                                     y = y))
+
+    base_plot <- ggplot2::ggplot(data = df, ggplot2::aes_string(x = x, y = y))
     base_plot_final <- base_plot +
       geom_point(size = size,
                  aes_string(col = colour_by),
@@ -202,7 +203,7 @@ stopifnot("plot_style must be one of circles or squares"= plot_style %in% c("cir
            },
            signif={
              base_plot_final <- base_plot_final +
-               geom_text(aes_string(label='ifelse(.data[[colour_by]] < signif_cutoff,
+               geom_text(aes_string(label='ifelse(.data[[colour_by_string]] < signif_cutoff,
                                 "***","ns")'),
                          size=signif_size,
                          color=signif_col)+
@@ -212,12 +213,9 @@ stopifnot("plot_style must be one of circles or squares"= plot_style %in% c("cir
 
   
   
-actual_plot <- base_plot_final
-
-  
-
-actual_plot +
+ base_plot_final +
     theme_minimal()+
+   
    theme(
       plot.title = element_text(hjust = title_just),
       panel.background = element_blank()

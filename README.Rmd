@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3764309.svg)](https://doi.org/10.5281/zenodo.3764309)
 [![Build Status](https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.org/Nelson-Gon/manymodelr)
 [![R CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg)](https://github.com/Nelson-Gon/manymodelr)
+![test-coverage](https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg)
 [![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 [![Rdoc](http://www.rdocumentation.org/badges/version/manymodelr)](http://www.rdocumentation.org/packages/manymodelr) 
 [![Downloads](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
@@ -52,7 +53,7 @@ Once the package has been successfully installed, we can then proceed by loading
 **Loading the package**
 
 ```{r}
-library(manymodelr)
+library(manymodelr, warn.conflicts = FALSE)
 ```
 
 
@@ -64,6 +65,7 @@ library(manymodelr)
 As one can guess from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form `x~y` where `y` is the grouping variable(in this case `Species`). One can supply a formula as shown next. 
 
 ```{r}
+
 head(agg_by_group(iris,.~Species,length))
 
 ```
@@ -114,8 +116,7 @@ head(lin_model)
 
 We can also fit a multinear model as shown below:
 ```{r}
-head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length",
-    "Petal.Length + Sepal.Width","lm"))
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length", "Petal.Length + Sepal.Width","lm"))
 ```
 
 To take this a step further, we can fit a model with the square of Sepal.Width. 
@@ -229,7 +230,7 @@ head(corrs)
 ```{r}
 
 # purely demonstrative
-get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns=c("factor","character"), method="spearman", exact=FALSE)
+get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns=c("factor","character"),method="spearman", exact=FALSE)
 
 
 ```
@@ -247,8 +248,7 @@ To use only a subset of the data, we can use provide a list of columns to `subse
 
 ```{r}
 
-head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),
-                   method="spearman",exact=FALSE))
+head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),method="spearman",exact=FALSE))
 
 ```
 
@@ -310,8 +310,7 @@ head(na_replace(airquality, how="value", value="Missing"),8)
 
 This provides a convenient way to replace values by group.
 ```{r}
-test_df <- data.frame(A=c(NA,1,2,3), B=c(1,5,6,NA),
-                      groups=c("A","A","B","B"))
+test_df <- data.frame(A=c(NA,1,2,3), B=c(1,5,6,NA),groups=c("A","A","B","B"))
 # Replace NAs by group
 # replcae with the next non NA by group.
 na_replace_grouped(df=test_df,group_by_cols = "groups",how="ffill")

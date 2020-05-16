@@ -1,4 +1,4 @@
-2020-05-13
+2020-05-16
 
 # `manymodelr`: Build and Tune Several Models
 
@@ -8,6 +8,7 @@
 Status](https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.org/Nelson-Gon/manymodelr)
 [![R
 CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg)](https://github.com/Nelson-Gon/manymodelr)
+![test-coverage](https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg)
 [![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 [![Rdoc](http://www.rdocumentation.org/badges/version/manymodelr)](http://www.rdocumentation.org/packages/manymodelr)
 [![Downloads](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
@@ -46,7 +47,7 @@ loading the package and exploring some of the key functions.
 **Loading the package**
 
 ``` r
-library(manymodelr)
+library(manymodelr, warn.conflicts = FALSE)
 #> Loading required package: caret
 #> Loading required package: lattice
 #> Loading required package: ggplot2
@@ -74,6 +75,7 @@ where `y` is the grouping variable(in this case `Species`). One can
 supply a formula as shown next.
 
 ``` r
+
 head(agg_by_group(iris,.~Species,length))
 #> Grouped By[1]:   Species 
 #> 
@@ -165,8 +167,7 @@ head(lin_model)
 We can also fit a multinear model as shown below:
 
 ``` r
-head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length",
-    "Petal.Length + Sepal.Width","lm"))
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length", "Petal.Length + Sepal.Width","lm"))
 #>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
 #> 1          5.1         3.5          1.4         0.2  setosa  4.902999
 #> 2          4.9         3.0          1.4         0.2  setosa  5.771541
@@ -374,7 +375,7 @@ specifying which column types(classes) should be dropped. It defaults to
 ``` r
 
 # purely demonstrative
-get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns=c("factor","character"), method="spearman", exact=FALSE)
+get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns=c("factor","character"),method="spearman", exact=FALSE)
 #> Warning in get_var_corr.data.frame(iris, "Sepal.Length", other_vars = "Petal.Length", : Columns with classes in drop_columns have been discarded. You
 #>               can disable this by setting yourself by setting drop_columns
 #>               to NULL.
@@ -404,8 +405,7 @@ therefore of length 2.
 
 ``` r
 
-head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),
-                   method="spearman",exact=FALSE))
+head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),method="spearman",exact=FALSE))
 #>   comparison_var other_var      p.value correlation
 #> 2            mpg      disp 6.370336e-13  -0.9088824
 #> 5            mpg        wt 1.487595e-11  -0.8864220
@@ -502,8 +502,7 @@ head(na_replace(airquality, how="value", value="Missing"),8)
 This provides a convenient way to replace values by group.
 
 ``` r
-test_df <- data.frame(A=c(NA,1,2,3), B=c(1,5,6,NA),
-                      groups=c("A","A","B","B"))
+test_df <- data.frame(A=c(NA,1,2,3), B=c(1,5,6,NA),groups=c("A","A","B","B"))
 # Replace NAs by group
 # replcae with the next non NA by group.
 na_replace_grouped(df=test_df,group_by_cols = "groups",how="ffill")
