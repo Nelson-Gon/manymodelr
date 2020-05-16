@@ -3,6 +3,8 @@
 # `manymodelr`: Build and Tune Several Models
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
+[![Codecov test
+coverage](https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3764309.svg)](https://doi.org/10.5281/zenodo.3764309)
 [![Build
 Status](https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.org/Nelson-Gon/manymodelr)
@@ -17,8 +19,6 @@ CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/b
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Nelson-Gon/manymodelr/graphs/commit-activity)
 [![Project
 Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Codecov test
-coverage](https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop)
 [![GitHub last
 commit](https://img.shields.io/github/last-commit/Nelson-Gon/manymodelr.svg)](https://github.com/Nelson-Gon/manymodelr/commits/master)
 [![GitHub
