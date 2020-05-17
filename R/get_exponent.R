@@ -11,12 +11,6 @@
 get_exponent <- function(y=NULL, x=NULL){
   UseMethod("get_exponent")
 }
-#' @export
-get_exponent.default <- function(y=NULL, x=NULL){
-  make_exponent(y=NULL, x=NULL)
-
-  
-}
 
 #' @export
 
