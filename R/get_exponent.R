@@ -21,12 +21,16 @@ get_exponent.default <- function(y=NULL, x=NULL){
 #' @export
 
 get_exponent.data.frame<-function(y=NULL, x=NULL){
- 
-    y %>%
-    dplyr::mutate(dplyr::across(is.numeric,~make_exponent(.,x=x)))
-    
- 
+  # This would have been done with dplyr but the where syntax requires import of tidyselect
+  # I try to minimise imports as much as possible
+  # I don't want to import tidyselect
+  #dplyr::mutate(y,dplyr::across(tidyselect:::where(is.numeric), ~make_exponent(y=.,x=x)))
 
+use_these_columns<-which(sapply(y, is.numeric))
+warning("Replacing all numeric columns with their exponents inplace")
+y[use_these_columns] <- sapply(y[use_these_columns],make_exponent,x=x)
+    
+y
 }
 
 #' @export
