@@ -29,15 +29,11 @@ mean squared error(msq), degrees of freedom(df),p_value.
 # perform analysis of variance
 aov_mod <- fit_model(iris, "Sepal.Length","Petal.Length + Species","aov")
 extract_model_info(aov_mod, "ssq")
-extract_model_info(aov_mod, c("ssq","p_value","aic"),k=5) 
-#select multiple
-extract_model_info(aov_mod, c("ssq","p_value")) 
+extract_model_info(aov_mod, c("ssq","predictors")) 
 # linear regression
 lm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
-extract_model_info(lm_model, "p_value") 
-extract_model_info(lm_model,"r2")
-extract_model_info(lm_model,"aic",k=3)
+extract_model_info(lm_model,c("aic","bic"))
 ## glm
 glm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
-extract_model_info(glm_model,"p_value")
+extract_model_info(glm_model,"aic")
 }

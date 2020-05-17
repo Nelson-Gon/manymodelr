@@ -15,17 +15,13 @@
 #' # perform analysis of variance
 #' aov_mod <- fit_model(iris, "Sepal.Length","Petal.Length + Species","aov")
 #' extract_model_info(aov_mod, "ssq")
-#' extract_model_info(aov_mod, c("ssq","p_value","aic"),k=5) 
-#' #select multiple
-#' extract_model_info(aov_mod, c("ssq","p_value")) 
+#' extract_model_info(aov_mod, c("ssq","predictors")) 
 #' # linear regression
 #' lm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
-#' extract_model_info(lm_model, "p_value") 
-#' extract_model_info(lm_model,"r2")
-#' extract_model_info(lm_model,"aic",k=3)
+#' extract_model_info(lm_model,c("aic","bic"))
 #' ## glm
 #' glm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
-#' extract_model_info(glm_model,"p_value")
+#' extract_model_info(glm_model,"aic")
 #' @export
 extract_model_info <- function(model_object=NULL, what=NULL,...){
   UseMethod("extract_model_info")
@@ -37,7 +33,7 @@ extract_model_info.default<- function(model_object=NULL, what=NULL,...){
 
 if(any(is.null(model_object), is.null(what))) stop("model_object and what are both required")
 model_call <- model_object$call
-model_formula <- gsub(".*=","",model_call)[[2]]
+model_formula <- gsub(".*=","",model_call)[2]
 formula_build <- trimws(unlist(strsplit(model_formula,"~")))
 predictor_var <- formula_build[2]
 response_var <- formula_build[1]
