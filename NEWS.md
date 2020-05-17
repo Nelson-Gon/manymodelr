@@ -9,7 +9,7 @@ author: "Nelson Gonzabato"
 **Major additions**
 
 
-- **extract_model_info** now supports `glmerMod`
+- **extract_model_info** now supports `glmerMod` and `glmmTMB`
 
 - **get_this** now works with numeric input and also supports `data.frame` objects.
 

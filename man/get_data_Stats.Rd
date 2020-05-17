@@ -10,7 +10,8 @@ get_data_Stats(
   func = NULL,
   exclude = c("factor", "character"),
   na.rm = FALSE,
-  na_action = NULL
+  na_action = NULL,
+  ...
 )
 
 get_stats(
@@ -18,7 +19,8 @@ get_stats(
   func = NULL,
   exclude = c("factor", "character"),
   na.rm = FALSE,
-  na_action = NULL
+  na_action = NULL,
+  ...
 )
 }
 \arguments{
@@ -30,7 +32,9 @@ get_stats(
 
 \item{na.rm}{Logical. Should NAs be removed. Defaults to FALSE.}
 
-\item{na_action}{If na.rm is set to TRUE, this uses na_replace to replace missing values.
+\item{na_action}{If na.rm is set to TRUE, this uses na_replace to replace missing values.}
+
+\item{...}{Other arguments to na_replace
 See ?na_replace for details.}
 }
 \value{

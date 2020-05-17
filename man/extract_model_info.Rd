@@ -4,7 +4,7 @@
 \alias{extract_model_info}
 \title{Extract important model attributes}
 \usage{
-extract_model_info(model_object, what, ...)
+extract_model_info(model_object = NULL, what = NULL, ...)
 }
 \arguments{
 \item{model_object}{A model object for example a linear model object, generalized linear model object,
@@ -12,7 +12,7 @@ analysis of variance object.}
 
 \item{what}{character. The attribute you would like to obtain for instance p_value}
 
-\item{...}{For `glm` and `lm` "aic", additional arguments to `AIC` from `stats`.}
+\item{...}{Arguments to other functions eg AIC, BIC, deviance etc}
 }
 \description{
 Provides a convenient way to extract any kind of model information from
