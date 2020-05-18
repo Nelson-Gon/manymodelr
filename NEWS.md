@@ -1,6 +1,9 @@
 ---
+
 title: "manymodelr-News"
 author: "Nelson Gonzabato"
+output: htlm_document
+
 ---
 
 # manymodelr 0.2.5
