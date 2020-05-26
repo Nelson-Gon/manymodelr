@@ -19,7 +19,22 @@ fit_model <- function (df=NULL, yname=NULL, xname=NULL, modeltype=NULL,...){
 }
 
 
+#' @export
+#' @title Fit several models with different response variables
+#' @inheritParams fit_model
+#' @return A list of model objects that can be used later.
+#' @examples 
+#' fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),
+#' xname="Petal.Length + Petal.Width",modeltype="lm")
+#' 
+fit_models <- function (df=NULL,yname=NULL, xname=NULL, modeltype=NULL,...){
+  if(!length(yname)>1){
+    stop("fit_models is used for several yname, use fit_model for single predictors")
+  }
 
+lapply(yname, function(x) fit_model(df=df,yname=x,xname=xname,modeltype = modeltype,...))
+
+}
 
 
 

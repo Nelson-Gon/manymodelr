@@ -16,6 +16,8 @@ output: htlm_document
 
 - **get_this** now works with numeric input and also supports `data.frame` objects.
 
+- **fit_models** extends **fit_model** by building many models at once.
+
 
 **Other changes**
 

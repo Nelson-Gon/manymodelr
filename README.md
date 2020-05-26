@@ -1,4 +1,4 @@
-2020-05-16
+2020-05-27
 
 # `manymodelr`: Build and Tune Several Models
 
@@ -221,34 +221,32 @@ follows:
 
 ``` r
 extract_model_info(lm_model, "r2")
-#> [1] 0.07138289
+#> NULL
 ```
 
 To extract the adjusted r squared, we can do the following:
 
 ``` r
 extract_model_info(lm_model, "adj_r2")
-#> [1] 0.0520367
+#> NULL
 ```
 
 For the p value:
 
 ``` r
 extract_model_info(lm_model, "p_value")
-#>  (Intercept) Petal.Length 
-#> 1.614927e-13 6.069778e-02
+#> NULL
 ```
 
 To extract multiple attributes:
 
 ``` r
 extract_model_info(lm_model,c("p_value","response"))
-#> $p_value
-#>  (Intercept) Petal.Length 
-#> 1.614927e-13 6.069778e-02 
+#> $<NA>
+#> NULL
 #> 
 #> $response
-#> Sepal.Length
+#> [1] "Sepal.Length"
 ```
 
 This is not restricted to linear models but will work for most model
@@ -330,6 +328,34 @@ iris1 %>%
 #> 4  setosa
 #> 5  setosa
 #> 6  setosa
+```
+
+  - `fit_models`
+
+This is similar to `fit_model` with the ability to fit many models with
+many predictors at once. A simple linear model for instance:
+
+``` r
+
+fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),xname="Petal.Length + Petal.Width",modeltype="lm")
+#> [[1]]
+#> 
+#> Call:
+#> lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)
+#> 
+#> Coefficients:
+#>  (Intercept)  Petal.Length   Petal.Width  
+#>       4.1906        0.5418       -0.3196  
+#> 
+#> 
+#> [[2]]
+#> 
+#> Call:
+#> lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)
+#> 
+#> Coefficients:
+#>  (Intercept)  Petal.Length   Petal.Width  
+#>       3.5870       -0.2571        0.3640
 ```
 
   - `get_var_corr`
@@ -433,7 +459,7 @@ plot_corr(mtcars,show_which = "corr",
 #> Using colour_by for the legend title.
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
 
 To show significance of the results instead of the correlations
 themselves, we can set `show_which` to “signif” as shown below. By
@@ -451,7 +477,7 @@ plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_
 #> "circles", : Using colour_by for the legend title.
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
 
 To explore more options, please take a look at the documentation.
 

@@ -199,6 +199,16 @@ iris1 %>%
 ```
 
 
+- `fit_models`
+
+This is similar to `fit_model` with the ability to fit many models with many predictors at once. A simple linear model for instance:
+
+```{r}
+
+fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),xname="Petal.Length + Petal.Width",modeltype="lm")
+
+```
+
 
 - `get_var_corr`
 
