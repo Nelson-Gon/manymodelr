@@ -37,7 +37,7 @@ model_formula <- gsub(".*=","",model_call)[2]
 formula_build <- trimws(unlist(strsplit(model_formula,"~")))
 predictor_var <- formula_build[2]
 response_var <- formula_build[1]
-
+model_summary <- summary(model_object)
 model_attrs_list <- list(call=model_call,
                          aic = AIC(model_object,...), bic = stats::BIC(model_object,...),
                        log_lik= stats::logLik(model_object,...), deviance = stats::deviance(model_object,...),
@@ -45,7 +45,10 @@ model_attrs_list <- list(call=model_call,
                       coeffs = stats::coef(model_object,...) , predictors = predictor_var,
                       residuals = stats::residuals(model_object,...),
                       resids = stats::residuals(model_object,...),
-                           response = response_var)
+                           response = response_var,
+                      r2 = model_summary$r.squared,
+                      adj_r2 = model_summary$adj.r.squared,
+                      p_value = coef(model_summary)[,4])
   
   
   attrs_to_select<-match(what,names(model_attrs_list))

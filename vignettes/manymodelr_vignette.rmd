@@ -1,6 +1,7 @@
 ---
 date: "`r Sys.Date()`"
-output: github_document
+title: Build and Tune Several Models with manymodelr
+output: html_document
 vignette: >
   %\VignetteIndexEntry{ "A Gentle Introduction to manymodelr"}
   %\VignetteEngine{knitr::rmarkdown}
@@ -159,7 +160,7 @@ extract_model_info(lm_model, "p_value")
 To extract multiple attributes:
 
 ```{r}
-extract_model_info(lm_model,c("p_value","response"))
+extract_model_info(lm_model,c("p_value","response","call","predictors"))
 
 ```
 

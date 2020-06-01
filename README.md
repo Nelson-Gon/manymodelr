@@ -1,4 +1,4 @@
-2020-05-27
+2020-06-02
 
 # `manymodelr`: Build and Tune Several Models
 
@@ -221,32 +221,40 @@ follows:
 
 ``` r
 extract_model_info(lm_model, "r2")
-#> NULL
+#> [1] 0.07138289
 ```
 
 To extract the adjusted r squared, we can do the following:
 
 ``` r
 extract_model_info(lm_model, "adj_r2")
-#> NULL
+#> [1] 0.0520367
 ```
 
 For the p value:
 
 ``` r
 extract_model_info(lm_model, "p_value")
-#> NULL
+#>  (Intercept) Petal.Length 
+#> 1.614927e-13 6.069778e-02
 ```
 
 To extract multiple attributes:
 
 ``` r
-extract_model_info(lm_model,c("p_value","response"))
-#> $<NA>
-#> NULL
+extract_model_info(lm_model,c("p_value","response","call","predictors"))
+#> $p_value
+#>  (Intercept) Petal.Length 
+#> 1.614927e-13 6.069778e-02 
 #> 
 #> $response
 #> [1] "Sepal.Length"
+#> 
+#> $call
+#> lm(formula = Sepal.Length ~ Petal.Length, data = df)
+#> 
+#> $predictors
+#> [1] "Petal.Length"
 ```
 
 This is not restricted to linear models but will work for most model

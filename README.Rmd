@@ -159,7 +159,7 @@ extract_model_info(lm_model, "p_value")
 To extract multiple attributes:
 
 ```{r}
-extract_model_info(lm_model,c("p_value","response"))
+extract_model_info(lm_model,c("p_value","response","call","predictors"))
 
 ```
 

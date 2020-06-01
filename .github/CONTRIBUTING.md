@@ -25,6 +25,12 @@ If edited via an `.R` file, please also update the docs using `roxygen2` to gene
 
 * Update `NEWS.md` to reflect the changes made.
 
+* Update `README.Rmd`, `knit`
+
+* Run: `cp README.Rmd vignettes/manymodelr_vignette.rmd && sed -i 's/github_document/html_document/g' vignettes/manymodelr_vignette.rmd`
+
+* `Knit` vignettes. Bonus points if you use `Rscript` or some way to automate this process. 
+
 
 Please note that the 'manymodelr' project is released with a
 [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
