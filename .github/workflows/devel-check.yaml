@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
         with:
-          r-version: '3.6.0'
+          r-version: '4.0.0'
       - name: Install make tools
         run: brew install automake
       - name: Install dependencies
