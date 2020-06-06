@@ -20,6 +20,9 @@ jobs:
         with:
           r-version: '3.6.3'
       - uses: r-lib/actions/setup-pandoc@master
+      
+      - name: Install make tools
+        run: brew install automake
 
       - name: Query dependencies
         run: |
