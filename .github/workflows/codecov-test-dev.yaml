@@ -38,7 +38,7 @@ jobs:
 
       - name: Install dependencies
         run:  |
-              install.packages("remotes")
+              install.packages("remotes", dependencies=TRUE)
               remotes::install_deps(dependencies = TRUE)
               remotes::install_github("tidyverse/dplyr")
 
