@@ -68,19 +68,27 @@ extract_model_info.lm <- extract_model_info.default
 extract_model_info.aov <- function(model_object=NULL, what=NULL,...){
   if(any(is.null(model_object), is.null(what))) stop("model_object and what are both required")
 
-  model_summary <- summary(model_object)
+  model_call <- model_object$call
+  model_formula <- gsub(".*=","",model_call)[2]
+  formula_build <- trimws(unlist(strsplit(model_formula,"~")))
+  predictor_var <- formula_build[2]
+  response_var <- formula_build[1]
+model_summary <- summary(model_object)
 possible_what <- c("coeffs","df","ssq","msq","f_value","p_value", "resids","aic","predictors","response",
                    "interactions","residuals")
 
 if(any(! what %in% possible_what)) stop(paste0(c("what should be one of",possible_what), collapse=" "))
 
 
-model_attrs_list<-list( coeffs = coef(model_object), df = model_summary[[1]][1], ssq = model_summary[[1]][2],
+model_attrs_list<-list( coeffs = coef(model_object), 
+                        df = model_summary[[1]][1], 
+                        ssq = model_summary[[1]][2],
           msq = model_summary[[1]][3], f_value = model_summary[[1]][4],
           p_value = model_summary[[1]][5], resids = residuals(model_summary),
-          residuals = residuals(model_summary), aic = extract_model_info.default(model_object,"aic"),
-          predictors = extract_model_info.default(model_object,"predictors"),
-          response = extract_model_info.default(model_object, "response"))
+          residuals = residuals(model_summary), 
+          aic = AIC(model_object,...),
+          predictors = predictor_var,
+          response = response_var)
 
 attrs_to_select <- match(what,names(model_attrs_list))
 
