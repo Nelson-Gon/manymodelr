@@ -14,6 +14,11 @@ test_that(desc= "extract_model_info works as expected",
           expect_equal(extract_model_info(aov_model,"predictors"), "Petal.Length")
           expect_type(extract_model_info(lm_model,"resids"),"double")
           expect_type(extract_model_info(lm_model,"residuals"),"double")
-        
+          expect_equal(length(extract_model_info(aov_model,c("ssq","msq"))),2)
+          # lme models
+           # this is purely demonstrative
+          fm2 <- lmer(Sepal.Length ~ Petal.Length + (1 | Species), data=iris)
+          expect_equal(extract_model_info(fm2,"random_groups")[[1]],3)
+          
               
                     })

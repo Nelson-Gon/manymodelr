@@ -21,7 +21,8 @@ LazyData: true
 RoxygenNote: 7.1.0
 Imports: 
     dplyr(>= 0.8.99.9000),
-    ggplot2(>= 3.2.0)
+    ggplot2(>= 3.2.0),
+    lme4(>= 1.1.23)
 Depends:
     caret(>= 6.0-81),
     Metrics(>= 0.1.4),

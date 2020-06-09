@@ -2,6 +2,7 @@
 #' @description Provides a convenient way to extract any kind of model information from
 #' common model objects
 #' @importFrom stats coef residuals AIC
+#' @importFrom lme4 lmer
 #' @param model_object A model object for example a linear model object, generalized linear model object,
 #' analysis of variance object.
 #' @param what character. The attribute you would like to obtain for instance p_value
@@ -40,7 +41,8 @@ response_var <- formula_build[1]
 model_summary <- summary(model_object)
 model_attrs_list <- list(call=model_call,
                          aic = AIC(model_object,...), bic = stats::BIC(model_object,...),
-                       log_lik= stats::logLik(model_object,...), deviance = stats::deviance(model_object,...),
+                       log_lik= stats::logLik(model_object,...), 
+                       deviance = stats::deviance(model_object,...),
                        df.resid= stats::df.residual(model_object,...),
                       coeffs = stats::coef(model_object,...) , predictors = predictor_var,
                       residuals = stats::residuals(model_object,...),
@@ -105,15 +107,20 @@ extract_model_info.lmerMod <- function(model_object=NULL, what=NULL,...){
 if(any(is.null(model_object), is.null(what))) stop("model_object and what are both required")
 
 model_summary <- summary(model_object)
-possible_what <- c("fixed_effects","resids", "log_lik","random_groups","random_effects","reml","formula",
+possible_what <- c("fixed_effects","resids", 
+                   "log_lik",
+                   "random_groups","random_effects","reml","formula",
                                   "coefficients", "residuals")
 if(any(! what %in% possible_what)) stop(paste0(c("what should be one of",possible_what), collapse=" "))
 
-model_attrs_list <-list(fixed_effects = model_summary[[10]], resids = model_summary [[16]],
-         residuals= extract_model_info.default(model_object,"resids"), 
-         log_lik =  extract_model_info.default(model_object, "log_lik"),
-         random_groups = model_summary [[9]],random_effects = Filter(Negate(anyNA),as.data.frame(model_summary[[13]])),
-         reml = model_summary [[14]],formula = model_summary[[15]], coefficients = extract_model_info.default(model_object,"coeffs") )
+model_attrs_list <-list(fixed_effects = model_summary[[10]], 
+                        resids = model_summary [[16]],
+         residuals= residuals(model_summary), 
+         log_lik = stats::logLik(model_object,...),
+         random_groups = model_summary [[9]],
+         random_effects = Filter(Negate(anyNA),as.data.frame(model_summary[[13]])),
+         reml = model_summary [[14]],formula = model_summary[[15]], 
+         coefficients = coef(model_object))
 
 attrs_to_select <- match(what, names(model_attrs_list))
 
