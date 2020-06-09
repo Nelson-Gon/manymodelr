@@ -7,7 +7,6 @@
 #' @noRd 
 
 force_exponent<-function(n){
-  if(!is.numeric(n)) stop("n must be of class numeric")
   force(n)
   function(x){
     x^n

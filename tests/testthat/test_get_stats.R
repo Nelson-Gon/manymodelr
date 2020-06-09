@@ -9,8 +9,11 @@ test_that(desc="test get_data_Stats",
  expect_error(get_stats(dummy_data),"Both df and func must be supplied",fixed=TRUE)
 
  expect_equal(final_res,5)
- expect_true(get_stats(airquality,func="min",na.rm = TRUE,na_action = "value", value=0)[2]==0)
-    
+ expect_true(get_stats(airquality,func="min",na.rm = TRUE,
+                       na_action = "value", value=0)[2]==0)
+ expect_error(get_stats(mtcars,"max",na.rm=TRUE,na_action = "get_mode"),
+              "NA removal requested on data with no missing values", fixed=TRUE)
+ 
                     })
 
 

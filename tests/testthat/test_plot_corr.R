@@ -31,4 +31,7 @@ expect_true(inherits(full_plot,"ggplot"))
 expect_true(inherits(full_plot_1,"ggplot"))
 # check signif works as required
 expect_true(all(unique(ggplot_build(full_plot_1)$data[[2]]$label) %in% c("***", "ns")))
+
+expect_warning(plot_corr(mtcars,legend_title = "test"),"Using correlation in colour_by",
+               fixed = TRUE)
                     })

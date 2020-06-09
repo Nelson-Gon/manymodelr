@@ -17,5 +17,5 @@ test_that(desc = "exponential value",
             expect_warning(get_exponent(iris,2), "Replacing all numeric columns with their exponents inplace", fixed=TRUE)
             expect_equal(get_exponent(iris,2)[41, 1],25)
             
-                    })
+           })
 

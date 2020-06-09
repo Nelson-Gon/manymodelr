@@ -8,7 +8,7 @@
 get_data_Stats(
   x = NULL,
   func = NULL,
-  exclude = c("factor", "character"),
+  exclude = NULL,
   na.rm = FALSE,
   na_action = NULL,
   ...
@@ -17,7 +17,7 @@ get_data_Stats(
 get_stats(
   x = NULL,
   func = NULL,
-  exclude = c("factor", "character"),
+  exclude = NULL,
   na.rm = FALSE,
   na_action = NULL,
   ...
@@ -28,7 +28,7 @@ get_stats(
 
 \item{func}{The nature of function to apply}
 
-\item{exclude}{What kind of data should be excluded? Defaults to c("character","factor") to drop character and factor columns}
+\item{exclude}{What kind of data should be excluded? Use for example c("character","factor") to drop character and factor columns}
 
 \item{na.rm}{Logical. Should NAs be removed. Defaults to FALSE.}
 

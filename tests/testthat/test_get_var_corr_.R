@@ -17,4 +17,9 @@ testthat::test_that(desc="Tests that get_var_corr
     # Expect length
     testthat::expect_true(length(names(get_var_corr_(mtcars,
                                   method = "kendall", exact = FALSE))) == 4)
+    
+    expect_equal(nrow(get_var_corr_(mtcars,
+                  subset_cols = list(c("mpg","vs"),
+                                     c("disp","wt")),
+                  method="spearman",exact=FALSE)), 2)
                     })

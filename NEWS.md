@@ -57,6 +57,8 @@ output: htlm_document
 
 - `get_this` no longer accepts non quoted character strings. 
 
+- Better coverage and code tests
+
 
 # manymodelr 0.2.4
 
