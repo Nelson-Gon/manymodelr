@@ -24,9 +24,11 @@ na_replace.data.frame<-function(df,how=NULL,value=NULL){
 #' @export
 na_replace.numeric<-function(df=NULL,how=NULL,value=NULL){
 
-  if(any(is.null(df), is.null(how))){
-    stop("df and how must both be provided.")
-  }
+ 
+  
+if(all(is.null(how),is.null(value))) stop("One of how or value should be provided")
+ 
+
   # individually get replacements 
   if(! how%in%c("ffill","samples","value", "get_mode")){
     stop("how should be one of ffill, samples, value or get_mode.")
@@ -37,7 +39,7 @@ na_replace.numeric<-function(df=NULL,how=NULL,value=NULL){
 
 switch(how,
          ffill =  ifelse(is.na(df), to_replace[1:length(df[is.na(df)])],df),
-         sample =       
+         samples =       
            ifelse(is.na(df),sample(na.omit(df),length(df[is.na(df)]),
                                    replace = TRUE),df),
          value = ifelse(is.na(df),value, df),
