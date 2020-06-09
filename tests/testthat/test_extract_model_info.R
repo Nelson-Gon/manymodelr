@@ -19,6 +19,12 @@ test_that(desc= "extract_model_info works as expected",
            # this is purely demonstrative
           fm2 <- lmer(Sepal.Length ~ Petal.Length + (1 | Species), data=iris)
           expect_equal(extract_model_info(fm2,"random_groups")[[1]],3)
+          expect_error(extract_model_info(fm2),"model_object and what are both required",
+                       fixed = TRUE)
+          expect_error(extract_model_info(fm2,"gibberish"),
+                       "what should be one of fixed_effects resids log_lik random_groups random_effects reml formula coefficients residuals",
+                       fixed=TRUE)
+          expect_equal(length(extract_model_info(fm2, c("reml","log_lik"))),2)
           
               
                     })

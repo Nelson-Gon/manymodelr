@@ -1,9 +1,9 @@
 # test fit_model
 library(manymodelr)
-testthat::test_that(desc="test fit_model",
+test_that(desc="test fit_model",
                     code={
                       
-testthat::expect_error(fit_model(iris,"Sepal.Length","Petal.Length"),
+expect_error(fit_model(iris,"Sepal.Length","Petal.Length"),
                            "All arguments must be supplied.", fixed=TRUE)
    
     
@@ -14,11 +14,21 @@ testthat::expect_error(fit_model(iris,"Sepal.Length","Petal.Length"),
       total_attrs<-length(manymodelr::extract_model_info(lm_fit,
                                             c("p_value","coeffs")))
       
-      testthat::expect_equal(total_attrs,2)
-      testthat::expect_true(inherits(lm_fit,"lm"))
-      testthat::expect_true(inherits(glm_fit,"glm"))
+      expect_equal(total_attrs,2)
+      expect_true(inherits(lm_fit,"lm"))
+      expect_true(inherits(glm_fit,"glm"))
       
-            
+      # fit models
+fit_many <- fit_models(df=iris,yname=c("Sepal.Length", "Sepal.Width"),
+                       xname="Petal.Length + Petal.Width",
+                       modeltype="lm")
+   expect_error( fit_models(df=iris,yname=c("Sepal.Length"),
+                            xname="Petal.Length + Petal.Width",
+                            modeltype="lm"),
+                 "fit_models is used for several yname, use fit_model for single predictors",
+                 fixed =TRUE)
+   expect_equal(length(fit_many),2)
+   
                     })
 
 
