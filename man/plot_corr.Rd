@@ -60,7 +60,7 @@ Defaults to 2.}
 
 \item{show_which}{Character. One of either corr or signif to control whether to show the
 correlation values or significance stars of the correlations. This is case sensitive and defaults to
-corr ie correlation values are shown.}
+corr i.e. correlation values are shown.}
 
 \item{size}{Size of the circles for plot_style set to circles}
 
@@ -87,7 +87,7 @@ labels produced by the plot method.}
 
 \item{signif_size}{Numeric. Defines size of the significance stars.}
 
-\item{signif_col}{Charcater. Defines the col for the significance stars.}
+\item{signif_col}{Character. Defines the col for the significance stars.}
 
 \item{...}{Other arguments to get_var_corr_}
 }

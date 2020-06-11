@@ -8,7 +8,7 @@
 #' @param y Values for the y axis. Defaults to "other_var."
 #' @param show_which Character. One of either corr or signif to control whether to show the
 #' correlation values or significance stars of the correlations. This is case sensitive and defaults to
-#' corr ie correlation values are shown.
+#' corr i.e. correlation values are shown.
 #' @param round_which Character. The column name to be rounded off.
 #' @param decimals     Numeric. To how many decimal places should the rounding be done?
 #' Defaults to 2.
@@ -33,7 +33,7 @@
 #' @param signif_cutoff Numeric. If show_signif is TRUE, this defines the cutoff point for significance. Defaults to 
 #' 0.05. 
 #' @param signif_size Numeric. Defines size of the significance stars.
-#' @param signif_col  Charcater. Defines the col for the significance stars. 
+#' @param signif_col  Character. Defines the col for the significance stars. 
 #' @param ... Other arguments to get_var_corr_
 #' @details
 #' This function uses `ggplot2` backend. `ggplot2` is thus required for the plots to work.

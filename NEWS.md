@@ -29,7 +29,7 @@ output: htlm_document
 - `df` was renamed as `old_data` in `multi_model_1`, `newdata` to `new_data`.
 
 
-- `plot_corr` now directly accepts `data.frame` obejcts. Arguments like `round_values` have also been dropped.
+- `plot_corr` now directly accepts `data.frame` objects. Arguments like `round_values` have also been dropped.
 
 
 - Fixed DOI to Max Kuhn's paper

@@ -12,7 +12,7 @@ analysis of variance object.}
 
 \item{what}{character. The attribute you would like to obtain for instance p_value}
 
-\item{...}{Arguments to other functions eg AIC, BIC, deviance etc}
+\item{...}{Arguments to other functions e.g. AIC, BIC, deviance etc}
 }
 \description{
 Provides a convenient way to extract any kind of model information from
@@ -22,7 +22,7 @@ common model objects
 This provides a convenient way to extract model information for any kind of model. For linear models,
 one can extract such attributes as coefficients, p value("p_value"), standard error("std_err"),
 estimate, t value("t_value"), residuals, aic and other known attributes.
-For analysis of variance (aov), other attributes like sum sqaured(ssq),
+For analysis of variance (aov), other attributes like sum squared(ssq),
 mean squared error(msq), degrees of freedom(df),p_value.
 }
 \examples{

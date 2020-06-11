@@ -164,7 +164,7 @@ head(lin_model)
 #> 6          5.4         3.9          1.7         0.4  setosa  6.707714
 ```
 
-We can also fit a multinear model as shown below:
+We can also fit a multilinear model as shown below:
 
 ``` r
 head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length", "Petal.Length + Sepal.Width","lm"))
