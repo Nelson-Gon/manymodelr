@@ -6,7 +6,7 @@ output: htlm_document
 
 ---
 
-# manymodelr 0.2.5
+# manymodelr 0.3.0
 
 
 **Major additions**

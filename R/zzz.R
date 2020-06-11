@@ -6,4 +6,5 @@ For the latest development version,
 please see: https://www.github.com/Nelson-Gon/manymodelr.
 Please file issues at https://github.com/Nelson-Gon/manymodelr/issues"
   packageStartupMessage(pkg_info)
+
 }

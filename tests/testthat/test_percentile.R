@@ -1,4 +1,4 @@
-testthat::test_that(desc="Test percentile selection",
+test_that(desc="Test percentile selection",
                     code={
                     
         expect_error(select_percentile(iris),"Must provide both df and percentile.",
