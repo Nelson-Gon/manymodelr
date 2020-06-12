@@ -6,6 +6,10 @@ output: htlm_document
 
 ---
 
+# manymodelr 0.3.1
+
+* Fixed issues for CRAN
+
 # manymodelr 0.3.0
 
 
@@ -50,7 +54,7 @@ output: htlm_document
 - `row_mean_na` is now defunct. Use `na_replace` instead.
 
 
-- `na_replace` no longer allows using functions such as `mean`,`min`, etc. These have been reimplemented in the package [mde](htttps://www.github.com/Nelson-Gon/mde)
+- `na_replace` no longer allows using functions such as `mean`,`min`, etc. These have been reimplemented in the package [mde](https://www.github.com/Nelson-Gon/mde)
 
 
 - `modeleR` is now defunct. Use `fit_model` instead.

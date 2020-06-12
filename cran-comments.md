@@ -2,7 +2,7 @@
 Release Summary
 
 
-This is a new release that provides several new functions and bug fixes. 
+This is a resubmission that fixes issues as advised. 
 
 
 ## Test environments
