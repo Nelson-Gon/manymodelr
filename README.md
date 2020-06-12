@@ -1,11 +1,11 @@
-2020-06-11
+2020-06-12
 
 # `manymodelr`: Build and Tune Several Models
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Codecov test
 coverage](https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3764309.svg)](https://doi.org/10.5281/zenodo.3764309)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg)](https://doi.org/10.5281/zenodo.3891106)
 [![Build
 Status](https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.org/Nelson-Gon/manymodelr)
 [![R
