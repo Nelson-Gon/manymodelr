@@ -1,4 +1,4 @@
-2020-06-12
+2020-06-19
 
 # `manymodelr`: Build and Tune Several Models
 

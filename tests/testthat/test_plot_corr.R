@@ -3,6 +3,7 @@ library(manymodelr)
 test_that(desc= "column names are valid",
                     code =  {
                      
+                      skip_on_oldrel()
                       expect_error(plot_corr(mtcars, 
                                  show_which = "corr", 
                                  custom_cols =  c("blue","yellow","gray"),

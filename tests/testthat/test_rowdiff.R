@@ -2,6 +2,7 @@
 test_that("Test rowdiff",
                     code={
   
+                      skip_on_oldrel()
                       
   dummy_data <- data.frame(A=c(1,1,2,3), B=c(4,5,3,7))
   

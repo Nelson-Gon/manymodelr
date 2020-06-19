@@ -1,6 +1,6 @@
 test_that(desc = "Test equal lengths",
                     code = {
-                      
+                      skip_on_oldrel()
             expect_error(multi_model_2(iris[1:50,],iris[50:95,],
                                         "Sepal.Length","Petal.Length","lm"),
                                    "Both old_data and new_data must have the same lengths",

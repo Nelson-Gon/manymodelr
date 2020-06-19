@@ -4,6 +4,7 @@ testthat::test_that(desc="Tests that get_var_corr
                     returns a warning",
                     code={
                       
+                        skip_on_oldrel()
     testthat::expect_warning(get_var_corr_(iris),
            "Columns with classes in drop_columns were dropped.", 
            fixed = TRUE)

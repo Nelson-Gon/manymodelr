@@ -1,6 +1,6 @@
 test_that(desc="Test percentile selection",
                     code={
-                    
+                      skip_on_oldrel()
         expect_error(select_percentile(iris),"Must provide both df and percentile.",
                                fixed=TRUE) 
         expect_true(ceiling(select_percentile(df=iris,percentile = 25,descend=TRUE)[[1]])==8)

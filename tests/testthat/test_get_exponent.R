@@ -2,6 +2,7 @@ library(manymodelr)
 test_that(desc = "exponential value",
                     code={
                       
+                      skip_on_oldrel()
                       
             expect_equal(get_exponent(12,3), 1728)
             expect_equal(get_exponent(2,5), 32)

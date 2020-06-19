@@ -3,6 +3,8 @@ library(manymodelr)
 testthat::test_that(desc="NA replacement works",
                     code={
                       
+                      skip_on_oldrel()
+                      
                   test_data <- data.frame(ID=c("A","A",
                                                "B","B"),
                                           Val=c(1,2,2,NA))

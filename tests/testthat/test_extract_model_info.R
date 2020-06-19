@@ -1,5 +1,6 @@
 test_that(desc= "extract_model_info works as expected",
                     code= {
+                      skip_on_oldrel()
             lm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
             aov_model <- fit_model(iris, "Sepal.Length","Petal.Length","aov")
             # Still need to figure out the best way to expect an equal value

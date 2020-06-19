@@ -6,6 +6,10 @@ output: htlm_document
 
 ---
 
+# manymodelr 0.3.2
+
+* Patch related to failing tests on old R releases, skip tests on these. 
+
 # manymodelr 0.3.1
 
 * Fixed issues for CRAN

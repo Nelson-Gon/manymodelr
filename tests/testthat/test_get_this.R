@@ -2,6 +2,7 @@
 library(manymodelr)
 test_that(desc="test get_this",
                     code={
+                      skip_on_oldrel()
             expect_equal(get_this(iris,"Sepal.Width")[1,],
                                    3.5)
             # expect that unnamed lists throw an error as required

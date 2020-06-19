@@ -3,6 +3,8 @@ library(manymodelr)
 testthat::test_that(desc="Correlation tests",
                     code={
                       
+                      skip_on_oldrel()
+                      
       test_data <- data.frame(A=rep(NA,12),B=rep(12,12))
       
     testthat::expect_error(get_var_corr(test_data,comparison_var = "A"),

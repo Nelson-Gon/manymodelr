@@ -2,7 +2,7 @@ title: Build and Tune Several Models
 url: https://nelson-gon.github.io/manymodelr/
 template:
    params:
-      bootswatch: flatly
+      bootswatch: darkly
 reference:
   - title: Exported Functions
     desc: Functions exported by manymodelr
@@ -32,7 +32,7 @@ navbar:
   left:
     - icon: fa-home
       href: articles/manymodelr_vignette.html
-    - text: "Tutorial"
+    - text: "Documentation"
       menu:
         - text: Usage
           href: articles/manymodelr_vignette.html

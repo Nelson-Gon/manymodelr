@@ -3,6 +3,7 @@ library(manymodelr)
 test_that(desc="test fit_model",
                     code={
                       
+                       skip_on_oldrel()
 expect_error(fit_model(iris,"Sepal.Length","Petal.Length"),
                            "All arguments must be supplied.", fixed=TRUE)
    

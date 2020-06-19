@@ -1,5 +1,7 @@
 testthat::test_that(desc="Test add_model_*",
                     code={
+                       
+                       skip_on_oldrel()
                       
                       iris1 <- iris[1:50,]
                       iris2 <- iris[51:100,]

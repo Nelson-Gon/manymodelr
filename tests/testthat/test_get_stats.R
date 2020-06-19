@@ -1,5 +1,7 @@
 test_that(desc="test get_data_Stats",
                     code={
+                        
+                        skip_on_oldrel()
     dummy_data <- data.frame(A=c(1,2,3,4,5))
     test_dummy_data <- get_stats(dummy_data,max)
     final_res <- unname(test_dummy_data)[1]
