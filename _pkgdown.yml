@@ -7,6 +7,8 @@ reference:
   - title: Exported Functions
     desc: Functions exported by manymodelr
     contents:
+     - '`add_model_residuals`'
+     - '`fit_models`'
      - '`add_model_predictions`'
      - '`agg_by_group`'
      - '`extract_model_info`'
