@@ -12,7 +12,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/darkly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Tutorial
+    Documentation
      
     <span class="caret"></span>
   </a>
@@ -136,23 +136,23 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>The data for which analysis is required</p></td>
+      <td><p>A data.frame object</p></td>
     </tr>
     <tr>
       <th>yname</th>
-      <td><p>The dependent variable</p></td>
+      <td><p>The outcome variable</p></td>
     </tr>
     <tr>
       <th>xname</th>
-      <td><p>The independent variable. Supports formulae x1+x2+...</p></td>
+      <td><p>The predictor variable(s)</p></td>
     </tr>
     <tr>
       <th>modeltype</th>
-      <td><p>Currently one of lm, glm and aov. Other models may work with inaccuracies</p></td>
+      <td><p>A character specifying the model type e.g lm for linear model</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments to the modeltype</p></td>
+      <td><p>Other arguments to specific model types.</p></td>
     </tr>
     </table>
 

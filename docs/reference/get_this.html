@@ -12,7 +12,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/darkly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Tutorial
+    Documentation
      
     <span class="caret"></span>
   </a>
@@ -129,20 +129,20 @@
     <p>Helper function to easily access elements</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_this</span>(<span class='no'>what</span>, <span class='no'>where</span>)</pre>
+    <pre class="usage"><span class='fu'>get_this</span>(<span class='kw'>where</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>what</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>what</th>
-      <td><p>What do you want to extract from the `data.frame` or `list`? No quotes. See
-examples below.</p></td>
-    </tr>
-    <tr>
       <th>where</th>
       <td><p>Where do you want to get it from? Currently only supports `list`s
 and `data.frame`objects.</p></td>
+    </tr>
+    <tr>
+      <th>what</th>
+      <td><p>What do you want to extract from the `data.frame` or `list`? No quotes. See
+examples below.</p></td>
     </tr>
     </table>
 
@@ -152,9 +152,14 @@ and `data.frame`objects.</p></td>
 the output of `multi_model_1`.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>my_list</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>A</span><span class='kw'>=</span><span class='fl'>520</span>),<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>B</span><span class='kw'>=</span><span class='fl'>456</span>))
-<span class='fu'>get_this</span>(<span class='no'>A</span>,<span class='no'>my_list</span>)</div><div class='output co'>#&gt; [[1]]
+    <pre class="examples"><div class='input'><span class='no'>my_list</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>A</span><span class='kw'>=</span><span class='fl'>520</span>),<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>B</span><span class='kw'>=</span><span class='fl'>456</span>,<span class='kw'>C</span><span class='kw'>=</span><span class='fl'>567</span>))
+<span class='fu'>get_this</span>(<span class='kw'>what</span><span class='kw'>=</span><span class='st'>"A"</span>,<span class='no'>my_list</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; [1] 520
+#&gt; </div><div class='input'><span class='fu'>get_this</span>(<span class='no'>my_list</span>,<span class='st'>"C"</span>)</div><div class='output co'>#&gt; [[1]]
+#&gt; [1] 567
+#&gt; </div><div class='input'><span class='co'># use values</span>
+<span class='fu'>get_this</span>(<span class='no'>my_list</span>, <span class='st'>"B"</span>)</div><div class='output co'>#&gt; [[1]]
+#&gt; [1] 456
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

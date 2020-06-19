@@ -12,7 +12,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/darkly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Tutorial
+    Documentation
      
     <span class="caret"></span>
   </a>
@@ -129,9 +129,23 @@
     <p>A pipe friendly way to get summary stats for exploratory data analysis</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_data_Stats</span>(<span class='no'>x</span>, <span class='no'>func</span>, <span class='kw'>exclude</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na_action</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>get_data_Stats</span>(
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>func</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>exclude</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na_action</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>get_stats</span>(<span class='no'>x</span>, <span class='no'>func</span>, <span class='kw'>exclude</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na_action</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>get_stats</span>(
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>func</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>exclude</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na_action</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,16 +160,19 @@
     </tr>
     <tr>
       <th>exclude</th>
-      <td><p>What kind of data should be excluded? Defaults to NULL. Currently only supports
-removing non-numeric data i.e exclude="non_numeric"</p></td>
+      <td><p>What kind of data should be excluded? Use for example c("character","factor") to drop character and factor columns</p></td>
     </tr>
     <tr>
       <th>na.rm</th>
-      <td><p>Logical. Should NAs be removed. Defaults to TRUE.</p></td>
+      <td><p>Logical. Should NAs be removed. Defaults to FALSE.</p></td>
     </tr>
     <tr>
       <th>na_action</th>
-      <td><p>If na.rm is set to TRUE, this uses na_replace to replace missing values.
+      <td><p>If na.rm is set to TRUE, this uses na_replace to replace missing values.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments to na_replace
 See ?na_replace for details.</p></td>
     </tr>
     </table>
@@ -168,8 +185,8 @@ See ?na_replace for details.</p></td>
     <p>A convenient wrapper especially useful for get_mode</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>get_data_Stats</span>(<span class='no'>airquality</span>,<span class='no'>mean</span>,<span class='st'>"non_numeric"</span>,<span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,<span class='kw'>na_action</span> <span class='kw'>=</span> <span class='st'>"get_mode"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Non numeric columns have been discarded.</span></div><div class='output co'>#&gt;      Ozone    Solar.R       Wind       Temp      Month        Day 
-#&gt;  37.503268 189.274510   9.957516  77.882353   6.993464  15.803922 </div><div class='input'><span class='fu'>get_stats</span>(<span class='no'>airquality</span>,<span class='no'>mean</span>,<span class='st'>"non_numeric"</span>,<span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,<span class='kw'>na_action</span> <span class='kw'>=</span> <span class='st'>"get_mode"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Non numeric columns have been discarded.</span></div><div class='output co'>#&gt;      Ozone    Solar.R       Wind       Temp      Month        Day 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>get_data_Stats</span>(<span class='no'>airquality</span>,<span class='no'>mean</span>,<span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,<span class='kw'>na_action</span> <span class='kw'>=</span> <span class='st'>"get_mode"</span>))</div><div class='output co'>#&gt;      Ozone    Solar.R       Wind       Temp      Month        Day 
+#&gt;  37.503268 189.274510   9.957516  77.882353   6.993464  15.803922 </div><div class='input'><span class='fu'>get_stats</span>(<span class='no'>airquality</span>,<span class='no'>mean</span>,<span class='st'>"non_numeric"</span>,<span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,<span class='kw'>na_action</span> <span class='kw'>=</span> <span class='st'>"get_mode"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Columns with classes in exclude have been discarded</span></div><div class='output co'>#&gt;      Ozone    Solar.R       Wind       Temp      Month        Day 
 #&gt;  37.503268 189.274510   9.957516  77.882353   6.993464  15.803922 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

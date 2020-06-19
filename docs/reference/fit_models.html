@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Replace missing values — na_replace • Build and Tune Several Models</title>
+<title>Fit several models with different response variables — fit_models • Build and Tune Several Models</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Replace missing values — na_replace" />
-<meta property="og:description" content="Replace missing values" />
+<meta property="og:title" content="Fit several models with different response variables — fit_models" />
+<meta property="og:description" content="Fit several models with different response variables" />
 
 
 
@@ -120,52 +120,69 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Replace missing values</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Nelson-Gon/manymodelr/blob/master/R/na_replace.R'><code>R/na_replace.R</code></a></small>
-    <div class="hidden name"><code>na_replace.Rd</code></div>
+    <h1>Fit several models with different response variables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Nelson-Gon/manymodelr/blob/master/R/fit_model.R'><code>R/fit_model.R</code></a></small>
+    <div class="hidden name"><code>fit_models.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Replace missing values</p>
+    <p>Fit several models with different response variables</p>
     </div>
 
-    <pre class="usage"><span class='fu'>na_replace</span>(<span class='no'>df</span>, <span class='kw'>how</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>fit_models</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>yname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>xname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>modeltype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>The data set(data.frame or vector) for which replacements are required</p></td>
+      <td><p>A data.frame object</p></td>
     </tr>
     <tr>
-      <th>how</th>
-      <td><p>How should missing values be replaced?  One of ffill, samples,value or any other known
-method e.g mean, median, max ,min. The default is NULL meaning no  imputation is done. For character vectors,
-the use of `get_mode` is also supported. No implementation for class factor(yet).</p></td>
+      <th>yname</th>
+      <td><p>The outcome variable</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>If how is set to value, this allows the user to provide a specific fill value for the NAs.</p></td>
+      <th>xname</th>
+      <td><p>The predictor variable(s)</p></td>
+    </tr>
+    <tr>
+      <th>modeltype</th>
+      <td><p>A character specifying the model type e.g lm for linear model</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments to specific model types.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data.frame object with missing values replaced.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function currently does not support grouping although this may be achieved with some
-inaccuracies using grouping functions from other packages.</p>
+    <p>A list of model objects that can be used later.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>na_replace</span>(<span class='no'>airquality</span>,<span class='kw'>how</span><span class='kw'>=</span><span class='st'>"value"</span>, <span class='kw'>value</span><span class='kw'>=</span><span class='st'>"Missing"</span>))</div><div class='output co'>#&gt;     Ozone Solar.R Wind Temp Month Day
-#&gt; 1      41     190  7.4   67     5   1
-#&gt; 2      36     118  8.0   72     5   2
-#&gt; 3      12     149 12.6   74     5   3
-#&gt; 4      18     313 11.5   62     5   4
-#&gt; 5 Missing Missing 14.3   56     5   5
-#&gt; 6      28 Missing 14.9   66     5   6</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>fit_models</span>(<span class='kw'>df</span><span class='kw'>=</span><span class='no'>iris</span>,<span class='kw'>yname</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Sepal.Length"</span>,<span class='st'>"Sepal.Width"</span>),
+<span class='kw'>xname</span><span class='kw'>=</span><span class='st'>"Petal.Length + Petal.Width"</span>,<span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"lm"</span>)</div><div class='output co'>#&gt; [[1]]
+#&gt; 
+#&gt; Call:
+#&gt; lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)
+#&gt; 
+#&gt; Coefficients:
+#&gt;  (Intercept)  Petal.Length   Petal.Width  
+#&gt;       4.1906        0.5418       -0.3196  
+#&gt; 
+#&gt; 
+#&gt; [[2]]
+#&gt; 
+#&gt; Call:
+#&gt; lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)
+#&gt; 
+#&gt; Coefficients:
+#&gt;  (Intercept)  Petal.Length   Petal.Width  
+#&gt;       3.5870       -0.2571        0.3640  
+#&gt; 
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

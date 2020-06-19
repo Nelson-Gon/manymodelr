@@ -19,6 +19,9 @@
     <loc>https://nelson-gon.github.io/manymodelr//reference/fit_model.html</loc>
   </url>
   <url>
+    <loc>https://nelson-gon.github.io/manymodelr//reference/fit_models.html</loc>
+  </url>
+  <url>
     <loc>https://nelson-gon.github.io/manymodelr//reference/get_data_Stats.html</loc>
   </url>
   <url>
@@ -37,9 +40,6 @@
     <loc>https://nelson-gon.github.io/manymodelr//reference/get_var_corr_.html</loc>
   </url>
   <url>
-    <loc>https://nelson-gon.github.io/manymodelr//reference/modeleR.html</loc>
-  </url>
-  <url>
     <loc>https://nelson-gon.github.io/manymodelr//reference/multi_model_1.html</loc>
   </url>
   <url>
@@ -56,9 +56,6 @@
   </url>
   <url>
     <loc>https://nelson-gon.github.io/manymodelr//reference/rowdiff.html</loc>
-  </url>
-  <url>
-    <loc>https://nelson-gon.github.io/manymodelr//reference/row_mean_na.html</loc>
   </url>
   <url>
     <loc>https://nelson-gon.github.io/manymodelr//reference/select_col.html</loc>

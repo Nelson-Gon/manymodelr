@@ -12,7 +12,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/darkly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -85,7 +85,7 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Tutorial
+    Documentation
      
     <span class="caret"></span>
   </a>
@@ -123,29 +123,48 @@
       <small>Source: <a href='https://github.com/Nelson-Gon/manymodelr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="manymodelr-025" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.5">
-<a href="#manymodelr-025" class="anchor"></a>manymodelr 0.2.5<small> Unreleased </small>
+    <div id="manymodelr-032" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.2">
+<a href="#manymodelr-032" class="anchor"></a>manymodelr 0.3.2<small> Unreleased </small>
+</h1>
+<ul>
+<li>Patch related to failing tests on old R releases, skip tests on these.</li>
+</ul>
+</div>
+    <div id="manymodelr-031" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.1">
+<a href="#manymodelr-031" class="anchor"></a>manymodelr 0.3.1<small> 2020-06-12 </small>
+</h1>
+<ul>
+<li>Fixed issues for CRAN</li>
+</ul>
+</div>
+    <div id="manymodelr-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#manymodelr-030" class="anchor"></a>manymodelr 0.3.0<small> Unreleased </small>
 </h1>
 <p><strong>Major additions</strong></p>
 <ul>
-<li>
-<strong>extract_model_info</strong> now supports <code>glmerMod</code>
-</li>
+<li><p><strong>extract_model_info</strong> now supports <code>glmerMod</code> and <code>glmmTMB</code></p></li>
+<li><p><strong>get_this</strong> now works with numeric input and also supports <code>data.frame</code> objects.</p></li>
+<li><p><strong>fit_models</strong> extends <strong>fit_model</strong> by building many models at once.</p></li>
 </ul>
 <p><strong>Other changes</strong></p>
 <ul>
+<li><p><code>get_stats</code> now drops columns via a vector and not “non_numeric” as previously.</p></li>
 <li><p>Metrics from <code>multi_model_1</code> are now more informative with the metric and method wrapped in the naming of the result.</p></li>
 <li><p><code>df</code> was renamed as <code>old_data</code> in <code>multi_model_1</code>, <code>newdata</code> to <code>new_data</code>.</p></li>
-<li><p><code>plot_corr</code> now directly accepts <code>data.frame</code> obejcts. Arguments like <code>round_values</code> have also been dropped.</p></li>
+<li><p><code>plot_corr</code> now directly accepts <code>data.frame</code> objects. Arguments like <code>round_values</code> have also been dropped.</p></li>
 <li><p>Fixed DOI to Max Kuhn’s paper</p></li>
 <li><p>Refactored <code>get_mode</code> to be <code>tidy</code> compliant.</p></li>
 <li><p>The argument <code>valid</code> was dropped in <code>multi_model_1</code>.</p></li>
 <li><p><code>get_all</code> was dropped in <code>select_percentile</code>.</p></li>
 <li><p><code>select_col</code>, <code>select_percentile</code>, <code>row_mean_na</code> will be removed in the next release.</p></li>
 <li><p><code>row_mean_na</code> is now defunct. Use <code>na_replace</code> instead.</p></li>
-<li><p><code>na_replace</code> no longer allows using functions such as <code>mean</code>,<code>min</code>, etc. These have been reimplemented in the package <a href="htttps://www.github.com/Nelson-Gon/mde">mde</a></p></li>
+<li><p><code>na_replace</code> no longer allows using functions such as <code>mean</code>,<code>min</code>, etc. These have been reimplemented in the package <a href="https://www.github.com/Nelson-Gon/mde">mde</a></p></li>
 <li><p><code>modeleR</code> is now defunct. Use <code>fit_model</code> instead.</p></li>
+<li><p><code>get_this</code> no longer accepts non quoted character strings.</p></li>
+<li><p>Better coverage and code tests</p></li>
 </ul>
 </div>
     <div id="manymodelr-024" class="section level1">
@@ -200,6 +219,7 @@
 <li><p><code>get_var_corr</code> provides a user-friendly way to find correlations between data.</p></li>
 <li><p><code>get_var_corr_</code> provides a user-friendly way to find combination-wise correlations. It is relatively fast depending on how big one’s data is and/or machine specifications.</p></li>
 <li><p><code>get_this</code> is an easy to use helper function to get metrics,predictions, etc. Currently supports lists and data.frame objects.</p></li>
+<li><p><code>modeleR</code> and <code>row_mean_na</code> were removed.</p></li>
 </ol>
 <p><strong>Major Modifications</strong></p>
 <ol>

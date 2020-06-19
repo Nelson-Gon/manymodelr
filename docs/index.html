@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Build and Tune Several Models • Build and Tune Several Models</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/darkly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -53,7 +53,7 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Tutorial
+    Documentation
      
     <span class="caret"></span>
   </a>
@@ -87,18 +87,18 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<p>2020-05-05</p>
+<p>2020-06-19</p>
 <div id="manymodelr-build-and-tune-several-models" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#manymodelr-build-and-tune-several-models" class="anchor"></a><code>manymodelr</code>: Build and Tune Several Models</h1></div>
-<p><a href="https://cran.r-project.org/package=manymodelr"><img src="https://www.r-pkg.org/badges/version/manymodelr" alt="CRAN_Status_Badge"></a> <a href="https://doi.org/10.5281/zenodo.3764309"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3764309.svg" alt="DOI"></a> <a href="https://travis-ci.org/Nelson-Gon/manymodelr"><img src="https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master" alt="Build Status"></a> <a href="https://github.com/Nelson-Gon/manymodelr"><img src="https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg" alt="R CMDCheck"></a> <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html"><img src="https://img.shields.io/badge/license-GPL--2-blue.svg" alt="license"></a> <a href="http://www.rdocumentation.org/packages/manymodelr"><img src="http://www.rdocumentation.org/badges/version/manymodelr" alt="Rdoc"></a> <a href="https://cran.r-project.org/package=manymodelr"><img src="https://cranlogs.r-pkg.org/badges/manymodelr" alt="Downloads"></a> <a href="https://cran.r-project.org/package=manymodelr"><img src="http://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow" alt="TotalDownloads"></a> <a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="lifecycle"></a> <a href="https://GitHub.com/Nelson-Gon/manymodelr/graphs/commit-activity"><img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintenance"></a> <a href="http://www.repostatus.org/#active"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status"></a> <a href="https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop"><img src="https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://github.com/Nelson-Gon/manymodelr/commits/master"><img src="https://img.shields.io/github/last-commit/Nelson-Gon/manymodelr.svg" alt="GitHub last commit"></a> <a href="https://GitHub.com/Nelson-Gon/manymodelr/issues/"><img src="https://img.shields.io/github/issues/Nelson-Gon/manymodelr.svg" alt="GitHub issues"></a> <a href="https://GitHub.com/Nelson-Gon/manymodelr/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/github/issues-closed/Nelson-Gon/manymodelr.svg" alt="GitHub issues-closed"></a> <a href="http://isitmaintained.com/project/Nelson-Gon/manymodelr" title="Average time to resolve an issue"><img src="http://isitmaintained.com/badge/resolution/Nelson-Gon/manymodelr.svg" alt="Average time to resolve an issue"></a> <a href="http://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a></p>
+<p><a href="https://cran.r-project.org/package=manymodelr"><img src="https://www.r-pkg.org/badges/version/manymodelr" alt="CRAN_Status_Badge"></a> <a href="https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop"><img src="https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://doi.org/10.5281/zenodo.3891106"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg" alt="DOI"></a> <a href="https://travis-ci.org/Nelson-Gon/manymodelr"><img src="https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master" alt="Build Status"></a> <a href="https://github.com/Nelson-Gon/manymodelr"><img src="https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg" alt="R CMDCheck"></a> <img src="https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg" alt="test-coverage"><a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html"><img src="https://img.shields.io/badge/license-GPL--2-blue.svg" alt="license"></a> <a href="http://www.rdocumentation.org/packages/manymodelr"><img src="http://www.rdocumentation.org/badges/version/manymodelr" alt="Rdoc"></a> <a href="https://cran.r-project.org/package=manymodelr"><img src="https://cranlogs.r-pkg.org/badges/manymodelr" alt="Downloads"></a> <a href="https://cran.r-project.org/package=manymodelr"><img src="http://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow" alt="TotalDownloads"></a> <a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="lifecycle"></a> <a href="https://GitHub.com/Nelson-Gon/manymodelr/graphs/commit-activity"><img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintenance"></a> <a href="http://www.repostatus.org/#active"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status"></a> <a href="https://github.com/Nelson-Gon/manymodelr/commits/master"><img src="https://img.shields.io/github/last-commit/Nelson-Gon/manymodelr.svg" alt="GitHub last commit"></a> <a href="https://GitHub.com/Nelson-Gon/manymodelr/issues/"><img src="https://img.shields.io/github/issues/Nelson-Gon/manymodelr.svg" alt="GitHub issues"></a> <a href="https://GitHub.com/Nelson-Gon/manymodelr/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/github/issues-closed/Nelson-Gon/manymodelr.svg" alt="GitHub issues-closed"></a> <a href="http://isitmaintained.com/project/Nelson-Gon/manymodelr" title="Average time to resolve an issue"><img src="http://isitmaintained.com/badge/resolution/Nelson-Gon/manymodelr.svg" alt="Average time to resolve an issue"></a> <a href="http://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a></p>
 <p>In this vignette, we take a look at how we can simplify many machine learning tasks using <code>manymodelr</code>. We will take a look at the core functions first.</p>
 <p><strong>Installing the package</strong></p>
 <div class="sourceCode" id="cb1"><pre class="r">
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"manymodelr"</span>)</pre></div>
 <p>Once the package has been successfully installed, we can then proceed by loading the package and exploring some of the key functions.</p>
 <p><strong>Loading the package</strong></p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">manymodelr</span>)
+<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">manymodelr</span>, <span class="kw">warn.conflicts</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="co">#&gt; Loading required package: caret</span>
 <span class="co">#&gt; Loading required package: lattice</span>
 <span class="co">#&gt; Loading required package: ggplot2</span>
@@ -118,7 +118,8 @@
 <li><strong><code>agg_by_group</code></strong></li>
 </ul>
 <p>As one can guess from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form <code>x~y</code> where <code>y</code> is the grouping variable(in this case <code>Species</code>). One can supply a formula as shown next.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="reference/agg_by_group.html">agg_by_group</a></span>(<span class="no">iris</span>,<span class="no">.</span>~<span class="no">Species</span>,<span class="no">length</span>))
+<div class="sourceCode" id="cb3"><pre class="r">
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="reference/agg_by_group.html">agg_by_group</a></span>(<span class="no">iris</span>,<span class="no">.</span>~<span class="no">Species</span>,<span class="no">length</span>))
 <span class="co">#&gt; Grouped By[1]:   Species </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;      Species Sepal.Length Sepal.Width Petal.Length Petal.Width</span>
@@ -126,7 +127,7 @@
 <span class="co">#&gt; 2 versicolor           50          50           50          50</span>
 <span class="co">#&gt; 3  virginica           50          50           50          50</span></pre></div>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="reference/agg_by_group.html">agg_by_group</a></span>(<span class="no">mtcars</span>,<span class="no">cyl</span>~<span class="no">hp</span>+<span class="no">vs</span>,<span class="no">sum</span>))
-<span class="co">#&gt; Grouped By[1]:   hp vs </span>
+<span class="co">#&gt; Grouped By[2]:   hp vs </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;    hp vs cyl</span>
 <span class="co">#&gt; 1  91  0   4</span>
@@ -178,9 +179,8 @@
 <span class="co">#&gt; 4          4.6         3.1          1.5         0.2  setosa  6.870402</span>
 <span class="co">#&gt; 5          5.0         3.6          1.4         0.2  setosa  6.382339</span>
 <span class="co">#&gt; 6          5.4         3.9          1.7         0.4  setosa  6.707714</span></pre></div>
-<p>We can also fit a multinear model as shown below:</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="reference/multi_model_2.html">multi_model_2</a></span>(<span class="no">iris</span>[<span class="fl">1</span>:<span class="fl">50</span>,],<span class="no">iris</span>[<span class="fl">50</span>:<span class="fl">99</span>,],<span class="st">"Sepal.Length"</span>,
-    <span class="st">"Petal.Length + Sepal.Width"</span>,<span class="st">"lm"</span>))
+<p>We can also fit a multilinear model as shown below:</p>
+<div class="sourceCode" id="cb9"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="reference/multi_model_2.html">multi_model_2</a></span>(<span class="no">iris</span>[<span class="fl">1</span>:<span class="fl">50</span>,],<span class="no">iris</span>[<span class="fl">50</span>:<span class="fl">99</span>,],<span class="st">"Sepal.Length"</span>, <span class="st">"Petal.Length + Sepal.Width"</span>,<span class="st">"lm"</span>))
 <span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted</span>
 <span class="co">#&gt; 1          5.1         3.5          1.4         0.2  setosa  4.902999</span>
 <span class="co">#&gt; 2          4.9         3.0          1.4         0.2  setosa  5.771541</span>
@@ -225,13 +225,19 @@
 <span class="co">#&gt;  (Intercept) Petal.Length </span>
 <span class="co">#&gt; 1.614927e-13 6.069778e-02</span></pre></div>
 <p>To extract multiple attributes:</p>
-<div class="sourceCode" id="cb15"><pre class="r"><span class="fu"><a href="reference/extract_model_info.html">extract_model_info</a></span>(<span class="no">lm_model</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"p_value"</span>,<span class="st">"response"</span>))
+<div class="sourceCode" id="cb15"><pre class="r"><span class="fu"><a href="reference/extract_model_info.html">extract_model_info</a></span>(<span class="no">lm_model</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"p_value"</span>,<span class="st">"response"</span>,<span class="st">"call"</span>,<span class="st">"predictors"</span>))
 <span class="co">#&gt; $p_value</span>
 <span class="co">#&gt;  (Intercept) Petal.Length </span>
 <span class="co">#&gt; 1.614927e-13 6.069778e-02 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $response</span>
-<span class="co">#&gt; Sepal.Length</span></pre></div>
+<span class="co">#&gt; [1] "Sepal.Length"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $call</span>
+<span class="co">#&gt; lm(formula = Sepal.Length ~ Petal.Length, data = df)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $predictors</span>
+<span class="co">#&gt; [1] "Petal.Length"</span></pre></div>
 <p>This is not restricted to linear models but will work for most model types. See <code><a href="reference/extract_model_info.html">help(extract_model_info)</a></code> to see currently supported model types.</p>
 <p>To add predictions to our data set, we can use <code>add_model_predictions</code> as follows:</p>
 <div class="sourceCode" id="cb16"><pre class="r"><span class="co"># select only column 6 that has our predicted values</span>
@@ -294,16 +300,40 @@
 <span class="co">#&gt; 5  setosa</span>
 <span class="co">#&gt; 6  setosa</span></pre></div>
 <ul>
+<li><code>fit_models</code></li>
+</ul>
+<p>This is similar to <code>fit_model</code> with the ability to fit many models with many predictors at once. A simple linear model for instance:</p>
+<div class="sourceCode" id="cb20"><pre class="r">
+<span class="fu"><a href="reference/fit_models.html">fit_models</a></span>(<span class="kw">df</span><span class="kw">=</span><span class="no">iris</span>,<span class="kw">yname</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Sepal.Length"</span>,<span class="st">"Sepal.Width"</span>),<span class="kw">xname</span><span class="kw">=</span><span class="st">"Petal.Length + Petal.Width"</span>,<span class="kw">modeltype</span><span class="kw">=</span><span class="st">"lm"</span>)
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;  (Intercept)  Petal.Length   Petal.Width  </span>
+<span class="co">#&gt;       4.1906        0.5418       -0.3196  </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;  (Intercept)  Petal.Length   Petal.Width  </span>
+<span class="co">#&gt;       3.5870       -0.2571        0.3640</span></pre></div>
+<ul>
 <li><code>get_var_corr</code></li>
 </ul>
 <p>As can probably(hopefully) be guessed from the name, this provides a convenient way to get variable correlations. It enables one to get correlation between one variable and all other variables in the data set.</p>
 <p><strong>Previously, one would set <code>get_all</code> to <code>TRUE</code> if they wanted to get correlations between all variables. This argument has been dropped in favor of simply supplying an optional <code>other_vars</code> vector if one does not want to get all correlations.</strong></p>
 <p>Sample usage:</p>
-<div class="sourceCode" id="cb20"><pre class="r">
+<div class="sourceCode" id="cb21"><pre class="r">
 <span class="co"># getall correlations</span>
 <span class="no">corrs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/get_var_corr.html">get_var_corr</a></span>(<span class="no">mtcars</span>,<span class="kw">comparison_var</span><span class="kw">=</span><span class="st">"mpg"</span>)</pre></div>
 <p>The result is as follows(default pearson):</p>
-<div class="sourceCode" id="cb21"><pre class="r">
+<div class="sourceCode" id="cb22"><pre class="r">
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">corrs</span>)
 <span class="co">#&gt;   comparison_var other_var      p.value correlation    lower_ci   upper_ci</span>
@@ -314,16 +344,16 @@
 <span class="co">#&gt; 5            mpg        wt 1.293959e-10  -0.8676594 -0.93382641 -0.7440872</span>
 <span class="co">#&gt; 6            mpg      qsec 1.708199e-02   0.4186840  0.08195487  0.6696186</span></pre></div>
 <p><strong>Previously, one would also set <code>drop_columns</code> to <code>TRUE</code> if they wanted to drop factor columns.</strong> Now, a user simply provides a character vector specifying which column types(classes) should be dropped. It defaults to <code><a href="https://rdrr.io/r/base/c.html">c("character","factor")</a></code>.</p>
-<div class="sourceCode" id="cb22"><pre class="r">
+<div class="sourceCode" id="cb23"><pre class="r">
 <span class="co"># purely demonstrative</span>
-<span class="fu"><a href="reference/get_var_corr.html">get_var_corr</a></span>(<span class="no">iris</span>,<span class="st">"Sepal.Length"</span>,<span class="kw">other_vars</span><span class="kw">=</span><span class="st">"Petal.Length"</span>,<span class="kw">drop_columns</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"factor"</span>,<span class="st">"character"</span>), <span class="kw">method</span><span class="kw">=</span><span class="st">"spearman"</span>, <span class="kw">exact</span><span class="kw">=</span><span class="fl">FALSE</span>)
+<span class="fu"><a href="reference/get_var_corr.html">get_var_corr</a></span>(<span class="no">iris</span>,<span class="st">"Sepal.Length"</span>,<span class="kw">other_vars</span><span class="kw">=</span><span class="st">"Petal.Length"</span>,<span class="kw">drop_columns</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"factor"</span>,<span class="st">"character"</span>),<span class="kw">method</span><span class="kw">=</span><span class="st">"spearman"</span>, <span class="kw">exact</span><span class="kw">=</span><span class="fl">FALSE</span>)
 <span class="co">#&gt; Warning in get_var_corr.data.frame(iris, "Sepal.Length", other_vars = "Petal.Length", : Columns with classes in drop_columns have been discarded. You</span>
 <span class="co">#&gt;               can disable this by setting yourself by setting drop_columns</span>
 <span class="co">#&gt;               to NULL.</span>
 <span class="co">#&gt;   comparison_var    other_var      p.value correlation</span>
 <span class="co">#&gt; 1   Sepal.Length Petal.Length 3.443087e-50   0.8818981</span></pre></div>
 <p>Similarly, <code>get_var_corr_</code> (note the underscore at the end) provides a convenient way to get combination-wise correlations.</p>
-<div class="sourceCode" id="cb23"><pre class="r">
+<div class="sourceCode" id="cb24"><pre class="r">
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="reference/get_var_corr_.html">get_var_corr_</a></span>(<span class="no">mtcars</span>),<span class="fl">6</span>)
 <span class="co">#&gt;   comparison_var other_var      p.value correlation    lower_ci   upper_ci</span>
 <span class="co">#&gt; 1            mpg       cyl 6.112687e-10  -0.8521620 -0.92576936 -0.7163171</span>
@@ -333,9 +363,8 @@
 <span class="co">#&gt; 5            mpg        wt 1.293959e-10  -0.8676594 -0.93382641 -0.7440872</span>
 <span class="co">#&gt; 6            mpg      qsec 1.708199e-02   0.4186840  0.08195487  0.6696186</span></pre></div>
 <p>To use only a subset of the data, we can use provide a list of columns to <code>subset_cols</code>. By default, the first value(vector) in the list is mapped to <code>comparison_var</code> and the other to <code>other_Var</code>. The list is therefore of length 2.</p>
-<div class="sourceCode" id="cb24"><pre class="r">
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="reference/get_var_corr_.html">get_var_corr_</a></span>(<span class="no">mtcars</span>,<span class="kw">subset_cols</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mpg"</span>,<span class="st">"vs"</span>),<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"disp"</span>,<span class="st">"wt"</span>)),
-                   <span class="kw">method</span><span class="kw">=</span><span class="st">"spearman"</span>,<span class="kw">exact</span><span class="kw">=</span><span class="fl">FALSE</span>))
+<div class="sourceCode" id="cb25"><pre class="r">
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="reference/get_var_corr_.html">get_var_corr_</a></span>(<span class="no">mtcars</span>,<span class="kw">subset_cols</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mpg"</span>,<span class="st">"vs"</span>),<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"disp"</span>,<span class="st">"wt"</span>)),<span class="kw">method</span><span class="kw">=</span><span class="st">"spearman"</span>,<span class="kw">exact</span><span class="kw">=</span><span class="fl">FALSE</span>))
 <span class="co">#&gt;   comparison_var other_var      p.value correlation</span>
 <span class="co">#&gt; 2            mpg      disp 6.370336e-13  -0.9088824</span>
 <span class="co">#&gt; 5            mpg        wt 1.487595e-11  -0.8864220</span></pre></div>
@@ -344,27 +373,24 @@
 </ul>
 <p>Obtaining correlations would mostly likely benefit from some form of visualization. <code>plot_corr</code> aims to achieve just that. There are currently two plot styles that is <code>squares</code> and <code>circles</code>. <code>circles</code> has the <code>shape</code> argument that can allow for more flexibility with respect to shape. It should be noted that the correlation matrix supplied to this function is an object produced by <code>get_var_corr_</code>.</p>
 <p>To modify the plot a bit, we can choose to switch the x and y values as shown below.</p>
-<div class="sourceCode" id="cb25"><pre class="r">
+<div class="sourceCode" id="cb26"><pre class="r">
 
 <span class="fu"><a href="reference/plot_corr.html">plot_corr</a></span>(<span class="no">mtcars</span>,<span class="kw">show_which</span> <span class="kw">=</span> <span class="st">"corr"</span>,
-          <span class="kw">round_which</span> <span class="kw">=</span> <span class="st">"correlation"</span>,<span class="kw">decimals</span> <span class="kw">=</span> <span class="fl">2</span>,
-          <span class="kw">x</span><span class="kw">=</span><span class="st">"other_var"</span>,
-           <span class="kw">y</span><span class="kw">=</span><span class="st">"comparison_var"</span>,<span class="kw">plot_style</span> <span class="kw">=</span> <span class="st">"squares"</span>
-          ,<span class="kw">width</span> <span class="kw">=</span> <span class="fl">1.1</span>,
-           <span class="kw">custom_cols</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"green"</span>,<span class="st">"blue"</span>,<span class="st">"red"</span>),<span class="kw">colour_by</span> <span class="kw">=</span> <span class="st">"correlation"</span>)</pre></div>
+          <span class="kw">round_which</span> <span class="kw">=</span> <span class="st">"correlation"</span>,<span class="kw">decimals</span> <span class="kw">=</span> <span class="fl">2</span>,<span class="kw">x</span><span class="kw">=</span><span class="st">"other_var"</span>,  <span class="kw">y</span><span class="kw">=</span><span class="st">"comparison_var"</span>,<span class="kw">plot_style</span> <span class="kw">=</span> <span class="st">"squares"</span>
+          ,<span class="kw">width</span> <span class="kw">=</span> <span class="fl">1.1</span>,<span class="kw">custom_cols</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"green"</span>,<span class="st">"blue"</span>,<span class="st">"red"</span>),<span class="kw">colour_by</span> <span class="kw">=</span> <span class="st">"correlation"</span>)
+<span class="co">#&gt; Warning in plot_corr(mtcars, show_which = "corr", round_which = "correlation", :</span>
+<span class="co">#&gt; Using colour_by for the legend title.</span></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-26-1.png"><!-- --></p>
 <p>To show significance of the results instead of the correlations themselves, we can set <code>show_which</code> to “signif” as shown below. By default, significance is set to 0.05. You can override this by supplying a different <code>signif_cutoff</code>.</p>
-<div class="sourceCode" id="cb26"><pre class="r"><span class="co"># color by p value</span>
+<div class="sourceCode" id="cb27"><pre class="r"><span class="co"># color by p value</span>
 <span class="co"># change custom colors by supplying custom_cols</span>
 <span class="co"># significance is default </span>
-<span class="fu"><a href="reference/plot_corr.html">plot_corr</a></span>(<span class="no">mtcars</span>, <span class="kw">x</span><span class="kw">=</span><span class="st">"other_var"</span>, <span class="kw">y</span><span class="kw">=</span><span class="st">"comparison_var"</span>,
-          <span class="kw">plot_style</span> <span class="kw">=</span> <span class="st">"squares"</span>,<span class="kw">show_which</span> <span class="kw">=</span> <span class="st">"signif"</span>,
-          <span class="kw">colour_by</span> <span class="kw">=</span> <span class="st">"p.value"</span>, <span class="kw">custom_cols</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"indianred4"</span>,<span class="st">"skyblue"</span>,<span class="st">"red"</span>))</pre></div>
-<div class="sourceCode" id="cb27"><pre class="r"><span class="fu"><a href="reference/plot_corr.html">plot_corr</a></span>(<span class="no">res</span>, <span class="kw">x</span><span class="kw">=</span><span class="st">"other_var"</span>, <span class="kw">y</span><span class="kw">=</span><span class="st">"comparison_var"</span>,
-          <span class="kw">plot_style</span> <span class="kw">=</span> <span class="st">"squares"</span>,
-          <span class="kw">show_corr</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">show_signif</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-          <span class="kw">colour_by</span> <span class="kw">=</span> <span class="st">"p.value"</span>,
-          <span class="kw">custom_cols</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"blue"</span>,<span class="st">"yellow"</span>,<span class="st">"red"</span>),
-          <span class="kw">signif_cutoff</span> <span class="kw">=</span> <span class="fl">0.01</span>)</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">233</span>)
+<span class="fu"><a href="reference/plot_corr.html">plot_corr</a></span>(<span class="no">mtcars</span>, <span class="kw">x</span><span class="kw">=</span><span class="st">"other_var"</span>, <span class="kw">y</span><span class="kw">=</span><span class="st">"comparison_var"</span>,<span class="kw">plot_style</span> <span class="kw">=</span> <span class="st">"circles"</span>,<span class="kw">show_which</span> <span class="kw">=</span> <span class="st">"signif"</span>,
+          <span class="kw">colour_by</span> <span class="kw">=</span> <span class="st">"p.value"</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/grDevices/colors.html">colours</a></span>(),<span class="fl">3</span>))
+<span class="co">#&gt; Warning in plot_corr(mtcars, x = "other_var", y = "comparison_var", plot_style =</span>
+<span class="co">#&gt; "circles", : Using colour_by for the legend title.</span></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-27-1.png"><!-- --></p>
 <p>To explore more options, please take a look at the documentation.</p>
 <ul>
 <li><code>rowdiff</code></li>
@@ -396,8 +422,7 @@
 <li><code>na_replace_grouped</code></li>
 </ul>
 <p>This provides a convenient way to replace values by group.</p>
-<div class="sourceCode" id="cb30"><pre class="r"><span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">A</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">NA</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), <span class="kw">B</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">NA</span>),
-                      <span class="kw">groups</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>,<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"B"</span>))
+<div class="sourceCode" id="cb30"><pre class="r"><span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">A</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">NA</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), <span class="kw">B</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">NA</span>),<span class="kw">groups</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>,<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"B"</span>))
 <span class="co"># Replace NAs by group</span>
 <span class="co"># replcae with the next non NA by group.</span>
 <span class="fu"><a href="reference/na_replace_grouped.html">na_replace_grouped</a></span>(<span class="kw">df</span><span class="kw">=</span><span class="no">test_df</span>,<span class="kw">group_by_cols</span> <span class="kw">=</span> <span class="st">"groups"</span>,<span class="kw">how</span><span class="kw">=</span><span class="st">"ffill"</span>)
