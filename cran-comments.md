@@ -2,8 +2,7 @@
 Release Summary
 
 
-This is a resubmission that fixes issues as advised. 
-
+This is a patch release to fix checks on old releases. 
 
 ## Test environments
 * local Windows 10 1903 x86_64, R 4.0.0 
