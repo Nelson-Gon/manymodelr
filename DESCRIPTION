@@ -12,9 +12,6 @@ Description: Frequently one needs a convenient way to build and tune
              several models in one function. The models are built using 'caret' functions with
              easier to read syntax.
              Kuhn(2014) <arXiv:1405.6974>.
-             Kuhn(2008) <doi:10.18637/jss.v028.i05>.
-             Chambers,J.M.(1992) <doi:10.1007/978-3-642-50096-1_48>.
-             Wilkinson,G.N. and Rogers, C. E. (1973) <doi:10.2307/2346786>.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
