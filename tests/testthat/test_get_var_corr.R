@@ -13,9 +13,7 @@ testthat::test_that(desc="Correlation tests",
     
     testthat::expect_warning( get_var_corr(iris,"Sepal.Length",
                                            drop_columns = c("factor")),
-                             "Columns with classes in drop_columns have been discarded. You
-              can disable this yourself by setting drop_columns
-              to NULL.", fixed=TRUE)
+                             "Columns with classes in drop_columns have been discarded. Youcan disable this yourself by setting drop_columns to NULL.", fixed=TRUE)
   
     
     # Test that when a user changes the method, it actually works.
