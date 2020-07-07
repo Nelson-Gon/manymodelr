@@ -1,4 +1,4 @@
-2020-06-19
+2020-07-07
 
 # `manymodelr`: Build and Tune Several Models
 
@@ -47,7 +47,8 @@ loading the package and exploring some of the key functions.
 **Loading the package**
 
 ``` r
-library(manymodelr, warn.conflicts = FALSE)
+
+library(manymodelr)
 #> Loading required package: caret
 #> Loading required package: lattice
 #> Loading required package: ggplot2
@@ -68,7 +69,7 @@ library(manymodelr, warn.conflicts = FALSE)
 
   - **`agg_by_group`**
 
-As one can guess from the name, this function provides an easy way to
+As can be guessed from the name, this function provides an easy way to
 manipulate grouped data. We can for instance find the number of
 observations in the iris data set. The formula takes the form `x~y`
 where `y` is the grouping variable(in this case `Species`). One can
@@ -86,6 +87,7 @@ head(agg_by_group(iris,.~Species,length))
 ```
 
 ``` r
+
 head(agg_by_group(mtcars,cyl~hp+vs,sum))
 #> Grouped By[2]:   hp vs 
 #> 
@@ -100,13 +102,12 @@ head(agg_by_group(mtcars,cyl~hp+vs,sum))
 
   - **`multi_model_1`**
 
-This is one of the core functions of the package. Since the function
-uses `caret` backend, we need to load `caret` before we can use it. To
-avoid, several messages showing up, we use the function
-`suppressMessages`. This assumes that one is familiar with machine
-learning basics.
+This is one of the core functions of the package. To avoid, several
+messages showing up, we use the function `suppressMessages`. This
+assumes that one is familiar with machine learning basics.
 
 ``` r
+
 set.seed(520)
 train_set<-createDataPartition(iris$Species,p=0.8,list=FALSE)
 valid_set<-iris[-train_set,]
@@ -145,10 +146,10 @@ head(m$predictions)
 
   - **multi\_model\_2**
 
-This is similar to `multi_model_1` with only one difference: it does not
-use metrics such as RMSE, accuracy and the like. This function is useful
-if one would like to fit and predict “simpler models” like generalized
-linear models or linear models, etc. Let’s take a look:
+This is similar to `multi_model_1` with one difference: it does not use
+metrics such as RMSE, accuracy and the like. This function is useful if
+one would like to fit and predict “simpler models” like generalized
+linear models or linear models. Let’s take a look:
 
 ``` r
 # fit a linear model and get predictions
@@ -167,7 +168,8 @@ head(lin_model)
 We can also fit a multilinear model as shown below:
 
 ``` r
-head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length", "Petal.Length + Sepal.Width","lm"))
+
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length", "Petal.Length +Sepal.Width","lm"))
 #>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
 #> 1          5.1         3.5          1.4         0.2  setosa  4.902999
 #> 2          4.9         3.0          1.4         0.2  setosa  5.771541
@@ -181,8 +183,8 @@ To take this a step further, we can fit a model with the square of
 Sepal.Width.
 
 ``` r
-head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length",
-    "Petal.Length + I(Sepal.Width)**2","lm"))
+
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length + I(Sepal.Width)**2","lm"))
 #>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
 #> 1          5.1         3.5          1.4         0.2  setosa  4.902999
 #> 2          4.9         3.0          1.4         0.2  setosa  5.771541
@@ -197,9 +199,8 @@ Exploration is therefore left to the reader.
 
   - **`fit_model`**
 
-Yet another core function, this allows us to fit any kind of model. It
-replaces `modeleR` which had several issues and development was
-discontinued. It can still work with some inaccuracies.
+This function allows us to fit any kind of model without. It replaces
+`modeleR` which had several issues and development was discontinued.
 
 ``` r
 iris1 <- iris[1:50,]
@@ -216,17 +217,19 @@ lm_model
 ```
 
 To extract information about the model, we can use `extract_model_info`
-as follows. Say we wanted to extract the R squared, we could proceed as
-follows:
+as follows. Say we wanted to extract the R squared value, we would
+proceed as follows:
 
 ``` r
+
 extract_model_info(lm_model, "r2")
 #> [1] 0.07138289
 ```
 
-To extract the adjusted r squared, we can do the following:
+To extract the adjusted R squared:
 
 ``` r
+
 extract_model_info(lm_model, "adj_r2")
 #> [1] 0.0520367
 ```
@@ -234,6 +237,7 @@ extract_model_info(lm_model, "adj_r2")
 For the p value:
 
 ``` r
+
 extract_model_info(lm_model, "p_value")
 #>  (Intercept) Petal.Length 
 #> 1.614927e-13 6.069778e-02
@@ -242,6 +246,7 @@ extract_model_info(lm_model, "p_value")
 To extract multiple attributes:
 
 ``` r
+
 extract_model_info(lm_model,c("p_value","response","call","predictors"))
 #> $p_value
 #>  (Intercept) Petal.Length 
@@ -266,6 +271,7 @@ as follows:
 
 ``` r
 # select only column 6 that has our predicted values
+
 head(add_model_predictions(lm_model, old_data = iris1, new_data =  iris2))[6]
 #>   predicted
 #> 1  6.761943
@@ -279,6 +285,7 @@ head(add_model_predictions(lm_model, old_data = iris1, new_data =  iris2))[6]
 To do the same with `dplyr`, one can work as follows:
 
 ``` r
+
 library(dplyr)
 #> 
 #> Attaching package: 'dplyr'
@@ -304,6 +311,8 @@ iris1 %>%
 To add residuals to our data set, we can use `add_model_residuals`:
 
 ``` r
+# 6 since residuals are added as the final column of the dataset
+
 head(add_model_residuals(lm_model, iris1)[6])
 #>     residuals
 #> 1  0.12762214
@@ -317,6 +326,7 @@ head(add_model_residuals(lm_model, iris1)[6])
 With `dplyr`:
 
 ``` r
+
 iris1 %>% 
   add_model_residuals(model=lm_model) %>% 
   add_model_predictions(new_data = iris2, model = lm_model) %>% 
@@ -345,7 +355,7 @@ many predictors at once. A simple linear model for instance:
 
 ``` r
 
-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),xname="Petal.Length + Petal.Width",modeltype="lm")
+( models<-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),xname="Petal.Length + Petal.Width",modeltype="lm") )
 #> [[1]]
 #> 
 #> Call:
@@ -366,6 +376,23 @@ fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),xname="Petal.Length + P
 #>       3.5870       -0.2571        0.3640
 ```
 
+One can then use these models as one may wish. To add residuals from
+these models for example:
+
+``` r
+
+res<-lapply(models,add_model_residuals,iris)
+
+head(res[[1]])
+#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species   residuals
+#> 1          5.1         3.5          1.4         0.2  setosa  0.21483967
+#> 2          4.9         3.0          1.4         0.2  setosa  0.01483967
+#> 3          4.7         3.2          1.3         0.2  setosa -0.13098262
+#> 4          4.6         3.1          1.5         0.2  setosa -0.33933805
+#> 5          5.0         3.6          1.4         0.2  setosa  0.11483967
+#> 6          5.4         3.9          1.7         0.4  setosa  0.41621663
+```
+
   - `get_var_corr`
 
 As can probably(hopefully) be guessed from the name, this provides a
@@ -383,15 +410,10 @@ Sample usage:
 ``` r
 
 # getall correlations
-corrs <- get_var_corr(mtcars,comparison_var="mpg")
-```
 
-The result is as follows(default pearson):
+# default pearson
 
-``` r
-
-
-head(corrs)
+head( corrs <- get_var_corr(mtcars,comparison_var="mpg") )
 #>   comparison_var other_var      p.value correlation    lower_ci   upper_ci
 #> 1            mpg       cyl 6.112687e-10  -0.8521620 -0.92576936 -0.7163171
 #> 2            mpg      disp 9.380327e-10  -0.8475514 -0.92335937 -0.7081376
@@ -409,7 +431,8 @@ specifying which column types(classes) should be dropped. It defaults to
 ``` r
 
 # purely demonstrative
-get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns=c("factor","character"),method="spearman", exact=FALSE)
+get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns=c("factor","character"),method="spearman",
+             exact=FALSE)
 #> Warning in get_var_corr.data.frame(iris, "Sepal.Length", other_vars = "Petal.Length", : Columns with classes in drop_columns have been discarded. You
 #>               can disable this by setting yourself by setting drop_columns
 #>               to NULL.
@@ -449,10 +472,10 @@ head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),method=
 
 Obtaining correlations would mostly likely benefit from some form of
 visualization. `plot_corr` aims to achieve just that. There are
-currently two plot styles that is `squares` and `circles`. `circles` has
-the `shape` argument that can allow for more flexibility with respect to
-shape. It should be noted that the correlation matrix supplied to this
-function is an object produced by `get_var_corr_`.
+currently two plot styles, `squares` and `circles`. `circles` has a
+`shape` argument that can allow for more flexibility. It should be noted
+that the correlation matrix supplied to this function is an object
+produced by `get_var_corr_`.
 
 To modify the plot a bit, we can choose to switch the x and y values as
 shown below.
@@ -479,8 +502,7 @@ a different `signif_cutoff`.
 # change custom colors by supplying custom_cols
 # significance is default 
 set.seed(233)
-plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_which = "signif",
-          colour_by = "p.value", sample(colours(),3))
+plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_which = "signif", colour_by = "p.value", sample(colours(),3))
 #> Warning in plot_corr(mtcars, x = "other_var", y = "comparison_var", plot_style =
 #> "circles", : Using colour_by for the legend title.
 ```
@@ -498,6 +520,7 @@ before calculations are made. Using `direction="reverse"` performs a
 subtraction akin to `x-(x-1)` where `x` is the row number.
 
 ``` r
+
 head(rowdiff(iris,exclude = "factor",direction = "reverse"))
 #>   Sepal.Length Sepal.Width Petal.Length Petal.Width
 #> 1           NA          NA           NA          NA
@@ -519,6 +542,7 @@ longer supported. They are now available with more flexibility in
 standalone [mde](https://www.github.com/Nelson-Gon/mde)
 
 ``` r
+
 head(na_replace(airquality, how="value", value="Missing"),8)
 #>     Ozone Solar.R Wind Temp Month Day
 #> 1      41     190  7.4   67     5   1
@@ -538,7 +562,7 @@ This provides a convenient way to replace values by group.
 ``` r
 test_df <- data.frame(A=c(NA,1,2,3), B=c(1,5,6,NA),groups=c("A","A","B","B"))
 # Replace NAs by group
-# replcae with the next non NA by group.
+# replace with the next non NA by group.
 na_replace_grouped(df=test_df,group_by_cols = "groups",how="ffill")
 #>   groups A B
 #> 1      A 1 1
@@ -556,7 +580,7 @@ missingness.
 **Exploring Further**
 
 The vignette has been short and therefore is non exhaustive. The best
-way to explore this and any package or language is to practice. For more
+way to explore this and any package or language is to practise. For more
 examples, please use `?function_name` and see a few implementations of
 the given function.
 

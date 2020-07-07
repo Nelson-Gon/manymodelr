@@ -1,6 +1,5 @@
 ---
 date: "`r Sys.Date()`"
-title: Build and Tune Several Models with manymodelr
 output: html_document
 vignette: >
   %\VignetteIndexEntry{ "A Gentle Introduction to manymodelr"}
@@ -54,7 +53,9 @@ Once the package has been successfully installed, we can then proceed by loading
 **Loading the package**
 
 ```{r}
-library(manymodelr, warn.conflicts = FALSE)
+
+library(manymodelr)
+
 ```
 
 
@@ -63,7 +64,7 @@ library(manymodelr, warn.conflicts = FALSE)
 
 - **`agg_by_group`**
 
-As one can guess from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form `x~y` where `y` is the grouping variable(in this case `Species`). One can supply a formula as shown next. 
+As can be guessed from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form `x~y` where `y` is the grouping variable(in this case `Species`). One can supply a formula as shown next. 
 
 ```{r}
 
@@ -72,15 +73,18 @@ head(agg_by_group(iris,.~Species,length))
 ```
 
 ```{r}
+
 head(agg_by_group(mtcars,cyl~hp+vs,sum))
+
 ```
 
 
 - **`multi_model_1`**
 
-This is one of the core functions of the package. Since the function uses `caret` backend, we need to load `caret` before we can use it. To avoid, several messages showing up, we use the function `suppressMessages`. This assumes that one is familiar with machine learning basics.
+This is one of the core functions of the package. To avoid, several messages showing up, we use the function `suppressMessages`. This assumes that one is familiar with machine learning basics.
 
 ```{r}
+
 set.seed(520)
 train_set<-createDataPartition(iris$Species,p=0.8,list=FALSE)
 valid_set<-iris[-train_set,]
@@ -106,25 +110,30 @@ head(m$predictions)
 
 - **multi_model_2**
 
-This is similar to `multi_model_1` with only one difference: it does not use metrics such as RMSE, accuracy and the like. This function is useful if one would like to fit and predict "simpler models" like generalized linear models or linear models, etc. Let's take a look:
+This is similar to `multi_model_1` with one difference: it does not use metrics such as RMSE, accuracy and the like. This function is useful if one would like to fit and predict "simpler models" like generalized linear models or linear models. Let's take a look:
 
 ```{r}
 # fit a linear model and get predictions
 lin_model <- multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length","lm")
 
 head(lin_model)
+
 ```
 
 We can also fit a multilinear model as shown below:
+
 ```{r}
-head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length", "Petal.Length + Sepal.Width","lm"))
+
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length", "Petal.Length +Sepal.Width","lm"))
+
 ```
 
 To take this a step further, we can fit a model with the square of Sepal.Width. 
 
 ```{r}
-head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length",
-    "Petal.Length + I(Sepal.Width)**2","lm"))
+
+head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length + I(Sepal.Width)**2","lm"))
+
 ```
 
 The above function does more and can fit and predict on any model type. Exploration is therefore left to the reader.
@@ -132,7 +141,7 @@ The above function does more and can fit and predict on any model type. Explorat
 
 - **`fit_model`**
 
- Yet another core function, this allows us to fit any kind of model. It replaces `modeleR` which had several issues and development was discontinued. It can still work with some inaccuracies.
+This function allows us to fit any kind of model without. It replaces `modeleR` which had several issues and development was discontinued. 
  
 ```{r}
 iris1 <- iris[1:50,]
@@ -142,24 +151,34 @@ lm_model
 
 ```
 
-To extract information about the model, we can use `extract_model_info` as follows. Say we wanted to extract the R squared, we could proceed as follows:
+To extract information about the model, we can use `extract_model_info` as follows. Say we wanted to extract the R squared value, we would proceed as follows:
+
 ```{r}
+
 extract_model_info(lm_model, "r2")
+
 ```
 
-To extract the adjusted r squared,  we can do the following:
+To extract the adjusted R squared:
+
 ```{r}
+
 extract_model_info(lm_model, "adj_r2")
+
 ```
 
 For the p value:
+
 ```{r}
+
 extract_model_info(lm_model, "p_value")
+
 ```
 
 To extract multiple attributes:
 
 ```{r}
+
 extract_model_info(lm_model,c("p_value","response","call","predictors"))
 
 ```
@@ -170,33 +189,42 @@ To add predictions to our data set, we can use `add_model_predictions` as follow
 
 ```{r}
 # select only column 6 that has our predicted values
+
 head(add_model_predictions(lm_model, old_data = iris1, new_data =  iris2))[6]
+
 ```
 
 To do the same with `dplyr`, one can work as follows:
 
 ```{r}
+
 library(dplyr)
 iris1 %>% 
   add_model_predictions(model=lm_model,new_data = iris2) %>% 
   select(predicted, everything()) %>% 
   head()
+
 ```
 
 To add residuals to our data set, we can use `add_model_residuals`:
 
 ```{r}
+# 6 since residuals are added as the final column of the dataset
+
 head(add_model_residuals(lm_model, iris1)[6])
+
 ```
 
 With `dplyr`:
 
 ```{r}
+
 iris1 %>% 
   add_model_residuals(model=lm_model) %>% 
   add_model_predictions(new_data = iris2, model = lm_model) %>% 
   select(predicted,residuals, everything()) %>% 
   head()
+
 ```
 
 
@@ -206,10 +234,20 @@ This is similar to `fit_model` with the ability to fit many models with many pre
 
 ```{r}
 
-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),xname="Petal.Length + Petal.Width",modeltype="lm")
+( models<-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),xname="Petal.Length + Petal.Width",modeltype="lm") )
 
 ```
 
+One can then use these models as one may wish. To add residuals from these models for example:
+
+
+```{r}
+
+res<-lapply(models,add_model_residuals,iris)
+
+head(res[[1]])
+
+```
 
 - `get_var_corr`
 
@@ -222,17 +260,11 @@ Sample usage:
 ```{r}
 
 # getall correlations
-corrs <- get_var_corr(mtcars,comparison_var="mpg")
 
+# default pearson
 
-```
+head( corrs <- get_var_corr(mtcars,comparison_var="mpg") )
 
-The result is as follows(default pearson):
-
-```{r}
-
-
-head(corrs)
 
 ```
 
@@ -241,7 +273,8 @@ head(corrs)
 ```{r}
 
 # purely demonstrative
-get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns=c("factor","character"),method="spearman", exact=FALSE)
+get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns=c("factor","character"),method="spearman",
+             exact=FALSE)
 
 
 ```
@@ -266,7 +299,7 @@ head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),method=
 
 - `plot_corr`
 
-Obtaining correlations would mostly likely benefit from some form of visualization. `plot_corr` aims to achieve just that. There are currently two plot styles that is `squares` and `circles`. `circles` has the `shape` argument that can allow for more flexibility with respect to shape. It should be noted that the correlation matrix supplied to this function is an object produced by `get_var_corr_`.
+Obtaining correlations would mostly likely benefit from some form of visualization. `plot_corr` aims to achieve just that. There are currently two plot styles, `squares` and `circles`. `circles` has a `shape` argument that can allow for more flexibility. It should be noted that the correlation matrix supplied to this function is an object produced by `get_var_corr_`.
 
 
 
@@ -282,16 +315,15 @@ plot_corr(mtcars,show_which = "corr",
 ```
 
 
-To show significance of the results instead of the correlations themselves, we can set `show_which` to "signif"  as shown below. By default,
-significance is set to 0.05. You can override this by supplying a different `signif_cutoff`.
+To show significance of the results instead of the correlations themselves, we can set `show_which` to "signif"  as shown below. By default, significance is set to 0.05. You can override this by supplying a different `signif_cutoff`.
 
 ```{r}
 # color by p value
 # change custom colors by supplying custom_cols
 # significance is default 
 set.seed(233)
-plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_which = "signif",
-          colour_by = "p.value", sample(colours(),3))
+plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_which = "signif", colour_by = "p.value", sample(colours(),3))
+
 ```
 
 
@@ -304,7 +336,9 @@ To explore more options, please take a look at the documentation.
  This is useful when trying to find differences between rows. The `direction` argument specifies how the subtractions are made while the `exclude` argument is used to specify classes that should be removed before calculations are made.  Using `direction="reverse"` performs a subtraction akin to `x-(x-1)` where `x` is the row number. 
 
 ```{r}
+
 head(rowdiff(iris,exclude = "factor",direction = "reverse"))
+
 ```
 
 
@@ -313,6 +347,7 @@ head(rowdiff(iris,exclude = "factor",direction = "reverse"))
 This allows the user to conveniently replace missing values. Current options are `ffill` which replaces with the next non-missing value, `samples` that samples the data and does replacement, `value` that allows one to fill `NA`s with a specific value. Other common mathematical methods like `min`, `max`,`get_mode`, `sd`, etc are no longer supported. They are now available with more flexibility in standalone [mde](https://www.github.com/Nelson-Gon/mde)
 
 ```{r}
+
 head(na_replace(airquality, how="value", value="Missing"),8)
 
 ```
@@ -323,7 +358,7 @@ This provides a convenient way to replace values by group.
 ```{r}
 test_df <- data.frame(A=c(NA,1,2,3), B=c(1,5,6,NA),groups=c("A","A","B","B"))
 # Replace NAs by group
-# replcae with the next non NA by group.
+# replace with the next non NA by group.
 na_replace_grouped(df=test_df,group_by_cols = "groups",how="ffill")
 
 ```
@@ -334,12 +369,12 @@ The use of `mean`,`sd`,etc is no longer supported. Use [mde](https://www.github.
 
 **Exploring Further**
 
-The vignette has been short and therefore is non exhaustive. The best way to explore this and any package or language is to practice. For more examples, please use `?function_name` and see a few implementations of the given function.
+The vignette has been short and therefore is non exhaustive. The best way to explore this and any package or language is to practise. For more examples, please use `?function_name` and see a few implementations of the given function.
 
 **Reporting Issues**
 
 If you would like to contribute, report issues or improve any of these functions, please raise a pull request at ([manymodelr](https://www.github.com/Nelson-Gon/manymodelr))
 
-> "Programs must be written for people to read, and only incidentally for machines to execute." - Harold Abelson 
+> "Programs must be written for people to read, and only incidentally for machines to execute." - Harold Abelson ([Reference](https://www.goodreads.com/quotes/tag/programming))
 
 **Thank You**
