@@ -36,7 +36,7 @@ get_var_corr.data.frame<-function (df, comparison_var=NULL, other_vars = NULL, m
   if(any(sapply(df,class) %in% drop_columns)){
     
     warning("Columns with classes in drop_columns have been discarded. You
-              can disable this by setting yourself by setting drop_columns
+              can disable yourself by setting drop_columns
               to NULL.")
     df <- Filter(function(x) ! class(x) %in% drop_columns,df)
 }
