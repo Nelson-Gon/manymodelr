@@ -249,6 +249,16 @@ head(res[[1]])
 
 ```
 
+To fit several model types with different variables, one can do the following:
+
+
+```{r}
+
+fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), xname="Petal.Length + Petal.Width",modeltype=c("lm","glm"))
+
+```
+
+
 - `get_var_corr`
 
 As can probably(hopefully) be guessed from the name, this provides a convenient way to get variable correlations. It enables one to get correlation between one variable and all other variables in the data set.

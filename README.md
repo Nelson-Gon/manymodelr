@@ -1,4 +1,4 @@
-2020-07-07
+2020-07-21
 
 # `manymodelr`: Build and Tune Several Models
 
@@ -357,6 +357,7 @@ many predictors at once. A simple linear model for instance:
 
 ( models<-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),xname="Petal.Length + Petal.Width",modeltype="lm") )
 #> [[1]]
+#> [[1]][[1]]
 #> 
 #> Call:
 #> lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)
@@ -366,7 +367,7 @@ many predictors at once. A simple linear model for instance:
 #>       4.1906        0.5418       -0.3196  
 #> 
 #> 
-#> [[2]]
+#> [[1]][[2]]
 #> 
 #> Call:
 #> lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)
@@ -384,13 +385,67 @@ these models for example:
 res<-lapply(models,add_model_residuals,iris)
 
 head(res[[1]])
-#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species   residuals
-#> 1          5.1         3.5          1.4         0.2  setosa  0.21483967
-#> 2          4.9         3.0          1.4         0.2  setosa  0.01483967
-#> 3          4.7         3.2          1.3         0.2  setosa -0.13098262
-#> 4          4.6         3.1          1.5         0.2  setosa -0.33933805
-#> 5          5.0         3.6          1.4         0.2  setosa  0.11483967
-#> 6          5.4         3.9          1.7         0.4  setosa  0.41621663
+#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#> 1          5.1         3.5          1.4         0.2  setosa
+#> 2          4.9         3.0          1.4         0.2  setosa
+#> 3          4.7         3.2          1.3         0.2  setosa
+#> 4          4.6         3.1          1.5         0.2  setosa
+#> 5          5.0         3.6          1.4         0.2  setosa
+#> 6          5.4         3.9          1.7         0.4  setosa
+```
+
+To fit several model types with different variables, one can do the
+following:
+
+``` r
+
+fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), xname="Petal.Length + Petal.Width",modeltype=c("lm","glm"))
+#> [[1]]
+#> [[1]][[1]]
+#> 
+#> Call:
+#> lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)
+#> 
+#> Coefficients:
+#>  (Intercept)  Petal.Length   Petal.Width  
+#>       4.1906        0.5418       -0.3196  
+#> 
+#> 
+#> [[1]][[2]]
+#> 
+#> Call:
+#> lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)
+#> 
+#> Coefficients:
+#>  (Intercept)  Petal.Length   Petal.Width  
+#>       3.5870       -0.2571        0.3640  
+#> 
+#> 
+#> 
+#> [[2]]
+#> [[2]][[1]]
+#> 
+#> Call:  glm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)
+#> 
+#> Coefficients:
+#>  (Intercept)  Petal.Length   Petal.Width  
+#>       4.1906        0.5418       -0.3196  
+#> 
+#> Degrees of Freedom: 149 Total (i.e. Null);  147 Residual
+#> Null Deviance:       102.2 
+#> Residual Deviance: 23.88     AIC: 158
+#> 
+#> [[2]][[2]]
+#> 
+#> Call:  glm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)
+#> 
+#> Coefficients:
+#>  (Intercept)  Petal.Length   Petal.Width  
+#>       3.5870       -0.2571        0.3640  
+#> 
+#> Degrees of Freedom: 149 Total (i.e. Null);  147 Residual
+#> Null Deviance:       28.31 
+#> Residual Deviance: 22.27     AIC: 147.6
 ```
 
   - `get_var_corr`
@@ -433,9 +488,9 @@ specifying which column types(classes) should be dropped. It defaults to
 # purely demonstrative
 get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns=c("factor","character"),method="spearman",
              exact=FALSE)
-#> Warning in get_var_corr.data.frame(iris, "Sepal.Length", other_vars = "Petal.Length", : Columns with classes in drop_columns have been discarded. You
-#>               can disable this by setting yourself by setting drop_columns
-#>               to NULL.
+#> Warning in get_var_corr.data.frame(iris, "Sepal.Length", other_vars =
+#> "Petal.Length", : Columns with classes in drop_columns have been discarded.
+#> Youcan disable this yourself by setting drop_columns to NULL.
 #>   comparison_var    other_var      p.value correlation
 #> 1   Sepal.Length Petal.Length 3.443087e-50   0.8818981
 ```
@@ -490,7 +545,7 @@ plot_corr(mtcars,show_which = "corr",
 #> Using colour_by for the legend title.
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
 
 To show significance of the results instead of the correlations
 themselves, we can set `show_which` to “signif” as shown below. By
@@ -507,7 +562,7 @@ plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_
 #> "circles", : Using colour_by for the legend title.
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-28-1.png)<!-- -->
 
 To explore more options, please take a look at the documentation.
 
