@@ -28,7 +28,7 @@ fit_many <- fit_models(df=iris,yname=c("Sepal.Length", "Sepal.Width"),
                             modeltype="lm"),
                  "fit_models is used for several yname, use fit_model for single predictors",
                  fixed =TRUE)
-   expect_equal(length(fit_many),2)
+   expect_equal(length(fit_many[[1]]),2)
    
                     })
 

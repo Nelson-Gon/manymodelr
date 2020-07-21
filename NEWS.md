@@ -5,6 +5,9 @@ author: "Nelson Gonzabato"
 output: htlm_document
 
 ---
+# manymodelr 0.3.3
+
+* Extended `fit_models` to support model fitting for several variables for several model types. 
 
 # manymodelr 0.3.2
 
