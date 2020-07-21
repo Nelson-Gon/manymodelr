@@ -161,8 +161,8 @@
     <p>A list of model objects that can be used later.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>fit_models</span>(<span class='kw'>df</span><span class='kw'>=</span><span class='no'>iris</span>,<span class='kw'>yname</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Sepal.Length"</span>,<span class='st'>"Sepal.Width"</span>),
-<span class='kw'>xname</span><span class='kw'>=</span><span class='st'>"Petal.Length + Petal.Width"</span>,<span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"lm"</span>)</div><div class='output co'>#&gt; [[1]]
+    <pre class="examples"><div class='input'><span class='fu'>fit_models</span>(<span class='kw'>df</span><span class='kw'>=</span><span class='no'>iris</span>,<span class='kw'>yname</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Sepal.Length"</span>,<span class='st'>"Sepal.Width"</span>),<span class='kw'>xname</span><span class='kw'>=</span><span class='st'>"Petal.Length + Petal.Width"</span>,<span class='kw'>modeltype</span><span class='kw'>=</span><span class='st'>"lm"</span>)</div><div class='output co'>#&gt; [[1]]
+#&gt; [[1]][[1]]
 #&gt; 
 #&gt; Call:
 #&gt; lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)
@@ -172,7 +172,7 @@
 #&gt;       4.1906        0.5418       -0.3196  
 #&gt; 
 #&gt; 
-#&gt; [[2]]
+#&gt; [[1]][[2]]
 #&gt; 
 #&gt; Call:
 #&gt; lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)
@@ -181,8 +181,56 @@
 #&gt;  (Intercept)  Petal.Length   Petal.Width  
 #&gt;       3.5870       -0.2571        0.3640  
 #&gt; 
-#&gt; </div><div class='input'>
-</div></pre>
+#&gt; 
+#&gt; </div><div class='input'><span class='co'>#many model types</span>
+<span class='fu'>fit_models</span>(<span class='kw'>df</span><span class='kw'>=</span><span class='no'>iris</span>,<span class='kw'>yname</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Sepal.Length"</span>,<span class='st'>"Sepal.Width"</span>), <span class='kw'>xname</span><span class='kw'>=</span><span class='st'>"Petal.Length + Petal.Width"</span>,<span class='kw'>modeltype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"lm"</span>,<span class='st'>"glm"</span>))</div><div class='output co'>#&gt; [[1]]
+#&gt; [[1]][[1]]
+#&gt; 
+#&gt; Call:
+#&gt; lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)
+#&gt; 
+#&gt; Coefficients:
+#&gt;  (Intercept)  Petal.Length   Petal.Width  
+#&gt;       4.1906        0.5418       -0.3196  
+#&gt; 
+#&gt; 
+#&gt; [[1]][[2]]
+#&gt; 
+#&gt; Call:
+#&gt; lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)
+#&gt; 
+#&gt; Coefficients:
+#&gt;  (Intercept)  Petal.Length   Petal.Width  
+#&gt;       3.5870       -0.2571        0.3640  
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; [[2]]
+#&gt; [[2]][[1]]
+#&gt; 
+#&gt; Call:  glm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)
+#&gt; 
+#&gt; Coefficients:
+#&gt;  (Intercept)  Petal.Length   Petal.Width  
+#&gt;       4.1906        0.5418       -0.3196  
+#&gt; 
+#&gt; Degrees of Freedom: 149 Total (i.e. Null);  147 Residual
+#&gt; Null Deviance:	    102.2 
+#&gt; Residual Deviance: 23.88 	AIC: 158
+#&gt; 
+#&gt; [[2]][[2]]
+#&gt; 
+#&gt; Call:  glm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)
+#&gt; 
+#&gt; Coefficients:
+#&gt;  (Intercept)  Petal.Length   Petal.Width  
+#&gt;       3.5870       -0.2571        0.3640  
+#&gt; 
+#&gt; Degrees of Freedom: 149 Total (i.e. Null);  147 Residual
+#&gt; Null Deviance:	    28.31 
+#&gt; Residual Deviance: 22.27 	AIC: 147.6
+#&gt; 
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
