@@ -129,7 +129,14 @@
     <p>Fit several models with different response variables</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fit_models</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>yname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>xname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>modeltype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>fit_models</span>(
+  <span class='kw'>df</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>yname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>xname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>modeltype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>drop_non_numeric</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,6 +156,10 @@
     <tr>
       <th>modeltype</th>
       <td><p>A character specifying the model type e.g lm for linear model</p></td>
+    </tr>
+    <tr>
+      <th>drop_non_numeric</th>
+      <td><p>Should non numeric columns be dropped? Defaults to FALSE</p></td>
     </tr>
     <tr>
       <th>...</th>

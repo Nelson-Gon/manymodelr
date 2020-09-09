@@ -4,7 +4,14 @@
 \alias{fit_models}
 \title{Fit several models with different response variables}
 \usage{
-fit_models(df = NULL, yname = NULL, xname = NULL, modeltype = NULL, ...)
+fit_models(
+  df = NULL,
+  yname = NULL,
+  xname = NULL,
+  modeltype = NULL,
+  drop_non_numeric = FALSE,
+  ...
+)
 }
 \arguments{
 \item{df}{A data.frame object}
@@ -14,6 +21,8 @@ fit_models(df = NULL, yname = NULL, xname = NULL, modeltype = NULL, ...)
 \item{xname}{The predictor variable(s)}
 
 \item{modeltype}{A character specifying the model type e.g lm for linear model}
+
+\item{drop_non_numeric}{Should non numeric columns be dropped? Defaults to FALSE}
 
 \item{...}{Other arguments to specific model types.}
 }

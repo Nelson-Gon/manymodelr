@@ -76,12 +76,12 @@
 
       
 
-      </header><script src="manymodelr_vignette_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
+      </header><script src="manymodelr_vignette_files/header-attrs-2.3/header-attrs.js"></script><script src="manymodelr_vignette_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip></h1>
             
-            <h4 class="date">2020-07-21</h4>
+            <h4 class="date">2020-09-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Nelson-Gon/manymodelr/blob/master/vignettes/manymodelr_vignette.rmd"><code>vignettes/manymodelr_vignette.rmd</code></a></small>
       <div class="hidden name"><code>manymodelr_vignette.rmd</code></div>
@@ -105,6 +105,7 @@
 <span class="co">#&gt; Loading required package: caret</span>
 <span class="co">#&gt; Loading required package: lattice</span>
 <span class="co">#&gt; Loading required package: ggplot2</span>
+<span class="co">#&gt; Warning: package 'ggplot2' was built under R version 4.0.2</span>
 <span class="co">#&gt; Loading required package: Metrics</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'Metrics'</span>
@@ -400,13 +401,70 @@
 <span class="co">#&gt; Degrees of Freedom: 149 Total (i.e. Null);  147 Residual</span>
 <span class="co">#&gt; Null Deviance:       28.31 </span>
 <span class="co">#&gt; Residual Deviance: 22.27     AIC: 147.6</span></pre></body></html></div>
+<p>If one would like to drop non-numeric columns from the analysis, one can set <code>drop_non_numeric</code> to <code>TRUE</code> as follows. The same can be done for <code>fit_model</code> above:</p>
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fu"><a href="../reference/fit_models.html">fit_models</a></span>(<span class="kw">df</span><span class="kw">=</span><span class="no">iris</span>,<span class="kw">yname</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Sepal.Length"</span>,<span class="st">"Sepal.Width"</span>),
+           <span class="kw">xname</span><span class="kw">=</span><span class="st">"."</span>,<span class="kw">modeltype</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lm"</span>,<span class="st">"glm"</span>), <span class="kw">drop_non_numeric</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [[1]][[1]]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = Sepal.Length ~ ., data = df)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;       (Intercept)        Sepal.Width       Petal.Length        Petal.Width  </span>
+<span class="co">#&gt;            2.1713             0.4959             0.8292            -0.3152  </span>
+<span class="co">#&gt; Speciesversicolor   Speciesvirginica  </span>
+<span class="co">#&gt;           -0.7236            -1.0235  </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[1]][[2]]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = Sepal.Width ~ ., data = df)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;       (Intercept)       Sepal.Length       Petal.Length        Petal.Width  </span>
+<span class="co">#&gt;            1.6572             0.3778            -0.1876             0.6257  </span>
+<span class="co">#&gt; Speciesversicolor   Speciesvirginica  </span>
+<span class="co">#&gt;           -1.1603            -1.3983  </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; [[2]][[1]]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:  glm(formula = Sepal.Length ~ ., data = df)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;       (Intercept)        Sepal.Width       Petal.Length        Petal.Width  </span>
+<span class="co">#&gt;            2.1713             0.4959             0.8292            -0.3152  </span>
+<span class="co">#&gt; Speciesversicolor   Speciesvirginica  </span>
+<span class="co">#&gt;           -0.7236            -1.0235  </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Degrees of Freedom: 149 Total (i.e. Null);  144 Residual</span>
+<span class="co">#&gt; Null Deviance:       102.2 </span>
+<span class="co">#&gt; Residual Deviance: 13.56     AIC: 79.12</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]][[2]]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:  glm(formula = Sepal.Width ~ ., data = df)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;       (Intercept)       Sepal.Length       Petal.Length        Petal.Width  </span>
+<span class="co">#&gt;            1.6572             0.3778            -0.1876             0.6257  </span>
+<span class="co">#&gt; Speciesversicolor   Speciesvirginica  </span>
+<span class="co">#&gt;           -1.1603            -1.3983  </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Degrees of Freedom: 149 Total (i.e. Null);  144 Residual</span>
+<span class="co">#&gt; Null Deviance:       28.31 </span>
+<span class="co">#&gt; Residual Deviance: 10.33     AIC: 38.31</span></pre></body></html></div>
 <ul>
 <li><code>get_var_corr</code></li>
 </ul>
 <p>As can probably(hopefully) be guessed from the name, this provides a convenient way to get variable correlations. It enables one to get correlation between one variable and all other variables in the data set.</p>
 <p><strong>Previously, one would set <code>get_all</code> to <code>TRUE</code> if they wanted to get correlations between all variables. This argument has been dropped in favor of simply supplying an optional <code>other_vars</code> vector if one does not want to get all correlations.</strong></p>
 <p>Sample usage:</p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r">
+<div class="sourceCode" id="cb24"><html><body><pre class="r">
 <span class="co"># getall correlations</span>
 
 <span class="co"># default pearson</span>
@@ -420,7 +478,7 @@
 <span class="co">#&gt; 5            mpg        wt 1.293959e-10  -0.8676594 -0.93382641 -0.7440872</span>
 <span class="co">#&gt; 6            mpg      qsec 1.708199e-02   0.4186840  0.08195487  0.6696186</span></pre></body></html></div>
 <p><strong>Previously, one would also set <code>drop_columns</code> to <code>TRUE</code> if they wanted to drop factor columns.</strong> Now, a user simply provides a character vector specifying which column types(classes) should be dropped. It defaults to <code><a href="https://rdrr.io/r/base/c.html">c("character","factor")</a></code>.</p>
-<div class="sourceCode" id="cb24"><html><body><pre class="r">
+<div class="sourceCode" id="cb25"><html><body><pre class="r">
 <span class="co"># purely demonstrative</span>
 <span class="fu"><a href="../reference/get_var_corr.html">get_var_corr</a></span>(<span class="no">iris</span>,<span class="st">"Sepal.Length"</span>,<span class="kw">other_vars</span><span class="kw">=</span><span class="st">"Petal.Length"</span>,<span class="kw">drop_columns</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"factor"</span>,<span class="st">"character"</span>),<span class="kw">method</span><span class="kw">=</span><span class="st">"spearman"</span>,
              <span class="kw">exact</span><span class="kw">=</span><span class="fl">FALSE</span>)
@@ -430,7 +488,7 @@
 <span class="co">#&gt;   comparison_var    other_var      p.value correlation</span>
 <span class="co">#&gt; 1   Sepal.Length Petal.Length 3.443087e-50   0.8818981</span></pre></body></html></div>
 <p>Similarly, <code>get_var_corr_</code> (note the underscore at the end) provides a convenient way to get combination-wise correlations.</p>
-<div class="sourceCode" id="cb25"><html><body><pre class="r">
+<div class="sourceCode" id="cb26"><html><body><pre class="r">
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="../reference/get_var_corr_.html">get_var_corr_</a></span>(<span class="no">mtcars</span>),<span class="fl">6</span>)
 <span class="co">#&gt;   comparison_var other_var      p.value correlation    lower_ci   upper_ci</span>
 <span class="co">#&gt; 1            mpg       cyl 6.112687e-10  -0.8521620 -0.92576936 -0.7163171</span>
@@ -440,7 +498,7 @@
 <span class="co">#&gt; 5            mpg        wt 1.293959e-10  -0.8676594 -0.93382641 -0.7440872</span>
 <span class="co">#&gt; 6            mpg      qsec 1.708199e-02   0.4186840  0.08195487  0.6696186</span></pre></body></html></div>
 <p>To use only a subset of the data, we can use provide a list of columns to <code>subset_cols</code>. By default, the first value(vector) in the list is mapped to <code>comparison_var</code> and the other to <code>other_Var</code>. The list is therefore of length 2.</p>
-<div class="sourceCode" id="cb26"><html><body><pre class="r">
+<div class="sourceCode" id="cb27"><html><body><pre class="r">
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="../reference/get_var_corr_.html">get_var_corr_</a></span>(<span class="no">mtcars</span>,<span class="kw">subset_cols</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mpg"</span>,<span class="st">"vs"</span>),<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"disp"</span>,<span class="st">"wt"</span>)),<span class="kw">method</span><span class="kw">=</span><span class="st">"spearman"</span>,<span class="kw">exact</span><span class="kw">=</span><span class="fl">FALSE</span>))
 <span class="co">#&gt;   comparison_var other_var      p.value correlation</span>
 <span class="co">#&gt; 2            mpg      disp 6.370336e-13  -0.9088824</span>
@@ -450,29 +508,29 @@
 </ul>
 <p>Obtaining correlations would mostly likely benefit from some form of visualization. <code>plot_corr</code> aims to achieve just that. There are currently two plot styles, <code>squares</code> and <code>circles</code>. <code>circles</code> has a <code>shape</code> argument that can allow for more flexibility. It should be noted that the correlation matrix supplied to this function is an object produced by <code>get_var_corr_</code>.</p>
 <p>To modify the plot a bit, we can choose to switch the x and y values as shown below.</p>
-<div class="sourceCode" id="cb27"><html><body><pre class="r">
+<div class="sourceCode" id="cb28"><html><body><pre class="r">
 
 <span class="fu"><a href="../reference/plot_corr.html">plot_corr</a></span>(<span class="no">mtcars</span>,<span class="kw">show_which</span> <span class="kw">=</span> <span class="st">"corr"</span>,
           <span class="kw">round_which</span> <span class="kw">=</span> <span class="st">"correlation"</span>,<span class="kw">decimals</span> <span class="kw">=</span> <span class="fl">2</span>,<span class="kw">x</span><span class="kw">=</span><span class="st">"other_var"</span>,  <span class="kw">y</span><span class="kw">=</span><span class="st">"comparison_var"</span>,<span class="kw">plot_style</span> <span class="kw">=</span> <span class="st">"squares"</span>
           ,<span class="kw">width</span> <span class="kw">=</span> <span class="fl">1.1</span>,<span class="kw">custom_cols</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"green"</span>,<span class="st">"blue"</span>,<span class="st">"red"</span>),<span class="kw">colour_by</span> <span class="kw">=</span> <span class="st">"correlation"</span>)
 <span class="co">#&gt; Warning in plot_corr(mtcars, show_which = "corr", round_which = "correlation", :</span>
 <span class="co">#&gt; Using colour_by for the legend title.</span></pre></body></html></div>
-<p><img src="manymodelr_vignette_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
+<p><img src="manymodelr_vignette_files/figure-html/unnamed-chunk-28-1.png" width="700"></p>
 <p>To show significance of the results instead of the correlations themselves, we can set <code>show_which</code> to “signif” as shown below. By default, significance is set to 0.05. You can override this by supplying a different <code>signif_cutoff</code>.</p>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="co"># color by p value</span>
+<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="co"># color by p value</span>
 <span class="co"># change custom colors by supplying custom_cols</span>
 <span class="co"># significance is default </span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">233</span>)
 <span class="fu"><a href="../reference/plot_corr.html">plot_corr</a></span>(<span class="no">mtcars</span>, <span class="kw">x</span><span class="kw">=</span><span class="st">"other_var"</span>, <span class="kw">y</span><span class="kw">=</span><span class="st">"comparison_var"</span>,<span class="kw">plot_style</span> <span class="kw">=</span> <span class="st">"circles"</span>,<span class="kw">show_which</span> <span class="kw">=</span> <span class="st">"signif"</span>, <span class="kw">colour_by</span> <span class="kw">=</span> <span class="st">"p.value"</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/grDevices/colors.html">colours</a></span>(),<span class="fl">3</span>))
 <span class="co">#&gt; Warning in plot_corr(mtcars, x = "other_var", y = "comparison_var", plot_style =</span>
 <span class="co">#&gt; "circles", : Using colour_by for the legend title.</span></pre></body></html></div>
-<p><img src="manymodelr_vignette_files/figure-html/unnamed-chunk-28-1.png" width="700"></p>
+<p><img src="manymodelr_vignette_files/figure-html/unnamed-chunk-29-1.png" width="700"></p>
 <p>To explore more options, please take a look at the documentation.</p>
 <ul>
 <li><code>rowdiff</code></li>
 </ul>
 <p>This is useful when trying to find differences between rows. The <code>direction</code> argument specifies how the subtractions are made while the <code>exclude</code> argument is used to specify classes that should be removed before calculations are made. Using <code>direction="reverse"</code> performs a subtraction akin to <code>x-(x-1)</code> where <code>x</code> is the row number.</p>
-<div class="sourceCode" id="cb29"><html><body><pre class="r">
+<div class="sourceCode" id="cb30"><html><body><pre class="r">
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="../reference/rowdiff.html">rowdiff</a></span>(<span class="no">iris</span>,<span class="kw">exclude</span> <span class="kw">=</span> <span class="st">"factor"</span>,<span class="kw">direction</span> <span class="kw">=</span> <span class="st">"reverse"</span>))
 <span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width</span>
 <span class="co">#&gt; 1           NA          NA           NA          NA</span>
@@ -485,7 +543,7 @@
 <li><code>na_replace</code></li>
 </ul>
 <p>This allows the user to conveniently replace missing values. Current options are <code>ffill</code> which replaces with the next non-missing value, <code>samples</code> that samples the data and does replacement, <code>value</code> that allows one to fill <code>NA</code>s with a specific value. Other common mathematical methods like <code>min</code>, <code>max</code>,<code>get_mode</code>, <code>sd</code>, etc are no longer supported. They are now available with more flexibility in standalone <a href="https://www.github.com/Nelson-Gon/mde">mde</a></p>
-<div class="sourceCode" id="cb30"><html><body><pre class="r">
+<div class="sourceCode" id="cb31"><html><body><pre class="r">
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="../reference/na_replace.html">na_replace</a></span>(<span class="no">airquality</span>, <span class="kw">how</span><span class="kw">=</span><span class="st">"value"</span>, <span class="kw">value</span><span class="kw">=</span><span class="st">"Missing"</span>),<span class="fl">8</span>)
 <span class="co">#&gt;     Ozone Solar.R Wind Temp Month Day</span>
 <span class="co">#&gt; 1      41     190  7.4   67     5   1</span>
@@ -500,7 +558,7 @@
 <li><code>na_replace_grouped</code></li>
 </ul>
 <p>This provides a convenient way to replace values by group.</p>
-<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">A</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">NA</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), <span class="kw">B</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">NA</span>),<span class="kw">groups</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>,<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"B"</span>))
+<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">test_df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">A</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">NA</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>), <span class="kw">B</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">NA</span>),<span class="kw">groups</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>,<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"B"</span>))
 <span class="co"># Replace NAs by group</span>
 <span class="co"># replace with the next non NA by group.</span>
 <span class="fu"><a href="../reference/na_replace_grouped.html">na_replace_grouped</a></span>(<span class="kw">df</span><span class="kw">=</span><span class="no">test_df</span>,<span class="kw">group_by_cols</span> <span class="kw">=</span> <span class="st">"groups"</span>,<span class="kw">how</span><span class="kw">=</span><span class="st">"ffill"</span>)

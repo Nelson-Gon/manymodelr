@@ -258,6 +258,14 @@ fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), xname="Petal.Length + 
 
 ```
 
+If one would like to drop non-numeric columns from the analysis, one can set `drop_non_numeric` to `TRUE` as follows. The same can be done for `fit_model` above:
+
+```{r}
+fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),
+           xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE)
+
+```
+
 
 - `get_var_corr`
 

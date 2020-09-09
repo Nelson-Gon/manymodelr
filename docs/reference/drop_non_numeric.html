@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fit and predict in a single function. — fit_model • Build and Tune Several Models</title>
+<title>Drops non numeric columns from a data.frame object — drop_non_numeric • Build and Tune Several Models</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Fit and predict in a single function. — fit_model" />
-<meta property="og:description" content="Fit and predict in a single function." />
+<meta property="og:title" content="Drops non numeric columns from a data.frame object — drop_non_numeric" />
+<meta property="og:description" content="Drops non numeric columns from a data.frame object" />
 
 
 
@@ -120,71 +120,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fit and predict in a single function.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Nelson-Gon/manymodelr/blob/master/R/fit_model.R'><code>R/fit_model.R</code></a></small>
-    <div class="hidden name"><code>fit_model.Rd</code></div>
+    <h1>Drops non numeric columns from a data.frame object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Nelson-Gon/manymodelr/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
+    <div class="hidden name"><code>drop_non_numeric.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Fit and predict in a single function.</p>
+    <p>Drops non numeric columns from a data.frame object</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fit_model</span>(
-  <span class='kw'>df</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>yname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>xname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>modeltype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>drop_non_numeric</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>drop_non_numeric</span>(<span class='no'>df</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>A data.frame object</p></td>
-    </tr>
-    <tr>
-      <th>yname</th>
-      <td><p>The outcome variable</p></td>
-    </tr>
-    <tr>
-      <th>xname</th>
-      <td><p>The predictor variable(s)</p></td>
-    </tr>
-    <tr>
-      <th>modeltype</th>
-      <td><p>A character specifying the model type e.g lm for linear model</p></td>
-    </tr>
-    <tr>
-      <th>drop_non_numeric</th>
-      <td><p>Should non numeric columns be dropped? Defaults to FALSE</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Other arguments to specific model types.</p></td>
+      <td><p>A data.frame object for which non-numeric columns will be dropped</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>fit_model</span>(<span class='no'>iris</span>,<span class='st'>"Sepal.Length"</span>,<span class='st'>"Species"</span>,<span class='st'>"lm"</span>)</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; lm(formula = Sepal.Length ~ Species, data = df)
-#&gt; 
-#&gt; Coefficients:
-#&gt;       (Intercept)  Speciesversicolor   Speciesvirginica  
-#&gt;             5.006              0.930              1.582  
-#&gt; </div><div class='input'><span class='fu'>fit_model</span>(<span class='no'>iris</span>,<span class='st'>"Sepal.Width"</span>,<span class='st'>"Sepal.Length + Petal.Length + I(Petal.Width)**2"</span>,<span class='st'>"lm"</span>)</div><div class='output co'>#&gt; 
-#&gt; Call:
-#&gt; lm(formula = Sepal.Width ~ Sepal.Length + Petal.Length + I(Petal.Width)^2, 
-#&gt;     data = df)
-#&gt; 
-#&gt; Coefficients:
-#&gt;    (Intercept)    Sepal.Length    Petal.Length  I(Petal.Width)  
-#&gt;         1.0431          0.6071         -0.5860          0.5580  
-#&gt; </div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>drop_non_numeric</span>(<span class='no'>iris</span>))</div><div class='output co'>#&gt; <span class='error'>Error in drop_non_numeric(iris): could not find function "drop_non_numeric"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

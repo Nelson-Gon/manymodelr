@@ -1,4 +1,4 @@
-2020-07-21
+2020-09-09
 
 # `manymodelr`: Build and Tune Several Models
 
@@ -52,6 +52,7 @@ library(manymodelr)
 #> Loading required package: caret
 #> Loading required package: lattice
 #> Loading required package: ggplot2
+#> Warning: package 'ggplot2' was built under R version 4.0.2
 #> Loading required package: Metrics
 #> 
 #> Attaching package: 'Metrics'
@@ -448,6 +449,69 @@ fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), xname="Petal.Length + 
 #> Residual Deviance: 22.27     AIC: 147.6
 ```
 
+If one would like to drop non-numeric columns from the analysis, one can
+set `drop_non_numeric` to `TRUE` as follows. The same can be done for
+`fit_model` above:
+
+``` r
+fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),
+           xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE)
+#> [[1]]
+#> [[1]][[1]]
+#> 
+#> Call:
+#> lm(formula = Sepal.Length ~ ., data = df)
+#> 
+#> Coefficients:
+#>       (Intercept)        Sepal.Width       Petal.Length        Petal.Width  
+#>            2.1713             0.4959             0.8292            -0.3152  
+#> Speciesversicolor   Speciesvirginica  
+#>           -0.7236            -1.0235  
+#> 
+#> 
+#> [[1]][[2]]
+#> 
+#> Call:
+#> lm(formula = Sepal.Width ~ ., data = df)
+#> 
+#> Coefficients:
+#>       (Intercept)       Sepal.Length       Petal.Length        Petal.Width  
+#>            1.6572             0.3778            -0.1876             0.6257  
+#> Speciesversicolor   Speciesvirginica  
+#>           -1.1603            -1.3983  
+#> 
+#> 
+#> 
+#> [[2]]
+#> [[2]][[1]]
+#> 
+#> Call:  glm(formula = Sepal.Length ~ ., data = df)
+#> 
+#> Coefficients:
+#>       (Intercept)        Sepal.Width       Petal.Length        Petal.Width  
+#>            2.1713             0.4959             0.8292            -0.3152  
+#> Speciesversicolor   Speciesvirginica  
+#>           -0.7236            -1.0235  
+#> 
+#> Degrees of Freedom: 149 Total (i.e. Null);  144 Residual
+#> Null Deviance:       102.2 
+#> Residual Deviance: 13.56     AIC: 79.12
+#> 
+#> [[2]][[2]]
+#> 
+#> Call:  glm(formula = Sepal.Width ~ ., data = df)
+#> 
+#> Coefficients:
+#>       (Intercept)       Sepal.Length       Petal.Length        Petal.Width  
+#>            1.6572             0.3778            -0.1876             0.6257  
+#> Speciesversicolor   Speciesvirginica  
+#>           -1.1603            -1.3983  
+#> 
+#> Degrees of Freedom: 149 Total (i.e. Null);  144 Residual
+#> Null Deviance:       28.31 
+#> Residual Deviance: 10.33     AIC: 38.31
+```
+
   - `get_var_corr`
 
 As can probably(hopefully) be guessed from the name, this provides a
@@ -545,7 +609,7 @@ plot_corr(mtcars,show_which = "corr",
 #> Using colour_by for the legend title.
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-28-1.png)<!-- -->
 
 To show significance of the results instead of the correlations
 themselves, we can set `show_which` to “signif” as shown below. By
@@ -562,7 +626,7 @@ plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_
 #> "circles", : Using colour_by for the legend title.
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-28-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->
 
 To explore more options, please take a look at the documentation.
 

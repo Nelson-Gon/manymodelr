@@ -38,3 +38,20 @@ skip_on_oldrel <- function(version="3.6.3", msg = NULL) {
   }
 }
 
+#' Drops non numeric columns from a data.frame object
+#' @param df A data.frame object for which non-numeric columns will be dropped
+#' @examples 
+#' head(drop_non_numeric(iris))
+#' @export
+
+drop_non_numeric <- function(df){
+  UseMethod("drop_non_numeric")
+  
+}
+
+#' @export
+
+drop_non_numeric.data.frame <- function(df){
+  Filter(is.numeric, df)
+}
+

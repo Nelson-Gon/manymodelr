@@ -258,6 +258,14 @@ fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), xname="Petal.Length + 
 
 ```
 
+If one would like to drop non-numeric columns from the analysis, one can set `drop_non_numeric` to `TRUE` as follows. The same can be done for `fit_model` above:
+
+```{r}
+fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),
+           xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE)
+
+```
+
 - `get_var_corr`
 
 As can probably(hopefully) be guessed from the name, this provides a convenient way to get variable correlations. It enables one to get correlation between one variable and all other variables in the data set.
