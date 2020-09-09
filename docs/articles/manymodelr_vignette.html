@@ -216,7 +216,7 @@
 <span class="no">lm_model</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = Sepal.Length ~ Petal.Length, data = df)</span>
+<span class="co">#&gt; lm(formula = Sepal.Length ~ Petal.Length, data = use_df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;  (Intercept)  Petal.Length  </span>
@@ -245,7 +245,7 @@
 <span class="co">#&gt; [1] "Sepal.Length"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $call</span>
-<span class="co">#&gt; lm(formula = Sepal.Length ~ Petal.Length, data = df)</span>
+<span class="co">#&gt; lm(formula = Sepal.Length ~ Petal.Length, data = use_df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $predictors</span>
 <span class="co">#&gt; [1] "Petal.Length"</span></pre></body></html></div>
@@ -274,7 +274,7 @@
 <span class="co">#&gt;     intersect, setdiff, setequal, union</span>
 <span class="no">iris1</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/add_model_predictions.html">add_model_predictions</a></span>(<span class="kw">model</span><span class="kw">=</span><span class="no">lm_model</span>,<span class="kw">new_data</span> <span class="kw">=</span> <span class="no">iris2</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">predicted</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">everything</a></span>()) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span>(<span class="no">predicted</span>, <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/reexports.html">everything</a></span>()) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>()
 <span class="co">#&gt;   predicted Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
 <span class="co">#&gt; 1  6.761943          5.1         3.5          1.4         0.2  setosa</span>
@@ -299,7 +299,7 @@
 <span class="no">iris1</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/add_model_residuals.html">add_model_residuals</a></span>(<span class="kw">model</span><span class="kw">=</span><span class="no">lm_model</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/add_model_predictions.html">add_model_predictions</a></span>(<span class="kw">new_data</span> <span class="kw">=</span> <span class="no">iris2</span>, <span class="kw">model</span> <span class="kw">=</span> <span class="no">lm_model</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">predicted</span>,<span class="no">residuals</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">everything</a></span>()) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span>(<span class="no">predicted</span>,<span class="no">residuals</span>, <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/reexports.html">everything</a></span>()) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>()
 <span class="co">#&gt;   predicted   residuals Sepal.Length Sepal.Width Petal.Length Petal.Width</span>
 <span class="co">#&gt; 1  6.761943  0.12762214          5.1         3.5          1.4         0.2</span>
@@ -325,7 +325,7 @@
 <span class="co">#&gt; [[1]][[1]]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)</span>
+<span class="co">#&gt; lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = use_df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;  (Intercept)  Petal.Length   Petal.Width  </span>
@@ -335,7 +335,7 @@
 <span class="co">#&gt; [[1]][[2]]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)</span>
+<span class="co">#&gt; lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = use_df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;  (Intercept)  Petal.Length   Petal.Width  </span>
@@ -359,7 +359,7 @@
 <span class="co">#&gt; [[1]][[1]]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)</span>
+<span class="co">#&gt; lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = use_df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;  (Intercept)  Petal.Length   Petal.Width  </span>
@@ -369,7 +369,7 @@
 <span class="co">#&gt; [[1]][[2]]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)</span>
+<span class="co">#&gt; lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = use_df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;  (Intercept)  Petal.Length   Petal.Width  </span>
@@ -380,7 +380,7 @@
 <span class="co">#&gt; [[2]]</span>
 <span class="co">#&gt; [[2]][[1]]</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Call:  glm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)</span>
+<span class="co">#&gt; Call:  glm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = use_df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;  (Intercept)  Petal.Length   Petal.Width  </span>
@@ -392,7 +392,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]][[2]]</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Call:  glm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)</span>
+<span class="co">#&gt; Call:  glm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = use_df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;  (Intercept)  Petal.Length   Petal.Width  </span>
@@ -408,56 +408,48 @@
 <span class="co">#&gt; [[1]][[1]]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = Sepal.Length ~ ., data = df)</span>
+<span class="co">#&gt; lm(formula = Sepal.Length ~ ., data = use_df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;       (Intercept)        Sepal.Width       Petal.Length        Petal.Width  </span>
-<span class="co">#&gt;            2.1713             0.4959             0.8292            -0.3152  </span>
-<span class="co">#&gt; Speciesversicolor   Speciesvirginica  </span>
-<span class="co">#&gt;           -0.7236            -1.0235  </span>
+<span class="co">#&gt;  (Intercept)   Sepal.Width  Petal.Length   Petal.Width  </span>
+<span class="co">#&gt;       1.8560        0.6508        0.7091       -0.5565  </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[1]][[2]]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = Sepal.Width ~ ., data = df)</span>
+<span class="co">#&gt; lm(formula = Sepal.Width ~ ., data = use_df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;       (Intercept)       Sepal.Length       Petal.Length        Petal.Width  </span>
-<span class="co">#&gt;            1.6572             0.3778            -0.1876             0.6257  </span>
-<span class="co">#&gt; Speciesversicolor   Speciesvirginica  </span>
-<span class="co">#&gt;           -1.1603            -1.3983  </span>
+<span class="co">#&gt;  (Intercept)  Sepal.Length  Petal.Length   Petal.Width  </span>
+<span class="co">#&gt;       1.0431        0.6071       -0.5860        0.5580  </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]</span>
 <span class="co">#&gt; [[2]][[1]]</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Call:  glm(formula = Sepal.Length ~ ., data = df)</span>
+<span class="co">#&gt; Call:  glm(formula = Sepal.Length ~ ., data = use_df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;       (Intercept)        Sepal.Width       Petal.Length        Petal.Width  </span>
-<span class="co">#&gt;            2.1713             0.4959             0.8292            -0.3152  </span>
-<span class="co">#&gt; Speciesversicolor   Speciesvirginica  </span>
-<span class="co">#&gt;           -0.7236            -1.0235  </span>
+<span class="co">#&gt;  (Intercept)   Sepal.Width  Petal.Length   Petal.Width  </span>
+<span class="co">#&gt;       1.8560        0.6508        0.7091       -0.5565  </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Degrees of Freedom: 149 Total (i.e. Null);  144 Residual</span>
+<span class="co">#&gt; Degrees of Freedom: 149 Total (i.e. Null);  146 Residual</span>
 <span class="co">#&gt; Null Deviance:       102.2 </span>
-<span class="co">#&gt; Residual Deviance: 13.56     AIC: 79.12</span>
+<span class="co">#&gt; Residual Deviance: 14.45     AIC: 84.64</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]][[2]]</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Call:  glm(formula = Sepal.Width ~ ., data = df)</span>
+<span class="co">#&gt; Call:  glm(formula = Sepal.Width ~ ., data = use_df)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;       (Intercept)       Sepal.Length       Petal.Length        Petal.Width  </span>
-<span class="co">#&gt;            1.6572             0.3778            -0.1876             0.6257  </span>
-<span class="co">#&gt; Speciesversicolor   Speciesvirginica  </span>
-<span class="co">#&gt;           -1.1603            -1.3983  </span>
+<span class="co">#&gt;  (Intercept)  Sepal.Length  Petal.Length   Petal.Width  </span>
+<span class="co">#&gt;       1.0431        0.6071       -0.5860        0.5580  </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Degrees of Freedom: 149 Total (i.e. Null);  144 Residual</span>
+<span class="co">#&gt; Degrees of Freedom: 149 Total (i.e. Null);  146 Residual</span>
 <span class="co">#&gt; Null Deviance:       28.31 </span>
-<span class="co">#&gt; Residual Deviance: 10.33     AIC: 38.31</span></pre></body></html></div>
+<span class="co">#&gt; Residual Deviance: 13.47     AIC: 74.2</span></pre></body></html></div>
 <ul>
 <li><code>get_var_corr</code></li>
 </ul>

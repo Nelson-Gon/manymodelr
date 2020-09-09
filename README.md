@@ -210,7 +210,7 @@ lm_model <- fit_model(iris1,"Sepal.Length","Petal.Length","lm")
 lm_model
 #> 
 #> Call:
-#> lm(formula = Sepal.Length ~ Petal.Length, data = df)
+#> lm(formula = Sepal.Length ~ Petal.Length, data = use_df)
 #> 
 #> Coefficients:
 #>  (Intercept)  Petal.Length  
@@ -257,7 +257,7 @@ extract_model_info(lm_model,c("p_value","response","call","predictors"))
 #> [1] "Sepal.Length"
 #> 
 #> $call
-#> lm(formula = Sepal.Length ~ Petal.Length, data = df)
+#> lm(formula = Sepal.Length ~ Petal.Length, data = use_df)
 #> 
 #> $predictors
 #> [1] "Petal.Length"
@@ -361,7 +361,7 @@ many predictors at once. A simple linear model for instance:
 #> [[1]][[1]]
 #> 
 #> Call:
-#> lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)
+#> lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = use_df)
 #> 
 #> Coefficients:
 #>  (Intercept)  Petal.Length   Petal.Width  
@@ -371,7 +371,7 @@ many predictors at once. A simple linear model for instance:
 #> [[1]][[2]]
 #> 
 #> Call:
-#> lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)
+#> lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = use_df)
 #> 
 #> Coefficients:
 #>  (Intercept)  Petal.Length   Petal.Width  
@@ -405,7 +405,7 @@ fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), xname="Petal.Length + 
 #> [[1]][[1]]
 #> 
 #> Call:
-#> lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)
+#> lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = use_df)
 #> 
 #> Coefficients:
 #>  (Intercept)  Petal.Length   Petal.Width  
@@ -415,7 +415,7 @@ fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), xname="Petal.Length + 
 #> [[1]][[2]]
 #> 
 #> Call:
-#> lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)
+#> lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = use_df)
 #> 
 #> Coefficients:
 #>  (Intercept)  Petal.Length   Petal.Width  
@@ -426,7 +426,7 @@ fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), xname="Petal.Length + 
 #> [[2]]
 #> [[2]][[1]]
 #> 
-#> Call:  glm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = df)
+#> Call:  glm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = use_df)
 #> 
 #> Coefficients:
 #>  (Intercept)  Petal.Length   Petal.Width  
@@ -438,7 +438,7 @@ fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), xname="Petal.Length + 
 #> 
 #> [[2]][[2]]
 #> 
-#> Call:  glm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = df)
+#> Call:  glm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = use_df)
 #> 
 #> Coefficients:
 #>  (Intercept)  Petal.Length   Petal.Width  
@@ -460,56 +460,48 @@ fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),
 #> [[1]][[1]]
 #> 
 #> Call:
-#> lm(formula = Sepal.Length ~ ., data = df)
+#> lm(formula = Sepal.Length ~ ., data = use_df)
 #> 
 #> Coefficients:
-#>       (Intercept)        Sepal.Width       Petal.Length        Petal.Width  
-#>            2.1713             0.4959             0.8292            -0.3152  
-#> Speciesversicolor   Speciesvirginica  
-#>           -0.7236            -1.0235  
+#>  (Intercept)   Sepal.Width  Petal.Length   Petal.Width  
+#>       1.8560        0.6508        0.7091       -0.5565  
 #> 
 #> 
 #> [[1]][[2]]
 #> 
 #> Call:
-#> lm(formula = Sepal.Width ~ ., data = df)
+#> lm(formula = Sepal.Width ~ ., data = use_df)
 #> 
 #> Coefficients:
-#>       (Intercept)       Sepal.Length       Petal.Length        Petal.Width  
-#>            1.6572             0.3778            -0.1876             0.6257  
-#> Speciesversicolor   Speciesvirginica  
-#>           -1.1603            -1.3983  
+#>  (Intercept)  Sepal.Length  Petal.Length   Petal.Width  
+#>       1.0431        0.6071       -0.5860        0.5580  
 #> 
 #> 
 #> 
 #> [[2]]
 #> [[2]][[1]]
 #> 
-#> Call:  glm(formula = Sepal.Length ~ ., data = df)
+#> Call:  glm(formula = Sepal.Length ~ ., data = use_df)
 #> 
 #> Coefficients:
-#>       (Intercept)        Sepal.Width       Petal.Length        Petal.Width  
-#>            2.1713             0.4959             0.8292            -0.3152  
-#> Speciesversicolor   Speciesvirginica  
-#>           -0.7236            -1.0235  
+#>  (Intercept)   Sepal.Width  Petal.Length   Petal.Width  
+#>       1.8560        0.6508        0.7091       -0.5565  
 #> 
-#> Degrees of Freedom: 149 Total (i.e. Null);  144 Residual
+#> Degrees of Freedom: 149 Total (i.e. Null);  146 Residual
 #> Null Deviance:       102.2 
-#> Residual Deviance: 13.56     AIC: 79.12
+#> Residual Deviance: 14.45     AIC: 84.64
 #> 
 #> [[2]][[2]]
 #> 
-#> Call:  glm(formula = Sepal.Width ~ ., data = df)
+#> Call:  glm(formula = Sepal.Width ~ ., data = use_df)
 #> 
 #> Coefficients:
-#>       (Intercept)       Sepal.Length       Petal.Length        Petal.Width  
-#>            1.6572             0.3778            -0.1876             0.6257  
-#> Speciesversicolor   Speciesvirginica  
-#>           -1.1603            -1.3983  
+#>  (Intercept)  Sepal.Length  Petal.Length   Petal.Width  
+#>       1.0431        0.6071       -0.5860        0.5580  
 #> 
-#> Degrees of Freedom: 149 Total (i.e. Null);  144 Residual
+#> Degrees of Freedom: 149 Total (i.e. Null);  146 Residual
 #> Null Deviance:       28.31 
-#> Residual Deviance: 10.33     AIC: 38.31
+#> Residual Deviance: 13.47     AIC: 74.2
 ```
 
   - `get_var_corr`
