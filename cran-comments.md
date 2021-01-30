@@ -2,7 +2,7 @@
 Release Summary
 
 
-This is a patch release to fix checks on old releases. 
+This is a new release. It introduces new functions and fixes issues with some functions. 
 
 ## Test environments
 * local Windows 10 1903 x86_64, R 4.0.0 

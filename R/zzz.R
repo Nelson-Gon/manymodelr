@@ -1,10 +1,9 @@
 # Welcome messages, nothing fancy
-.onAttach <- function(...){
-  # better to paste or c the message
-  pkg_info <- "Welcome to manymodelr.
-For the latest development version,
-please see: https://www.github.com/Nelson-Gon/manymodelr.
-Please file issues at https://github.com/Nelson-Gon/manymodelr/issues"
-  packageStartupMessage(pkg_info)
-
+.onAttach <- function(lib, pkg, ...){
+  startup_msg <- paste0("Welcome to manymodelr. This is manymodelr version ",
+                        packageVersion("manymodelr"),".\n",
+                  " Please file issues and feedback at https://www.github.com/Nelson-Gon/manymodelr/issues\n",
+                        "Turn this message off using 'suppressPackageStartupMessages(library(manymodelr))'\n",
+                        " Happy Exploration :)")
+  packageStartupMessage(startup_msg)
 }
