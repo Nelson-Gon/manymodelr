@@ -4,6 +4,6 @@
                         packageVersion("manymodelr"),".\n",
                   " Please file issues and feedback at https://www.github.com/Nelson-Gon/manymodelr/issues\n",
                         "Turn this message off using 'suppressPackageStartupMessages(library(manymodelr))'\n",
-                        " Happy Exploration :)")
+                        " Happy Modelling! :)")
   packageStartupMessage(startup_msg)
 }

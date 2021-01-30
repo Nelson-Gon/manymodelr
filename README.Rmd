@@ -1,6 +1,7 @@
 ---
 date: "`r Sys.Date()`"
 output: github_document
+title: "manymodelr: Build and Tune Several Models"
 vignette: >
   %\VignetteIndexEntry{ "A Gentle Introduction to manymodelr"}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# `manymodelr`: Build and Tune Several Models
+
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Codecov test coverage](https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop)

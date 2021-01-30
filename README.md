@@ -1,6 +1,6 @@
+manymodelr: Build and Tune Several Models
+================
 2021-01-31
-
-# `manymodelr`: Build and Tune Several Models
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Codecov test
@@ -62,7 +62,7 @@ library(manymodelr)
 #> Welcome to manymodelr. This is manymodelr version 0.3.5.
 #>  Please file issues and feedback at https://www.github.com/Nelson-Gon/manymodelr/issues
 #> Turn this message off using 'suppressPackageStartupMessages(library(manymodelr))'
-#>  Happy Exploration :)
+#>  Happy Modelling! :)
 ```
 
 **Sample Usage of Key Functions**
