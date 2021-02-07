@@ -15,7 +15,8 @@ multi_model_2(old_data, new_data, yname, xname, modeltype, ...)
 
 \item{xname}{The predictor variable(s)}
 
-\item{modeltype}{A character specifying the model type e.g lm for linear model}
+\item{modeltype}{A character specifying the model type e.g lm for 
+linear model}
 
 \item{...}{Other arguments to specific model types.}
 }

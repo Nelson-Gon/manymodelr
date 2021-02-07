@@ -20,9 +20,11 @@ fit_models(
 
 \item{xname}{The predictor variable(s)}
 
-\item{modeltype}{A character specifying the model type e.g lm for linear model}
+\item{modeltype}{A character specifying the model type e.g lm for 
+linear model}
 
-\item{drop_non_numeric}{Should non numeric columns be dropped? Defaults to FALSE}
+\item{drop_non_numeric}{Should non numeric columns be dropped? 
+Defaults to FALSE}
 
 \item{...}{Other arguments to specific model types.}
 }
@@ -33,7 +35,9 @@ A list of model objects that can be used later.
 Fit several models with different response variables
 }
 \examples{
-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),xname="Petal.Length + Petal.Width",modeltype="lm")
+fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),
+xname="Petal.Length + Petal.Width",modeltype="lm")
 #many model types
-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), xname="Petal.Length + Petal.Width",modeltype=c("lm","glm"))
+fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), 
+xname="Petal.Length + Petal.Width",modeltype=c("lm","glm"))
 }

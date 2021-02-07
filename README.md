@@ -649,7 +649,7 @@ options are `ffill` which replaces with the next non-missing value,
 allows one to fill `NA`s with a specific value. Other common
 mathematical methods like `min`, `max`,`get_mode`, `sd`, etc are no
 longer supported. They are now available with more flexibility in
-standalone [mde](https://www.github.com/Nelson-Gon/mde)
+standalone [mde](https://github.com/Nelson-Gon/mde)
 
 ``` r
 
@@ -682,7 +682,7 @@ na_replace_grouped(df=test_df,group_by_cols = "groups",how="ffill")
 ```
 
 The use of `mean`,`sd`,etc is no longer supported. Use
-[mde](https://www.github.com/Nelson-Gon/mde) instead which is focused on
+[mde](https://github.com/Nelson-Gon/mde) instead which is focused on
 missingness.
 
 -----
@@ -698,7 +698,7 @@ the given function.
 
 If you would like to contribute, report issues or improve any of these
 functions, please raise a pull request at
-([manymodelr](https://www.github.com/Nelson-Gon/manymodelr))
+([manymodelr](https://github.com/Nelson-Gon/manymodelr))
 
 > “Programs must be written for people to read, and only incidentally
 > for machines to execute.” - Harold Abelson

@@ -1,4 +1,5 @@
 # Welcome messages, nothing fancy
+#' @importFrom utils packageVersion
 .onAttach <- function(lib, pkg, ...){
   startup_msg <- paste0("Welcome to manymodelr. This is manymodelr version ",
                         packageVersion("manymodelr"),".\n",
