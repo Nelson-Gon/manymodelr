@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../articles/manymodelr_vignette.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
   </a>
 </li>
@@ -103,7 +103,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Nelson-Gon/manymodelr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -129,14 +129,14 @@
     <p>This function returns the correlations between different variables.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_var_corr</span>(
-  <span class='no'>df</span>,
-  <span class='kw'>comparison_var</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>other_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"pearson"</span>,
-  <span class='kw'>drop_columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"factor"</span>, <span class='st'>"character"</span>),
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_var_corr</span><span class='op'>(</span>
+  <span class='va'>df</span>,
+  comparison_var <span class='op'>=</span> <span class='cn'>NULL</span>,
+  other_vars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  method <span class='op'>=</span> <span class='st'>"pearson"</span>,
+  drop_columns <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"factor"</span>, <span class='st'>"character"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,7 +176,8 @@ c("factor","character")</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Get correlations between all variables</span>
-<span class='fu'>get_var_corr</span>(<span class='no'>mtcars</span>,<span class='st'>"mpg"</span>)</div><div class='output co'>#&gt;    comparison_var other_var      p.value correlation    lower_ci   upper_ci
+<span class='fu'>get_var_corr</span><span class='op'>(</span><span class='va'>mtcars</span>,<span class='st'>"mpg"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    comparison_var other_var      p.value correlation    lower_ci   upper_ci
 #&gt; 1             mpg       cyl 6.112687e-10  -0.8521620 -0.92576936 -0.7163171
 #&gt; 2             mpg      disp 9.380327e-10  -0.8475514 -0.92335937 -0.7081376
 #&gt; 3             mpg        hp 1.787835e-07  -0.7761684 -0.88526861 -0.5860994
@@ -187,7 +188,8 @@ c("factor","character")</p></td>
 #&gt; 8             mpg        am 2.850207e-04   0.5998324  0.31755830  0.7844520
 #&gt; 9             mpg      gear 5.400948e-03   0.4802848  0.15806177  0.7100628
 #&gt; 10            mpg      carb 1.084446e-03  -0.5509251 -0.75464796 -0.2503183</div><div class='input'><span class='co'># Use only a few variables</span>
-<span class='fu'>get_var_corr</span>(<span class='no'>mtcars</span>,<span class='st'>"mpg"</span>, <span class='kw'>other_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"disp"</span>,<span class='st'>"drat"</span>), <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"kendall"</span>,<span class='kw'>exact</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;   comparison_var other_var      p.value correlation
+<span class='fu'>get_var_corr</span><span class='op'>(</span><span class='va'>mtcars</span>,<span class='st'>"mpg"</span>, other_vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>,<span class='st'>"drat"</span><span class='op'>)</span>, method <span class='op'>=</span> <span class='st'>"kendall"</span>,exact<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   comparison_var other_var      p.value correlation
 #&gt; 1            mpg      disp 1.006950e-09  -0.7681311
 #&gt; 2            mpg      drat 2.381533e-04   0.4645488</div></pre>
   </div>
@@ -205,7 +207,7 @@ c("factor","character")</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

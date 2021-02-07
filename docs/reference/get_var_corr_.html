@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../articles/manymodelr_vignette.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
   </a>
 </li>
@@ -103,7 +103,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Nelson-Gon/manymodelr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -129,12 +129,12 @@
     <p>Get correlations for combinations</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_var_corr_</span>(
-  <span class='no'>df</span>,
-  <span class='kw'>subset_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>drop_columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"character"</span>, <span class='st'>"factor"</span>),
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_var_corr_</span><span class='op'>(</span>
+  <span class='va'>df</span>,
+  subset_cols <span class='op'>=</span> <span class='cn'>NULL</span>,
+  drop_columns <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"character"</span>, <span class='st'>"factor"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,7 +168,8 @@ c("factor","character")</p></td>
 for combinations of variables. It is currently slow and may take up to a minute depending on system specifications.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>get_var_corr_</span>(<span class='no'>mtcars</span>,<span class='kw'>method</span><span class='kw'>=</span><span class='st'>"pearson"</span>)</div><div class='output co'>#&gt;    comparison_var other_var      p.value correlation    lower_ci   upper_ci
+    <pre class="examples"><div class='input'><span class='fu'>get_var_corr_</span><span class='op'>(</span><span class='va'>mtcars</span>,method<span class='op'>=</span><span class='st'>"pearson"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    comparison_var other_var      p.value correlation    lower_ci   upper_ci
 #&gt; 1             mpg       cyl 6.112687e-10 -0.85216196 -0.92576936 -0.7163171
 #&gt; 2             mpg      disp 9.380327e-10 -0.84755138 -0.92335937 -0.7081376
 #&gt; 3             mpg        hp 1.787835e-07 -0.77616837 -0.88526861 -0.5860994
@@ -224,10 +225,11 @@ for combinations of variables. It is currently slow and may take up to a minute 
 #&gt; 53             am      gear 5.834043e-08  0.79405876  0.61589632  0.8949546
 #&gt; 54             am      carb 7.544526e-01  0.05753435 -0.29712041  0.3982389
 #&gt; 55           gear      carb 1.290291e-01  0.27407284 -0.08250603  0.5684422</div><div class='input'><span class='co'>#use only a subset of the data.</span>
- <span class='fu'>get_var_corr_</span>(<span class='no'>mtcars</span>,
-             <span class='kw'>subset_cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mpg"</span>,<span class='st'>"vs"</span>),
-                                <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"disp"</span>,<span class='st'>"wt"</span>)),
-             <span class='kw'>method</span><span class='kw'>=</span><span class='st'>"spearman"</span>,<span class='kw'>exact</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;   comparison_var other_var      p.value correlation
+ <span class='fu'>get_var_corr_</span><span class='op'>(</span><span class='va'>mtcars</span>,
+             subset_cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mpg"</span>,<span class='st'>"vs"</span><span class='op'>)</span>,
+                                <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>,<span class='st'>"wt"</span><span class='op'>)</span><span class='op'>)</span>,
+             method<span class='op'>=</span><span class='st'>"spearman"</span>,exact<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   comparison_var other_var      p.value correlation
 #&gt; 2            mpg      disp 6.370336e-13  -0.9088824
 #&gt; 5            mpg        wt 1.487595e-11  -0.8864220</div></pre>
   </div>
@@ -245,7 +247,7 @@ for combinations of variables. It is currently slow and may take up to a minute 
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

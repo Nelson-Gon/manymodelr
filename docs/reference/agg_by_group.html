@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../articles/manymodelr_vignette.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
   </a>
 </li>
@@ -103,7 +103,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Nelson-Gon/manymodelr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -129,7 +129,7 @@
     <p>This function performs operations by grouping the data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>agg_by_group</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>my_formula</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>func</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>agg_by_group</span><span class='op'>(</span>df <span class='op'>=</span> <span class='cn'>NULL</span>, my_formula <span class='op'>=</span> <span class='cn'>NULL</span>, func <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,7 +158,8 @@ See examples below</p></td>
     <p>A grouped data.frame object with results of the chosen operation.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>agg_by_group</span>(<span class='no'>airquality</span>,<span class='no'>.</span>~<span class='no'>Month</span>,<span class='no'>sum</span>))</div><div class='output co'>#&gt; Grouped By[1]:	Month 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>agg_by_group</span><span class='op'>(</span><span class='va'>airquality</span>,<span class='va'>.</span><span class='op'>~</span><span class='va'>Month</span>,<span class='va'>sum</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Grouped By[1]:	Month 
 #&gt;  </div><div class='output co'>#&gt;   Month Ozone Solar.R  Wind Temp Day
 #&gt; 1     5   579    4369 276.1 1595 386
 #&gt; 2     6   265    1658 109.6  704 129
@@ -180,7 +181,7 @@ See examples below</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../articles/manymodelr_vignette.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
   </a>
 </li>
@@ -103,7 +103,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Nelson-Gon/manymodelr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -129,7 +129,7 @@
     <p>Fit and predict in one function</p>
     </div>
 
-    <pre class="usage"><span class='fu'>multi_model_2</span>(<span class='no'>old_data</span>, <span class='no'>new_data</span>, <span class='no'>yname</span>, <span class='no'>xname</span>, <span class='no'>modeltype</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>multi_model_2</span><span class='op'>(</span><span class='va'>old_data</span>, <span class='va'>new_data</span>, <span class='va'>yname</span>, <span class='va'>xname</span>, <span class='va'>modeltype</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,7 +163,8 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># fit a linear model and get predictions</span>
-<span class='fu'>multi_model_2</span>(<span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>50</span>,],<span class='no'>iris</span>[<span class='fl'>50</span>:<span class='fl'>99</span>,],<span class='st'>"Sepal.Length"</span>,<span class='st'>"Petal.Length"</span>,<span class='st'>"lm"</span>)</div><div class='output co'>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
+<span class='fu'>multi_model_2</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>,<span class='va'>iris</span><span class='op'>[</span><span class='fl'>50</span><span class='op'>:</span><span class='fl'>99</span>,<span class='op'>]</span>,<span class='st'>"Sepal.Length"</span>,<span class='st'>"Petal.Length"</span>,<span class='st'>"lm"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
 #&gt; 1           5.1         3.5          1.4         0.2  setosa  4.972378
 #&gt; 2           4.9         3.0          1.4         0.2  setosa  6.761943
 #&gt; 3           4.7         3.2          1.3         0.2  setosa  6.653485
@@ -214,8 +215,9 @@
 #&gt; 48          4.6         3.2          1.4         0.2  setosa  6.490797
 #&gt; 49          5.3         3.7          1.5         0.2  setosa  6.545026
 #&gt; 50          5.0         3.3          1.4         0.2  setosa  5.840046</div><div class='input'><span class='co'># multilinear</span>
-<span class='fu'>multi_model_2</span>(<span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>50</span>,],<span class='no'>iris</span>[<span class='fl'>50</span>:<span class='fl'>99</span>,],<span class='st'>"Sepal.Length"</span>,
-    <span class='st'>"Petal.Length + Sepal.Width"</span>,<span class='st'>"lm"</span>)</div><div class='output co'>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
+<span class='fu'>multi_model_2</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>,<span class='va'>iris</span><span class='op'>[</span><span class='fl'>50</span><span class='op'>:</span><span class='fl'>99</span>,<span class='op'>]</span>,<span class='st'>"Sepal.Length"</span>,
+    <span class='st'>"Petal.Length + Sepal.Width"</span>,<span class='st'>"lm"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
 #&gt; 1           5.1         3.5          1.4         0.2  setosa  4.902999
 #&gt; 2           4.9         3.0          1.4         0.2  setosa  5.771541
 #&gt; 3           4.7         3.2          1.3         0.2  setosa  5.714857
@@ -266,7 +268,8 @@
 #&gt; 48          4.6         3.2          1.4         0.2  setosa  5.429606
 #&gt; 49          5.3         3.7          1.5         0.2  setosa  5.457948
 #&gt; 50          5.0         3.3          1.4         0.2  setosa  4.822537</div><div class='input'><span class='co'># glm</span>
-<span class='fu'>multi_model_2</span>(<span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>50</span>,],<span class='no'>iris</span>[<span class='fl'>50</span>:<span class='fl'>99</span>,],<span class='st'>"Sepal.Length"</span>,<span class='st'>"Petal.Length"</span>,<span class='st'>"glm"</span>)</div><div class='output co'>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
+<span class='fu'>multi_model_2</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>,<span class='va'>iris</span><span class='op'>[</span><span class='fl'>50</span><span class='op'>:</span><span class='fl'>99</span>,<span class='op'>]</span>,<span class='st'>"Sepal.Length"</span>,<span class='st'>"Petal.Length"</span>,<span class='st'>"glm"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
 #&gt; 1           5.1         3.5          1.4         0.2  setosa  4.972378
 #&gt; 2           4.9         3.0          1.4         0.2  setosa  6.761943
 #&gt; 3           4.7         3.2          1.3         0.2  setosa  6.653485
@@ -332,7 +335,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

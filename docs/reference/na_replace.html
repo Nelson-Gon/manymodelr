@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../articles/manymodelr_vignette.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
   </a>
 </li>
@@ -103,7 +103,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Nelson-Gon/manymodelr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -129,7 +129,7 @@
     <p>Replace missing values</p>
     </div>
 
-    <pre class="usage"><span class='fu'>na_replace</span>(<span class='no'>df</span>, <span class='kw'>how</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>na_replace</span><span class='op'>(</span><span class='va'>df</span>, how <span class='op'>=</span> <span class='cn'>NULL</span>, value <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,7 +159,8 @@ the use of `get_mode` is also supported. No implementation for class factor(yet)
 inaccuracies using grouping functions from other packages.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>na_replace</span>(<span class='no'>airquality</span>,<span class='kw'>how</span><span class='kw'>=</span><span class='st'>"value"</span>, <span class='kw'>value</span><span class='kw'>=</span><span class='st'>"Missing"</span>))</div><div class='output co'>#&gt;     Ozone Solar.R Wind Temp Month Day
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>na_replace</span><span class='op'>(</span><span class='va'>airquality</span>,how<span class='op'>=</span><span class='st'>"value"</span>, value<span class='op'>=</span><span class='st'>"Missing"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;     Ozone Solar.R Wind Temp Month Day
 #&gt; 1      41     190  7.4   67     5   1
 #&gt; 2      36     118  8.0   72     5   2
 #&gt; 3      12     149 12.6   74     5   3
@@ -181,7 +182,7 @@ inaccuracies using grouping functions from other packages.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
