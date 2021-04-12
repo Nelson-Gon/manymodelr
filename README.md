@@ -1,6 +1,6 @@
 manymodelr: Build and Tune Several Models
 ================
-2021-02-07
+2021-04-12
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Codecov test
@@ -12,7 +12,7 @@ Status](https://travis-ci.com/Nelson-Gon/manymodelr.png?branch=master)](https://
 CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg)](https://github.com/Nelson-Gon/manymodelr)
 ![test-coverage](https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg)
 [![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![Rdoc](https://www.rdocumentation.org/badges/version/manymodelr)](https://www.rdocumentation.org/packages/manymodelr)
+[![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/mde)](https://CRAN.R-project.org/package=mde)
 [![Downloads](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![TotalDownloads](https://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow)](https://cran.r-project.org/package=manymodelr)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
@@ -59,6 +59,7 @@ library(manymodelr)
 #> 
 #>     precision, recall
 #> Loading required package: e1071
+#> Warning: package 'e1071' was built under R version 4.0.4
 #> Welcome to manymodelr. This is manymodelr version 0.3.5.
 #>  Please file issues and feedback at https://www.github.com/Nelson-Gon/manymodelr/issues
 #> Turn this message off using 'suppressPackageStartupMessages(library(manymodelr))'
@@ -287,6 +288,7 @@ To do the same with `dplyr`, one can work as follows:
 ``` r
 
 library(dplyr)
+#> Warning: package 'dplyr' was built under R version 4.0.4
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
@@ -649,7 +651,7 @@ options are `ffill` which replaces with the next non-missing value,
 allows one to fill `NA`s with a specific value. Other common
 mathematical methods like `min`, `max`,`get_mode`, `sd`, etc are no
 longer supported. They are now available with more flexibility in
-standalone [mde](https://github.com/Nelson-Gon/mde)
+standalone [manymodelr](https://github.com/Nelson-Gon/manymodelr)
 
 ``` r
 
