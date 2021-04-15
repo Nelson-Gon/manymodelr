@@ -36,10 +36,10 @@ knitr::opts_chunk$set(
 [![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/Nelson-Gon/manymodelr.svg)](https://isitmaintained.com/project/Nelson-Gon/manymodelr "Average time to resolve an issue")
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 
-In this vignette, we take a look at how we can simplify many machine learning tasks using `manymodelr`. We will take a look at the core functions first.
+In this vignette, we take a look at how we can simplify many machine learning tasks using `manymodelr`. 
 
 
-**Installing the package**
+## Installation 
 
 ```{r, eval=FALSE}
 
@@ -60,42 +60,48 @@ library(manymodelr)
 ```
 
 
-**Sample Usage of Key Functions**
+## Modeling 
 
+First, a word of caution. The examples shown in this section are meant to simply show what the functions do and not what the best model is. For a specific use case, please perform the necessary model checks, post-hoc analyses, and/or choose predictor variables and model types as appropriate based on domain knowledge.
 
-- **`agg_by_group`**
-
-As can be guessed from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form `x~y` where `y` is the grouping variable(in this case `Species`). One can supply a formula as shown next. 
-
-```{r}
-
-head(agg_by_group(iris,.~Species,length))
-
-```
-
-```{r}
-
-head(agg_by_group(mtcars,cyl~hp+vs,sum))
-
-```
+With this in mind, let us look at how we can perform modeling tasks using `manymodelr`. 
 
 
 - **`multi_model_1`**
 
-This is one of the core functions of the package. To avoid, several messages showing up, we use the function `suppressMessages`. This assumes that one is familiar with machine learning basics.
+This is one of the core functions of the package. `multi_model_1` aims to allow
+model fitting, prediction, and reporting with a single function. The `multi` 
+part of the function's name reflects the fact that we can fit several model 
+types with one function. An example follows next. 
+
+For purposes of this report, we create a simple dataset to use.
 
 ```{r}
-
 set.seed(520)
-train_set<-createDataPartition(iris$Species,p=0.8,list=FALSE)
-valid_set<-iris[-train_set,]
-train_set<-iris[train_set,]
+# Create a simple dataset with a binary target
+# Here normal is a fictional target where we assume that it meets 
+# some criterion means 
+sample_data <- data.frame(normal = as.factor(rep(c("Yes", "No"), 500)), 
+                          height=rnorm(100, mean=0.5, sd=0.2), 
+                          weight=runif(100,0, 0.6),
+                          yield = rnorm(100, mean =520, sd = 10))
+
+head(sample_data)
+```
+
+
+```{r}
+set.seed(520)
+train_set<-createDataPartition(sample_data$normal,p=0.6,list=FALSE)
+valid_set<-sample_data[-train_set,]
+train_set<-sample_data[train_set,]
 ctrl<-trainControl(method="cv",number=5)
-m<-multi_model_1(train_set,"Species",".",c("knn","rpart"), "Accuracy",ctrl,new_data =valid_set)
+m<-multi_model_1(train_set,"normal",".",c("knn","rpart"), 
+                 "Accuracy",ctrl,new_data =valid_set)
 
 ```
 
-The above message tells us that the model has returned our metrics for each of the model types we specified. These can be extracted as shown below. Other return values include predictions and a summary of the model.
+The above returns a list containing metrics, predictions, and a model summary.  These can be extracted as shown below. 
 
 ```{r}
 
@@ -113,46 +119,78 @@ head(m$predictions)
 
 This is similar to `multi_model_1` with one difference: it does not use metrics such as RMSE, accuracy and the like. This function is useful if one would like to fit and predict "simpler models" like generalized linear models or linear models. Let's take a look:
 
+
+
+
 ```{r}
 # fit a linear model and get predictions
-lin_model <- multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length","lm")
+lin_model <- multi_model_2(mtcars[1:16,],mtcars[17:32,],"mpg","wt","lm")
 
-head(lin_model)
+lin_model[c("predicted", "mpg")]
 
 ```
 
-We can also fit a multilinear model as shown below:
+From the above, we see that `wt` alone may not be a great predictor for `mpg`. We
+can fit a multi-linear model with other predictors. Let's say `disp` and `drat` are important too, then we add those to the model.  
 
 ```{r}
 
-head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length", "Petal.Length +Sepal.Width","lm"))
+multi_lin <- multi_model_2(mtcars[1:16, ], mtcars[17:32,],"mpg", "wt + disp + drat","lm")
+
+multi_lin[,c("predicted", "mpg")]
 
 ```
 
-To take this a step further, we can fit a model with the square of Sepal.Width. 
-
-```{r}
-
-head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length + I(Sepal.Width)**2","lm"))
-
-```
-
-The above function does more and can fit and predict on any model type. Exploration is therefore left to the reader.
-
+ 
 
 - **`fit_model`**
 
-This function allows us to fit any kind of model without. It replaces `modeleR` which had several issues and development was discontinued. 
+This function allows us to fit any kind of model without necessarily returning predictions. 
  
 ```{r}
-iris1 <- iris[1:50,]
-iris2 <- iris[51:100,]
-lm_model <- fit_model(iris1,"Sepal.Length","Petal.Length","lm")
+lm_model <- fit_model(mtcars,"mpg","wt","lm")
 lm_model
 
 ```
 
-To extract information about the model, we can use `extract_model_info` as follows. Say we wanted to extract the R squared value, we would proceed as follows:
+- `fit_models`
+
+This is similar to `fit_model` with the ability to fit many models with many predictors at once. A simple linear model for instance:
+
+```{r}
+
+models<-fit_models(df=sample_data,yname=c("height", "weight"),xname="yield",
+                   modeltype="glm") 
+
+```
+
+One can then use these models as one may wish. To add residuals from these models for example:
+
+
+```{r}
+
+
+res_residuals <- lapply(models[[1]], add_model_residuals,sample_data)
+res_predictions <- lapply(models[[1]], add_model_predictions, sample_data, sample_data)
+# Get height predictions for the model height ~ yield 
+head(res_predictions[[1]])
+
+```
+
+
+If one would like to drop non-numeric columns from the analysis, one can set `drop_non_numeric` to `TRUE` as follows. The same can be done for `fit_model` above:
+
+```{r}
+fit_models(df=sample_data,yname=c("height","weight"),
+           xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE)
+
+```
+
+
+## Extraction of Model Information
+
+
+To extract information about a given model, we can use `extract_model_info` as follows.
 
 ```{r}
 
@@ -186,86 +224,10 @@ extract_model_info(lm_model,c("p_value","response","call","predictors"))
 
 This is not restricted to linear models but will work for most model types. See `help(extract_model_info)` to see currently supported model types.
 
-To add predictions to our data set, we can use `add_model_predictions` as follows:
-
-```{r}
-# select only column 6 that has our predicted values
-
-head(add_model_predictions(lm_model, old_data = iris1, new_data =  iris2))[6]
-
-```
-
-To do the same with `dplyr`, one can work as follows:
-
-```{r}
-
-library(dplyr)
-iris1 %>% 
-  add_model_predictions(model=lm_model,new_data = iris2) %>% 
-  select(predicted, everything()) %>% 
-  head()
-
-```
-
-To add residuals to our data set, we can use `add_model_residuals`:
-
-```{r}
-# 6 since residuals are added as the final column of the dataset
-
-head(add_model_residuals(lm_model, iris1)[6])
-
-```
-
-With `dplyr`:
-
-```{r}
-
-iris1 %>% 
-  add_model_residuals(model=lm_model) %>% 
-  add_model_predictions(new_data = iris2, model = lm_model) %>% 
-  select(predicted,residuals, everything()) %>% 
-  head()
-
-```
 
 
-- `fit_models`
 
-This is similar to `fit_model` with the ability to fit many models with many predictors at once. A simple linear model for instance:
-
-```{r}
-
-( models<-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),xname="Petal.Length + Petal.Width",modeltype="lm") )
-
-```
-
-One can then use these models as one may wish. To add residuals from these models for example:
-
-
-```{r}
-
-res<-lapply(models,add_model_residuals,iris)
-
-head(res[[1]])
-
-```
-
-To fit several model types with different variables, one can do the following:
-
-
-```{r}
-
-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), xname="Petal.Length + Petal.Width",modeltype=c("lm","glm"))
-
-```
-
-If one would like to drop non-numeric columns from the analysis, one can set `drop_non_numeric` to `TRUE` as follows. The same can be done for `fit_model` above:
-
-```{r}
-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),
-           xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE)
-
-```
+## Correlations 
 
 
 - `get_var_corr`
@@ -292,7 +254,8 @@ head( corrs <- get_var_corr(mtcars,comparison_var="mpg") )
 ```{r}
 
 # purely demonstrative
-get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns=c("factor","character"),method="spearman",
+get_var_corr(sample_data,"height",other_vars="weight",
+             drop_columns=c("factor","character"),method="spearman",
              exact=FALSE)
 
 
@@ -303,7 +266,7 @@ Similarly, `get_var_corr_` (note the underscore at the end) provides  a convenie
 
 ```{r}
 
-head(get_var_corr_(mtcars),6)
+head(get_var_corr_(sample_data),6)
 
 ```
 
@@ -311,7 +274,8 @@ To use only a subset of the data, we can use provide a list of columns to `subse
 
 ```{r}
 
-head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),method="spearman",exact=FALSE))
+head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),
+                   method="spearman",exact=FALSE))
 
 ```
 
@@ -349,6 +313,26 @@ plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_
 
 To explore more options, please take a look at the documentation.
 
+## Extra Functions 
+
+
+
+- **`agg_by_group`**
+
+As can be guessed from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form `x~y` where `y` is the grouping variable(in this case `normal`). One can supply a formula as shown next. 
+
+```{r}
+
+head(agg_by_group(sample_data,.~normal,length))
+
+```
+
+```{r}
+
+head(agg_by_group(mtcars,cyl~hp+vs,sum))
+
+```
+
 
 - `rowdiff`
 
@@ -356,7 +340,7 @@ To explore more options, please take a look at the documentation.
 
 ```{r}
 
-head(rowdiff(iris,exclude = "factor",direction = "reverse"))
+head(rowdiff(sample_data,exclude = "factor",direction = "reverse"))
 
 ```
 

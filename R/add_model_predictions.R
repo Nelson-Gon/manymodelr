@@ -44,9 +44,21 @@ UseMethod("add_model_residuals")
 }
 #' @export
 add_model_residuals <- function(model=NULL, old_data=NULL){
-  if(any(is.null(model), is.null(old_data))) stop("Both model and old_data are required.")
-  old_data$residuals <- residuals(model)
-  old_data
+  if(any(is.null(model), is.null(old_data))){
+    stop("Both model and old_data are required.")
+  }
+
+if (!is.data.frame(old_data)){
+  warning(paste0("Force converting old_data from ", typeof(old_data),
+                 "to a data.frame"))
+          old_data <- as.data.frame(old_data)
+}
+old_data$residuals <- residuals(model)
+
+old_data
+  
+
+ 
 }
 
 

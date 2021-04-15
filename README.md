@@ -1,6 +1,6 @@
 manymodelr: Build and Tune Several Models
 ================
-2021-04-12
+2021-04-15
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Codecov test
@@ -31,10 +31,9 @@ issue](https://isitmaintained.com/badge/resolution/Nelson-Gon/manymodelr.svg)](h
 Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 
 In this vignette, we take a look at how we can simplify many machine
-learning tasks using `manymodelr`. We will take a look at the core
-functions first.
+learning tasks using `manymodelr`.
 
-**Installing the package**
+## Installation
 
 ``` r
 
@@ -66,61 +65,59 @@ library(manymodelr)
 #>  Happy Modelling! :)
 ```
 
-**Sample Usage of Key Functions**
+## Modeling
 
-  - **`agg_by_group`**
+First, a word of caution. The examples shown in this section are meant
+to simply show what the functions do and not what the best model is. For
+a specific use case, please perform the necessary model checks, post-hoc
+analyses, and/or choose predictor variables and model types as
+appropriate based on domain knowledge.
 
-As can be guessed from the name, this function provides an easy way to
-manipulate grouped data. We can for instance find the number of
-observations in the iris data set. The formula takes the form `x~y`
-where `y` is the grouping variable(in this case `Species`). One can
-supply a formula as shown next.
-
-``` r
-
-head(agg_by_group(iris,.~Species,length))
-#> Grouped By[1]:   Species 
-#> 
-#>      Species Sepal.Length Sepal.Width Petal.Length Petal.Width
-#> 1     setosa           50          50           50          50
-#> 2 versicolor           50          50           50          50
-#> 3  virginica           50          50           50          50
-```
-
-``` r
-
-head(agg_by_group(mtcars,cyl~hp+vs,sum))
-#> Grouped By[2]:   hp vs 
-#> 
-#>    hp vs cyl
-#> 1  91  0   4
-#> 2 110  0  12
-#> 3 150  0  16
-#> 4 175  0  22
-#> 5 180  0  24
-#> 6 205  0   8
-```
+With this in mind, let us look at how we can perform modeling tasks
+using `manymodelr`.
 
   - **`multi_model_1`**
 
-This is one of the core functions of the package. To avoid, several
-messages showing up, we use the function `suppressMessages`. This
-assumes that one is familiar with machine learning basics.
+This is one of the core functions of the package. `multi_model_1` aims
+to allow model fitting, prediction, and reporting with a single
+function. The `multi` part of the function’s name reflects the fact that
+we can fit several model types with one function. An example follows
+next.
+
+For purposes of this report, we create a simple dataset to use.
 
 ``` r
-
 set.seed(520)
-train_set<-createDataPartition(iris$Species,p=0.8,list=FALSE)
-valid_set<-iris[-train_set,]
-train_set<-iris[train_set,]
-ctrl<-trainControl(method="cv",number=5)
-m<-multi_model_1(train_set,"Species",".",c("knn","rpart"), "Accuracy",ctrl,new_data =valid_set)
+# Create a simple dataset with a binary target
+# Here normal is a fictional target where we assume that it meets 
+# some criterion means 
+sample_data <- data.frame(normal = as.factor(rep(c("Yes", "No"), 500)), 
+                          height=rnorm(100, mean=0.5, sd=0.2), 
+                          weight=runif(100,0, 0.6),
+                          yield = rnorm(100, mean =520, sd = 10))
+
+head(sample_data)
+#>   normal    height     weight    yield
+#> 1    Yes 0.2849090 0.13442312 520.2837
+#> 2     No 0.2427826 0.37484971 504.4754
+#> 3    Yes 0.2579432 0.47134828 515.6463
+#> 4     No 0.5175604 0.50143592 522.2247
+#> 5    Yes 0.4026023 0.47171755 502.6406
+#> 6     No 0.9789886 0.04191937 509.4663
 ```
 
-The above message tells us that the model has returned our metrics for
-each of the model types we specified. These can be extracted as shown
-below. Other return values include predictions and a summary of the
-model.
+``` r
+set.seed(520)
+train_set<-createDataPartition(sample_data$normal,p=0.6,list=FALSE)
+valid_set<-sample_data[-train_set,]
+train_set<-sample_data[train_set,]
+ctrl<-trainControl(method="cv",number=5)
+m<-multi_model_1(train_set,"normal",".",c("knn","rpart"), 
+                 "Accuracy",ctrl,new_data =valid_set)
+```
+
+The above returns a list containing metrics, predictions, and a model
+summary. These can be extracted as shown below.
 
 ``` r
 
@@ -128,21 +125,21 @@ m$metric
 #> # A tibble: 1 x 2
 #>   knn_accuracy rpart_accuracy
 #>          <dbl>          <dbl>
-#> 1            1          0.933
+#> 1        0.872           0.68
 ```
 
 ``` r
 
 head(m$predictions)
 #> # A tibble: 6 x 2
-#>   knn    rpart 
-#>   <chr>  <chr> 
-#> 1 setosa setosa
-#> 2 setosa setosa
-#> 3 setosa setosa
-#> 4 setosa setosa
-#> 5 setosa setosa
-#> 6 setosa setosa
+#>   knn   rpart
+#>   <chr> <chr>
+#> 1 Yes   Yes  
+#> 2 No    Yes  
+#> 3 No    No   
+#> 4 No    Yes  
+#> 5 No    No   
+#> 6 Yes   Yes
 ```
 
   - **multi\_model\_2**
@@ -154,200 +151,71 @@ linear models or linear models. Let’s take a look:
 
 ``` r
 # fit a linear model and get predictions
-lin_model <- multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length","lm")
+lin_model <- multi_model_2(mtcars[1:16,],mtcars[17:32,],"mpg","wt","lm")
 
-head(lin_model)
-#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
-#> 1          5.1         3.5          1.4         0.2  setosa  4.972378
-#> 2          4.9         3.0          1.4         0.2  setosa  6.761943
-#> 3          4.7         3.2          1.3         0.2  setosa  6.653485
-#> 4          4.6         3.1          1.5         0.2  setosa  6.870402
-#> 5          5.0         3.6          1.4         0.2  setosa  6.382339
-#> 6          5.4         3.9          1.7         0.4  setosa  6.707714
+lin_model[c("predicted", "mpg")]
+#>                     predicted  mpg
+#> Mazda RX4            10.17314 21.0
+#> Mazda RX4 Wag        24.32264 21.0
+#> Datsun 710           26.95458 22.8
+#> Hornet 4 Drive       25.96479 21.4
+#> Hornet Sportabout    23.13039 18.7
+#> Valiant              18.38390 18.1
+#> Duster 360           18.76632 14.3
+#> Merc 240D            16.94420 24.4
+#> Merc 230             16.92171 22.8
+#> Merc 280             25.51488 19.2
+#> Merc 280C            24.59258 17.8
+#> Merc 450SE           27.41348 16.4
+#> Merc 450SL           19.95856 17.3
+#> Merc 450SLC          21.75818 15.2
+#> Cadillac Fleetwood   18.15895 10.4
+#> Lincoln Continental  21.71319 10.4
 ```
 
-We can also fit a multilinear model as shown below:
+From the above, we see that `wt` alone may not be a great predictor for
+`mpg`. We can fit a multi-linear model with other predictors. Let’s say
+`disp` and `drat` are important too, then we add those to the model.
 
 ``` r
 
-head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length", "Petal.Length +Sepal.Width","lm"))
-#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
-#> 1          5.1         3.5          1.4         0.2  setosa  4.902999
-#> 2          4.9         3.0          1.4         0.2  setosa  5.771541
-#> 3          4.7         3.2          1.3         0.2  setosa  5.714857
-#> 4          4.6         3.1          1.5         0.2  setosa  5.761483
-#> 5          5.0         3.6          1.4         0.2  setosa  4.972473
-#> 6          5.4         3.9          1.7         0.4  setosa  5.476232
+multi_lin <- multi_model_2(mtcars[1:16, ], mtcars[17:32,],"mpg", "wt + disp + drat","lm")
+
+multi_lin[,c("predicted", "mpg")]
+#>                     predicted  mpg
+#> Mazda RX4            10.43041 21.0
+#> Mazda RX4 Wag        24.39765 21.0
+#> Datsun 710           25.56629 22.8
+#> Hornet 4 Drive       25.38957 21.4
+#> Hornet Sportabout    23.15234 18.7
+#> Valiant              17.36908 18.1
+#> Duster 360           17.67102 14.3
+#> Merc 240D            15.59802 24.4
+#> Merc 230             14.96161 22.8
+#> Merc 280             25.05592 19.2
+#> Merc 280C            23.66222 17.8
+#> Merc 450SE           25.95326 16.4
+#> Merc 450SL           17.05637 17.3
+#> Merc 450SLC          21.97756 15.2
+#> Cadillac Fleetwood   17.22593 10.4
+#> Lincoln Continental  22.17872 10.4
 ```
-
-To take this a step further, we can fit a model with the square of
-Sepal.Width.
-
-``` r
-
-head(multi_model_2(iris[1:50,],iris[50:99,],"Sepal.Length","Petal.Length + I(Sepal.Width)**2","lm"))
-#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
-#> 1          5.1         3.5          1.4         0.2  setosa  4.902999
-#> 2          4.9         3.0          1.4         0.2  setosa  5.771541
-#> 3          4.7         3.2          1.3         0.2  setosa  5.714857
-#> 4          4.6         3.1          1.5         0.2  setosa  5.761483
-#> 5          5.0         3.6          1.4         0.2  setosa  4.972473
-#> 6          5.4         3.9          1.7         0.4  setosa  5.476232
-```
-
-The above function does more and can fit and predict on any model type.
-Exploration is therefore left to the reader.
 
   - **`fit_model`**
 
-This function allows us to fit any kind of model without. It replaces
-`modeleR` which had several issues and development was discontinued.
+This function allows us to fit any kind of model without necessarily
+returning predictions.
 
 ``` r
-iris1 <- iris[1:50,]
-iris2 <- iris[51:100,]
-lm_model <- fit_model(iris1,"Sepal.Length","Petal.Length","lm")
+lm_model <- fit_model(mtcars,"mpg","wt","lm")
 lm_model
 #> 
 #> Call:
-#> lm(formula = Sepal.Length ~ Petal.Length, data = use_df)
+#> lm(formula = mpg ~ wt, data = use_df)
 #> 
 #> Coefficients:
-#>  (Intercept)  Petal.Length  
-#>       4.2132        0.5423
-```
-
-To extract information about the model, we can use `extract_model_info`
-as follows. Say we wanted to extract the R squared value, we would
-proceed as follows:
-
-``` r
-
-extract_model_info(lm_model, "r2")
-#> [1] 0.07138289
-```
-
-To extract the adjusted R squared:
-
-``` r
-
-extract_model_info(lm_model, "adj_r2")
-#> [1] 0.0520367
-```
-
-For the p value:
-
-``` r
-
-extract_model_info(lm_model, "p_value")
-#>  (Intercept) Petal.Length 
-#> 1.614927e-13 6.069778e-02
-```
-
-To extract multiple attributes:
-
-``` r
-
-extract_model_info(lm_model,c("p_value","response","call","predictors"))
-#> $p_value
-#>  (Intercept) Petal.Length 
-#> 1.614927e-13 6.069778e-02 
-#> 
-#> $response
-#> [1] "Sepal.Length"
-#> 
-#> $call
-#> lm(formula = Sepal.Length ~ Petal.Length, data = use_df)
-#> 
-#> $predictors
-#> [1] "Petal.Length"
-```
-
-This is not restricted to linear models but will work for most model
-types. See `help(extract_model_info)` to see currently supported model
-types.
-
-To add predictions to our data set, we can use `add_model_predictions`
-as follows:
-
-``` r
-# select only column 6 that has our predicted values
-
-head(add_model_predictions(lm_model, old_data = iris1, new_data =  iris2))[6]
-#>   predicted
-#> 1  6.761943
-#> 2  6.653485
-#> 3  6.870402
-#> 4  6.382339
-#> 5  6.707714
-#> 6  6.653485
-```
-
-To do the same with `dplyr`, one can work as follows:
-
-``` r
-
-library(dplyr)
-#> Warning: package 'dplyr' was built under R version 4.0.4
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
-iris1 %>% 
-  add_model_predictions(model=lm_model,new_data = iris2) %>% 
-  select(predicted, everything()) %>% 
-  head()
-#>   predicted Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#> 1  6.761943          5.1         3.5          1.4         0.2  setosa
-#> 2  6.653485          4.9         3.0          1.4         0.2  setosa
-#> 3  6.870402          4.7         3.2          1.3         0.2  setosa
-#> 4  6.382339          4.6         3.1          1.5         0.2  setosa
-#> 5  6.707714          5.0         3.6          1.4         0.2  setosa
-#> 6  6.653485          5.4         3.9          1.7         0.4  setosa
-```
-
-To add residuals to our data set, we can use `add_model_residuals`:
-
-``` r
-# 6 since residuals are added as the final column of the dataset
-
-head(add_model_residuals(lm_model, iris1)[6])
-#>     residuals
-#> 1  0.12762214
-#> 2 -0.07237786
-#> 3 -0.21814860
-#> 4 -0.42660712
-#> 5  0.02762214
-#> 6  0.26493436
-```
-
-With `dplyr`:
-
-``` r
-
-iris1 %>% 
-  add_model_residuals(model=lm_model) %>% 
-  add_model_predictions(new_data = iris2, model = lm_model) %>% 
-  select(predicted,residuals, everything()) %>% 
-  head()
-#>   predicted   residuals Sepal.Length Sepal.Width Petal.Length Petal.Width
-#> 1  6.761943  0.12762214          5.1         3.5          1.4         0.2
-#> 2  6.653485 -0.07237786          4.9         3.0          1.4         0.2
-#> 3  6.870402 -0.21814860          4.7         3.2          1.3         0.2
-#> 4  6.382339 -0.42660712          4.6         3.1          1.5         0.2
-#> 5  6.707714  0.02762214          5.0         3.6          1.4         0.2
-#> 6  6.653485  0.26493436          5.4         3.9          1.7         0.4
-#>   Species
-#> 1  setosa
-#> 2  setosa
-#> 3  setosa
-#> 4  setosa
-#> 5  setosa
-#> 6  setosa
+#> (Intercept)           wt  
+#>      37.285       -5.344
 ```
 
   - `fit_models`
@@ -357,26 +225,8 @@ many predictors at once. A simple linear model for instance:
 
 ``` r
 
-( models<-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),xname="Petal.Length + Petal.Width",modeltype="lm") )
-#> [[1]]
-#> [[1]][[1]]
-#> 
-#> Call:
-#> lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = use_df)
-#> 
-#> Coefficients:
-#>  (Intercept)  Petal.Length   Petal.Width  
-#>       4.1906        0.5418       -0.3196  
-#> 
-#> 
-#> [[1]][[2]]
-#> 
-#> Call:
-#> lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = use_df)
-#> 
-#> Coefficients:
-#>  (Intercept)  Petal.Length   Petal.Width  
-#>       3.5870       -0.2571        0.3640
+models<-fit_models(df=sample_data,yname=c("height", "weight"),xname="yield",
+                   modeltype="glm") 
 ```
 
 One can then use these models as one may wish. To add residuals from
@@ -384,70 +234,18 @@ these models for example:
 
 ``` r
 
-res<-lapply(models,add_model_residuals,iris)
 
-head(res[[1]])
-#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#> 1          5.1         3.5          1.4         0.2  setosa
-#> 2          4.9         3.0          1.4         0.2  setosa
-#> 3          4.7         3.2          1.3         0.2  setosa
-#> 4          4.6         3.1          1.5         0.2  setosa
-#> 5          5.0         3.6          1.4         0.2  setosa
-#> 6          5.4         3.9          1.7         0.4  setosa
-```
-
-To fit several model types with different variables, one can do the
-following:
-
-``` r
-
-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), xname="Petal.Length + Petal.Width",modeltype=c("lm","glm"))
-#> [[1]]
-#> [[1]][[1]]
-#> 
-#> Call:
-#> lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = use_df)
-#> 
-#> Coefficients:
-#>  (Intercept)  Petal.Length   Petal.Width  
-#>       4.1906        0.5418       -0.3196  
-#> 
-#> 
-#> [[1]][[2]]
-#> 
-#> Call:
-#> lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = use_df)
-#> 
-#> Coefficients:
-#>  (Intercept)  Petal.Length   Petal.Width  
-#>       3.5870       -0.2571        0.3640  
-#> 
-#> 
-#> 
-#> [[2]]
-#> [[2]][[1]]
-#> 
-#> Call:  glm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = use_df)
-#> 
-#> Coefficients:
-#>  (Intercept)  Petal.Length   Petal.Width  
-#>       4.1906        0.5418       -0.3196  
-#> 
-#> Degrees of Freedom: 149 Total (i.e. Null);  147 Residual
-#> Null Deviance:       102.2 
-#> Residual Deviance: 23.88     AIC: 158
-#> 
-#> [[2]][[2]]
-#> 
-#> Call:  glm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = use_df)
-#> 
-#> Coefficients:
-#>  (Intercept)  Petal.Length   Petal.Width  
-#>       3.5870       -0.2571        0.3640  
-#> 
-#> Degrees of Freedom: 149 Total (i.e. Null);  147 Residual
-#> Null Deviance:       28.31 
-#> Residual Deviance: 22.27     AIC: 147.6
+res_residuals <- lapply(models[[1]], add_model_residuals,sample_data)
+res_predictions <- lapply(models[[1]], add_model_predictions, sample_data, sample_data)
+# Get height predictions for the model height ~ yield 
+head(res_predictions[[1]])
+#>   normal    height     weight    yield predicted
+#> 1    Yes 0.2849090 0.13442312 520.2837 0.5028866
+#> 2     No 0.2427826 0.37484971 504.4754 0.4943626
+#> 3    Yes 0.2579432 0.47134828 515.6463 0.5003860
+#> 4     No 0.5175604 0.50143592 522.2247 0.5039331
+#> 5    Yes 0.4026023 0.47171755 502.6406 0.4933732
+#> 6     No 0.9789886 0.04191937 509.4663 0.4970537
 ```
 
 If one would like to drop non-numeric columns from the analysis, one can
@@ -455,55 +253,108 @@ set `drop_non_numeric` to `TRUE` as follows. The same can be done for
 `fit_model` above:
 
 ``` r
-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),
+fit_models(df=sample_data,yname=c("height","weight"),
            xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE)
 #> [[1]]
 #> [[1]][[1]]
 #> 
 #> Call:
-#> lm(formula = Sepal.Length ~ ., data = use_df)
+#> lm(formula = height ~ ., data = use_df)
 #> 
 #> Coefficients:
-#>  (Intercept)   Sepal.Width  Petal.Length   Petal.Width  
-#>       1.8560        0.6508        0.7091       -0.5565  
+#> (Intercept)       weight        yield  
+#>   0.2176942   -0.2185572    0.0006712  
 #> 
 #> 
 #> [[1]][[2]]
 #> 
 #> Call:
-#> lm(formula = Sepal.Width ~ ., data = use_df)
+#> lm(formula = weight ~ ., data = use_df)
 #> 
 #> Coefficients:
-#>  (Intercept)  Sepal.Length  Petal.Length   Petal.Width  
-#>       1.0431        0.6071       -0.5860        0.5580  
+#> (Intercept)       height        yield  
+#>   0.0112753   -0.1463926    0.0006827  
 #> 
 #> 
 #> 
 #> [[2]]
 #> [[2]][[1]]
 #> 
-#> Call:  glm(formula = Sepal.Length ~ ., data = use_df)
+#> Call:  glm(formula = height ~ ., data = use_df)
 #> 
 #> Coefficients:
-#>  (Intercept)   Sepal.Width  Petal.Length   Petal.Width  
-#>       1.8560        0.6508        0.7091       -0.5565  
+#> (Intercept)       weight        yield  
+#>   0.2176942   -0.2185572    0.0006712  
 #> 
-#> Degrees of Freedom: 149 Total (i.e. Null);  146 Residual
-#> Null Deviance:       102.2 
-#> Residual Deviance: 14.45     AIC: 84.64
+#> Degrees of Freedom: 999 Total (i.e. Null);  997 Residual
+#> Null Deviance:       45.82 
+#> Residual Deviance: 44.32     AIC: -270.3
 #> 
 #> [[2]][[2]]
 #> 
-#> Call:  glm(formula = Sepal.Width ~ ., data = use_df)
+#> Call:  glm(formula = weight ~ ., data = use_df)
 #> 
 #> Coefficients:
-#>  (Intercept)  Sepal.Length  Petal.Length   Petal.Width  
-#>       1.0431        0.6071       -0.5860        0.5580  
+#> (Intercept)       height        yield  
+#>   0.0112753   -0.1463926    0.0006827  
 #> 
-#> Degrees of Freedom: 149 Total (i.e. Null);  146 Residual
-#> Null Deviance:       28.31 
-#> Residual Deviance: 13.47     AIC: 74.2
+#> Degrees of Freedom: 999 Total (i.e. Null);  997 Residual
+#> Null Deviance:       30.7 
+#> Residual Deviance: 29.69     AIC: -671.1
 ```
+
+## Extraction of Model Information
+
+To extract information about a given model, we can use
+`extract_model_info` as follows.
+
+``` r
+
+extract_model_info(lm_model, "r2")
+#> [1] 0.7528328
+```
+
+To extract the adjusted R squared:
+
+``` r
+
+extract_model_info(lm_model, "adj_r2")
+#> [1] 0.7445939
+```
+
+For the p value:
+
+``` r
+
+extract_model_info(lm_model, "p_value")
+#>  (Intercept)           wt 
+#> 8.241799e-19 1.293959e-10
+```
+
+To extract multiple attributes:
+
+``` r
+
+extract_model_info(lm_model,c("p_value","response","call","predictors"))
+#> $p_value
+#>  (Intercept)           wt 
+#> 8.241799e-19 1.293959e-10 
+#> 
+#> $response
+#> [1] "mpg"
+#> 
+#> $call
+#> lm(formula = mpg ~ wt, data = use_df)
+#> 
+#> $predictors
+#> [1] "wt"
+```
+
+This is not restricted to linear models but will work for most model
+types. See `help(extract_model_info)` to see currently supported model
+types.
+
+## Correlations
 
   - `get_var_corr`
 
@@ -543,13 +394,14 @@ specifying which column types(classes) should be dropped. It defaults to
 ``` r
 
 # purely demonstrative
-get_var_corr(iris,"Sepal.Length",other_vars="Petal.Length",drop_columns=c("factor","character"),method="spearman",
+get_var_corr(sample_data,"height",other_vars="weight",
+             drop_columns=c("factor","character"),method="spearman",
              exact=FALSE)
-#> Warning in get_var_corr.data.frame(iris, "Sepal.Length", other_vars =
-#> "Petal.Length", : Columns with classes in drop_columns have been discarded.
-#> Youcan disable this yourself by setting drop_columns to NULL.
-#>   comparison_var    other_var      p.value correlation
-#> 1   Sepal.Length Petal.Length 3.443087e-50   0.8818981
+#> Warning in get_var_corr.data.frame(sample_data, "height", other_vars =
+#> "weight", : Columns with classes in drop_columns have been discarded. Youcan
+#> disable this yourself by setting drop_columns to NULL.
+#>   comparison_var other_var      p.value correlation
+#> 1         height    weight 4.204642e-07  -0.1591719
 ```
 
 Similarly, `get_var_corr_` (note the underscore at the end) provides a
@@ -557,14 +409,13 @@ convenient way to get combination-wise correlations.
 
 ``` r
 
-head(get_var_corr_(mtcars),6)
-#>   comparison_var other_var      p.value correlation    lower_ci   upper_ci
-#> 1            mpg       cyl 6.112687e-10  -0.8521620 -0.92576936 -0.7163171
-#> 2            mpg      disp 9.380327e-10  -0.8475514 -0.92335937 -0.7081376
-#> 3            mpg        hp 1.787835e-07  -0.7761684 -0.88526861 -0.5860994
-#> 4            mpg      drat 1.776240e-05   0.6811719  0.43604838  0.8322010
-#> 5            mpg        wt 1.293959e-10  -0.8676594 -0.93382641 -0.7440872
-#> 6            mpg      qsec 1.708199e-02   0.4186840  0.08195487  0.6696186
+head(get_var_corr_(sample_data),6)
+#> Warning in get_var_corr_.data.frame(sample_data): Columns with classes in
+#> drop_columns were dropped.
+#>   comparison_var other_var      p.value correlation    lower_ci    upper_ci
+#> 1         height    weight 1.470866e-08 -0.17793196 -0.23730741 -0.11723201
+#> 2         height     yield 4.473683e-01  0.02405390 -0.03799584  0.08591886
+#> 3         weight     yield 2.986171e-01  0.03290108 -0.02915146  0.09470100
 ```
 
 To use only a subset of the data, we can use provide a list of columns
@@ -574,7 +425,8 @@ therefore of length 2.
 
 ``` r
 
-head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),method="spearman",exact=FALSE))
+head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),
+                   method="spearman",exact=FALSE))
 #>   comparison_var other_var      p.value correlation
 #> 2            mpg      disp 6.370336e-13  -0.9088824
 #> 5            mpg        wt 1.487595e-11  -0.8864220
@@ -602,7 +454,7 @@ plot_corr(mtcars,show_which = "corr",
 #> Using colour_by for the legend title.
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-28-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
 
 To show significance of the results instead of the correlations
 themselves, we can set `show_which` to “signif” as shown below. By
@@ -619,9 +471,43 @@ plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_
 #> "circles", : Using colour_by for the legend title.
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
 
 To explore more options, please take a look at the documentation.
+
+## Extra Functions
+
+  - **`agg_by_group`**
+
+As can be guessed from the name, this function provides an easy way to
+manipulate grouped data. We can for instance find the number of
+observations in the iris data set. The formula takes the form `x~y`
+where `y` is the grouping variable(in this case `normal`). One can
+supply a formula as shown next.
+
+``` r
+
+head(agg_by_group(sample_data,.~normal,length))
+#> Grouped By[1]:   normal 
+#> 
+#>   normal height weight yield
+#> 1     No    500    500   500
+#> 2    Yes    500    500   500
+```
+
+``` r
+
+head(agg_by_group(mtcars,cyl~hp+vs,sum))
+#> Grouped By[2]:   hp vs 
+#> 
+#>    hp vs cyl
+#> 1  91  0   4
+#> 2 110  0  12
+#> 3 150  0  16
+#> 4 175  0  22
+#> 5 180  0  24
+#> 6 205  0   8
+```
 
   - `rowdiff`
 
@@ -633,14 +519,14 @@ subtraction akin to `x-(x-1)` where `x` is the row number.
 
 ``` r
 
-head(rowdiff(iris,exclude = "factor",direction = "reverse"))
-#>   Sepal.Length Sepal.Width Petal.Length Petal.Width
-#> 1           NA          NA           NA          NA
-#> 2         -0.2        -0.5          0.0         0.0
-#> 3         -0.2         0.2         -0.1         0.0
-#> 4         -0.1        -0.1          0.2         0.0
-#> 5          0.4         0.5         -0.1         0.0
-#> 6          0.4         0.3          0.3         0.2
+head(rowdiff(sample_data,exclude = "factor",direction = "reverse"))
+#>        height      weight      yield
+#> 1          NA          NA         NA
+#> 2 -0.04212634  0.24042659 -15.808303
+#> 3  0.01516059  0.09649856  11.170825
+#> 4  0.25961718  0.03008764   6.578424
+#> 5 -0.11495811 -0.02971837 -19.584090
+#> 6  0.57638627 -0.42979818   6.825719
 ```
 
   - `na_replace`
