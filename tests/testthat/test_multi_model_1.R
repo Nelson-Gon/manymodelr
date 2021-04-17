@@ -3,26 +3,38 @@ test_that(desc="Test that multi_model_1 works as intended",
                       
                       skip_on_oldrel()
                       set.seed(520)
-                      train_set<-createDataPartition(iris$Species,p=0.8,list=FALSE)
-                      valid_set<-iris[-train_set,]
-                      train_set<-iris[train_set,]
-                      ctrl<-trainControl(method="cv",number=5)
-                      m<-multi_model_1(train_set,"Species",".",c("knn","rpart"), "Accuracy",ctrl,new_data =valid_set)
+                      train_set<-createDataPartition(yields$normal,
+                                                     p=0.8,
+                                                     list=FALSE)
+                      valid_set<-yields[-train_set,]
+                      train_set<-yields[train_set,]
+                      ctrl<-trainControl(method="cv",
+                                         number=5)
+                      m<-multi_model_1(train_set,"normal",".",
+                                       c("knn","rpart"), 
+                                       "Accuracy",ctrl,
+                                       new_data =valid_set)
                        
-                expect_error(multi_model_1(iris[1:120,],"Species",".",c("knn","svmRadial"),
+                expect_error(multi_model_1(yields[1:120,],"normal",
+                                           ".",c("knn","svmRadial"),
                                                      "Accuracy",ctrl),
               "new_data,metric,method, and control must all be supplied",
               fixed=TRUE)
               
              
             # need both control and metric
-            expect_error(multi_model_1(iris[1:120,],"Species",".",c("knn","svmRadial"),
-                                                 metric=NULL,ctrl,new_data = iris[1:120,]),
-                                   "new_data,metric,method, and control must all be supplied",
+            expect_error(multi_model_1(yields[1:120,],
+                                       "normal",".",
+                                       c("knn","svmRadial"),
+                                                 metric=NULL,ctrl,
+                                       new_data = yields[1:120,]),
+                    "new_data,metric,method, and control must all be supplied",
                                    fixed=TRUE)
             # need method
-            expect_error(multi_model_1(iris[1:120,],"Species",".",method=NULL,
-                                                 metric="Accuracy",ctrl,new_data = iris[1:120,]),
+            expect_error(multi_model_1(yields[1:120,],
+                                       "normal",".",method=NULL,
+                                  metric="Accuracy",ctrl,
+                                  new_data = yields[1:120,]),
                                    "new_data,metric,method, and control must all be supplied",
                                    fixed=TRUE)
             # ensure that no value is null

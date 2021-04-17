@@ -3,15 +3,22 @@ testthat::test_that(desc="Test add_model_*",
                        
                        skip_on_oldrel()
                       
-                      iris1 <- iris[1:50,]
-                      iris2 <- iris[51:100,]
-                      lm_model <- fit_model(iris1,"Sepal.Length","Sepal.Width","lm") 
-  expect_error(add_model_predictions(old_data = iris1,new_data = iris2),"A model, old_data, and new_data must be provided",fixed=TRUE)
+                      yields1 <- yields[1:50,]
+                      yields2 <- yields[51:100,]
+                      lm_model <- fit_model(yields1,
+                                            "weight","height","lm") 
+  expect_error(add_model_predictions(old_data = yields1,new_data = yields2),
+               "A model, old_data, and new_data must be provided",fixed=TRUE)
    
- expect_error(add_model_predictions(model = lm_model,old_data = iris1),"A model, old_data, and new_data must be provided",fixed=TRUE)      
- expect_error(add_model_predictions(model = lm_model,old_data = iris1,
-                                               new_data = iris[1:5,]),"old_data and new_data must have equal lengths.",fixed=TRUE)   
- expect_error(add_model_residuals(iris1),"Both model and old_data are required.",fixed=TRUE) 
- expect_true("predicted" %in% names(add_model_predictions(lm_model,iris1,iris2)))
- expect_true("residuals" %in% names(add_model_residuals(lm_model, iris1)))
+ expect_error(add_model_predictions(model = lm_model,
+                                    old_data = yields1),
+              "A model, old_data, and new_data must be provided",fixed=TRUE)      
+ expect_error(add_model_predictions(model = lm_model,old_data = yields1,
+                                               new_data = yields[1:5,]),
+              "old_data and new_data must have equal lengths.",fixed=TRUE)   
+ expect_error(add_model_residuals(yields1),"Both model and old_data are required.",
+              fixed=TRUE) 
+ expect_true("predicted" %in% names(add_model_predictions(lm_model,yields1,
+                                                          yields2)))
+ expect_true("residuals" %in% names(add_model_residuals(lm_model, yields1)))
                       })

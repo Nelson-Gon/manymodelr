@@ -1,6 +1,6 @@
 manymodelr: Build and Tune Several Models
 ================
-2021-04-15
+2021-04-17
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Codecov test
@@ -59,10 +59,13 @@ library(manymodelr)
 #>     precision, recall
 #> Loading required package: e1071
 #> Warning: package 'e1071' was built under R version 4.0.4
-#> Welcome to manymodelr. This is manymodelr version 0.3.5.
+#> Welcome to manymodelr. This is manymodelr version 0.3.6.
 #>  Please file issues and feedback at https://www.github.com/Nelson-Gon/manymodelr/issues
 #> Turn this message off using 'suppressPackageStartupMessages(library(manymodelr))'
 #>  Happy Modelling! :)
+
+# data for examples
+data("yields", package="manymodelr")
 ```
 
 ## Modeling
@@ -88,29 +91,9 @@ For purposes of this report, we create a simple dataset to use.
 
 ``` r
 set.seed(520)
-# Create a simple dataset with a binary target
-# Here normal is a fictional target where we assume that it meets 
-# some criterion means 
-sample_data <- data.frame(normal = as.factor(rep(c("Yes", "No"), 500)), 
-                          height=rnorm(100, mean=0.5, sd=0.2), 
-                          weight=runif(100,0, 0.6),
-                          yield = rnorm(100, mean =520, sd = 10))
-
-head(sample_data)
-#>   normal    height     weight    yield
-#> 1    Yes 0.2849090 0.13442312 520.2837
-#> 2     No 0.2427826 0.37484971 504.4754
-#> 3    Yes 0.2579432 0.47134828 515.6463
-#> 4     No 0.5175604 0.50143592 522.2247
-#> 5    Yes 0.4026023 0.47171755 502.6406
-#> 6     No 0.9789886 0.04191937 509.4663
-```
-
-``` r
-set.seed(520)
-train_set<-createDataPartition(sample_data$normal,p=0.6,list=FALSE)
-valid_set<-sample_data[-train_set,]
-train_set<-sample_data[train_set,]
+train_set<-createDataPartition(yields$normal,p=0.6,list=FALSE)
+valid_set<-yields[-train_set,]
+train_set<-yields[train_set,]
 ctrl<-trainControl(method="cv",number=5)
 m<-multi_model_1(train_set,"normal",".",c("knn","rpart"), 
                  "Accuracy",ctrl,new_data =valid_set)
@@ -225,7 +208,7 @@ many predictors at once. A simple linear model for instance:
 
 ``` r
 
-models<-fit_models(df=sample_data,yname=c("height", "weight"),xname="yield",
+models<-fit_models(df=yields,yname=c("height", "weight"),xname="yield",
                    modeltype="glm") 
 ```
 
@@ -235,8 +218,8 @@ these models for example:
 ``` r
 
 
-res_residuals <- lapply(models[[1]], add_model_residuals,sample_data)
-res_predictions <- lapply(models[[1]], add_model_predictions, sample_data, sample_data)
+res_residuals <- lapply(models[[1]], add_model_residuals,yields)
+res_predictions <- lapply(models[[1]], add_model_predictions, yields, yields)
 # Get height predictions for the model height ~ yield 
 head(res_predictions[[1]])
 #>   normal    height     weight    yield predicted
@@ -253,7 +236,7 @@ set `drop_non_numeric` to `TRUE` as follows. The same can be done for
 `fit_model` above:
 
 ``` r
-fit_models(df=sample_data,yname=c("height","weight"),
+fit_models(df=yields,yname=c("height","weight"),
            xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE)
 #> [[1]]
 #> [[1]][[1]]
@@ -394,12 +377,12 @@ specifying which column types(classes) should be dropped. It defaults to
 ``` r
 
 # purely demonstrative
-get_var_corr(sample_data,"height",other_vars="weight",
+get_var_corr(yields,"height",other_vars="weight",
              drop_columns=c("factor","character"),method="spearman",
              exact=FALSE)
-#> Warning in get_var_corr.data.frame(sample_data, "height", other_vars =
-#> "weight", : Columns with classes in drop_columns have been discarded. Youcan
-#> disable this yourself by setting drop_columns to NULL.
+#> Warning in get_var_corr.data.frame(yields, "height", other_vars = "weight", :
+#> Columns with classes in drop_columns have been discarded. Youcan disable this
+#> yourself by setting drop_columns to NULL.
 #>   comparison_var other_var      p.value correlation
 #> 1         height    weight 4.204642e-07  -0.1591719
 ```
@@ -409,8 +392,8 @@ convenient way to get combination-wise correlations.
 
 ``` r
 
-head(get_var_corr_(sample_data),6)
-#> Warning in get_var_corr_.data.frame(sample_data): Columns with classes in
+head(get_var_corr_(yields),6)
+#> Warning in get_var_corr_.data.frame(yields): Columns with classes in
 #> drop_columns were dropped.
 #>   comparison_var other_var      p.value correlation    lower_ci    upper_ci
 #> 1         height    weight 1.470866e-08 -0.17793196 -0.23730741 -0.11723201
@@ -454,7 +437,7 @@ plot_corr(mtcars,show_which = "corr",
 #> Using colour_by for the legend title.
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
 
 To show significance of the results instead of the correlations
 themselves, we can set `show_which` to “signif” as shown below. By
@@ -471,7 +454,7 @@ plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_
 #> "circles", : Using colour_by for the legend title.
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
 
 To explore more options, please take a look at the documentation.
 
@@ -487,7 +470,7 @@ supply a formula as shown next.
 
 ``` r
 
-head(agg_by_group(sample_data,.~normal,length))
+head(agg_by_group(yields,.~normal,length))
 #> Grouped By[1]:   normal 
 #> 
 #>   normal height weight yield
@@ -519,7 +502,7 @@ subtraction akin to `x-(x-1)` where `x` is the row number.
 
 ``` r
 
-head(rowdiff(sample_data,exclude = "factor",direction = "reverse"))
+head(rowdiff(yields,exclude = "factor",direction = "reverse"))
 #>        height      weight      yield
 #> 1          NA          NA         NA
 #> 2 -0.04212634  0.24042659 -15.808303

@@ -11,7 +11,8 @@
 #' 
 #' @return A dataframe showing the row corresponding to the required percentile.
 #' @examples
-#' select_percentile(iris,5)
+#' data("yields", package="manymodelr")
+#' select_percentile(yields,5)
 #'@export
 select_percentile<-function(df=NULL,percentile=NULL,descend=FALSE){
   UseMethod("select_percentile")

@@ -8,9 +8,9 @@
 #' @name fit_model
 #' @title Fit and predict in a single function.
 #' @examples
-#' fit_model(iris,"Sepal.Length","Species","lm")
-#' fit_model(iris,"Sepal.Width",
-#' "Sepal.Length + Petal.Length + I(Petal.Width)**2","lm")
+#' data("yields", package="manymodelr")
+#' fit_model(yields,"height","weight","lm")
+#' fit_model(yields, "weight","height + I(yield)**2","lm")
 
 #' @export
 fit_model <- function (df=NULL, yname=NULL, xname=NULL, modeltype=NULL,
@@ -32,11 +32,11 @@ do.call(modeltype, list(data = quote(use_df), model_formula,...))
 #' @inheritParams fit_model
 #' @return A list of model objects that can be used later.
 #' @examples 
-#' fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),
-#' xname="Petal.Length + Petal.Width",modeltype="lm")
+#' data("yields", package="manymodelr")
+#' fit_models(df=yields,yname=c("height","yield"),xname="weight",modeltype="lm")
 #' #many model types
-#' fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), 
-#' xname="Petal.Length + Petal.Width",modeltype=c("lm","glm"))
+#' fit_models(df=yields,yname=c("height","yield"),xname="weight",
+#' modeltype=c("lm", "glm"))
 fit_models <- function (df=NULL,yname=NULL, xname=NULL, modeltype=NULL,
                         drop_non_numeric=FALSE,
                         ...){

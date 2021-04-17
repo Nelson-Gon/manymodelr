@@ -22,11 +22,11 @@ A friendly way to select a column or several columns. Mainly for non-pipe usage
 It is recommended to use known select functions to do pipe manipulations. Otherwise convert to tibble
 }
 \examples{
-select_col(iris,Petal.Length,Sepal.Length,Species,Petal.Width)
+select_col(yields,height,weight,normal)
 # A pipe friendly example
 \dontrun{
 library(dplyr)
-as_tibble(iris) \%>\%
-select_col(Species)
+as_tibble(yields) \%>\%
+select_col(height, weight, normal)
 }
 }

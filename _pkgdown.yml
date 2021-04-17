@@ -27,6 +27,8 @@ reference:
      - '`rowdiff`'
      - '`select_col`'
      - '`select_percentile`'
+     - '`drop_non_numeric`'
+     - '`yields`' 
 
 
 navbar:
@@ -36,7 +38,11 @@ navbar:
       href: articles/manymodelr_vignette.html
     - text: "Documentation"
       menu:
-        - text: Usage
-          href: articles/manymodelr_vignette.html
+        - text: Modeling with manymodelr 
+          href: articles/modeling.html
+        - text: Correlation analysis
+          href: articles/correlations.html
+        - text: Miscellaneous 
+          href: articles/misc.html 
         - text: Changes
           href: news/index.html

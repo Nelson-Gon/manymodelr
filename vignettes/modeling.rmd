@@ -1,0 +1,200 @@
+---
+date: "`r Sys.Date()`"
+title: "Building predictive models with manymodelr"
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{ "Easy modeling with manymodelr"}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
+[![Codecov test coverage](https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg)](https://doi.org/10.5281/zenodo.3891106)
+[![Build Status](https://travis-ci.com/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.com/Nelson-Gon/manymodelr)
+[![R CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg)](https://github.com/Nelson-Gon/manymodelr)
+![test-coverage](https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg)
+[![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/mde)](https://CRAN.R-project.org/package=mde)
+[![Downloads](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
+[![TotalDownloads](https://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow)](https://cran.r-project.org/package=manymodelr) 
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html) 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Nelson-Gon/manymodelr/graphs/commit-activity) 
+[![Project Status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/) 
+[![GitHub last commit](https://img.shields.io/github/last-commit/Nelson-Gon/manymodelr.svg)](https://github.com/Nelson-Gon/manymodelr/commits/master)
+[![GitHub issues](https://img.shields.io/github/issues/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues/)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues?q=is%3Aissue+is%3Aclosed)
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/Nelson-Gon/manymodelr.svg)](https://isitmaintained.com/project/Nelson-Gon/manymodelr "Average time to resolve an issue")
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
+
+First, a word of caution. The examples shown in this section are meant to simply show what the functions do and not what the best model is. For a specific use case, please perform the necessary model checks, post-hoc analyses, and/or choose predictor variables and model types as appropriate based on domain knowledge.
+
+With this in mind, let us look at how we can perform modeling tasks using `manymodelr`. 
+
+
+- **`multi_model_1`**
+
+This is one of the core functions of the package. `multi_model_1` aims to allow
+model fitting, prediction, and reporting with a single function. The `multi` 
+part of the function's name reflects the fact that we can fit several model 
+types with one function. An example follows next. 
+
+For purposes of this report, we create a simple dataset to use.
+
+```{r}
+library(manymodelr)
+set.seed(520)
+# Create a simple dataset with a binary target
+# Here normal is a fictional target where we assume that it meets 
+# some criterion means 
+sample_data <- data.frame(normal = as.factor(rep(c("Yes", "No"), 500)), 
+                          height=rnorm(100, mean=0.5, sd=0.2), 
+                          weight=runif(100,0, 0.6),
+                          yield = rnorm(100, mean =520, sd = 10))
+
+head(sample_data)
+```
+
+
+```{r}
+set.seed(520)
+train_set<-createDataPartition(sample_data$normal,p=0.6,list=FALSE)
+valid_set<-sample_data[-train_set,]
+train_set<-sample_data[train_set,]
+ctrl<-trainControl(method="cv",number=5)
+m<-multi_model_1(train_set,"normal",".",c("knn","rpart"), 
+                 "Accuracy",ctrl,new_data =valid_set)
+
+```
+
+The above returns a list containing metrics, predictions, and a model summary.  These can be extracted as shown below. 
+
+```{r}
+
+m$metric
+
+```
+
+```{r}
+
+head(m$predictions)
+
+```
+
+- **multi_model_2**
+
+This is similar to `multi_model_1` with one difference: it does not use metrics such as RMSE, accuracy and the like. This function is useful if one would like to fit and predict "simpler models" like generalized linear models or linear models. Let's take a look:
+
+
+
+
+```{r}
+# fit a linear model and get predictions
+lin_model <- multi_model_2(mtcars[1:16,],mtcars[17:32,],"mpg","wt","lm")
+
+lin_model[c("predicted", "mpg")]
+
+```
+
+From the above, we see that `wt` alone may not be a great predictor for `mpg`. We
+can fit a multi-linear model with other predictors. Let's say `disp` and `drat` are important too, then we add those to the model.  
+
+```{r}
+
+multi_lin <- multi_model_2(mtcars[1:16, ], mtcars[17:32,],"mpg", "wt + disp + drat","lm")
+
+multi_lin[,c("predicted", "mpg")]
+
+```
+
+ 
+
+- **`fit_model`**
+
+This function allows us to fit any kind of model without necessarily returning predictions. 
+ 
+```{r}
+lm_model <- fit_model(mtcars,"mpg","wt","lm")
+lm_model
+
+```
+
+- `fit_models`
+
+This is similar to `fit_model` with the ability to fit many models with many predictors at once. A simple linear model for instance:
+
+```{r}
+
+models<-fit_models(df=sample_data,yname=c("height", "weight"),xname="yield",
+                   modeltype="glm") 
+
+```
+
+One can then use these models as one may wish. To add residuals from these models for example:
+
+
+```{r}
+
+
+res_residuals <- lapply(models[[1]], add_model_residuals,sample_data)
+res_predictions <- lapply(models[[1]], add_model_predictions, sample_data, sample_data)
+# Get height predictions for the model height ~ yield 
+head(res_predictions[[1]])
+
+```
+
+
+If one would like to drop non-numeric columns from the analysis, one can set `drop_non_numeric` to `TRUE` as follows. The same can be done for `fit_model` above:
+
+```{r}
+fit_models(df=sample_data,yname=c("height","weight"),
+           xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE)
+
+```
+
+
+## Extraction of Model Information
+
+
+To extract information about a given model, we can use `extract_model_info` as follows.
+
+```{r}
+
+extract_model_info(lm_model, "r2")
+
+```
+
+To extract the adjusted R squared:
+
+```{r}
+
+extract_model_info(lm_model, "adj_r2")
+
+```
+
+For the p value:
+
+```{r}
+
+extract_model_info(lm_model, "p_value")
+
+```
+
+To extract multiple attributes:
+
+```{r}
+
+extract_model_info(lm_model,c("p_value","response","call","predictors"))
+
+```
+
+This is not restricted to linear models but will work for most model types. See `help(extract_model_info)` to see currently supported model types.

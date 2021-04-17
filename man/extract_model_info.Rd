@@ -27,13 +27,14 @@ mean squared error(msq), degrees of freedom(df),p_value.
 }
 \examples{
 # perform analysis of variance
-aov_mod <- fit_model(iris, "Sepal.Length","Petal.Length + Species","aov")
+data("yields", package="manymodelr")
+aov_mod <- fit_model(yields, "weight","height + normal","aov")
 extract_model_info(aov_mod, "ssq")
 extract_model_info(aov_mod, c("ssq","predictors")) 
 # linear regression
-lm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
+lm_model <-fit_model(yields, "weight","height","lm")
 extract_model_info(lm_model,c("aic","bic"))
 ## glm
-glm_model <- fit_model(iris, "Sepal.Length","Petal.Length","lm")
+glm_model <- fit_model(yields, "weight","height","glm")
 extract_model_info(glm_model,"aic")
 }

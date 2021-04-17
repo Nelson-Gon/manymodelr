@@ -2,8 +2,11 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  correlations: correlations.html
   manymodelr_vignette: manymodelr_vignette.html
-last_built: 2021-02-07T03:22Z
+  misc: misc.html
+  modeling: modeling.html
+last_built: 2021-04-17T12:40Z
 urls:
   reference: https://nelson-gon.github.io/manymodelr//reference
   article: https://nelson-gon.github.io/manymodelr//articles

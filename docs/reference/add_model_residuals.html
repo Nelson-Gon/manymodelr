@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -92,7 +92,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/manymodelr_vignette.html">Usage</a>
+      <a href="../articles/modeling.html">Modeling with manymodelr</a>
+    </li>
+    <li>
+      <a href="../articles/correlations.html">Correlation analysis</a>
+    </li>
+    <li>
+      <a href="../articles/misc.html">Miscellaneous</a>
     </li>
     <li>
       <a href="../news/index.html">Changes</a>
@@ -149,17 +155,18 @@
     <p>A data.frame object with residuals added.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>iris1</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>
-<span class='va'>iris2</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>[</span><span class='fl'>51</span><span class='op'>:</span><span class='fl'>100</span>,<span class='op'>]</span>
-<span class='va'>lm_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fit_model.html'>fit_model</a></span><span class='op'>(</span><span class='va'>iris1</span>,<span class='st'>"Sepal.Length"</span>,<span class='st'>"Sepal.Width"</span>,<span class='st'>"lm"</span><span class='op'>)</span> 
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>add_model_residuals</span><span class='op'>(</span><span class='va'>lm_model</span>,<span class='va'>iris1</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species   residuals
-#&gt; 1          5.1         3.5          1.4         0.2  setosa  0.04428474
-#&gt; 2          4.9         3.0          1.4         0.2  setosa  0.18952960
-#&gt; 3          4.7         3.2          1.3         0.2  setosa -0.14856834
-#&gt; 4          4.6         3.1          1.5         0.2  setosa -0.17951937
-#&gt; 5          5.0         3.6          1.4         0.2  setosa -0.12476423
-#&gt; 6          5.4         3.9          1.7         0.4  setosa  0.06808885</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"yields"</span>, package<span class='op'>=</span><span class='st'>"manymodelr"</span><span class='op'>)</span>
+<span class='va'>yields1</span> <span class='op'>&lt;-</span> <span class='va'>yields</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>
+<span class='va'>yields2</span> <span class='op'>&lt;-</span> <span class='va'>yields</span><span class='op'>[</span><span class='fl'>51</span><span class='op'>:</span><span class='fl'>100</span>,<span class='op'>]</span>
+<span class='va'>lm_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fit_model.html'>fit_model</a></span><span class='op'>(</span><span class='va'>yields1</span>,<span class='st'>"weight"</span>,<span class='st'>"height"</span>,<span class='st'>"lm"</span><span class='op'>)</span> 
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>add_model_residuals</span><span class='op'>(</span><span class='va'>lm_model</span>, <span class='va'>yields2</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    normal    height     weight    yield   residuals
+#&gt; 51    Yes 0.5876683 0.53966096 524.0298 -0.19588072
+#&gt; 52     No 0.1937264 0.46185381 516.9982  0.03232510
+#&gt; 53    Yes 0.3642414 0.07183639 527.1234  0.13322172
+#&gt; 54     No 0.6026853 0.21721278 536.8593  0.23862377
+#&gt; 55    Yes 0.5081495 0.16057305 516.6769  0.17555630
+#&gt; 56     No 0.5740309 0.53528679 518.9117 -0.08703343</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -13,5 +13,5 @@ drop_non_numeric(df)
 Drops non numeric columns from a data.frame object
 }
 \examples{
-head(drop_non_numeric(iris))
+ drop_non_numeric(data.frame(A=1:2, B=c("A", "B")))
 }

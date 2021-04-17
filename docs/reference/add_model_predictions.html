@@ -75,7 +75,7 @@ A dplyr compatible way to add predictions to a data set." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -95,7 +95,13 @@ A dplyr compatible way to add predictions to a data set." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/manymodelr_vignette.html">Usage</a>
+      <a href="../articles/modeling.html">Modeling with manymodelr</a>
+    </li>
+    <li>
+      <a href="../articles/correlations.html">Correlation analysis</a>
+    </li>
+    <li>
+      <a href="../articles/misc.html">Miscellaneous</a>
     </li>
     <li>
       <a href="../news/index.html">Changes</a>
@@ -161,17 +167,18 @@ A dplyr compatible way to add predictions to a data set.</p>
     <div class='dont-index'><p><code><a href='fit_model.html'>fit_model</a></code> <code><a href='extract_model_info.html'>extract_model_info</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>iris1</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>
-<span class='va'>iris2</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>[</span><span class='fl'>51</span><span class='op'>:</span><span class='fl'>100</span>,<span class='op'>]</span>
-<span class='va'>lm_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fit_model.html'>fit_model</a></span><span class='op'>(</span><span class='va'>iris1</span>,<span class='st'>"Sepal.Length"</span>,<span class='st'>"Sepal.Width"</span>,<span class='st'>"lm"</span><span class='op'>)</span> 
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>add_model_predictions</span><span class='op'>(</span><span class='va'>lm_model</span>,<span class='va'>iris1</span>,<span class='va'>iris2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
-#&gt; 1          5.1         3.5          1.4         0.2  setosa  4.848568
-#&gt; 2          4.9         3.0          1.4         0.2  setosa  4.848568
-#&gt; 3          4.7         3.2          1.3         0.2  setosa  4.779519
-#&gt; 4          4.6         3.1          1.5         0.2  setosa  4.227128
-#&gt; 5          5.0         3.6          1.4         0.2  setosa  4.572372
-#&gt; 6          5.4         3.9          1.7         0.4  setosa  4.572372</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"yields"</span>, package<span class='op'>=</span><span class='st'>"manymodelr"</span><span class='op'>)</span>
+<span class='va'>yields1</span> <span class='op'>&lt;-</span> <span class='va'>yields</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>
+<span class='va'>yields2</span><span class='op'>&lt;-</span> <span class='va'>yields</span><span class='op'>[</span><span class='fl'>51</span><span class='op'>:</span><span class='fl'>100</span>,<span class='op'>]</span>
+<span class='va'>lm_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fit_model.html'>fit_model</a></span><span class='op'>(</span><span class='va'>yields1</span>,<span class='st'>"weight"</span>,<span class='st'>"height"</span>,<span class='st'>"lm"</span><span class='op'>)</span> 
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>add_model_predictions</span><span class='op'>(</span><span class='va'>lm_model</span>,<span class='va'>yields1</span>,<span class='va'>yields2</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   normal    height     weight    yield predicted
+#&gt; 1    Yes 0.2849090 0.13442312 520.2837 0.2424740
+#&gt; 2     No 0.2427826 0.37484971 504.4754 0.3567557
+#&gt; 3    Yes 0.2579432 0.47134828 515.6463 0.3072897
+#&gt; 4     No 0.5175604 0.50143592 522.2247 0.2381176
+#&gt; 5    Yes 0.4026023 0.47171755 502.6406 0.2655422
+#&gt; 6     No 0.9789886 0.04191937 509.4663 0.2464302</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

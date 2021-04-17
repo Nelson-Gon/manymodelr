@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -92,7 +92,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/manymodelr_vignette.html">Usage</a>
+      <a href="../articles/modeling.html">Modeling with manymodelr</a>
+    </li>
+    <li>
+      <a href="../articles/correlations.html">Correlation analysis</a>
+    </li>
+    <li>
+      <a href="../articles/misc.html">Miscellaneous</a>
     </li>
     <li>
       <a href="../news/index.html">Changes</a>
@@ -155,11 +161,13 @@
     </tr>
     <tr>
       <th>modeltype</th>
-      <td><p>A character specifying the model type e.g lm for linear model</p></td>
+      <td><p>A character specifying the model type e.g lm for 
+linear model</p></td>
     </tr>
     <tr>
       <th>drop_non_numeric</th>
-      <td><p>Should non numeric columns be dropped? Defaults to FALSE</p></td>
+      <td><p>Should non numeric columns be dropped? 
+Defaults to FALSE</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -172,76 +180,78 @@
     <p>A list of model objects that can be used later.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>fit_models</span><span class='op'>(</span>df<span class='op'>=</span><span class='va'>iris</span>,yname<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Sepal.Length"</span>,<span class='st'>"Sepal.Width"</span><span class='op'>)</span>,xname<span class='op'>=</span><span class='st'>"Petal.Length + Petal.Width"</span>,modeltype<span class='op'>=</span><span class='st'>"lm"</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"yields"</span>, package<span class='op'>=</span><span class='st'>"manymodelr"</span><span class='op'>)</span>
+<span class='fu'>fit_models</span><span class='op'>(</span>df<span class='op'>=</span><span class='va'>yields</span>,yname<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"height"</span>,<span class='st'>"yield"</span><span class='op'>)</span>,xname<span class='op'>=</span><span class='st'>"weight"</span>,modeltype<span class='op'>=</span><span class='st'>"lm"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; [[1]][[1]]
 #&gt; 
 #&gt; Call:
-#&gt; lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = use_df)
+#&gt; lm(formula = height ~ weight, data = use_df)
 #&gt; 
 #&gt; Coefficients:
-#&gt;  (Intercept)  Petal.Length   Petal.Width  
-#&gt;       4.1906        0.5418       -0.3196  
+#&gt; (Intercept)       weight  
+#&gt;      0.5661      -0.2174  
 #&gt; 
 #&gt; 
 #&gt; [[1]][[2]]
 #&gt; 
 #&gt; Call:
-#&gt; lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = use_df)
+#&gt; lm(formula = yield ~ weight, data = use_df)
 #&gt; 
 #&gt; Coefficients:
-#&gt;  (Intercept)  Petal.Length   Petal.Width  
-#&gt;       3.5870       -0.2571        0.3640  
+#&gt; (Intercept)       weight  
+#&gt;     519.142        1.793  
 #&gt; 
 #&gt; 
 #&gt; </div><div class='input'><span class='co'>#many model types</span>
-<span class='fu'>fit_models</span><span class='op'>(</span>df<span class='op'>=</span><span class='va'>iris</span>,yname<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Sepal.Length"</span>,<span class='st'>"Sepal.Width"</span><span class='op'>)</span>, xname<span class='op'>=</span><span class='st'>"Petal.Length + Petal.Width"</span>,modeltype<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"lm"</span>,<span class='st'>"glm"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>fit_models</span><span class='op'>(</span>df<span class='op'>=</span><span class='va'>yields</span>,yname<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"height"</span>,<span class='st'>"yield"</span><span class='op'>)</span>,xname<span class='op'>=</span><span class='st'>"weight"</span>,
+modeltype<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"lm"</span>, <span class='st'>"glm"</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; [[1]][[1]]
 #&gt; 
 #&gt; Call:
-#&gt; lm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = use_df)
+#&gt; lm(formula = height ~ weight, data = use_df)
 #&gt; 
 #&gt; Coefficients:
-#&gt;  (Intercept)  Petal.Length   Petal.Width  
-#&gt;       4.1906        0.5418       -0.3196  
+#&gt; (Intercept)       weight  
+#&gt;      0.5661      -0.2174  
 #&gt; 
 #&gt; 
 #&gt; [[1]][[2]]
 #&gt; 
 #&gt; Call:
-#&gt; lm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = use_df)
+#&gt; lm(formula = yield ~ weight, data = use_df)
 #&gt; 
 #&gt; Coefficients:
-#&gt;  (Intercept)  Petal.Length   Petal.Width  
-#&gt;       3.5870       -0.2571        0.3640  
+#&gt; (Intercept)       weight  
+#&gt;     519.142        1.793  
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; [[2]]
 #&gt; [[2]][[1]]
 #&gt; 
-#&gt; Call:  glm(formula = Sepal.Length ~ Petal.Length + Petal.Width, data = use_df)
+#&gt; Call:  glm(formula = height ~ weight, data = use_df)
 #&gt; 
 #&gt; Coefficients:
-#&gt;  (Intercept)  Petal.Length   Petal.Width  
-#&gt;       4.1906        0.5418       -0.3196  
+#&gt; (Intercept)       weight  
+#&gt;      0.5661      -0.2174  
 #&gt; 
-#&gt; Degrees of Freedom: 149 Total (i.e. Null);  147 Residual
-#&gt; Null Deviance:	    102.2 
-#&gt; Residual Deviance: 23.88 	AIC: 158
+#&gt; Degrees of Freedom: 999 Total (i.e. Null);  998 Residual
+#&gt; Null Deviance:	    45.82 
+#&gt; Residual Deviance: 44.37 	AIC: -271.4
 #&gt; 
 #&gt; [[2]][[2]]
 #&gt; 
-#&gt; Call:  glm(formula = Sepal.Width ~ Petal.Length + Petal.Width, data = use_df)
+#&gt; Call:  glm(formula = yield ~ weight, data = use_df)
 #&gt; 
 #&gt; Coefficients:
-#&gt;  (Intercept)  Petal.Length   Petal.Width  
-#&gt;       3.5870       -0.2571        0.3640  
+#&gt; (Intercept)       weight  
+#&gt;     519.142        1.793  
 #&gt; 
-#&gt; Degrees of Freedom: 149 Total (i.e. Null);  147 Residual
-#&gt; Null Deviance:	    28.31 
-#&gt; Residual Deviance: 22.27 	AIC: 147.6
+#&gt; Degrees of Freedom: 999 Total (i.e. Null);  998 Residual
+#&gt; Null Deviance:	    91170 
+#&gt; Residual Deviance: 91080 	AIC: 7356
 #&gt; 
 #&gt; </div></pre>
   </div>

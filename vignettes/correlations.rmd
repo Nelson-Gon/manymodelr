@@ -1,0 +1,122 @@
+---
+date: "`r Sys.Date()`"
+title: "Correlation Analysis with manymodelr"
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{ "Variable Correlations with manymolder"}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
+[![Codecov test coverage](https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg)](https://doi.org/10.5281/zenodo.3891106)
+[![Build Status](https://travis-ci.com/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.com/Nelson-Gon/manymodelr)
+[![R CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg)](https://github.com/Nelson-Gon/manymodelr)
+![test-coverage](https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg)
+[![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/mde)](https://CRAN.R-project.org/package=mde)
+[![Downloads](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
+[![TotalDownloads](https://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow)](https://cran.r-project.org/package=manymodelr) 
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html) 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Nelson-Gon/manymodelr/graphs/commit-activity) 
+[![Project Status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/) 
+[![GitHub last commit](https://img.shields.io/github/last-commit/Nelson-Gon/manymodelr.svg)](https://github.com/Nelson-Gon/manymodelr/commits/master)
+[![GitHub issues](https://img.shields.io/github/issues/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues/)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues?q=is%3Aissue+is%3Aclosed)
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/Nelson-Gon/manymodelr.svg)](https://isitmaintained.com/project/Nelson-Gon/manymodelr "Average time to resolve an issue")
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
+## Correlations 
+
+
+- `get_var_corr`
+
+As can probably(hopefully) be guessed from the name, this provides a convenient way to get variable correlations. It enables one to get correlation between one variable and all other variables in the data set.
+
+**Previously, one would set `get_all` to `TRUE` if they wanted to get correlations between all variables. This argument has been dropped in favor of simply supplying an optional `other_vars` vector if one does not want to get all correlations.** 
+
+
+
+```{r}
+library(manymodelr)
+# getall correlations
+
+# default pearson
+
+head( corrs <- get_var_corr(mtcars,comparison_var="mpg") )
+
+
+```
+
+**Previously, one would also set `drop_columns` to `TRUE` if they wanted to drop factor columns.** Now, a user simply provides a character vector specifying which column types(classes) should be dropped. It defaults to `c("character","factor")`.
+
+```{r}
+data("yields", package="manymodelr")
+# purely demonstrative
+get_var_corr(yields,"height",other_vars="weight",
+             drop_columns=c("factor","character"),method="spearman",
+             exact=FALSE)
+
+
+```
+
+
+Similarly, `get_var_corr_` (note the underscore at the end) provides  a convenient way to get combination-wise correlations.
+
+```{r}
+
+head(get_var_corr_(yields),6)
+
+```
+
+To use only a subset of the data, we can use provide a list of columns to `subset_cols`. By default, the first value(vector) in the list is mapped to `comparison_var` and the other to `other_Var`. The list is therefore of length 2.
+
+```{r}
+
+head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),
+                   method="spearman",exact=FALSE))
+
+```
+
+
+- `plot_corr`
+
+Obtaining correlations would mostly likely benefit from some form of visualization. `plot_corr` aims to achieve just that. There are currently two plot styles, `squares` and `circles`. `circles` has a `shape` argument that can allow for more flexibility. It should be noted that the correlation matrix supplied to this function is an object produced by `get_var_corr_`.
+
+
+
+To modify the plot a bit, we can choose to switch the x and y values as shown below.
+
+```{r}
+
+
+plot_corr(mtcars,show_which = "corr",
+          round_which = "correlation",decimals = 2,x="other_var",  y="comparison_var",plot_style = "squares"
+          ,width = 1.1,custom_cols = c("green","blue","red"),colour_by = "correlation")
+
+```
+
+
+To show significance of the results instead of the correlations themselves, we can set `show_which` to "signif"  as shown below. By default, significance is set to 0.05. You can override this by supplying a different `signif_cutoff`.
+
+```{r}
+# color by p value
+# change custom colors by supplying custom_cols
+# significance is default 
+set.seed(233)
+plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_which = "signif", colour_by = "p.value", sample(colours(),3))
+
+```
+
+
+
+To explore more options, please take a look at the documentation.

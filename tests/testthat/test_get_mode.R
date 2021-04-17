@@ -2,7 +2,7 @@ library(manymodelr)
 test_that(desc = "expect get_mode error",
                     code={
                       skip_on_oldrel()
-                expect_error(get_mode(iris$Species),
+                expect_error(get_mode(yields$normal),
             "No implementation available for objects of class factor",
                       fixed=TRUE)
                     })
@@ -17,7 +17,7 @@ test_that(desc="test get_mode",
         expect_equal(get_mode(test_vec), 1)
         expect_equal(get_mode(test_chr),"Apples")
         
-expect_warning(get_mode(iris),"factor columns converted to character",fixed=TRUE)
+expect_warning(get_mode(yields),"factor columns converted to character",fixed=TRUE)
         
                     })
 

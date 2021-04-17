@@ -32,7 +32,7 @@ Defaults to FALSE}
 Fit and predict in a single function.
 }
 \examples{
-fit_model(iris,"Sepal.Length","Species","lm")
-fit_model(iris,"Sepal.Width",
-"Sepal.Length + Petal.Length + I(Petal.Width)**2","lm")
+data("yields", package="manymodelr")
+fit_model(yields,"height","weight","lm")
+fit_model(yields, "weight","height + I(yield)**2","lm")
 }

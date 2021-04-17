@@ -74,7 +74,7 @@ predictions to finally use. The models are built based on Max Kuhn's models in t
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -94,7 +94,13 @@ predictions to finally use. The models are built based on Max Kuhn's models in t
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/manymodelr_vignette.html">Usage</a>
+      <a href="../articles/modeling.html">Modeling with manymodelr</a>
+    </li>
+    <li>
+      <a href="../articles/correlations.html">Correlation analysis</a>
+    </li>
+    <li>
+      <a href="../articles/misc.html">Miscellaneous</a>
     </li>
     <li>
       <a href="../news/index.html">Changes</a>
@@ -196,12 +202,13 @@ make an informed choice of the best models</p>
 <p>Kuhn (2008), "Building Predictive Models in R Using the caret" (http://www.jstatsoft.org/article/view/v028i05/v28i05.pold_data)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>train_set</span><span class='op'>&lt;-</span><span class='fu'>createDataPartition</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span>,p<span class='op'>=</span><span class='fl'>0.8</span>,list<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='va'>valid_set</span><span class='op'>&lt;-</span><span class='va'>iris</span><span class='op'>[</span><span class='op'>-</span><span class='va'>train_set</span>,<span class='op'>]</span>
-<span class='va'>train_set</span><span class='op'>&lt;-</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>train_set</span>,<span class='op'>]</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"yields"</span>, package<span class='op'>=</span><span class='st'>"manymodelr"</span><span class='op'>)</span>
+<span class='va'>train_set</span><span class='op'>&lt;-</span><span class='fu'>createDataPartition</span><span class='op'>(</span><span class='va'>yields</span><span class='op'>$</span><span class='va'>normal</span>,p<span class='op'>=</span><span class='fl'>0.8</span>,list<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>valid_set</span><span class='op'>&lt;-</span><span class='va'>yields</span><span class='op'>[</span><span class='op'>-</span><span class='va'>train_set</span>,<span class='op'>]</span>
+<span class='va'>train_set</span><span class='op'>&lt;-</span><span class='va'>yields</span><span class='op'>[</span><span class='va'>train_set</span>,<span class='op'>]</span>
 <span class='va'>ctrl</span><span class='op'>&lt;-</span><span class='fu'>trainControl</span><span class='op'>(</span>method<span class='op'>=</span><span class='st'>"cv"</span>,number<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>233</span><span class='op'>)</span>
-<span class='va'>m</span><span class='op'>&lt;-</span><span class='fu'>multi_model_1</span><span class='op'>(</span><span class='va'>train_set</span>,<span class='st'>"Species"</span>,<span class='st'>"."</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"knn"</span>,<span class='st'>"rpart"</span><span class='op'>)</span>,
+<span class='va'>m</span><span class='op'>&lt;-</span><span class='fu'>multi_model_1</span><span class='op'>(</span><span class='va'>train_set</span>,<span class='st'>"normal"</span>,<span class='st'>"."</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"knn"</span>,<span class='st'>"rpart"</span><span class='op'>)</span>,
 <span class='st'>"Accuracy"</span>,<span class='va'>ctrl</span>,new_data <span class='op'>=</span><span class='va'>valid_set</span><span class='op'>)</span>
 <span class='va'>m</span><span class='op'>$</span><span class='va'>Predictions</span>
 </div><div class='output co'>#&gt; NULL</div><div class='input'><span class='va'>m</span><span class='op'>$</span><span class='va'>Metrics</span>

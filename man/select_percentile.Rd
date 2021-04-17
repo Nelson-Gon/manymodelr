@@ -26,5 +26,6 @@ Returns mean values if the position of the percentile is  whole number.
 Values are sorted in ascending order. You can change this by setting descend to TRUE.
 }
 \examples{
-select_percentile(iris,5)
+data("yields", package="manymodelr")
+select_percentile(yields,5)
 }

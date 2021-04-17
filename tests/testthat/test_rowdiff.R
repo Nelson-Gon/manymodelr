@@ -16,10 +16,10 @@ test_that("Test rowdiff",
  # Replace NAs frrom calculation
 expect_equal(rowdiff(dummy_data, na.rm=TRUE,na_action = "value", value=0)[4,1],0)
 
-expect_error(rowdiff(iris,direction = "gibberish"),
+expect_error(rowdiff(yields,direction = "gibberish"),
              "Only forward and reverse are supported", fixed=TRUE)
 
-expect_equal(ncol(rowdiff(iris,exclude="factor")), 4)
+expect_equal(ncol(rowdiff(yields,exclude="factor")), 3)
 })
 
 

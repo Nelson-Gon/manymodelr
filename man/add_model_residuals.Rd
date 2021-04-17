@@ -18,8 +18,9 @@ A data.frame object with residuals added.
 A dplyr compatible convenience function to add residuals to a data set
 }
 \examples{
-iris1 <- iris[1:50,]
-iris2 <- iris[51:100,]
-lm_model <- fit_model(iris1,"Sepal.Length","Sepal.Width","lm") 
-head(add_model_residuals(lm_model,iris1))
+data("yields", package="manymodelr")
+yields1 <- yields[1:50,]
+yields2 <- yields[51:100,]
+lm_model <- fit_model(yields1,"weight","height","lm") 
+head(add_model_residuals(lm_model, yields2))
 }

@@ -39,8 +39,10 @@ This function returns the differences between rows depending on the user's choic
 }
 \examples{
 # Remove factor columns
-rowdiff(iris,exclude = "factor",direction = "reverse")
-rowdiff(iris[1:5,], exclude="factor", na.rm = TRUE, na_action = "get_mode",direction = "reverse")
+data("yields", package="manymodelr")
+rowdiff(yields,exclude = "factor",direction = "reverse")
+rowdiff(yields[1:5,], exclude="factor", na.rm = TRUE, 
+na_action = "get_mode",direction = "reverse")
 }
 \seealso{
 \code{\link{na_replace}}

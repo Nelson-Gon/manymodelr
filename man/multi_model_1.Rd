@@ -47,12 +47,13 @@ This function is meant to help in exploratory analysis to
 make an informed choice of the best models
 }
 \examples{
-train_set<-createDataPartition(iris$Species,p=0.8,list=FALSE)
-valid_set<-iris[-train_set,]
-train_set<-iris[train_set,]
+data("yields", package="manymodelr")
+train_set<-createDataPartition(yields$normal,p=0.8,list=FALSE)
+valid_set<-yields[-train_set,]
+train_set<-yields[train_set,]
 ctrl<-trainControl(method="cv",number=5)
 set.seed(233)
-m<-multi_model_1(train_set,"Species",".",c("knn","rpart"),
+m<-multi_model_1(train_set,"normal",".",c("knn","rpart"),
 "Accuracy",ctrl,new_data =valid_set)
 m$Predictions
 m$Metrics

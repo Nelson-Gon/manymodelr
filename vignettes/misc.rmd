@@ -1,0 +1,96 @@
+---
+date: "`r Sys.Date()`"
+title: "Extra functions in manymodelr"
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{ "Extra functions in manymodelr"}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
+[![Codecov test coverage](https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg)](https://doi.org/10.5281/zenodo.3891106)
+[![Build Status](https://travis-ci.com/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.com/Nelson-Gon/manymodelr)
+[![R CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg)](https://github.com/Nelson-Gon/manymodelr)
+![test-coverage](https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg)
+[![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/mde)](https://CRAN.R-project.org/package=mde)
+[![Downloads](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
+[![TotalDownloads](https://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow)](https://cran.r-project.org/package=manymodelr) 
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html) 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Nelson-Gon/manymodelr/graphs/commit-activity) 
+[![Project Status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/) 
+[![GitHub last commit](https://img.shields.io/github/last-commit/Nelson-Gon/manymodelr.svg)](https://github.com/Nelson-Gon/manymodelr/commits/master)
+[![GitHub issues](https://img.shields.io/github/issues/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues/)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues?q=is%3Aissue+is%3Aclosed)
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/Nelson-Gon/manymodelr.svg)](https://isitmaintained.com/project/Nelson-Gon/manymodelr "Average time to resolve an issue")
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
+
+
+```{r}
+library(manymodelr)
+```
+
+
+- **`agg_by_group`**
+
+As can be guessed from the name, this function provides an easy way to manipulate grouped data. We can for instance find the number of observations in the iris data set. The formula takes the form `x~y` where `y` is the grouping variable(in this case `normal`). One can supply a formula as shown next. 
+
+```{r}
+# Load the yields dataset
+data("yields")
+head(agg_by_group(yields,.~normal,length))
+
+```
+
+```{r}
+
+head(agg_by_group(mtcars,cyl~hp+vs,sum))
+
+```
+
+
+- `rowdiff`
+
+ This is useful when trying to find differences between rows. The `direction` argument specifies how the subtractions are made while the `exclude` argument is used to specify classes that should be removed before calculations are made.  Using `direction="reverse"` performs a subtraction akin to `x-(x-1)` where `x` is the row number. 
+
+```{r}
+
+head(rowdiff(yields,exclude = "factor",direction = "reverse"))
+
+```
+
+
+- `na_replace`
+
+This allows the user to conveniently replace missing values. Current options are `ffill` which replaces with the next non-missing value, `samples` that samples the data and does replacement, `value` that allows one to fill `NA`s with a specific value. Other common mathematical methods like `min`, `max`,`get_mode`, `sd`, etc are no longer supported. They are now available with more flexibility in standalone [manymodelr](https://github.com/Nelson-Gon/manymodelr)
+
+```{r}
+
+head(na_replace(airquality, how="value", value="Missing"),8)
+
+```
+
+- `na_replace_grouped`
+
+This provides a convenient way to replace values by group.
+```{r}
+test_df <- data.frame(A=c(NA,1,2,3), B=c(1,5,6,NA),groups=c("A","A","B","B"))
+# Replace NAs by group
+# replace with the next non NA by group.
+na_replace_grouped(df=test_df,group_by_cols = "groups",how="ffill")
+
+```
+
+The use of `mean`,`sd`,etc is no longer supported. Use [mde](https://github.com/Nelson-Gon/mde) instead which is focused on missingness. 
+

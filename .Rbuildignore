@@ -21,3 +21,4 @@ _config.yml
 ^pkgdown$
 README_files/
 ^CRAN-RELEASE$
+^data-raw$

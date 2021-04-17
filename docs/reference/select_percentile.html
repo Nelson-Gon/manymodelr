@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -92,7 +92,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/manymodelr_vignette.html">Usage</a>
+      <a href="../articles/modeling.html">Modeling with manymodelr</a>
+    </li>
+    <li>
+      <a href="../articles/correlations.html">Correlation analysis</a>
+    </li>
+    <li>
+      <a href="../articles/misc.html">Miscellaneous</a>
     </li>
     <li>
       <a href="../news/index.html">Changes</a>
@@ -159,9 +165,10 @@ Returns mean values if the position of the percentile is  whole number.
 Values are sorted in ascending order. You can change this by setting descend to TRUE.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>select_percentile</span><span class='op'>(</span><span class='va'>iris</span>,<span class='fl'>5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] ### Ordered by Sepal.Length ###</div><div class='output co'>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#&gt; 14          4.3           3          1.1         0.1  setosa</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"yields"</span>, package<span class='op'>=</span><span class='st'>"manymodelr"</span><span class='op'>)</span>
+<span class='fu'>select_percentile</span><span class='op'>(</span><span class='va'>yields</span>,<span class='fl'>5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] ### Ordered by height ###</div><div class='output co'>#&gt;    normal    height    weight    yield
+#&gt; 85    Yes -0.151028 0.3277021 521.8901</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

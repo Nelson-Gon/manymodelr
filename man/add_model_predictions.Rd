@@ -22,10 +22,11 @@ Add predictions to the data set.
 A dplyr compatible way to add predictions to a data set.
 }
 \examples{
-iris1 <- iris[1:50,]
-iris2 <- iris[51:100,]
-lm_model <- fit_model(iris1,"Sepal.Length","Sepal.Width","lm") 
-head(add_model_predictions(lm_model,iris1,iris2))
+data("yields", package="manymodelr")
+yields1 <- yields[1:50,]
+yields2<- yields[51:100,]
+lm_model <- fit_model(yields1,"weight","height","lm") 
+head(add_model_predictions(lm_model,yields1,yields2))
 }
 \seealso{
 \code{\link{fit_model}} \code{\link{extract_model_info}}

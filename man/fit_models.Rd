@@ -35,9 +35,9 @@ A list of model objects that can be used later.
 Fit several models with different response variables
 }
 \examples{
-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"),
-xname="Petal.Length + Petal.Width",modeltype="lm")
+data("yields", package="manymodelr")
+fit_models(df=yields,yname=c("height","yield"),xname="weight",modeltype="lm")
 #many model types
-fit_models(df=iris,yname=c("Sepal.Length","Sepal.Width"), 
-xname="Petal.Length + Petal.Width",modeltype=c("lm","glm"))
+fit_models(df=yields,yname=c("height","yield"),xname="weight",
+modeltype=c("lm", "glm"))
 }

@@ -56,6 +56,7 @@ Once the package has been successfully installed, we can then proceed by loading
 ```{r}
 
 library(manymodelr)
+data("yields", package="manymodelr")
 
 ```
 
@@ -76,25 +77,14 @@ types with one function. An example follows next.
 
 For purposes of this report, we create a simple dataset to use.
 
-```{r}
-set.seed(520)
-# Create a simple dataset with a binary target
-# Here normal is a fictional target where we assume that it meets 
-# some criterion means 
-sample_data <- data.frame(normal = as.factor(rep(c("Yes", "No"), 500)), 
-                          height=rnorm(100, mean=0.5, sd=0.2), 
-                          weight=runif(100,0, 0.6),
-                          yield = rnorm(100, mean =520, sd = 10))
 
-head(sample_data)
-```
 
 
 ```{r}
 set.seed(520)
-train_set<-createDataPartition(sample_data$normal,p=0.6,list=FALSE)
-valid_set<-sample_data[-train_set,]
-train_set<-sample_data[train_set,]
+train_set<-createDataPartition(yields$normal,p=0.6,list=FALSE)
+valid_set<-yields[-train_set,]
+train_set<-yields[train_set,]
 ctrl<-trainControl(method="cv",number=5)
 m<-multi_model_1(train_set,"normal",".",c("knn","rpart"), 
                  "Accuracy",ctrl,new_data =valid_set)
@@ -159,7 +149,7 @@ This is similar to `fit_model` with the ability to fit many models with many pre
 
 ```{r}
 
-models<-fit_models(df=sample_data,yname=c("height", "weight"),xname="yield",
+models<-fit_models(df=yields,yname=c("height", "weight"),xname="yield",
                    modeltype="glm") 
 
 ```
@@ -170,8 +160,8 @@ One can then use these models as one may wish. To add residuals from these model
 ```{r}
 
 
-res_residuals <- lapply(models[[1]], add_model_residuals,sample_data)
-res_predictions <- lapply(models[[1]], add_model_predictions, sample_data, sample_data)
+res_residuals <- lapply(models[[1]], add_model_residuals,yields)
+res_predictions <- lapply(models[[1]], add_model_predictions, yields, yields)
 # Get height predictions for the model height ~ yield 
 head(res_predictions[[1]])
 
@@ -181,7 +171,7 @@ head(res_predictions[[1]])
 If one would like to drop non-numeric columns from the analysis, one can set `drop_non_numeric` to `TRUE` as follows. The same can be done for `fit_model` above:
 
 ```{r}
-fit_models(df=sample_data,yname=c("height","weight"),
+fit_models(df=yields,yname=c("height","weight"),
            xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE)
 
 ```
@@ -254,7 +244,7 @@ head( corrs <- get_var_corr(mtcars,comparison_var="mpg") )
 ```{r}
 
 # purely demonstrative
-get_var_corr(sample_data,"height",other_vars="weight",
+get_var_corr(yields,"height",other_vars="weight",
              drop_columns=c("factor","character"),method="spearman",
              exact=FALSE)
 
@@ -266,7 +256,7 @@ Similarly, `get_var_corr_` (note the underscore at the end) provides  a convenie
 
 ```{r}
 
-head(get_var_corr_(sample_data),6)
+head(get_var_corr_(yields),6)
 
 ```
 
@@ -323,7 +313,7 @@ As can be guessed from the name, this function provides an easy way to manipulat
 
 ```{r}
 
-head(agg_by_group(sample_data,.~normal,length))
+head(agg_by_group(yields,.~normal,length))
 
 ```
 
@@ -340,7 +330,7 @@ head(agg_by_group(mtcars,cyl~hp+vs,sum))
 
 ```{r}
 
-head(rowdiff(sample_data,exclude = "factor",direction = "reverse"))
+head(rowdiff(yields,exclude = "factor",direction = "reverse"))
 
 ```
 

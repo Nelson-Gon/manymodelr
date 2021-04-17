@@ -6,7 +6,7 @@ test_that(desc="test get_data_Stats",
     test_dummy_data <- get_stats(dummy_data,max)
     final_res <- unname(test_dummy_data)[1]
    
- expect_warning(get_stats(iris,max,exclude = "factor"),"Columns with classes in exclude have been discarded",fixed=TRUE)
+ expect_warning(get_stats(yields,max,exclude = "factor"),"Columns with classes in exclude have been discarded",fixed=TRUE)
  
  expect_error(get_stats(dummy_data),"Both df and func must be supplied",fixed=TRUE)
 
