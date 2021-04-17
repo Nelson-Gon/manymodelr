@@ -464,7 +464,7 @@ To explore more options, please take a look at the documentation.
 
 As can be guessed from the name, this function provides an easy way to
 manipulate grouped data. We can for instance find the number of
-observations in the iris data set. The formula takes the form `x~y`
+observations in the yields data set. The formula takes the form `x~y`
 where `y` is the grouping variable(in this case `normal`). One can
 supply a formula as shown next.
 
