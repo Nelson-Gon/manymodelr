@@ -1,6 +1,6 @@
 manymodelr: Build and Tune Several Models
 ================
-2021-04-17
+2021-05-01
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Codecov test
@@ -12,7 +12,7 @@ Status](https://travis-ci.com/Nelson-Gon/manymodelr.png?branch=master)](https://
 CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg)](https://github.com/Nelson-Gon/manymodelr)
 ![test-coverage](https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg)
 [![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/mde)](https://CRAN.R-project.org/package=mde)
+[![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/manymodelr)](https://CRAN.R-project.org/package=manymodelr)
 [![Downloads](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![TotalDownloads](https://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow)](https://cran.r-project.org/package=manymodelr)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
@@ -381,7 +381,7 @@ get_var_corr(yields,"height",other_vars="weight",
              drop_columns=c("factor","character"),method="spearman",
              exact=FALSE)
 #> Warning in get_var_corr.data.frame(yields, "height", other_vars = "weight", :
-#> Columns with classes in drop_columns have been discarded. Youcan disable this
+#> Columns with classes in drop_columns have been discarded. You can disable this
 #> yourself by setting drop_columns to NULL.
 #>   comparison_var other_var      p.value correlation
 #> 1         height    weight 4.204642e-07  -0.1591719
