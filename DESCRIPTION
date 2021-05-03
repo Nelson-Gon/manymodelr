@@ -33,3 +33,4 @@ Suggests:
     covr, 
     markdown 
 VignetteBuilder: knitr
+LazyData: True
