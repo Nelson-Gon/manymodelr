@@ -33,8 +33,6 @@ knitr::opts_chunk$set(
 [![GitHub last commit](https://img.shields.io/github/last-commit/Nelson-Gon/manymodelr.svg)](https://github.com/Nelson-Gon/manymodelr/commits/master)
 [![GitHub issues](https://img.shields.io/github/issues/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues/)
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues?q=is%3Aissue+is%3Aclosed)
-[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/Nelson-Gon/manymodelr.svg)](https://isitmaintained.com/project/Nelson-Gon/manymodelr "Average time to resolve an issue")
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 
 
 ```{r}
@@ -73,7 +71,7 @@ head(rowdiff(yields,exclude = "factor",direction = "reverse"))
 
 - `na_replace`
 
-This allows the user to conveniently replace missing values. Current options are `ffill` which replaces with the next non-missing value, `samples` that samples the data and does replacement, `value` that allows one to fill `NA`s with a specific value. Other common mathematical methods like `min`, `max`,`get_mode`, `sd`, etc are no longer supported. They are now available with more flexibility in standalone [manymodelr](https://github.com/Nelson-Gon/manymodelr)
+This allows the user to conveniently replace missing values. Current options are `ffill` which replaces with the next non-missing value, `samples` that samples the data and does replacement, `value` that allows one to fill `NA`s with a specific value. Other common mathematical methods like `min`, `max`,`get_mode`, `sd`, etc are no longer supported. They are now available with more flexibility in standalone [mde](https://github.com/Nelson-Gon/mde)
 
 ```{r}
 

@@ -1,6 +1,6 @@
 manymodelr: Build and Tune Several Models
 ================
-2021-05-01
+2021-06-10
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Codecov test
@@ -25,8 +25,6 @@ commit](https://img.shields.io/github/last-commit/Nelson-Gon/manymodelr.svg)](ht
 issues](https://img.shields.io/github/issues/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues/)
 [![GitHub
 issues-closed](https://img.shields.io/github/issues-closed/Nelson-Gon/manymodelr.svg)](https://GitHub.com/Nelson-Gon/manymodelr/issues?q=is%3Aissue+is%3Aclosed)
-[![Average time to resolve an
-issue](https://isitmaintained.com/badge/resolution/Nelson-Gon/manymodelr.svg)](https://isitmaintained.com/project/Nelson-Gon/manymodelr "Average time to resolve an issue")
 [![PRs
 Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 
@@ -381,7 +379,7 @@ get_var_corr(yields,"height",other_vars="weight",
              drop_columns=c("factor","character"),method="spearman",
              exact=FALSE)
 #> Warning in get_var_corr.data.frame(yields, "height", other_vars = "weight", :
-#> Columns with classes in drop_columns have been discarded. You can disable this
+#> Columns with classes in drop_columns have been discarded. Youcan disable this
 #> yourself by setting drop_columns to NULL.
 #>   comparison_var other_var      p.value correlation
 #> 1         height    weight 4.204642e-07  -0.1591719
@@ -520,7 +518,7 @@ options are `ffill` which replaces with the next non-missing value,
 allows one to fill `NA`s with a specific value. Other common
 mathematical methods like `min`, `max`,`get_mode`, `sd`, etc are no
 longer supported. They are now available with more flexibility in
-standalone [manymodelr](https://github.com/Nelson-Gon/manymodelr)
+standalone [mde](https://github.com/Nelson-Gon/mde)
 
 ``` r
 
