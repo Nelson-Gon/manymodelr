@@ -16,7 +16,7 @@ License: GPL-2
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 Imports: 
-    dplyr (>= 1.1.27.1),
+    dplyr (>= 1.0.0),
     ggplot2 (>= 3.3.5),
     lme4 (>= 1.1.27.1)
 Depends:
