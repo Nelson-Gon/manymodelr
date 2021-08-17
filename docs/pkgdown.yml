@@ -1,4 +1,4 @@
-pandoc: 2.7.3
+pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
@@ -6,7 +6,7 @@ articles:
   manymodelr_vignette: manymodelr_vignette.html
   misc: misc.html
   modeling: modeling.html
-last_built: 2021-06-10T07:54Z
+last_built: 2021-08-17T07:37Z
 urls:
   reference: https://nelson-gon.github.io/manymodelr//reference
   article: https://nelson-gon.github.io/manymodelr//articles

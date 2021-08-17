@@ -7,7 +7,6 @@ output: htlm_document
 ---
 # manymodelr 0.3.6
 
-* `LazyData` is no longer set to `TRUE` in the Description file. 
 
 * Updated all examples to use the new dataset, `yields`.
 
