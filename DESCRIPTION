@@ -16,14 +16,14 @@ License: GPL-2
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 Imports: 
-    dplyr(>= 1.0.0),
-    ggplot2(>= 3.2.0),
-    lme4(>= 1.1.27.1)
+    dplyr (>= 1.1.27.1),
+    ggplot2 (>= 3.3.5),
+    lme4 (>= 1.1.27.1)
 Depends:
-    R(>= 3.6.0),
-    caret(>= 6.0-81),
-    Metrics(>= 0.1.4),
-    e1071(>= 1.7-0.1)
+    R (>= 3.6.0),
+    caret (>= 6.0.88),
+    Metrics (>= 0.1.4),
+    e1071 (>= 1.7.8)
 URL: https://github.com/Nelson-Gon/manymodelr
 BugReports: https://github.com/Nelson-Gon/manymodelr/issues
 Suggests: 
