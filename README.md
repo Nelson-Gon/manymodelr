@@ -1,13 +1,11 @@
 manymodelr: Build and Tune Several Models
 ================
-2021-06-10
+2021-09-19
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
 [![Codecov test
 coverage](https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg)](https://doi.org/10.5281/zenodo.3891106)
-[![Build
-Status](https://travis-ci.com/Nelson-Gon/manymodelr.png?branch=master)](https://travis-ci.com/Nelson-Gon/manymodelr)
 [![R
 CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg)](https://github.com/Nelson-Gon/manymodelr)
 ![test-coverage](https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg)
@@ -34,7 +32,6 @@ learning tasks using `manymodelr`.
 ## Installation
 
 ``` r
-
 install.packages("manymodelr")
 ```
 
@@ -44,7 +41,6 @@ loading the package and exploring some of the key functions.
 **Loading the package**
 
 ``` r
-
 library(manymodelr)
 #> Loading required package: caret
 #> Loading required package: lattice
@@ -56,7 +52,6 @@ library(manymodelr)
 #> 
 #>     precision, recall
 #> Loading required package: e1071
-#> Warning: package 'e1071' was built under R version 4.0.4
 #> Welcome to manymodelr. This is manymodelr version 0.3.6.
 #>  Please file issues and feedback at https://www.github.com/Nelson-Gon/manymodelr/issues
 #> Turn this message off using 'suppressPackageStartupMessages(library(manymodelr))'
@@ -77,7 +72,7 @@ appropriate based on domain knowledge.
 With this in mind, let us look at how we can perform modeling tasks
 using `manymodelr`.
 
-  - **`multi_model_1`**
+-   **`multi_model_1`**
 
 This is one of the core functions of the package. `multi_model_1` aims
 to allow model fitting, prediction, and reporting with a single
@@ -101,7 +96,6 @@ The above returns a list containing metrics, predictions, and a model
 summary. These can be extracted as shown below.
 
 ``` r
-
 m$metric
 #> # A tibble: 1 x 2
 #>   knn_accuracy rpart_accuracy
@@ -110,7 +104,6 @@ m$metric
 ```
 
 ``` r
-
 head(m$predictions)
 #> # A tibble: 6 x 2
 #>   knn   rpart
@@ -123,7 +116,7 @@ head(m$predictions)
 #> 6 Yes   Yes
 ```
 
-  - **multi\_model\_2**
+-   **multi\_model\_2**
 
 This is similar to `multi_model_1` with one difference: it does not use
 metrics such as RMSE, accuracy and the like. This function is useful if
@@ -159,7 +152,6 @@ From the above, we see that `wt` alone may not be a great predictor for
 `disp` and `drat` are important too, then we add those to the model.
 
 ``` r
-
 multi_lin <- multi_model_2(mtcars[1:16, ], mtcars[17:32,],"mpg", "wt + disp + drat","lm")
 
 multi_lin[,c("predicted", "mpg")]
@@ -182,7 +174,7 @@ multi_lin[,c("predicted", "mpg")]
 #> Lincoln Continental  22.17872 10.4
 ```
 
-  - **`fit_model`**
+-   **`fit_model`**
 
 This function allows us to fit any kind of model without necessarily
 returning predictions.
@@ -199,13 +191,12 @@ lm_model
 #>      37.285       -5.344
 ```
 
-  - `fit_models`
+-   `fit_models`
 
 This is similar to `fit_model` with the ability to fit many models with
 many predictors at once. A simple linear model for instance:
 
 ``` r
-
 models<-fit_models(df=yields,yname=c("height", "weight"),xname="yield",
                    modeltype="glm") 
 ```
@@ -214,7 +205,6 @@ One can then use these models as one may wish. To add residuals from
 these models for example:
 
 ``` r
-
 
 res_residuals <- lapply(models[[1]], add_model_residuals,yields)
 res_predictions <- lapply(models[[1]], add_model_predictions, yields, yields)
@@ -290,7 +280,6 @@ To extract information about a given model, we can use
 `extract_model_info` as follows.
 
 ``` r
-
 extract_model_info(lm_model, "r2")
 #> [1] 0.7528328
 ```
@@ -298,7 +287,6 @@ extract_model_info(lm_model, "r2")
 To extract the adjusted R squared:
 
 ``` r
-
 extract_model_info(lm_model, "adj_r2")
 #> [1] 0.7445939
 ```
@@ -306,7 +294,6 @@ extract_model_info(lm_model, "adj_r2")
 For the p value:
 
 ``` r
-
 extract_model_info(lm_model, "p_value")
 #>  (Intercept)           wt 
 #> 8.241799e-19 1.293959e-10
@@ -315,7 +302,6 @@ extract_model_info(lm_model, "p_value")
 To extract multiple attributes:
 
 ``` r
-
 extract_model_info(lm_model,c("p_value","response","call","predictors"))
 #> $p_value
 #>  (Intercept)           wt 
@@ -337,7 +323,7 @@ types.
 
 ## Correlations
 
-  - `get_var_corr`
+-   `get_var_corr`
 
 As can probably(hopefully) be guessed from the name, this provides a
 convenient way to get variable correlations. It enables one to get
@@ -352,7 +338,6 @@ not want to get all correlations.**
 Sample usage:
 
 ``` r
-
 # getall correlations
 
 # default pearson
@@ -373,13 +358,12 @@ specifying which column types(classes) should be dropped. It defaults to
 `c("character","factor")`.
 
 ``` r
-
 # purely demonstrative
 get_var_corr(yields,"height",other_vars="weight",
              drop_columns=c("factor","character"),method="spearman",
              exact=FALSE)
 #> Warning in get_var_corr.data.frame(yields, "height", other_vars = "weight", :
-#> Columns with classes in drop_columns have been discarded. Youcan disable this
+#> Columns with classes in drop_columns have been discarded. You can disable this
 #> yourself by setting drop_columns to NULL.
 #>   comparison_var other_var      p.value correlation
 #> 1         height    weight 4.204642e-07  -0.1591719
@@ -389,7 +373,6 @@ Similarly, `get_var_corr_` (note the underscore at the end) provides a
 convenient way to get combination-wise correlations.
 
 ``` r
-
 head(get_var_corr_(yields),6)
 #> Warning in get_var_corr_.data.frame(yields): Columns with classes in
 #> drop_columns were dropped.
@@ -405,7 +388,6 @@ mapped to `comparison_var` and the other to `other_Var`. The list is
 therefore of length 2.
 
 ``` r
-
 head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),
                    method="spearman",exact=FALSE))
 #>   comparison_var other_var      p.value correlation
@@ -413,7 +395,7 @@ head(get_var_corr_(mtcars,subset_cols=list(c("mpg","vs"),c("disp","wt")),
 #> 5            mpg        wt 1.487595e-11  -0.8864220
 ```
 
-  - `plot_corr`
+-   `plot_corr`
 
 Obtaining correlations would mostly likely benefit from some form of
 visualization. `plot_corr` aims to achieve just that. There are
@@ -426,7 +408,6 @@ To modify the plot a bit, we can choose to switch the x and y values as
 shown below.
 
 ``` r
-
 
 plot_corr(mtcars,show_which = "corr",
           round_which = "correlation",decimals = 2,x="other_var",  y="comparison_var",plot_style = "squares"
@@ -458,7 +439,7 @@ To explore more options, please take a look at the documentation.
 
 ## Extra Functions
 
-  - **`agg_by_group`**
+-   **`agg_by_group`**
 
 As can be guessed from the name, this function provides an easy way to
 manipulate grouped data. We can for instance find the number of
@@ -467,7 +448,6 @@ where `y` is the grouping variable(in this case `normal`). One can
 supply a formula as shown next.
 
 ``` r
-
 head(agg_by_group(yields,.~normal,length))
 #> Grouped By[1]:   normal 
 #> 
@@ -477,7 +457,6 @@ head(agg_by_group(yields,.~normal,length))
 ```
 
 ``` r
-
 head(agg_by_group(mtcars,cyl~hp+vs,sum))
 #> Grouped By[2]:   hp vs 
 #> 
@@ -490,7 +469,7 @@ head(agg_by_group(mtcars,cyl~hp+vs,sum))
 #> 6 205  0   8
 ```
 
-  - `rowdiff`
+-   `rowdiff`
 
 This is useful when trying to find differences between rows. The
 `direction` argument specifies how the subtractions are made while the
@@ -499,7 +478,6 @@ before calculations are made. Using `direction="reverse"` performs a
 subtraction akin to `x-(x-1)` where `x` is the row number.
 
 ``` r
-
 head(rowdiff(yields,exclude = "factor",direction = "reverse"))
 #>        height      weight      yield
 #> 1          NA          NA         NA
@@ -510,7 +488,7 @@ head(rowdiff(yields,exclude = "factor",direction = "reverse"))
 #> 6  0.57638627 -0.42979818   6.825719
 ```
 
-  - `na_replace`
+-   `na_replace`
 
 This allows the user to conveniently replace missing values. Current
 options are `ffill` which replaces with the next non-missing value,
@@ -521,7 +499,6 @@ longer supported. They are now available with more flexibility in
 standalone [mde](https://github.com/Nelson-Gon/mde)
 
 ``` r
-
 head(na_replace(airquality, how="value", value="Missing"),8)
 #>     Ozone Solar.R Wind Temp Month Day
 #> 1      41     190  7.4   67     5   1
@@ -534,7 +511,7 @@ head(na_replace(airquality, how="value", value="Missing"),8)
 #> 8      19      99 13.8   59     5   8
 ```
 
-  - `na_replace_grouped`
+-   `na_replace_grouped`
 
 This provides a convenient way to replace values by group.
 
@@ -554,7 +531,7 @@ The use of `mean`,`sd`,etc is no longer supported. Use
 [mde](https://github.com/Nelson-Gon/mde) instead which is focused on
 missingness.
 
------
+------------------------------------------------------------------------
 
 **Exploring Further**
 
