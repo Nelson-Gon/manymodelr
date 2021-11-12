@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -169,164 +169,167 @@ linear model</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># fit a linear model and get predictions</span>
-<span class='fu'>multi_model_2</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>,<span class='va'>iris</span><span class='op'>[</span><span class='fl'>50</span><span class='op'>:</span><span class='fl'>99</span>,<span class='op'>]</span>,<span class='st'>"Sepal.Length"</span>,<span class='st'>"Petal.Length"</span>,<span class='st'>"lm"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
-#&gt; 1           5.1         3.5          1.4         0.2  setosa  4.972378
-#&gt; 2           4.9         3.0          1.4         0.2  setosa  6.761943
-#&gt; 3           4.7         3.2          1.3         0.2  setosa  6.653485
-#&gt; 4           4.6         3.1          1.5         0.2  setosa  6.870402
-#&gt; 5           5.0         3.6          1.4         0.2  setosa  6.382339
-#&gt; 6           5.4         3.9          1.7         0.4  setosa  6.707714
-#&gt; 7           4.6         3.4          1.4         0.3  setosa  6.653485
-#&gt; 8           5.0         3.4          1.5         0.2  setosa  6.761943
-#&gt; 9           4.4         2.9          1.4         0.2  setosa  6.002734
-#&gt; 10          4.9         3.1          1.5         0.1  setosa  6.707714
-#&gt; 11          5.4         3.7          1.5         0.2  setosa  6.328109
-#&gt; 12          4.8         3.4          1.6         0.2  setosa  6.111192
-#&gt; 13          4.8         3.0          1.4         0.1  setosa  6.490797
-#&gt; 14          4.3         3.0          1.1         0.1  setosa  6.382339
-#&gt; 15          5.8         4.0          1.2         0.2  setosa  6.761943
-#&gt; 16          5.7         4.4          1.5         0.4  setosa  6.165422
-#&gt; 17          5.4         3.9          1.3         0.4  setosa  6.599256
-#&gt; 18          5.1         3.5          1.4         0.3  setosa  6.653485
-#&gt; 19          5.7         3.8          1.7         0.3  setosa  6.436568
-#&gt; 20          5.1         3.8          1.5         0.3  setosa  6.653485
-#&gt; 21          5.4         3.4          1.7         0.2  setosa  6.328109
-#&gt; 22          5.1         3.7          1.5         0.4  setosa  6.816173
-#&gt; 23          4.6         3.6          1.0         0.2  setosa  6.382339
-#&gt; 24          5.1         3.3          1.7         0.5  setosa  6.870402
-#&gt; 25          4.8         3.4          1.9         0.2  setosa  6.761943
-#&gt; 26          5.0         3.0          1.6         0.2  setosa  6.545026
-#&gt; 27          5.0         3.4          1.6         0.4  setosa  6.599256
-#&gt; 28          5.2         3.5          1.5         0.2  setosa  6.816173
-#&gt; 29          5.2         3.4          1.4         0.2  setosa  6.924631
-#&gt; 30          4.7         3.2          1.6         0.2  setosa  6.653485
-#&gt; 31          4.8         3.1          1.6         0.2  setosa  6.111192
-#&gt; 32          5.4         3.4          1.5         0.4  setosa  6.273880
-#&gt; 33          5.2         4.1          1.5         0.1  setosa  6.219651
-#&gt; 34          5.5         4.2          1.4         0.2  setosa  6.328109
-#&gt; 35          4.9         3.1          1.5         0.2  setosa  6.978860
-#&gt; 36          5.0         3.2          1.2         0.2  setosa  6.653485
-#&gt; 37          5.5         3.5          1.3         0.2  setosa  6.653485
-#&gt; 38          4.9         3.6          1.4         0.1  setosa  6.761943
-#&gt; 39          4.4         3.0          1.3         0.2  setosa  6.599256
-#&gt; 40          5.1         3.4          1.5         0.2  setosa  6.436568
-#&gt; 41          5.0         3.5          1.3         0.3  setosa  6.382339
-#&gt; 42          4.5         2.3          1.3         0.3  setosa  6.599256
-#&gt; 43          4.4         3.2          1.3         0.2  setosa  6.707714
-#&gt; 44          5.0         3.5          1.6         0.6  setosa  6.382339
-#&gt; 45          5.1         3.8          1.9         0.4  setosa  6.002734
-#&gt; 46          4.8         3.0          1.4         0.3  setosa  6.490797
-#&gt; 47          5.1         3.8          1.6         0.2  setosa  6.490797
-#&gt; 48          4.6         3.2          1.4         0.2  setosa  6.490797
-#&gt; 49          5.3         3.7          1.5         0.2  setosa  6.545026
-#&gt; 50          5.0         3.3          1.4         0.2  setosa  5.840046</div><div class='input'><span class='co'># multilinear</span>
-<span class='fu'>multi_model_2</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>,<span class='va'>iris</span><span class='op'>[</span><span class='fl'>50</span><span class='op'>:</span><span class='fl'>99</span>,<span class='op'>]</span>,<span class='st'>"Sepal.Length"</span>,
-    <span class='st'>"Petal.Length + Sepal.Width"</span>,<span class='st'>"lm"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
-#&gt; 1           5.1         3.5          1.4         0.2  setosa  4.902999
-#&gt; 2           4.9         3.0          1.4         0.2  setosa  5.771541
-#&gt; 3           4.7         3.2          1.3         0.2  setosa  5.714857
-#&gt; 4           4.6         3.1          1.5         0.2  setosa  5.761483
-#&gt; 5           5.0         3.6          1.4         0.2  setosa  4.972473
-#&gt; 6           5.4         3.9          1.7         0.4  setosa  5.476232
-#&gt; 7           4.6         3.4          1.4         0.3  setosa  5.447890
-#&gt; 8           5.0         3.4          1.5         0.2  setosa  5.838282
-#&gt; 9           4.4         2.9          1.4         0.2  setosa  4.840821
-#&gt; 10          4.9         3.1          1.5         0.1  setosa  5.542974
-#&gt; 11          5.4         3.7          1.5         0.2  setosa  5.211097
-#&gt; 12          4.8         3.4          1.6         0.2  setosa  4.630538
-#&gt; 13          4.8         3.0          1.4         0.1  setosa  5.496348
-#&gt; 14          4.3         3.0          1.1         0.1  setosa  4.905731
-#&gt; 15          5.8         4.0          1.2         0.2  setosa  5.571316
-#&gt; 16          5.7         4.4          1.5         0.4  setosa  5.259555
-#&gt; 17          5.4         3.9          1.3         0.4  setosa  5.619773
-#&gt; 18          5.1         3.5          1.4         0.3  setosa  5.581374
-#&gt; 19          5.7         3.8          1.7         0.3  setosa  5.267781
-#&gt; 20          5.1         3.8          1.5         0.3  setosa  5.047441
-#&gt; 21          5.4         3.4          1.7         0.2  setosa  5.077614
-#&gt; 22          5.1         3.7          1.5         0.4  setosa  5.799883
-#&gt; 23          4.6         3.6          1.0         0.2  setosa  5.306181
-#&gt; 24          5.1         3.3          1.7         0.5  setosa  5.361033
-#&gt; 25          4.8         3.4          1.9         0.2  setosa  5.504574
-#&gt; 26          5.0         3.0          1.6         0.2  setosa  5.457948
-#&gt; 27          5.0         3.4          1.6         0.4  setosa  5.553032
-#&gt; 28          5.2         3.5          1.5         0.2  setosa  5.532916
-#&gt; 29          5.2         3.4          1.4         0.2  setosa  5.723083
-#&gt; 30          4.7         3.2          1.6         0.2  setosa  5.514632
-#&gt; 31          4.8         3.1          1.6         0.2  setosa  5.030988
-#&gt; 32          5.4         3.4          1.5         0.4  setosa  4.982530
-#&gt; 33          5.2         4.1          1.5         0.1  setosa  4.954189
-#&gt; 34          5.5         4.2          1.4         0.2  setosa  5.211097
-#&gt; 35          4.9         3.1          1.5         0.2  setosa  5.551200
-#&gt; 36          5.0         3.2          1.2         0.2  setosa  5.581374
-#&gt; 37          5.5         3.5          1.3         0.2  setosa  5.848340
-#&gt; 38          4.9         3.6          1.4         0.1  setosa  5.704799
-#&gt; 39          4.4         3.0          1.3         0.2  setosa  5.085840
-#&gt; 40          5.1         3.4          1.5         0.2  setosa  5.468006
-#&gt; 41          5.0         3.5          1.3         0.3  setosa  5.105956
-#&gt; 42          4.5         2.3          1.3         0.3  setosa  5.286065
-#&gt; 43          4.4         3.2          1.3         0.2  setosa  5.609716
-#&gt; 44          5.0         3.5          1.6         0.6  setosa  5.172698
-#&gt; 45          5.1         3.8          1.9         0.4  setosa  4.774079
-#&gt; 46          4.8         3.0          1.4         0.3  setosa  5.296123
-#&gt; 47          5.1         3.8          1.6         0.2  setosa  5.496348
-#&gt; 48          4.6         3.2          1.4         0.2  setosa  5.429606
-#&gt; 49          5.3         3.7          1.5         0.2  setosa  5.457948
-#&gt; 50          5.0         3.3          1.4         0.2  setosa  4.822537</div><div class='input'><span class='co'># glm</span>
-<span class='fu'>multi_model_2</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>,<span class='va'>iris</span><span class='op'>[</span><span class='fl'>50</span><span class='op'>:</span><span class='fl'>99</span>,<span class='op'>]</span>,<span class='st'>"Sepal.Length"</span>,<span class='st'>"Petal.Length"</span>,<span class='st'>"glm"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted
-#&gt; 1           5.1         3.5          1.4         0.2  setosa  4.972378
-#&gt; 2           4.9         3.0          1.4         0.2  setosa  6.761943
-#&gt; 3           4.7         3.2          1.3         0.2  setosa  6.653485
-#&gt; 4           4.6         3.1          1.5         0.2  setosa  6.870402
-#&gt; 5           5.0         3.6          1.4         0.2  setosa  6.382339
-#&gt; 6           5.4         3.9          1.7         0.4  setosa  6.707714
-#&gt; 7           4.6         3.4          1.4         0.3  setosa  6.653485
-#&gt; 8           5.0         3.4          1.5         0.2  setosa  6.761943
-#&gt; 9           4.4         2.9          1.4         0.2  setosa  6.002734
-#&gt; 10          4.9         3.1          1.5         0.1  setosa  6.707714
-#&gt; 11          5.4         3.7          1.5         0.2  setosa  6.328109
-#&gt; 12          4.8         3.4          1.6         0.2  setosa  6.111192
-#&gt; 13          4.8         3.0          1.4         0.1  setosa  6.490797
-#&gt; 14          4.3         3.0          1.1         0.1  setosa  6.382339
-#&gt; 15          5.8         4.0          1.2         0.2  setosa  6.761943
-#&gt; 16          5.7         4.4          1.5         0.4  setosa  6.165422
-#&gt; 17          5.4         3.9          1.3         0.4  setosa  6.599256
-#&gt; 18          5.1         3.5          1.4         0.3  setosa  6.653485
-#&gt; 19          5.7         3.8          1.7         0.3  setosa  6.436568
-#&gt; 20          5.1         3.8          1.5         0.3  setosa  6.653485
-#&gt; 21          5.4         3.4          1.7         0.2  setosa  6.328109
-#&gt; 22          5.1         3.7          1.5         0.4  setosa  6.816173
-#&gt; 23          4.6         3.6          1.0         0.2  setosa  6.382339
-#&gt; 24          5.1         3.3          1.7         0.5  setosa  6.870402
-#&gt; 25          4.8         3.4          1.9         0.2  setosa  6.761943
-#&gt; 26          5.0         3.0          1.6         0.2  setosa  6.545026
-#&gt; 27          5.0         3.4          1.6         0.4  setosa  6.599256
-#&gt; 28          5.2         3.5          1.5         0.2  setosa  6.816173
-#&gt; 29          5.2         3.4          1.4         0.2  setosa  6.924631
-#&gt; 30          4.7         3.2          1.6         0.2  setosa  6.653485
-#&gt; 31          4.8         3.1          1.6         0.2  setosa  6.111192
-#&gt; 32          5.4         3.4          1.5         0.4  setosa  6.273880
-#&gt; 33          5.2         4.1          1.5         0.1  setosa  6.219651
-#&gt; 34          5.5         4.2          1.4         0.2  setosa  6.328109
-#&gt; 35          4.9         3.1          1.5         0.2  setosa  6.978860
-#&gt; 36          5.0         3.2          1.2         0.2  setosa  6.653485
-#&gt; 37          5.5         3.5          1.3         0.2  setosa  6.653485
-#&gt; 38          4.9         3.6          1.4         0.1  setosa  6.761943
-#&gt; 39          4.4         3.0          1.3         0.2  setosa  6.599256
-#&gt; 40          5.1         3.4          1.5         0.2  setosa  6.436568
-#&gt; 41          5.0         3.5          1.3         0.3  setosa  6.382339
-#&gt; 42          4.5         2.3          1.3         0.3  setosa  6.599256
-#&gt; 43          4.4         3.2          1.3         0.2  setosa  6.707714
-#&gt; 44          5.0         3.5          1.6         0.6  setosa  6.382339
-#&gt; 45          5.1         3.8          1.9         0.4  setosa  6.002734
-#&gt; 46          4.8         3.0          1.4         0.3  setosa  6.490797
-#&gt; 47          5.1         3.8          1.6         0.2  setosa  6.490797
-#&gt; 48          4.6         3.2          1.4         0.2  setosa  6.490797
-#&gt; 49          5.3         3.7          1.5         0.2  setosa  6.545026
-#&gt; 50          5.0         3.3          1.4         0.2  setosa  5.840046</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># fit a linear model and get predictions</span></span>
+<span class='r-in'><span class='fu'>multi_model_2</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>,<span class='va'>iris</span><span class='op'>[</span><span class='fl'>50</span><span class='op'>:</span><span class='fl'>99</span>,<span class='op'>]</span>,<span class='st'>"Sepal.Length"</span>,<span class='st'>"Petal.Length"</span>,<span class='st'>"lm"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1           5.1         3.5          1.4         0.2  setosa  4.972378</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2           4.9         3.0          1.4         0.2  setosa  6.761943</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3           4.7         3.2          1.3         0.2  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4           4.6         3.1          1.5         0.2  setosa  6.870402</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5           5.0         3.6          1.4         0.2  setosa  6.382339</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6           5.4         3.9          1.7         0.4  setosa  6.707714</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7           4.6         3.4          1.4         0.3  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8           5.0         3.4          1.5         0.2  setosa  6.761943</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9           4.4         2.9          1.4         0.2  setosa  6.002734</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10          4.9         3.1          1.5         0.1  setosa  6.707714</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11          5.4         3.7          1.5         0.2  setosa  6.328109</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12          4.8         3.4          1.6         0.2  setosa  6.111192</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13          4.8         3.0          1.4         0.1  setosa  6.490797</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14          4.3         3.0          1.1         0.1  setosa  6.382339</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15          5.8         4.0          1.2         0.2  setosa  6.761943</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16          5.7         4.4          1.5         0.4  setosa  6.165422</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17          5.4         3.9          1.3         0.4  setosa  6.599256</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18          5.1         3.5          1.4         0.3  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19          5.7         3.8          1.7         0.3  setosa  6.436568</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20          5.1         3.8          1.5         0.3  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21          5.4         3.4          1.7         0.2  setosa  6.328109</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22          5.1         3.7          1.5         0.4  setosa  6.816173</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23          4.6         3.6          1.0         0.2  setosa  6.382339</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24          5.1         3.3          1.7         0.5  setosa  6.870402</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25          4.8         3.4          1.9         0.2  setosa  6.761943</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26          5.0         3.0          1.6         0.2  setosa  6.545026</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 27          5.0         3.4          1.6         0.4  setosa  6.599256</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 28          5.2         3.5          1.5         0.2  setosa  6.816173</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 29          5.2         3.4          1.4         0.2  setosa  6.924631</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 30          4.7         3.2          1.6         0.2  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 31          4.8         3.1          1.6         0.2  setosa  6.111192</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 32          5.4         3.4          1.5         0.4  setosa  6.273880</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 33          5.2         4.1          1.5         0.1  setosa  6.219651</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 34          5.5         4.2          1.4         0.2  setosa  6.328109</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 35          4.9         3.1          1.5         0.2  setosa  6.978860</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 36          5.0         3.2          1.2         0.2  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 37          5.5         3.5          1.3         0.2  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 38          4.9         3.6          1.4         0.1  setosa  6.761943</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 39          4.4         3.0          1.3         0.2  setosa  6.599256</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 40          5.1         3.4          1.5         0.2  setosa  6.436568</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 41          5.0         3.5          1.3         0.3  setosa  6.382339</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 42          4.5         2.3          1.3         0.3  setosa  6.599256</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 43          4.4         3.2          1.3         0.2  setosa  6.707714</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 44          5.0         3.5          1.6         0.6  setosa  6.382339</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 45          5.1         3.8          1.9         0.4  setosa  6.002734</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 46          4.8         3.0          1.4         0.3  setosa  6.490797</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 47          5.1         3.8          1.6         0.2  setosa  6.490797</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 48          4.6         3.2          1.4         0.2  setosa  6.490797</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 49          5.3         3.7          1.5         0.2  setosa  6.545026</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 50          5.0         3.3          1.4         0.2  setosa  5.840046</span>
+<span class='r-in'><span class='co'># multilinear</span></span>
+<span class='r-in'><span class='fu'>multi_model_2</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>,<span class='va'>iris</span><span class='op'>[</span><span class='fl'>50</span><span class='op'>:</span><span class='fl'>99</span>,<span class='op'>]</span>,<span class='st'>"Sepal.Length"</span>,</span>
+<span class='r-in'>    <span class='st'>"Petal.Length + Sepal.Width"</span>,<span class='st'>"lm"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1           5.1         3.5          1.4         0.2  setosa  4.902999</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2           4.9         3.0          1.4         0.2  setosa  5.771541</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3           4.7         3.2          1.3         0.2  setosa  5.714857</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4           4.6         3.1          1.5         0.2  setosa  5.761483</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5           5.0         3.6          1.4         0.2  setosa  4.972473</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6           5.4         3.9          1.7         0.4  setosa  5.476232</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7           4.6         3.4          1.4         0.3  setosa  5.447890</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8           5.0         3.4          1.5         0.2  setosa  5.838282</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9           4.4         2.9          1.4         0.2  setosa  4.840821</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10          4.9         3.1          1.5         0.1  setosa  5.542974</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11          5.4         3.7          1.5         0.2  setosa  5.211097</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12          4.8         3.4          1.6         0.2  setosa  4.630538</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13          4.8         3.0          1.4         0.1  setosa  5.496348</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14          4.3         3.0          1.1         0.1  setosa  4.905731</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15          5.8         4.0          1.2         0.2  setosa  5.571316</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16          5.7         4.4          1.5         0.4  setosa  5.259555</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17          5.4         3.9          1.3         0.4  setosa  5.619773</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18          5.1         3.5          1.4         0.3  setosa  5.581374</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19          5.7         3.8          1.7         0.3  setosa  5.267781</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20          5.1         3.8          1.5         0.3  setosa  5.047441</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21          5.4         3.4          1.7         0.2  setosa  5.077614</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22          5.1         3.7          1.5         0.4  setosa  5.799883</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23          4.6         3.6          1.0         0.2  setosa  5.306181</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24          5.1         3.3          1.7         0.5  setosa  5.361033</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25          4.8         3.4          1.9         0.2  setosa  5.504574</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26          5.0         3.0          1.6         0.2  setosa  5.457948</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 27          5.0         3.4          1.6         0.4  setosa  5.553032</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 28          5.2         3.5          1.5         0.2  setosa  5.532916</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 29          5.2         3.4          1.4         0.2  setosa  5.723083</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 30          4.7         3.2          1.6         0.2  setosa  5.514632</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 31          4.8         3.1          1.6         0.2  setosa  5.030988</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 32          5.4         3.4          1.5         0.4  setosa  4.982530</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 33          5.2         4.1          1.5         0.1  setosa  4.954189</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 34          5.5         4.2          1.4         0.2  setosa  5.211097</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 35          4.9         3.1          1.5         0.2  setosa  5.551200</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 36          5.0         3.2          1.2         0.2  setosa  5.581374</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 37          5.5         3.5          1.3         0.2  setosa  5.848340</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 38          4.9         3.6          1.4         0.1  setosa  5.704799</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 39          4.4         3.0          1.3         0.2  setosa  5.085840</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 40          5.1         3.4          1.5         0.2  setosa  5.468006</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 41          5.0         3.5          1.3         0.3  setosa  5.105956</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 42          4.5         2.3          1.3         0.3  setosa  5.286065</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 43          4.4         3.2          1.3         0.2  setosa  5.609716</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 44          5.0         3.5          1.6         0.6  setosa  5.172698</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 45          5.1         3.8          1.9         0.4  setosa  4.774079</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 46          4.8         3.0          1.4         0.3  setosa  5.296123</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 47          5.1         3.8          1.6         0.2  setosa  5.496348</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 48          4.6         3.2          1.4         0.2  setosa  5.429606</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 49          5.3         3.7          1.5         0.2  setosa  5.457948</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 50          5.0         3.3          1.4         0.2  setosa  4.822537</span>
+<span class='r-in'><span class='co'># glm</span></span>
+<span class='r-in'><span class='fu'>multi_model_2</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>,<span class='va'>iris</span><span class='op'>[</span><span class='fl'>50</span><span class='op'>:</span><span class='fl'>99</span>,<span class='op'>]</span>,<span class='st'>"Sepal.Length"</span>,<span class='st'>"Petal.Length"</span>,<span class='st'>"glm"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species predicted</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1           5.1         3.5          1.4         0.2  setosa  4.972378</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2           4.9         3.0          1.4         0.2  setosa  6.761943</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3           4.7         3.2          1.3         0.2  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4           4.6         3.1          1.5         0.2  setosa  6.870402</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5           5.0         3.6          1.4         0.2  setosa  6.382339</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6           5.4         3.9          1.7         0.4  setosa  6.707714</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7           4.6         3.4          1.4         0.3  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8           5.0         3.4          1.5         0.2  setosa  6.761943</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9           4.4         2.9          1.4         0.2  setosa  6.002734</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10          4.9         3.1          1.5         0.1  setosa  6.707714</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11          5.4         3.7          1.5         0.2  setosa  6.328109</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12          4.8         3.4          1.6         0.2  setosa  6.111192</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13          4.8         3.0          1.4         0.1  setosa  6.490797</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14          4.3         3.0          1.1         0.1  setosa  6.382339</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15          5.8         4.0          1.2         0.2  setosa  6.761943</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16          5.7         4.4          1.5         0.4  setosa  6.165422</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17          5.4         3.9          1.3         0.4  setosa  6.599256</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18          5.1         3.5          1.4         0.3  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19          5.7         3.8          1.7         0.3  setosa  6.436568</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20          5.1         3.8          1.5         0.3  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21          5.4         3.4          1.7         0.2  setosa  6.328109</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22          5.1         3.7          1.5         0.4  setosa  6.816173</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23          4.6         3.6          1.0         0.2  setosa  6.382339</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24          5.1         3.3          1.7         0.5  setosa  6.870402</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25          4.8         3.4          1.9         0.2  setosa  6.761943</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26          5.0         3.0          1.6         0.2  setosa  6.545026</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 27          5.0         3.4          1.6         0.4  setosa  6.599256</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 28          5.2         3.5          1.5         0.2  setosa  6.816173</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 29          5.2         3.4          1.4         0.2  setosa  6.924631</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 30          4.7         3.2          1.6         0.2  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 31          4.8         3.1          1.6         0.2  setosa  6.111192</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 32          5.4         3.4          1.5         0.4  setosa  6.273880</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 33          5.2         4.1          1.5         0.1  setosa  6.219651</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 34          5.5         4.2          1.4         0.2  setosa  6.328109</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 35          4.9         3.1          1.5         0.2  setosa  6.978860</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 36          5.0         3.2          1.2         0.2  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 37          5.5         3.5          1.3         0.2  setosa  6.653485</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 38          4.9         3.6          1.4         0.1  setosa  6.761943</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 39          4.4         3.0          1.3         0.2  setosa  6.599256</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 40          5.1         3.4          1.5         0.2  setosa  6.436568</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 41          5.0         3.5          1.3         0.3  setosa  6.382339</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 42          4.5         2.3          1.3         0.3  setosa  6.599256</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 43          4.4         3.2          1.3         0.2  setosa  6.707714</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 44          5.0         3.5          1.6         0.6  setosa  6.382339</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 45          5.1         3.8          1.9         0.4  setosa  6.002734</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 46          4.8         3.0          1.4         0.3  setosa  6.490797</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 47          5.1         3.8          1.6         0.2  setosa  6.490797</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 48          4.6         3.2          1.4         0.2  setosa  6.490797</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 49          5.3         3.7          1.5         0.2  setosa  6.545026</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 50          5.0         3.3          1.4         0.2  setosa  5.840046</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

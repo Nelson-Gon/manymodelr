@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -174,70 +174,72 @@ c("factor","character")</p></td>
 for combinations of variables. It is currently slow and may take up to a minute depending on system specifications.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>get_var_corr_</span><span class='op'>(</span><span class='va'>mtcars</span>,method<span class='op'>=</span><span class='st'>"pearson"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    comparison_var other_var      p.value correlation    lower_ci   upper_ci
-#&gt; 1             mpg       cyl 6.112687e-10 -0.85216196 -0.92576936 -0.7163171
-#&gt; 2             mpg      disp 9.380327e-10 -0.84755138 -0.92335937 -0.7081376
-#&gt; 3             mpg        hp 1.787835e-07 -0.77616837 -0.88526861 -0.5860994
-#&gt; 4             mpg      drat 1.776240e-05  0.68117191  0.43604838  0.8322010
-#&gt; 5             mpg        wt 1.293959e-10 -0.86765938 -0.93382641 -0.7440872
-#&gt; 6             mpg      qsec 1.708199e-02  0.41868403  0.08195487  0.6696186
-#&gt; 7             mpg        vs 3.415937e-05  0.66403892  0.41036301  0.8223262
-#&gt; 8             mpg        am 2.850207e-04  0.59983243  0.31755830  0.7844520
-#&gt; 9             mpg      gear 5.400948e-03  0.48028476  0.15806177  0.7100628
-#&gt; 10            mpg      carb 1.084446e-03 -0.55092507 -0.75464796 -0.2503183
-#&gt; 11            cyl      disp 1.802838e-12  0.90203287  0.80724418  0.9514607
-#&gt; 12            cyl        hp 3.477861e-09  0.83244745  0.68160156  0.9154223
-#&gt; 13            cyl      drat 8.244636e-06 -0.69993811 -0.84290834 -0.4646481
-#&gt; 14            cyl        wt 1.217567e-07  0.78249579  0.59657947  0.8887052
-#&gt; 15            cyl      qsec 3.660533e-04 -0.59124207 -0.77927809 -0.3055388
-#&gt; 16            cyl        vs 1.843018e-08 -0.81081180 -0.90393935 -0.6442689
-#&gt; 17            cyl        am 2.151207e-03 -0.52260705 -0.73699794 -0.2126675
-#&gt; 18            cyl      gear 4.173297e-03 -0.49268660 -0.71802597 -0.1738615
-#&gt; 19            cyl      carb 1.942340e-03  0.52698829  0.21843307  0.7397479
-#&gt; 20           disp        hp 7.142679e-08  0.79094859  0.61067938  0.8932775
-#&gt; 21           disp      drat 5.282022e-06 -0.71021393 -0.84872374 -0.4805193
-#&gt; 22           disp        wt 1.222320e-11  0.88797992  0.78115863  0.9442902
-#&gt; 23           disp      qsec 1.314404e-02 -0.43369788 -0.67961513 -0.1001493
-#&gt; 24           disp        vs 5.235012e-06 -0.71041589 -0.84883771 -0.4808327
-#&gt; 25           disp        am 3.662114e-04 -0.59122704 -0.77926901 -0.3055178
-#&gt; 26           disp      gear 9.635921e-04 -0.55556920 -0.75751468 -0.2565810
-#&gt; 27           disp      carb 2.526789e-02  0.39497686  0.05367539  0.6536467
-#&gt; 28             hp      drat 9.988772e-03 -0.44875912 -0.68955223 -0.1186280
-#&gt; 29             hp        wt 4.145827e-05  0.65874789  0.40251134  0.8192573
-#&gt; 30             hp      qsec 5.766253e-06 -0.70822339 -0.84759984 -0.4774331
-#&gt; 31             hp        vs 2.940896e-06 -0.72309674 -0.85596751 -0.5006318
-#&gt; 32             hp        am 1.798309e-01 -0.24320426 -0.54562696  0.1152646
-#&gt; 33             hp      gear 4.930119e-01 -0.12570426 -0.45447743  0.2332119
-#&gt; 34             hp      carb 7.827810e-07  0.74981247  0.54311998  0.8708249
-#&gt; 35           drat        wt 4.784260e-06 -0.71244065 -0.84997951 -0.4839784
-#&gt; 36           drat      qsec 6.195826e-01  0.09120476 -0.26594700  0.4263400
-#&gt; 37           drat        vs 1.167553e-02  0.44027846  0.10819483  0.6839680
-#&gt; 38           drat        am 4.726790e-06  0.71271113  0.48439908  0.8501319
-#&gt; 39           drat      gear 8.360110e-06  0.69961013  0.46414402  0.8427222
-#&gt; 40           drat      carb 6.211834e-01 -0.09078980 -0.42599760  0.2663358
-#&gt; 41             wt      qsec 3.388683e-01 -0.17471588 -0.49335358  0.1852649
-#&gt; 42             wt        vs 9.798492e-04 -0.55491568 -0.75711174 -0.2556982
-#&gt; 43             wt        am 1.125440e-05 -0.69249526 -0.83867523 -0.4532461
-#&gt; 44             wt      gear 4.586601e-04 -0.58328700 -0.77446381 -0.2944887
-#&gt; 45             wt      carb 1.463861e-02  0.42760594  0.09273981  0.6755700
-#&gt; 46           qsec        vs 1.029669e-06  0.74453544  0.53464277  0.8679076
-#&gt; 47           qsec        am 2.056621e-01 -0.22986086 -0.53562398  0.1291876
-#&gt; 48           qsec      gear 2.425344e-01 -0.21268223 -0.52261830  0.1469065
-#&gt; 49           qsec      carb 4.536949e-05 -0.65624923 -0.81780480 -0.3988165
-#&gt; 50             vs        am 3.570439e-01  0.16834512 -0.19159569  0.4883712
-#&gt; 51             vs      gear 2.579439e-01  0.20602335 -0.15371324  0.5175379
-#&gt; 52             vs      carb 6.670496e-04 -0.56960714 -0.76613289 -0.2756654
-#&gt; 53             am      gear 5.834043e-08  0.79405876  0.61589632  0.8949546
-#&gt; 54             am      carb 7.544526e-01  0.05753435 -0.29712041  0.3982389
-#&gt; 55           gear      carb 1.290291e-01  0.27407284 -0.08250603  0.5684422</div><div class='input'><span class='co'>#use only a subset of the data.</span>
- <span class='fu'>get_var_corr_</span><span class='op'>(</span><span class='va'>mtcars</span>,
-             subset_cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mpg"</span>,<span class='st'>"vs"</span><span class='op'>)</span>,
-                                <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>,<span class='st'>"wt"</span><span class='op'>)</span><span class='op'>)</span>,
-             method<span class='op'>=</span><span class='st'>"spearman"</span>,exact<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   comparison_var other_var      p.value correlation
-#&gt; 2            mpg      disp 6.370336e-13  -0.9088824
-#&gt; 5            mpg        wt 1.487595e-11  -0.8864220</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>get_var_corr_</span><span class='op'>(</span><span class='va'>mtcars</span>,method<span class='op'>=</span><span class='st'>"pearson"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    comparison_var other_var      p.value correlation    lower_ci   upper_ci</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1             mpg       cyl 6.112687e-10 -0.85216196 -0.92576936 -0.7163171</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2             mpg      disp 9.380327e-10 -0.84755138 -0.92335937 -0.7081376</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3             mpg        hp 1.787835e-07 -0.77616837 -0.88526861 -0.5860994</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4             mpg      drat 1.776240e-05  0.68117191  0.43604838  0.8322010</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5             mpg        wt 1.293959e-10 -0.86765938 -0.93382641 -0.7440872</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6             mpg      qsec 1.708199e-02  0.41868403  0.08195487  0.6696186</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7             mpg        vs 3.415937e-05  0.66403892  0.41036301  0.8223262</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8             mpg        am 2.850207e-04  0.59983243  0.31755830  0.7844520</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9             mpg      gear 5.400948e-03  0.48028476  0.15806177  0.7100628</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10            mpg      carb 1.084446e-03 -0.55092507 -0.75464796 -0.2503183</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11            cyl      disp 1.802838e-12  0.90203287  0.80724418  0.9514607</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12            cyl        hp 3.477861e-09  0.83244745  0.68160156  0.9154223</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13            cyl      drat 8.244636e-06 -0.69993811 -0.84290834 -0.4646481</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14            cyl        wt 1.217567e-07  0.78249579  0.59657947  0.8887052</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15            cyl      qsec 3.660533e-04 -0.59124207 -0.77927809 -0.3055388</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16            cyl        vs 1.843018e-08 -0.81081180 -0.90393935 -0.6442689</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17            cyl        am 2.151207e-03 -0.52260705 -0.73699794 -0.2126675</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18            cyl      gear 4.173297e-03 -0.49268660 -0.71802597 -0.1738615</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19            cyl      carb 1.942340e-03  0.52698829  0.21843307  0.7397479</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20           disp        hp 7.142679e-08  0.79094859  0.61067938  0.8932775</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21           disp      drat 5.282022e-06 -0.71021393 -0.84872374 -0.4805193</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22           disp        wt 1.222320e-11  0.88797992  0.78115863  0.9442902</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23           disp      qsec 1.314404e-02 -0.43369788 -0.67961513 -0.1001493</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24           disp        vs 5.235012e-06 -0.71041589 -0.84883771 -0.4808327</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25           disp        am 3.662114e-04 -0.59122704 -0.77926901 -0.3055178</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26           disp      gear 9.635921e-04 -0.55556920 -0.75751468 -0.2565810</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 27           disp      carb 2.526789e-02  0.39497686  0.05367539  0.6536467</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 28             hp      drat 9.988772e-03 -0.44875912 -0.68955223 -0.1186280</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 29             hp        wt 4.145827e-05  0.65874789  0.40251134  0.8192573</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 30             hp      qsec 5.766253e-06 -0.70822339 -0.84759984 -0.4774331</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 31             hp        vs 2.940896e-06 -0.72309674 -0.85596751 -0.5006318</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 32             hp        am 1.798309e-01 -0.24320426 -0.54562696  0.1152646</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 33             hp      gear 4.930119e-01 -0.12570426 -0.45447743  0.2332119</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 34             hp      carb 7.827810e-07  0.74981247  0.54311998  0.8708249</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 35           drat        wt 4.784260e-06 -0.71244065 -0.84997951 -0.4839784</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 36           drat      qsec 6.195826e-01  0.09120476 -0.26594700  0.4263400</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 37           drat        vs 1.167553e-02  0.44027846  0.10819483  0.6839680</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 38           drat        am 4.726790e-06  0.71271113  0.48439908  0.8501319</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 39           drat      gear 8.360110e-06  0.69961013  0.46414402  0.8427222</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 40           drat      carb 6.211834e-01 -0.09078980 -0.42599760  0.2663358</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 41             wt      qsec 3.388683e-01 -0.17471588 -0.49335358  0.1852649</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 42             wt        vs 9.798492e-04 -0.55491568 -0.75711174 -0.2556982</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 43             wt        am 1.125440e-05 -0.69249526 -0.83867523 -0.4532461</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 44             wt      gear 4.586601e-04 -0.58328700 -0.77446381 -0.2944887</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 45             wt      carb 1.463861e-02  0.42760594  0.09273981  0.6755700</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 46           qsec        vs 1.029669e-06  0.74453544  0.53464277  0.8679076</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 47           qsec        am 2.056621e-01 -0.22986086 -0.53562398  0.1291876</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 48           qsec      gear 2.425344e-01 -0.21268223 -0.52261830  0.1469065</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 49           qsec      carb 4.536949e-05 -0.65624923 -0.81780480 -0.3988165</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 50             vs        am 3.570439e-01  0.16834512 -0.19159569  0.4883712</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 51             vs      gear 2.579439e-01  0.20602335 -0.15371324  0.5175379</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 52             vs      carb 6.670496e-04 -0.56960714 -0.76613289 -0.2756654</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 53             am      gear 5.834043e-08  0.79405876  0.61589632  0.8949546</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 54             am      carb 7.544526e-01  0.05753435 -0.29712041  0.3982389</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 55           gear      carb 1.290291e-01  0.27407284 -0.08250603  0.5684422</span>
+<span class='r-in'><span class='co'>#use only a subset of the data.</span></span>
+<span class='r-in'> <span class='fu'>get_var_corr_</span><span class='op'>(</span><span class='va'>mtcars</span>,</span>
+<span class='r-in'>             subset_cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mpg"</span>,<span class='st'>"vs"</span><span class='op'>)</span>,</span>
+<span class='r-in'>                                <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>,<span class='st'>"wt"</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span class='r-in'>             method<span class='op'>=</span><span class='st'>"spearman"</span>,exact<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   comparison_var other_var      p.value correlation</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2            mpg      disp 6.370336e-13  -0.9088824</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5            mpg        wt 1.487595e-11  -0.8864220</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -155,18 +155,19 @@
     <p>A data.frame object with residuals added.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"yields"</span>, package<span class='op'>=</span><span class='st'>"manymodelr"</span><span class='op'>)</span>
-<span class='va'>yields1</span> <span class='op'>&lt;-</span> <span class='va'>yields</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span>
-<span class='va'>yields2</span> <span class='op'>&lt;-</span> <span class='va'>yields</span><span class='op'>[</span><span class='fl'>51</span><span class='op'>:</span><span class='fl'>100</span>,<span class='op'>]</span>
-<span class='va'>lm_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fit_model.html'>fit_model</a></span><span class='op'>(</span><span class='va'>yields1</span>,<span class='st'>"weight"</span>,<span class='st'>"height"</span>,<span class='st'>"lm"</span><span class='op'>)</span> 
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>add_model_residuals</span><span class='op'>(</span><span class='va'>lm_model</span>, <span class='va'>yields2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    normal    height     weight    yield   residuals
-#&gt; 51    Yes 0.5876683 0.53966096 524.0298 -0.19588072
-#&gt; 52     No 0.1937264 0.46185381 516.9982  0.03232510
-#&gt; 53    Yes 0.3642414 0.07183639 527.1234  0.13322172
-#&gt; 54     No 0.6026853 0.21721278 536.8593  0.23862377
-#&gt; 55    Yes 0.5081495 0.16057305 516.6769  0.17555630
-#&gt; 56     No 0.5740309 0.53528679 518.9117 -0.08703343</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"yields"</span>, package<span class='op'>=</span><span class='st'>"manymodelr"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>yields1</span> <span class='op'>&lt;-</span> <span class='va'>yields</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span>,<span class='op'>]</span></span>
+<span class='r-in'><span class='va'>yields2</span> <span class='op'>&lt;-</span> <span class='va'>yields</span><span class='op'>[</span><span class='fl'>51</span><span class='op'>:</span><span class='fl'>100</span>,<span class='op'>]</span></span>
+<span class='r-in'><span class='va'>lm_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fit_model.html'>fit_model</a></span><span class='op'>(</span><span class='va'>yields1</span>,<span class='st'>"weight"</span>,<span class='st'>"height"</span>,<span class='st'>"lm"</span><span class='op'>)</span> </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>add_model_residuals</span><span class='op'>(</span><span class='va'>lm_model</span>, <span class='va'>yields2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    normal    height     weight    yield   residuals</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 51    Yes 0.5876683 0.53966096 524.0298 -0.19588072</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 52     No 0.1937264 0.46185381 516.9982  0.03232510</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 53    Yes 0.3642414 0.07183639 527.1234  0.13322172</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 54     No 0.6026853 0.21721278 536.8593  0.23862377</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 55    Yes 0.5081495 0.16057305 516.6769  0.17555630</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 56     No 0.5740309 0.53528679 518.9117 -0.08703343</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

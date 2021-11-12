@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -82,12 +82,12 @@
 
       
 
-      </header><script src="correlations_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="correlations_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Correlation Analysis with manymodelr</h1>
             
-            <h4 class="date">2021-09-19</h4>
+            <h4 class="date">2021-11-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Nelson-Gon/manymodelr/blob/master/vignettes/correlations.rmd"><code>vignettes/correlations.rmd</code></a></small>
       <div class="hidden name"><code>correlations.rmd</code></div>
@@ -96,7 +96,6 @@
 
     
     
-<p><a href="https://cran.r-project.org/package=manymodelr"><img src="https://www.r-pkg.org/badges/version/manymodelr" alt="CRAN_Status_Badge"></a> <a href="https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop"><img src="https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://doi.org/10.5281/zenodo.3891106"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg" alt="DOI"></a> <a href="https://github.com/Nelson-Gon/manymodelr"><img src="https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg" alt="R CMDCheck"></a> <img src="https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg" alt="test-coverage"><a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/license-GPL--2-blue.svg" alt="license"></a> <a href="https://CRAN.R-project.org/package=manymodelr"><img src="https://www.r-pkg.org/badges/version-ago/manymodelr" alt="CRAN_Release_Badge"></a> <a href="https://cran.r-project.org/package=manymodelr"><img src="https://cranlogs.r-pkg.org/badges/manymodelr" alt="Downloads"></a> <a href="https://cran.r-project.org/package=manymodelr"><img src="https://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow" alt="TotalDownloads"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="lifecycle"></a> <a href="https://GitHub.com/Nelson-Gon/manymodelr/graphs/commit-activity"><img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintenance"></a> <a href="https://www.repostatus.org/"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status"></a> <a href="https://github.com/Nelson-Gon/manymodelr/commits/master"><img src="https://img.shields.io/github/last-commit/Nelson-Gon/manymodelr.svg" alt="GitHub last commit"></a> <a href="https://GitHub.com/Nelson-Gon/manymodelr/issues/"><img src="https://img.shields.io/github/issues/Nelson-Gon/manymodelr.svg" alt="GitHub issues"></a> <a href="https://GitHub.com/Nelson-Gon/manymodelr/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/github/issues-closed/Nelson-Gon/manymodelr.svg" alt="GitHub issues-closed"></a> <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a></p>
 <ul>
 <li><code>get_var_corr</code></li>
 </ul>
@@ -105,8 +104,8 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Nelson-Gon/manymodelr">manymodelr</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: caret</span>
-<span class="co">#&gt; Loading required package: lattice</span>
 <span class="co">#&gt; Loading required package: ggplot2</span>
+<span class="co">#&gt; Loading required package: lattice</span>
 <span class="co">#&gt; Loading required package: Metrics</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'Metrics'</span>
@@ -114,7 +113,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     precision, recall</span>
 <span class="co">#&gt; Loading required package: e1071</span>
-<span class="co">#&gt; Welcome to manymodelr. This is manymodelr version 0.3.6.</span>
+<span class="co">#&gt; Welcome to manymodelr. This is manymodelr version 0.3.7.</span>
 <span class="co">#&gt;  Please file issues and feedback at https://www.github.com/Nelson-Gon/manymodelr/issues</span>
 <span class="co">#&gt; Turn this message off using 'suppressPackageStartupMessages(library(manymodelr))'</span>
 <span class="co">#&gt;  Happy Modelling! :)</span>
@@ -130,7 +129,7 @@
 <span class="co">#&gt; 4            mpg      drat 1.776240e-05   0.6811719  0.43604838  0.8322010</span>
 <span class="co">#&gt; 5            mpg        wt 1.293959e-10  -0.8676594 -0.93382641 -0.7440872</span>
 <span class="co">#&gt; 6            mpg      qsec 1.708199e-02   0.4186840  0.08195487  0.6696186</span></code></pre></div>
-<p><strong>Previously, one would also set <code>drop_columns</code> to <code>TRUE</code> if they wanted to drop factor columns.</strong> Now, a user simply provides a character vector specifying which column types(classes) should be dropped. It defaults to <code><a href="https://rdrr.io/r/base/c.html">c("character","factor")</a></code>.</p>
+<p><strong>Previously, one would also set <code>drop_columns</code> to <code>TRUE</code> if they wanted to drop factor columns.</strong> Now, a user simply provides a character vector specifying which column types(classes) should be dropped. It defaults to <code>c("character","factor")</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"yields"</span>, package<span class="op">=</span><span class="st">"manymodelr"</span><span class="op">)</span>
 <span class="co"># purely demonstrative</span>

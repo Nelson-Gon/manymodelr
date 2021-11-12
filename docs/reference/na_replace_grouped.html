@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -159,16 +159,17 @@
     <p>A `data.frame` object with `NA`s replaced.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>test2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>A<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>,<span class='st'>"A"</span>,<span class='st'>"A"</span>,<span class='st'>"B"</span>,<span class='st'>"B"</span>,<span class='st'>"B"</span><span class='op'>)</span>,
-B<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>,<span class='fl'>5</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='cn'>NA</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>na_replace_grouped</span><span class='op'>(</span><span class='va'>test2</span>,<span class='st'>"A"</span>,how<span class='op'>=</span><span class='st'>"value"</span>,<span class='st'>"Replaced"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   A        B
-#&gt; 1 A Replaced
-#&gt; 2 A        5
-#&gt; 3 A        2
-#&gt; 4 B        2
-#&gt; 5 B Replaced
-#&gt; 6 B        2</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>test2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>A<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>,<span class='st'>"A"</span>,<span class='st'>"A"</span>,<span class='st'>"B"</span>,<span class='st'>"B"</span>,<span class='st'>"B"</span><span class='op'>)</span>,</span>
+<span class='r-in'>B<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>,<span class='fl'>5</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='cn'>NA</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>na_replace_grouped</span><span class='op'>(</span><span class='va'>test2</span>,<span class='st'>"A"</span>,how<span class='op'>=</span><span class='st'>"value"</span>,<span class='st'>"Replaced"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   A        B</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 A Replaced</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 A        5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 A        2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 B        2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 B Replaced</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 B        2</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

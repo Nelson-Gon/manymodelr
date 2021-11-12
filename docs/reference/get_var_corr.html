@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -181,23 +181,25 @@ c("factor","character")</p></td>
     <p>A data.frame object containing correlations between comparison_var and each of other_vars</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Get correlations between all variables</span>
-<span class='fu'>get_var_corr</span><span class='op'>(</span><span class='va'>mtcars</span>,<span class='st'>"mpg"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    comparison_var other_var      p.value correlation    lower_ci   upper_ci
-#&gt; 1             mpg       cyl 6.112687e-10  -0.8521620 -0.92576936 -0.7163171
-#&gt; 2             mpg      disp 9.380327e-10  -0.8475514 -0.92335937 -0.7081376
-#&gt; 3             mpg        hp 1.787835e-07  -0.7761684 -0.88526861 -0.5860994
-#&gt; 4             mpg      drat 1.776240e-05   0.6811719  0.43604838  0.8322010
-#&gt; 5             mpg        wt 1.293959e-10  -0.8676594 -0.93382641 -0.7440872
-#&gt; 6             mpg      qsec 1.708199e-02   0.4186840  0.08195487  0.6696186
-#&gt; 7             mpg        vs 3.415937e-05   0.6640389  0.41036301  0.8223262
-#&gt; 8             mpg        am 2.850207e-04   0.5998324  0.31755830  0.7844520
-#&gt; 9             mpg      gear 5.400948e-03   0.4802848  0.15806177  0.7100628
-#&gt; 10            mpg      carb 1.084446e-03  -0.5509251 -0.75464796 -0.2503183</div><div class='input'><span class='co'># Use only a few variables</span>
-<span class='fu'>get_var_corr</span><span class='op'>(</span><span class='va'>mtcars</span>,<span class='st'>"mpg"</span>, other_vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>,<span class='st'>"drat"</span><span class='op'>)</span>, method <span class='op'>=</span> <span class='st'>"kendall"</span>,exact<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   comparison_var other_var      p.value correlation
-#&gt; 1            mpg      disp 1.006950e-09  -0.7681311
-#&gt; 2            mpg      drat 2.381533e-04   0.4645488</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># Get correlations between all variables</span></span>
+<span class='r-in'><span class='fu'>get_var_corr</span><span class='op'>(</span><span class='va'>mtcars</span>,<span class='st'>"mpg"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    comparison_var other_var      p.value correlation    lower_ci   upper_ci</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1             mpg       cyl 6.112687e-10  -0.8521620 -0.92576936 -0.7163171</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2             mpg      disp 9.380327e-10  -0.8475514 -0.92335937 -0.7081376</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3             mpg        hp 1.787835e-07  -0.7761684 -0.88526861 -0.5860994</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4             mpg      drat 1.776240e-05   0.6811719  0.43604838  0.8322010</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5             mpg        wt 1.293959e-10  -0.8676594 -0.93382641 -0.7440872</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6             mpg      qsec 1.708199e-02   0.4186840  0.08195487  0.6696186</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7             mpg        vs 3.415937e-05   0.6640389  0.41036301  0.8223262</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8             mpg        am 2.850207e-04   0.5998324  0.31755830  0.7844520</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9             mpg      gear 5.400948e-03   0.4802848  0.15806177  0.7100628</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10            mpg      carb 1.084446e-03  -0.5509251 -0.75464796 -0.2503183</span>
+<span class='r-in'><span class='co'># Use only a few variables</span></span>
+<span class='r-in'><span class='fu'>get_var_corr</span><span class='op'>(</span><span class='va'>mtcars</span>,<span class='st'>"mpg"</span>, other_vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"disp"</span>,<span class='st'>"drat"</span><span class='op'>)</span>, method <span class='op'>=</span> <span class='st'>"kendall"</span>,exact<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   comparison_var other_var      p.value correlation</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1            mpg      disp 1.006950e-09  -0.7681311</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2            mpg      drat 2.381533e-04   0.4645488</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
