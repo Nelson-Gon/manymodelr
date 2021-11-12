@@ -1,10 +1,13 @@
 ---
-
-title: "manymodelr-News"
+title: "manymodelr's changelog"
 author: "Nelson Gonzabato"
-output: htlm_document
-
+output: html_document
 ---
+
+# manymodelr 0.3.7 
+
+* We no longer use any URLs in vignettes to avoid issues with CRAN checks. 
+
 # manymodelr 0.3.6
 
 

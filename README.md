@@ -1,17 +1,17 @@
 manymodelr: Build and Tune Several Models
 ================
-2021-09-19
+2021-11-12
 
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/web/packages/manymodelr/index.html)
 [![Codecov test
 coverage](https://codecov.io/gh/Nelson-Gon/manymodelr/branch/develop/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/manymodelr?branch=develop)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg)](https://doi.org/10.5281/zenodo.3891106)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg)](https://zenodo.org/record/5211272)
 [![R
 CMDCheck](https://github.com/Nelson-Gon/manymodelr/workflows/R-CMD-check-devel/badge.svg)](https://github.com/Nelson-Gon/manymodelr)
 ![test-coverage](https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg)
 [![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/manymodelr)](https://CRAN.R-project.org/package=manymodelr)
-[![Downloads](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/package=manymodelr)
+[![CRAN_Release_Badge](https://www.r-pkg.org/badges/version-ago/manymodelr)](https://cran.r-project.org/web/packages/manymodelr/index.html)
+[![Downloads](https://cranlogs.r-pkg.org/badges/manymodelr)](https://cran.r-project.org/web/packages/manymodelr/index.html)
 [![TotalDownloads](https://cranlogs.r-pkg.org/badges/grand-total/manymodelr?color=yellow)](https://cran.r-project.org/package=manymodelr)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Nelson-Gon/manymodelr/graphs/commit-activity)
@@ -43,8 +43,8 @@ loading the package and exploring some of the key functions.
 ``` r
 library(manymodelr)
 #> Loading required package: caret
-#> Loading required package: lattice
 #> Loading required package: ggplot2
+#> Loading required package: lattice
 #> Loading required package: Metrics
 #> 
 #> Attaching package: 'Metrics'
@@ -52,7 +52,7 @@ library(manymodelr)
 #> 
 #>     precision, recall
 #> Loading required package: e1071
-#> Welcome to manymodelr. This is manymodelr version 0.3.6.
+#> Welcome to manymodelr. This is manymodelr version 0.3.7.
 #>  Please file issues and feedback at https://www.github.com/Nelson-Gon/manymodelr/issues
 #> Turn this message off using 'suppressPackageStartupMessages(library(manymodelr))'
 #>  Happy Modelling! :)
@@ -116,7 +116,7 @@ head(m$predictions)
 #> 6 Yes   Yes
 ```
 
--   **multi\_model\_2**
+-   **multi_model_2**
 
 This is similar to `multi_model_1` with one difference: it does not use
 metrics such as RMSE, accuracy and the like. This function is useful if
