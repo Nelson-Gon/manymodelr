@@ -77,7 +77,7 @@ output: html_document
 - `row_mean_na` is now defunct. Use `na_replace` instead.
 
 
-- `na_replace` no longer allows using functions such as `mean`,`min`, etc. These have been reimplemented in the package [mde](https://www.github.com/Nelson-Gon/mde)
+- `na_replace` no longer allows using functions such as `mean`,`min`, etc. These have been reimplemented in the package [mde](https://github.com/Nelson-Gon/mde)
 
 
 - `modeleR` is now defunct. Use `fit_model` instead.
