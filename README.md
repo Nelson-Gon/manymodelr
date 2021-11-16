@@ -1,6 +1,6 @@
 manymodelr: Build and Tune Several Models
 ================
-2021-11-12
+2021-11-16
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://CRAN.R-project.org/package=manymodelr)
 [![Codecov test
@@ -52,7 +52,7 @@ library(manymodelr)
 #> 
 #>     precision, recall
 #> Loading required package: e1071
-#> Welcome to manymodelr. This is manymodelr version 0.3.7.
+#> Welcome to manymodelr. This is manymodelr version 0.3.8.9000.
 #>  Please file issues and feedback at https://www.github.com/Nelson-Gon/manymodelr/issues
 #> Turn this message off using 'suppressPackageStartupMessages(library(manymodelr))'
 #>  Happy Modelling! :)

@@ -1,6 +1,6 @@
 Package: manymodelr
 Title: Build and Tune Several Models
-Version: 0.3.7
+Version: 0.3.8.9000
 Authors@R: 
     person(given = "Nelson",
            family = "Gonzabato",
@@ -34,3 +34,4 @@ Suggests:
     markdown 
 VignetteBuilder: knitr
 LazyData: True
+Config/testthat/edition: 3

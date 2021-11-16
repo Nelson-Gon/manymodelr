@@ -1,22 +1,18 @@
-#' Test that get_var_corr_ returns a warning
-library(manymodelr)
-testthat::test_that(desc="Tests that get_var_corr
+test_that(desc="Tests that get_var_corr
                     returns a warning",
                     code={
                       
                         skip_on_oldrel()
-    testthat::expect_warning(get_var_corr_(yields),
-           "Columns with classes in drop_columns were dropped.", 
-           fixed = TRUE)
+    expect_snapshot(expect_warning(get_var_corr_(yields)))
     # Uses get_var_corr but we cannot just assume that it works.
     # Verify that things work as intended
-    testthat::expect_true("upper_ci" %in% names(get_var_corr_(mtcars)))
+    expect_true("upper_ci" %in% names(get_var_corr_(mtcars)))
     # Test method changes
-    testthat::expect_false(any(c("upper_ci","lower_ci") %in% 
+    expect_false(any(c("upper_ci","lower_ci") %in% 
                                  names(get_var_corr_(mtcars,
                               method = "spearman", exact = FALSE))))
     # Expect length
-    testthat::expect_true(length(names(get_var_corr_(mtcars,
+    expect_true(length(names(get_var_corr_(mtcars,
                                   method = "kendall", exact = FALSE))) == 4)
     
     expect_equal(nrow(get_var_corr_(mtcars,

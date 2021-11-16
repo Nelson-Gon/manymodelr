@@ -1,5 +1,3 @@
-# Missing Value Replacement
-library(manymodelr)
 testthat::test_that(desc="NA replacement works",
                     code={
 
