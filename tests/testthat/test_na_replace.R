@@ -2,9 +2,9 @@
 library(manymodelr)
 testthat::test_that(desc="NA replacement works",
                     code={
-                      
+
                       skip_on_oldrel()
-                      
+
                   test_data <- data.frame(ID=c("A","A",
                                                "B","B"),
                                           Val=c(1,2,2,NA))
@@ -17,16 +17,15 @@ testthat::test_that(desc="NA replacement works",
              expect_equal(na_replace(df=test_data,how="ffill")[4,2],1)
              set.seed(123)
              expect_equal(na_replace(df=test_data,how="samples")[4,2],2)
-              
-            expect_error(na_replace(test_data),"One of how or value should be provided",
-                         fixed=TRUE)
-          
-                    
+
+            expect_error(na_replace(test_data))
+
+
                   })
 
 test_that(desc="Test grouped replacement",
                     code={
-                      
+
               test_data <- data.frame(ID=c("A","A","A",
                                                    "B","B","B"),
                                               Val=c(1,NA,3,2,NA,5))
@@ -36,8 +35,6 @@ test_that(desc="Test grouped replacement",
                                      1)
               expect_error(na_replace_grouped(test_data,
                                                         group_by_cols = "ID",
-                                                        how="mean"),
-                                     "how should be one of ffill, samples, value or get_mode.",
-                                     fixed = TRUE)
+                                                        how="mean"))
                     })
 
