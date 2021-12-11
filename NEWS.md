@@ -6,6 +6,9 @@ output: html_document
 
 # manymodelr 0.3.8
 
+* A new function `report_model` was introduced to allow simple model reports. 
+See `?report_model` for details and documentation. 
+
 * We now use `testthat` edition 3 which makes it easier to deal with warnings
 and errors in a cleaner way. See https://github.com/r-lib/testthat/issues/1471,
 https://github.com/Nelson-Gon/manymodelr/pull/22. 

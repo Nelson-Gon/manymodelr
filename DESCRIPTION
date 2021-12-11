@@ -18,7 +18,8 @@ RoxygenNote: 7.1.2
 Imports: 
     dplyr (>= 1.0.0),
     ggplot2 (>= 3.3.5),
-    lme4 (>= 1.1.27.1)
+    lme4 (>= 1.1.27.1),
+    stringr (>= 1.4.0)
 Depends:
     R (>= 3.6.0),
     caret (>= 6.0.88),
