@@ -14,9 +14,19 @@ report_model <- function(model_object = NULL,
                          response_name = "Score") {
   UseMethod("report_model")
 }
+
+report_model.default <- function(model_object=NULL,
+                                 response_name = "Score"){
+  if(is.null(model_object)){
+    stop("No model object was supplied. Please provide one.")
+  }
+  stop(paste0("We currently do not support reports for ",
+              class(model_object), " objects, sorry!"))
+}
 #' @export 
 report_model.glm <- function(model_object = NULL,
                          response_name = "Score") {
+
   model_coeffs <- summary(model_object)$coefficients[, c(1, 4)]
   
   model_coeffs %>%
