@@ -1,6 +1,6 @@
 manymodelr: Build and Tune Several Models
 ================
-2021-11-16
+2021-12-11
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://CRAN.R-project.org/package=manymodelr)
 [![Codecov test
@@ -224,8 +224,8 @@ set `drop_non_numeric` to `TRUE` as follows. The same can be done for
 `fit_model` above:
 
 ``` r
-fit_models(df=yields,yname=c("height","weight"),
-           xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE)
+(models<-fit_models(df=yields,yname=c("height","weight"),
+           xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE))
 #> [[1]]
 #> [[1]][[1]]
 #> 
@@ -272,6 +272,19 @@ fit_models(df=yields,yname=c("height","weight"),
 #> Degrees of Freedom: 999 Total (i.e. Null);  997 Residual
 #> Null Deviance:       30.7 
 #> Residual Deviance: 29.69     AIC: -671.1
+```
+
+## Generating a (simple) model report
+
+One can generate a very simple model report using `report_model` as
+follows:
+
+``` r
+report_model(models[[2]][[1]])
+#>              Type      Estimate      P_Value Exp_Estimate  Effect
+#> 1 Estimated Score  0.2176942039 5.487736e-01    1.2432068    1.24
+#> 2          weight -0.2185572088 1.252007e-08    0.8036775 -19.63%
+#> 3           yield  0.0006711689 3.369693e-01    1.0006714  +0.07%
 ```
 
 ## Extraction of Model Information
@@ -416,7 +429,7 @@ plot_corr(mtcars,show_which = "corr",
 #> Using colour_by for the legend title.
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
 
 To show significance of the results instead of the correlations
 themselves, we can set `show_which` to “signif” as shown below. By
@@ -433,7 +446,7 @@ plot_corr(mtcars, x="other_var", y="comparison_var",plot_style = "circles",show_
 #> "circles", : Using colour_by for the legend title.
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
 
 To explore more options, please take a look at the documentation.
 

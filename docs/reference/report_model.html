@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Contributing to manymodelr • Build and Tune Several Models</title>
+<title>Create a simplified report of a model's summary — report_model • Build and Tune Several Models</title>
 
 
 <!-- jquery -->
@@ -18,8 +18,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script>
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -33,13 +33,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="Contributing to manymodelr" />
+<meta property="og:title" content="Create a simplified report of a model's summary — report_model" />
+<meta property="og:description" content="Create a simplified report of a model's summary" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -70,7 +71,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">Build and Tune Several Models</a>
+        <a class="navbar-link" href="../index.html">Build and Tune Several Models</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8.9000</span>
       </span>
     </div>
@@ -78,7 +79,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="articles/manymodelr_vignette.html">
+  <a href="../articles/manymodelr_vignette.html">
     <span class="fa fa-home"></span>
      
   </a>
@@ -91,16 +92,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/modeling.html">Modeling with manymodelr</a>
+      <a href="../articles/modeling.html">Modeling with manymodelr</a>
     </li>
     <li>
-      <a href="articles/correlations.html">Correlation analysis</a>
+      <a href="../articles/correlations.html">Correlation analysis</a>
     </li>
     <li>
-      <a href="articles/misc.html">Miscellaneous</a>
+      <a href="../articles/misc.html">Miscellaneous</a>
     </li>
     <li>
-      <a href="news/index.html">Changes</a>
+      <a href="../news/index.html">Changes</a>
     </li>
   </ul>
 </li>
@@ -123,58 +124,52 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Contributing to manymodelr</h1>
+    <h1>Create a simplified report of a model's summary</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Nelson-Gon/manymodelr/blob/master/R/report_model.R'><code>R/report_model.R</code></a></small>
+    <div class="hidden name"><code>report_model.Rd</code></div>
     </div>
 
-<div id="contributing-to-manymodelr" class="section level1">
+    <div class="ref-description">
+    <p>Create a simplified report of a model's summary</p>
+    </div>
 
-<p>This document provides guidelines for contributions to manymodelr.</p>
-<p><strong>Kinds of contribution</strong></p>
-<ul>
-<li>Typo fixes</li>
-<li>Documentantion enhancements</li>
-<li>Pull requests</li>
-</ul>
-<p><strong>Fixing typos and enhancing documentation</strong></p>
-<p>To fix typos and/or grammatical errors, please edit the corresponding <code>.R</code> or <code>.md</code> file that generates the documentation.</p>
-<p>If edited via an <code>.R</code> file, please also update the docs using <code>roxygen2</code> to generate the associated <code>.Rd</code> file.</p>
-<p><strong>Pull Requests</strong></p>
-<ul>
-<li><p>Please raise an issue for discussion and reproducibility checks at <a href="https://github.com/Nelson-Gon/manymodelr/issues">issues</a></p></li>
-<li><p>Once the bug/enhancement is approved, please create a Git branch for the pull request.</p></li>
-<li><p>Make changes and ensure that builds are passing the necessary checks on Travis.</p></li>
-<li><p>Update <code>NEWS.md</code> to reflect the changes made.</p></li>
-<li><p>Update <code>README.Rmd</code>, <code>knit</code></p></li>
-<li><p>Run: <code>cp README.Rmd vignettes/manymodelr_vignette.rmd &amp;&amp; sed -i 's/github_document/html_document/g' vignettes/manymodelr_vignette.rmd</code></p></li>
-<li><p><code>Knit</code> vignettes. Bonus points if you use <code>Rscript</code> or some way to automate this process.</p></li>
-</ul>
-<p><strong>Release checklist</strong></p>
-<ul>
-<li><p>Check as CRAN with <code>devtools::checK()</code></p></li>
-<li><p>Check old releases with <code><a href="https://devtools.r-lib.org/reference/check_win.html">devtools::check_win_oldrelease()</a></code></p></li>
-<li><p>Update changes in <code>NEWS.md</code></p></li>
-<li><p>Update version in <code>Description</code>.</p></li>
-<li><p>Update <code>README.rmd</code>, knit to make <code>README.md</code>.</p></li>
-<li><p>Perform a spelling check.</p></li>
-<li><p>Rebuild site if necessary with <code><a href="https://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site</a></code></p></li>
-<li><p>Update <code>cran-comments.md</code></p></li>
-<li><p>Release package with <code><a href="https://devtools.r-lib.org/reference/release.html">devtools::release</a></code> if all steps above are fulfilled.</p></li>
-</ul>
-<p>Please note that the ‘manymodelr’ project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
-</div>
+    <pre class="usage"><span class='fu'>report_model</span><span class='op'>(</span>model_object <span class='op'>=</span> <span class='cn'>NULL</span>, response_name <span class='op'>=</span> <span class='st'>"Score"</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>model_object</th>
+      <td><p>A model object</p></td>
+    </tr>
+    <tr>
+      <th>response_name</th>
+      <td><p>Name of the response variable. Defaults to "Score".</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data.frame object showing a simple model report that includes the 
+effect of each predictor variable on the response.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='r-in'><span class='va'>models</span><span class='op'>&lt;-</span><span class='fu'><a href='fit_models.html'>fit_models</a></span><span class='op'>(</span>df<span class='op'>=</span><span class='va'>yields</span>,yname<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"height"</span>,<span class='st'>"yield"</span><span class='op'>)</span>,xname<span class='op'>=</span><span class='st'>"weight"</span>,</span>
+<span class='r-in'>modeltype<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"lm"</span>, <span class='st'>"glm"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>report_model</span><span class='op'>(</span><span class='va'>models</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              Type   Estimate       P_Value Exp_Estimate  Effect</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 Estimated Score  0.5661263 1.446829e-233    1.7614306    1.76</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2          weight -0.2173539  1.470866e-08    0.8046452 -19.54%</span>
+</pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
-
 
 
       <footer>

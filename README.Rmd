@@ -170,9 +170,17 @@ head(res_predictions[[1]])
 If one would like to drop non-numeric columns from the analysis, one can set `drop_non_numeric` to `TRUE` as follows. The same can be done for `fit_model` above:
 
 ```{r}
-fit_models(df=yields,yname=c("height","weight"),
-           xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE)
+(models<-fit_models(df=yields,yname=c("height","weight"),
+           xname=".",modeltype=c("lm","glm"), drop_non_numeric = TRUE))
 
+```
+
+## Generating a (simple) model report
+
+One can generate a very simple model report using `report_model` as follows:
+
+```{r}
+report_model(models[[2]][[1]])
 ```
 
 
