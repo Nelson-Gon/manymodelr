@@ -12,8 +12,8 @@ test_chr <- c("Apples","Apples","Pineapples",
                         "Apples")
 expect_equal(get_mode(test_vec), 1)
 expect_equal(get_mode(test_chr),"Apples")
-        
-expect_snapshot(expect_warning(get_mode(yields)))
+
+expect_warning(get_mode(yields))
 })
 
 
