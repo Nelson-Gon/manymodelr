@@ -23,3 +23,4 @@ README_files/
 ^CRAN-RELEASE$
 ^data-raw$
 ^NEWS\.HTML$
+actions.yaml
