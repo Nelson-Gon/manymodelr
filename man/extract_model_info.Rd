@@ -30,7 +30,7 @@ mean squared error(msq), degrees of freedom(df),p_value.
 data("yields", package="manymodelr")
 aov_mod <- fit_model(yields, "weight","height + normal","aov")
 extract_model_info(aov_mod, "ssq")
-extract_model_info(aov_mod, c("ssq","predictors")) 
+extract_model_info(aov_mod, c("ssq","predictors"))
 # linear regression
 lm_model <-fit_model(yields, "weight","height","lm")
 extract_model_info(lm_model,c("aic","bic"))

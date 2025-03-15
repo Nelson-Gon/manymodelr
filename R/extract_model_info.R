@@ -11,13 +11,13 @@
 #' one can extract such attributes as coefficients, p value("p_value"), standard error("std_err"),
 #' estimate, t value("t_value"), residuals, aic and other known attributes.
 #' For analysis of variance (aov), other attributes like sum squared(ssq),
-#' mean squared error(msq), degrees of freedom(df),p_value. 
-#' @examples 
+#' mean squared error(msq), degrees of freedom(df),p_value.
+#' @examples
 #' # perform analysis of variance
 #' data("yields", package="manymodelr")
 #' aov_mod <- fit_model(yields, "weight","height + normal","aov")
 #' extract_model_info(aov_mod, "ssq")
-#' extract_model_info(aov_mod, c("ssq","predictors")) 
+#' extract_model_info(aov_mod, c("ssq","predictors"))
 #' # linear regression
 #' lm_model <-fit_model(yields, "weight","height","lm")
 #' extract_model_info(lm_model,c("aic","bic"))
@@ -30,7 +30,7 @@ extract_model_info <- function(model_object=NULL, what=NULL,...){
 
 }
 
-
+#' @export
 extract_model_info.default<- function(model_object=NULL, what=NULL,...){
 
 if(any(is.null(model_object), is.null(what))) stop("model_object and what are both required")
@@ -42,7 +42,7 @@ response_var <- formula_build[1]
 model_summary <- summary(model_object)
 model_attrs_list <- list(call=model_call,
                          aic = AIC(model_object,...), bic = stats::BIC(model_object,...),
-                       log_lik= stats::logLik(model_object,...), 
+                       log_lik= stats::logLik(model_object,...),
                        deviance = stats::deviance(model_object,...),
                        df.resid= stats::df.residual(model_object,...),
                       coeffs = stats::coef(model_object,...) , predictors = predictor_var,
@@ -52,10 +52,10 @@ model_attrs_list <- list(call=model_call,
                       r2 = model_summary$r.squared,
                       adj_r2 = model_summary$adj.r.squared,
                       p_value = coef(model_summary)[,4])
-  
-  
+
+
   attrs_to_select<-match(what,names(model_attrs_list))
-  
+
   if(length(what) == 1) model_attrs_list[[attrs_to_select]] else model_attrs_list[attrs_to_select]
 }
 
@@ -83,12 +83,12 @@ possible_what <- c("coeffs","df","ssq","msq","f_value","p_value", "resids","aic"
 if(any(! what %in% possible_what)) stop(paste0(c("what should be one of",possible_what), collapse=" "))
 
 
-model_attrs_list<-list( coeffs = coef(model_object), 
-                        df = model_summary[[1]][1], 
+model_attrs_list<-list( coeffs = coef(model_object),
+                        df = model_summary[[1]][1],
                         ssq = model_summary[[1]][2],
           msq = model_summary[[1]][3], f_value = model_summary[[1]][4],
           p_value = model_summary[[1]][5], resids = residuals(model_summary),
-          residuals = residuals(model_summary), 
+          residuals = residuals(model_summary),
           aic = AIC(model_object,...),
           predictors = predictor_var,
           response = response_var)
@@ -108,19 +108,19 @@ extract_model_info.lmerMod <- function(model_object=NULL, what=NULL,...){
 if(any(is.null(model_object), is.null(what))) stop("model_object and what are both required")
 
 model_summary <- summary(model_object)
-possible_what <- c("fixed_effects","resids", 
+possible_what <- c("fixed_effects","resids",
                    "log_lik",
                    "random_groups","random_effects","reml","formula",
                                   "coefficients", "residuals")
 if(any(! what %in% possible_what)) stop(paste0(c("what should be one of",possible_what), collapse=" "))
 
-model_attrs_list <-list(fixed_effects = model_summary[[10]], 
+model_attrs_list <-list(fixed_effects = model_summary[[10]],
                         resids = model_summary [[16]],
-         residuals= residuals(model_summary), 
+         residuals= residuals(model_summary),
          log_lik = stats::logLik(model_object,...),
          random_groups = model_summary [[9]],
          random_effects = Filter(Negate(anyNA),as.data.frame(model_summary[[13]])),
-         reml = model_summary [[14]],formula = model_summary[[15]], 
+         reml = model_summary [[14]],formula = model_summary[[15]],
          coefficients = coef(model_object))
 
 attrs_to_select <- match(what, names(model_attrs_list))
