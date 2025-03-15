@@ -29,7 +29,8 @@ agg_by_group.data.frame <-function(data_set=NULL,my_formula=NULL,func=NULL,...){
   my_formula<-deparse(substitute(my_formula))
 
   res<-aggregate(as.formula(my_formula),data = data_set,func,...)
-  extracted_attr <- gsub("\\W","",gsub(".*(?=~)","",my_formula,perl=TRUE))
+  # For some reason, this will fail with "left" as the trimmer
+  extracted_attr <- trimws(gsub("[+~]","",gsub(".*(?=~)","",my_formula,perl=TRUE)))
   if(any(is.null(extracted_attr), is.na(extracted_attr))){
     stop("No groups found, please check your data and try again")
   }
