@@ -3,14 +3,14 @@ Release Summary
 
 
 This is a patch release. It fixes known issues on the CRAN release. It also updates
-the minimum required R version for compatibiltiy with dependencies. 
+the minimum required R version for compatibility with dependencies. 
 
 ## Test environments
 
 * Local MacOS 
 * Windows Latest 
 * Windows Devel 
-* 
+* Ubuntu Devel
 
 ## R CMD check results
 

@@ -6,6 +6,10 @@ output: html_document
 
 # manymodelr 0.3.8
 
+* Fixed issues with extracting groups for a future version of R. 
+
+* The minimum required R version was updated to 4.4.
+
 * A new function `report_model` was introduced to allow simple model reports. 
 See `?report_model` for details and documentation. 
 
