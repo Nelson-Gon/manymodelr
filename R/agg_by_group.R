@@ -30,6 +30,9 @@ agg_by_group.data.frame <-function(data_set=NULL,my_formula=NULL,func=NULL,...){
 
   res<-aggregate(as.formula(my_formula),data_set,func,...)
   extracted_attr <- trimws(gsub("[~+]","",gsub(".*(?=~)","",my_formula,perl=TRUE),"left"))
+  if(any(is.null(extracted_attr), is.na(extracted_attr))){
+    stop("No groups found, please check your data and try again")
+  }
   attr(res,"Groups")<-extracted_attr
   attr(res,"Groups")<-strsplit(attributes(res)$Groups,"\\s+")[[1]]
   res_list<-unlist(strsplit(attributes(res)["Groups"][[1]]," "))
