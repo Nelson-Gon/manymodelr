@@ -12,7 +12,7 @@ report_model(model_object = NULL, response_name = "Score")
 \item{response_name}{Name of the response variable. Defaults to "Score".}
 }
 \value{
-A data.frame object showing a simple model report that includes the 
+A data.frame object showing a simple model report that includes the
 effect of each predictor variable on the response.
 }
 \description{

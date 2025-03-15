@@ -82,7 +82,7 @@ labels produced by the plot method.}
 
 \item{legend_title}{Title to use for the legend.}
 
-\item{signif_cutoff}{Numeric. If show_signif is TRUE, this defines the cutoff point for significance. Defaults to 
+\item{signif_cutoff}{Numeric. If show_signif is TRUE, this defines the cutoff point for significance. Defaults to
 0.05.}
 
 \item{signif_size}{Numeric. Defines size of the significance stars.}
@@ -106,7 +106,7 @@ blanks in the plot would indicate a correlation of 1.
 \examples{
 plot_corr(mtcars,show_which = "corr",
 round_values = TRUE,
-round_which = "correlation",decimals = 2,x="other_var", 
+round_which = "correlation",decimals = 2,x="other_var",
 y="comparison_var",plot_style = "circles",width = 1.1,
 custom_cols = c("green","blue","red"),colour_by = "correlation")
 }

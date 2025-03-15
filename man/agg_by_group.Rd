@@ -4,10 +4,10 @@
 \alias{agg_by_group}
 \title{A convenient way to perform grouped operations}
 \usage{
-agg_by_group(df = NULL, my_formula = NULL, func = NULL, ...)
+agg_by_group(data_set = NULL, my_formula = NULL, func = NULL, ...)
 }
 \arguments{
-\item{df}{The data set for which correlations are required}
+\item{data_set}{The data set for which correlations are required}
 
 \item{my_formula}{A formula such as A~B where B is the grouping variable(normally a factor).
 See examples below}
