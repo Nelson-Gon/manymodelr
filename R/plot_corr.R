@@ -153,8 +153,8 @@ if (is.null(colour_by)) {
 
 
 
-    base_plot <- ggplot2::ggplot(data = df, ggplot2::aes(x = !!dplyr::sym(x) ,
-                                                         y = !!dplyr::sym(y)))
+    base_plot <- ggplot(data = df, aes(x = !!sym(x) ,
+                                                         y = !!sym(y)))
     base_plot_final <- base_plot +
       geom_point(size = size,
                  aes_string(col = colour_by),
@@ -169,7 +169,7 @@ if (is.null(colour_by)) {
   if (plot_style == "squares") {
     base_plot_final <- base_plot +
       geom_tile(size = size,
-                aes(fill = !!dplyr::sym(colour_by)),
+                aes(fill = !!sym(colour_by)),
                 width = width) +
       scale_fill_gradient2(low = custom_cols[1],
                            mid = custom_cols[2],

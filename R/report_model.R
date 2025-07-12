@@ -53,7 +53,7 @@ report_model.glm <- function(model_object = NULL,
         ),
         round(Exp_Estimate, 2)
       ),
-      Type = stringr::str_replace_all(
+      Type = str_replace_all(
         Type,
         "^\\(.*",
         paste0("Estimated ",

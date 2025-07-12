@@ -38,20 +38,20 @@
 #' m$Metrics
 #' m$modelInfo
 #' @export
-multi_model_1<-function (old_data, yname, xname, method=NULL, metric=NULL, control=NULL,new_data=NULL,  ...) 
+multi_model_1<-function (old_data, yname, xname, method=NULL, metric=NULL, control=NULL,new_data=NULL,  ...)
 {
   UseMethod("multi_model_1")
 }
 #' @export
-multi_model_1<-function (old_data, yname, xname, method=NULL, metric=NULL, control=NULL,new_data=NULL, 
+multi_model_1<-function (old_data, yname, xname, method=NULL, metric=NULL, control=NULL,new_data=NULL,
                          ...) {
-  
+
   if(any(is.null(new_data),is.null(metric),is.null(method), is.null(control))){
     stop("new_data,metric,method, and control must all be supplied")
   }
-  
 
-  
+
+
 model_formula <- as.formula(paste0(yname, "~", xname))
 fitted_model <- lapply(method, function(met) {
     set.seed(520)
@@ -62,18 +62,19 @@ fitted_model <- lapply(method, function(met) {
   predicted_values <- as.data.frame(sapply(predictions, function(x) do.call(unlist,list(x))))
   new_metric <- tolower(metric)
   names(predicted_values) <- method
- 
-  
-  
+
+
+
 metrics <- lapply(predicted_values, function(x) do.call(new_metric, list(new_data[,yname],x)))
 
-  
-final_results <- list(metric = dplyr::as_tibble(metrics), predictions = dplyr::as_tibble(predicted_values),
+
+final_results <- list(metric = as_tibble(metrics), predictions =
+                        as_tibble(predicted_values),
                       model_info=fitted_model)
- 
+
 names(final_results$metric) <- paste(names(final_results$metric),new_metric,sep = "_")
 final_results
-  
+
 
 
 }

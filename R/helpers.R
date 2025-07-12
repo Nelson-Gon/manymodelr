@@ -4,13 +4,13 @@
 #' @details This is a function factory that creates an exponent from a given value of n
 #' @return Returns n to the power of n
 #' @keywords internal
-#' @noRd 
+#' @noRd
 
 force_exponent<-function(n){
   force(n)
   function(x){
     x^n
-    
+
   }
 }
 
@@ -25,28 +25,28 @@ make_exponent<-function(y=NULL,x=NULL){
   if(any(!is.numeric(y),!is.numeric(x))) stop("Only numerics are supported")
   get_exponent_helper<-force_exponent(x)
   get_exponent_helper(y)
- 
+
 }
 
 # skip tests on old releases
 
 skip_on_oldrel <- function(version="3.6.3", msg = NULL) {
-  current_version <- utils::packageVersion("base")
+  current_version <- packageVersion("base")
   if (current_version <= version) {
     msg <- paste("R version",current_version, "not supported. Please upgrade to R>= 3.6.3")
-    testthat::skip(msg)
+    skip(msg)
   }
 }
 
 #' Drops non numeric columns from a data.frame object
 #' @param df A data.frame object for which non-numeric columns will be dropped
-#' @examples 
+#' @examples
 #'  drop_non_numeric(data.frame(A=1:2, B=c("A", "B")))
 #' @export
 
 drop_non_numeric <- function(df){
   UseMethod("drop_non_numeric")
-  
+
 }
 
 #' @export

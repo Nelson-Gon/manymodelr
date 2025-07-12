@@ -4,12 +4,12 @@ title: "manymodelr: Build and Tune Several Models"
 output: html_document
 vignette: >
   %\VignetteIndexEntry{ "Modeling made simple with manymodelr"}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(
+opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )

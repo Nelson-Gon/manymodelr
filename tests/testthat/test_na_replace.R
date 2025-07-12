@@ -1,4 +1,4 @@
-testthat::test_that(desc="NA replacement works",
+test_that(desc="NA replacement works",
                     code={
 
                       skip_on_oldrel()

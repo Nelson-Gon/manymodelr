@@ -16,20 +16,20 @@ na_replace<-function(df,how=NULL,value=NULL){
 #' @export
 
 na_replace.data.frame<-function(df,how=NULL,value=NULL){
- df %>% 
-    dplyr::mutate(dplyr::across(dplyr::everything(),
-                                ~na_replace.character(.,how=how,value = value)))
-  
+ df %>%
+    mutate(across(everything(),
+                  ~na_replace.character(.,how=how,value = value)))
+
 }
 #' @export
 na_replace.numeric<-function(df=NULL,how=NULL,value=NULL){
 
- 
-  
-if(all(is.null(how),is.null(value))) stop("One of how or value should be provided")
- 
 
-  # individually get replacements 
+
+if(all(is.null(how),is.null(value))) stop("One of how or value should be provided")
+
+
+  # individually get replacements
   if(! how%in%c("ffill","samples","value", "get_mode")){
     stop("how should be one of ffill, samples, value or get_mode.")
   }
@@ -39,13 +39,13 @@ if(all(is.null(how),is.null(value))) stop("One of how or value should be provide
 
 switch(how,
          ffill =  ifelse(is.na(df), to_replace[1:length(df[is.na(df)])],df),
-         samples =       
+         samples =
            ifelse(is.na(df),sample(na.omit(df),length(df[is.na(df)]),
                                    replace = TRUE),df),
          value = ifelse(is.na(df),value, df),
          get_mode = ifelse(is.na(df),do.call("get_mode",list(na.omit(df))),df))
-  
-  
+
+
 }
 #' @export
 na_replace.character<- na_replace.numeric

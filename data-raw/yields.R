@@ -9,4 +9,4 @@ yields <- data.frame(normal = rep(c("Yes", "No"), 500),
                           weight=runif(100,0, 0.6),
                           yield = rnorm(100, mean =520, sd = 10))
 
-usethis::use_data(yields, overwrite = TRUE)
+use_data(yields, overwrite = TRUE)
