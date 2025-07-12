@@ -4,7 +4,7 @@ title: "manymodelr: Build and Tune Several Models"
 output: html_document
 vignette: >
   %\VignetteIndexEntry{ "Modeling made simple with manymodelr"}
-  %\VignetteEngine{rmarkdown}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 

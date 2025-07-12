@@ -4,7 +4,7 @@ title: "Correlation Analysis with manymodelr"
 output: html_document
 vignette: >
   %\VignetteIndexEntry{ "Variable Correlations with manymolder"}
-  %\VignetteEngine{rmarkdown}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 

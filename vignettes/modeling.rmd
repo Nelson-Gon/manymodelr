@@ -4,7 +4,7 @@ title: "Building predictive models with manymodelr"
 output: html_document
 vignette: >
   %\VignetteIndexEntry{ "Easy modeling with manymodelr"}
-  %\VignetteEngine{rmarkdown}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 

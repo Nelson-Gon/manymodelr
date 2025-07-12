@@ -4,7 +4,7 @@ title: "Extra functions in manymodelr"
 output: html_document
 vignette: >
   %\VignetteIndexEntry{ "Extra functions in manymodelr"}
-  %\VignetteEngine{rmarkdown}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
