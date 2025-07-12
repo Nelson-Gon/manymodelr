@@ -1,6 +1,6 @@
 Package: manymodelr
 Title: Build and Tune Several Models
-Version: 0.3.9
+Version: 0.4.0.999
 Authors@R: 
     person(given = "Nelson",
            family = "Gonzabato",
