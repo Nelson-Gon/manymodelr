@@ -32,7 +32,8 @@ Suggests:
     rmarkdown,
     testthat,
     covr, 
-    markdown 
+    markdown, 
+    usethis
 VignetteBuilder: knitr
 LazyData: True
 Config/testthat/edition: 3
