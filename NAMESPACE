@@ -67,5 +67,4 @@ importFrom(stats,"as.formula", logLik, deviance, df.residual, BIC,
 importFrom(stringr,str_replace_all)
 importFrom(utils,combn, globalVariables, packageVersion)
 importFrom(usethis, use_data)
-importFrom(knitr, opts_chunk)
 importFrom(testthat, test_that,skip)
