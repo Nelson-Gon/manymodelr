@@ -25,7 +25,7 @@ A dplyr compatible way to add predictions to a data set.
 data("yields", package="manymodelr")
 yields1 <- yields[1:50,]
 yields2<- yields[51:100,]
-lm_model <- fit_model(yields1,"weight","height","lm") 
+lm_model <- fit_model(yields1,"weight","height","lm")
 head(add_model_predictions(lm_model,yields1,yields2))
 }
 \seealso{

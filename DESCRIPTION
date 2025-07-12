@@ -19,7 +19,9 @@ Imports:
     dplyr (>= 1.0.0),
     ggplot2 (>= 3.3.5),
     lme4 (>= 1.1.27.1),
-    stringr (>= 1.4.0)
+    stringr (>= 1.4.0),
+    usethis (>= 3.1.0),
+    testthat (>= 3.2.3)
 Depends:
     R (>= 4.4),
     caret (>= 6.0.88),
