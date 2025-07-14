@@ -10,9 +10,16 @@
 #' @param control See caret ?trainControl for details.
 #' @param new_data A data set to validate the model or for which predictions are required
 #' @param ... Other arguments to caret's train function
-#' @importFrom dplyr "%>%"
+#' @importFrom dplyr "%>%" "arrange" "desc" "everything" "mutate" "summarise"
+#' "select" "pull" "filter" "group_by" "lead" "lag" "sym" "across"  "tibble"
+#'  "as_tibble"
 #' @importFrom stats "as.formula"  "complete.cases" "setNames" "na.omit" "predict"
-#' @importFrom dplyr "arrange" "desc"
+#' "AIC" "aggregate" "cor.test" "residuals"
+#' @importFrom stringr "str_replace_all"
+#' @importFrom utils "combn" "globalVariables" "packageVersion"
+#' @importFrom usethis "use_data"
+#' @importFrom testthat "test_that" "skip"
+#' @importFrom lme4 "lmer"
 #' @import caret
 #' @import e1071
 #' @rawNamespace   import(Metrics,except=c("precision","recall"))
