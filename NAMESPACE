@@ -54,8 +54,10 @@ export(select_col)
 export(select_percentile)
 import(caret)
 import(e1071)
-import(ggplot2)
-importFrom(ggplot2, ggplot,aes)
+importFrom(ggplot2, ggplot,aes,
+           geom_point, scale_color_gradient2, labs, geom_tile,
+           scale_fill_gradient2, geom_text,
+           theme, theme_minimal)
 importFrom(dplyr,"%>%",
            arrange, desc,
            everything, mutate,summarise,
