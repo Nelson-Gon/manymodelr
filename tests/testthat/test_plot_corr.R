@@ -3,7 +3,7 @@ library(manymodelr)
 test_that(desc = "column names are valid",
           code =  {
             skip_on_oldrel()
-            
+
             expect_error(
               plot_corr(
                 mtcars,
@@ -14,7 +14,7 @@ test_that(desc = "column names are valid",
                 round_which =   "foo"
               )
             )
-            
+
             expect_warning(plot_corr(mtcars, colour_by = "p.value"))
             expect_error(plot_corr(mtcars, plot_style = "box"))
             full_plot <-
@@ -62,6 +62,6 @@ test_that(desc = "column names are valid",
             expect_true(all(unique(
               ggplot_build(full_plot_1)$data[[2]]$label
             ) %in% c("***", "ns")))
-            
+
             expect_warning(plot_corr(mtcars, legend_title = "test"))
           })

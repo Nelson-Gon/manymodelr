@@ -17,7 +17,7 @@ get_var_corr_(
 \item{subset_cols}{A `list` of length 2. The values in the list correspond to the comparison
 and other_Var arguments in `get_var_corr`. See examples below.}
 
-\item{drop_columns}{A character vector specifying column classes to drop. Defaults to 
+\item{drop_columns}{A character vector specifying column classes to drop. Defaults to
 c("factor","character")}
 
 \item{...}{Other arguments to `get_var_corr`}

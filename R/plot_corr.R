@@ -1,6 +1,4 @@
 #' Plot a correlations matrix
-#' @importFrom ggplot2 "ggplot" "aes" "geom_point" "scale_color_gradient2" "labs"
-#'  "geom_tile" "scale_fill_gradient2" "geom_text" "theme" "theme_minimal"
 #' @description This function plots the results produced by
 #' `get_var_corr_`.
 #' @param df The data to be plotted. A `data.frame` object produced

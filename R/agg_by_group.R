@@ -1,5 +1,4 @@
 #' A convenient way to perform grouped operations
-#' @importFrom stats aggregate
 #' @description This function performs operations by grouping the data.
 #' @param data_set The data set for which correlations are required
 #' @param my_formula A formula such as A~B where B is the grouping variable(normally a factor).

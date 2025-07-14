@@ -48,10 +48,10 @@ make an informed choice of the best models
 }
 \examples{
 data("yields", package="manymodelr")
-train_set<-createDataPartition(yields$normal,p=0.8,list=FALSE)
+train_set<-caret::createDataPartition(yields$normal,p=0.8,list=FALSE)
 valid_set<-yields[-train_set,]
 train_set<-yields[train_set,]
-ctrl<-trainControl(method="cv",number=5)
+ctrl<-caret::trainControl(method="cv",number=5)
 set.seed(233)
 m<-multi_model_1(train_set,"normal",".",c("knn","rpart"),
 "Accuracy",ctrl,new_data =valid_set)

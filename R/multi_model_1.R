@@ -10,19 +10,6 @@
 #' @param control See caret ?trainControl for details.
 #' @param new_data A data set to validate the model or for which predictions are required
 #' @param ... Other arguments to caret's train function
-#' @importFrom dplyr "%>%" "arrange" "desc" "everything" "mutate" "summarise"
-#' "select" "pull" "filter" "group_by" "lead" "lag" "sym" "across"  "tibble"
-#'  "as_tibble"
-#' @importFrom stats "as.formula"  "complete.cases" "setNames" "na.omit" "predict"
-#' "AIC" "aggregate" "cor.test" "residuals"
-#' @importFrom stringr "str_replace_all"
-#' @importFrom utils "combn" "globalVariables" "packageVersion"
-#' @importFrom usethis "use_data"
-#' @importFrom testthat "test_that" "skip"
-#' @importFrom lme4 "lmer"
-#' @import caret
-#' @import e1071
-#' @rawNamespace   import(Metrics,except=c("precision","recall"))
 #' @return A list containing two objects. A tibble containing a summary of the metrics per model,
 #' a tibble containing predicted values and information concerning the model
 #' @details Most of the details of the parameters can be found in the caret package documentation.
@@ -34,10 +21,10 @@
 #' Kuhn (2008), "Building Predictive Models in R Using the caret" (http://www.jstatsoft.org/article/view/v028i05/v28i05.pold_data)
 #' @examples
 #' data("yields", package="manymodelr")
-#' train_set<-createDataPartition(yields$normal,p=0.8,list=FALSE)
+#' train_set<-caret::createDataPartition(yields$normal,p=0.8,list=FALSE)
 #' valid_set<-yields[-train_set,]
 #' train_set<-yields[train_set,]
-#' ctrl<-trainControl(method="cv",number=5)
+#' ctrl<-caret::trainControl(method="cv",number=5)
 #' set.seed(233)
 #' m<-multi_model_1(train_set,"normal",".",c("knn","rpart"),
 #' "Accuracy",ctrl,new_data =valid_set)

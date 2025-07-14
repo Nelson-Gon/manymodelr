@@ -1,8 +1,6 @@
 #' Extract important model attributes
 #' @description Provides a convenient way to extract any kind of model information from
 #' common model objects
-#' @importFrom stats coef residuals AIC
-#' @importFrom lme4 lmer
 #' @param model_object A model object for example a linear model object, generalized linear model object,
 #' analysis of variance object.
 #' @param what character. The attribute you would like to obtain for instance p_value

@@ -21,21 +21,15 @@ Imports:
     lme4 (>= 1.1.27.1),
     stringr (>= 1.4.0),
     usethis (>= 3.1.0),
-    testthat (>= 3.2.3)
-Depends:
-    R (>= 4.4),
+    testthat (>= 3.2.3),
     caret (>= 6.0.88),
-    Metrics (>= 0.1.4),
-    e1071 (>= 1.7.8)
+    Metrics (>= 0.1.4)
+Depends:
+    R (>= 4.4)
 URL: https://github.com/Nelson-Gon/manymodelr
 BugReports: https://github.com/Nelson-Gon/manymodelr/issues
 Suggests: 
-    knitr,
-    rmarkdown,
-    testthat,
-    covr, 
-    markdown, 
-    usethis
+    knitr
 VignetteBuilder: knitr
 LazyData: True
 Config/testthat/edition: 3

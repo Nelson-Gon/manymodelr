@@ -24,7 +24,7 @@ supplied, all variables will be used.}
 \item{method}{The method used to perform the correlation test as defined in 'cor.test'.
 Defaults to pearson.}
 
-\item{drop_columns}{A character vector specifying column classes to drop. Defaults to 
+\item{drop_columns}{A character vector specifying column classes to drop. Defaults to
 c("factor","character")}
 
 \item{...}{Other arguments to 'cor.test' see ?cor.test for details}

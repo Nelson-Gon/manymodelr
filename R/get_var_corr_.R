@@ -1,5 +1,4 @@
 #' Get correlations for combinations
-#' @importFrom utils combn
 #' @param df A `data.frame` object for which correlations are required in combinations.
 #' @param subset_cols A `list` of length 2. The values in the list correspond to the comparison
 #' and other_Var arguments in `get_var_corr`. See examples below.

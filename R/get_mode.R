@@ -3,13 +3,12 @@
 #'@param x  The dataframe or vector for which the mode is required.
 #'@param na.rm Logical. Should `NA`s be dropped? Defaults to `TRUE`
 #'@return a data.frame or vector showing the mode of the variable(s)
-#'@importFrom dplyr %>%
+
 #'@details Useful when used together with get_stats in a pipe fashion.
 #'These functions are for exploratory data analysis
 #' The smallest number is returned if there is a tie in values
 #' The function is currently slow for greater than 300,000 rows. It may take up to a minute.
 #' may work with inaccuracies. By default, NAs are discarded.
-#' @importFrom stats na.omit
 #' @examples
 #'test<-c(1,2,3,3,3,3,4,5)
 #'test2<-c(455,7878,908981,NA,456,455,7878,7878,NA)
