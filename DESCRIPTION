@@ -29,7 +29,9 @@ Depends:
 URL: https://github.com/Nelson-Gon/manymodelr
 BugReports: https://github.com/Nelson-Gon/manymodelr/issues
 Suggests: 
-    knitr
+    knitr,
+    rmarkdown,
+    covr
 VignetteBuilder: knitr
 LazyData: True
 Config/testthat/edition: 3
