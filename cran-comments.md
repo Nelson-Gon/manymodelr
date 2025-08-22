@@ -2,8 +2,8 @@
 Release Summary
 
 
-This is a patch release. It fixes known issues on the CRAN release. It also updates
-the minimum required R version for compatibility with dependencies. 
+This is a patch release. It fixes a few issues and complies with ggplot2 
+future release requirements. 
 
 ## Test environments
 
